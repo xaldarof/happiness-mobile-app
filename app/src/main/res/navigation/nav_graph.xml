@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/happinessFragment">
+
+    <fragment
+        android:id="@+id/happinessFragment"
+        android:name="pdf.reader.happiness.presentation.fragments.HappinessFragment"
+        android:label="fragment_happiness"
+        tools:layout="@layout/fragment_happiness" >
+        <action
+            android:id="@+id/action_happinessFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/successFragment"
+        android:name="pdf.reader.happiness.presentation.fragments.SuccessFragment"
+        android:label="fragment_success"
+        tools:layout="@layout/fragment_success" >
+        <action
+            android:id="@+id/action_successFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lifeFragment"
+        android:name="pdf.reader.happiness.presentation.fragments.LifeFragment"
+        android:label="fragment_blank"
+        tools:layout="@layout/fragment_blank" >
+        <action
+            android:id="@+id/action_lifeFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="pdf.reader.happiness.presentation.fragments.MainFragment"
+        android:label="fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_successFragment"
+            app:destination="@id/successFragment"
+            app:launchSingleTop="false" />
+        <action
+            android:id="@+id/action_mainFragment_to_happinessFragment"
+            app:destination="@id/happinessFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_lifeFragment"
+            app:destination="@id/lifeFragment" />
+    </fragment>
+</navigation>
