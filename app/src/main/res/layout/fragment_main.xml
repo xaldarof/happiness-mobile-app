@@ -23,7 +23,6 @@
         app:layout_constraintGuide_percent="0.03" />
 
 
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -46,22 +45,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2">
 
-
-        <com.mikhaellopez.circularprogressbar.CircularProgressBar
-            android:id="@+id/circularProgressBar"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:cpb_background_progressbar_color="#b6bbd8"
-            app:cpb_background_progressbar_width="5dp"
-            app:cpb_progress_direction="to_right"
-            app:cpb_progressbar_color="#DD7A9C"
-            app:cpb_progressbar_width="10dp"
-            app:cpb_round_border="false"
-            app:cpb_progress="50"
-            app:layout_constraintHeight_percent="0.3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"
-            app:layout_constraintWidth_percent="0.15" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineLife"
@@ -95,7 +78,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/life_counterTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv1"
@@ -121,6 +104,7 @@
         app:layout_constraintTop_toBottomOf="@+id/lifeBtn"
         app:layout_constraintWidth_percent="0.49">
 
+
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="0dp"
@@ -144,6 +128,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/successCountTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv3"
@@ -182,7 +167,7 @@
             app:layout_constraintWidth_percent="0.5" />
 
         <TextView
-            android:id="@+id/tv2"
+            android:id="@+id/happyCountTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
@@ -196,14 +181,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv2"
-            android:layout_alignStart="@+id/tv2"
+            android:layout_below="@+id/happyCountTv"
+            android:layout_alignStart="@+id/happyCountTv"
             android:text="90 Советов"
             android:textColor="@color/white"
             android:textSize="11sp"
             android:textStyle="normal"
-            app:layout_constraintStart_toStartOf="@+id/tv2"
-            app:layout_constraintTop_toBottomOf="@+id/tv2" />
+            app:layout_constraintStart_toStartOf="@+id/happyCountTv"
+            app:layout_constraintTop_toBottomOf="@+id/happyCountTv" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -256,7 +241,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/loveCountTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv7"

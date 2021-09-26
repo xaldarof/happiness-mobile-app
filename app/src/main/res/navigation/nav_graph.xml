@@ -24,15 +24,6 @@
             app:destination="@id/mainFragment" />
     </fragment>
     <fragment
-        android:id="@+id/lifeFragment"
-        android:name="pdf.reader.happiness.presentation.fragments.LifeFragment"
-        android:label="fragment_blank"
-        tools:layout="@layout/fragment_blank" >
-        <action
-            android:id="@+id/action_lifeFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/mainFragment"
         android:name="pdf.reader.happiness.presentation.fragments.MainFragment"
         android:label="fragment_main">
@@ -46,5 +37,13 @@
         <action
             android:id="@+id/action_mainFragment_to_lifeFragment"
             app:destination="@id/lifeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lifeFragment"
+        android:name="pdf.reader.happiness.presentation.fragments.LifeFragment"
+        android:label="LifeFragment" >
+        <action
+            android:id="@+id/action_lifeFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
 </navigation>
