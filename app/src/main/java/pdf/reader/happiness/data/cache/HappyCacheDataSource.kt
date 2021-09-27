@@ -1,15 +1,20 @@
 package pdf.reader.happiness.data.cache
 
 import kotlinx.coroutines.flow.Flow
-import pdf.reader.happiness.data.models.HappyModel
-import pdf.reader.happiness.data.room.dao.HappyDao
+import kotlinx.coroutines.flow.map
+import pdf.reader.happiness.data.models.InfoModel
+import pdf.reader.happiness.data.models.Type
+import pdf.reader.happiness.data.room.dao.CoreDao
 
 interface HappyCacheDataSource {
 
-    fun fetch(): Flow<List<HappyModel>>
+    fun fetchHappy(): Flow<List<InfoModel>>
 
-    class Base(private val happyDao: HappyDao): HappyCacheDataSource {
-        override fun fetch() = happyDao.fetchHappyData()
-
+    class Base(private val coreDao: CoreDao) : HappyCacheDataSource {
+        override fun fetchHappy(): Flow<List<InfoModel>> {
+            return coreDao.fetchHappy(Type.HAPPY).map {
+                it.map { it.mapToInfoModel() }
+            }
+        }
     }
 }

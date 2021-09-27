@@ -181,6 +181,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/happyCounterTv"
             android:layout_below="@+id/happyCountTv"
             android:layout_alignStart="@+id/happyCountTv"
             android:text="90 Советов"

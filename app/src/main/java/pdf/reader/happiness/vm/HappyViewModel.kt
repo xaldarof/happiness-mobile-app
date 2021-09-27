@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import pdf.reader.happiness.data.core.DataRepository
 
-class SuccessViewModel(private val repository: DataRepository): ViewModel() {
+class HappyViewModel(private val dataRepository: DataRepository): ViewModel() {
 
-    suspend fun fetchSuccess() = repository.fetchSuccess().asLiveData()
+    suspend fun fetchHappy() = dataRepository.fetchHappy().asLiveData()
 
 }

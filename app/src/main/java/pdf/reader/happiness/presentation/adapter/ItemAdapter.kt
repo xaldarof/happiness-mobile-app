@@ -1,27 +1,28 @@
 package pdf.reader.happiness.presentation.adapter
 
 import android.R
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import pdf.reader.happiness.data.models.SuccessModel
 import pdf.reader.happiness.databinding.ItemBinding
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import androidx.recyclerview.widget.DiffUtil
 import pdf.reader.happiness.data.models.InfoModel
 
 
-class ItemAdapter(private val onClick: OnClick,private val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ItemAdapter(private val onClick: OnClick): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val list = ArrayList<InfoModel>()
     private var lastPosition = -1
 
     fun update(newList:List<InfoModel>){
+        val diffUtill = DiffUtill(list,newList)
+        val diff = DiffUtil.calculateDiff(diffUtill,true)
         list.clear()
         list.addAll(newList)
-        notifyDataSetChanged()
+        diff.dispatchUpdatesTo(this)
     }
 
     private inner class ItemViewHolder(private val itemBinding: ItemBinding):RecyclerView.ViewHolder(itemBinding.root){

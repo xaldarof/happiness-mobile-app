@@ -1,14 +1,13 @@
 package pdf.reader.happiness.data.cache
 
 import kotlinx.coroutines.flow.Flow
-import pdf.reader.happiness.data.models.LoveModel
-import pdf.reader.happiness.data.room.dao.LoveDao
+import pdf.reader.happiness.data.models.InfoModel
+import pdf.reader.happiness.data.room.dao.CoreDao
 
 interface LoveCacheDataSource {
 
-    fun fetchLove():Flow<List<LoveModel>>
+    fun fetchLove():Flow<List<InfoModel>>
 
-    class Base(private val loveDao: LoveDao): LoveCacheDataSource {
-        override fun fetchLove() = loveDao.fetchLoveData()
+    class Base(private val coreDao: CoreDao) {
     }
 }

@@ -1,28 +1,23 @@
 package pdf.reader.happiness.presentation.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.asLiveData
-import androidx.navigation.ActivityNavigator
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
-import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import pdf.reader.happiness.R
 import pdf.reader.happiness.data.core.DataRepository
 import pdf.reader.happiness.databinding.FragmentMainBinding
-import java.io.BufferedReader
-import java.io.InputStreamReader
 
+@KoinApiExtension
 class MainFragment : Fragment(),KoinComponent {
 
     private lateinit var binding : FragmentMainBinding
@@ -44,9 +39,14 @@ class MainFragment : Fragment(),KoinComponent {
         binding.lifeBtn.setOnClickListener {
             Navigation.findNavController(binding.root).navigate(R.id.action_mainFragment_to_lifeFragment)
         }
+        binding.happyBtn.setOnClickListener {
+            Navigation.findNavController(binding.root).navigate(R.id.action_mainFragment_to_happinessFragment)
+        }
+
         CoroutineScope(Dispatchers.Main).launch {
             successSize()
             lifeSize()
+            happySize()
         }
     }
     private suspend fun successSize(){
@@ -57,6 +57,11 @@ class MainFragment : Fragment(),KoinComponent {
     private suspend fun lifeSize(){
         repository.fetchLife().asLiveData().observeForever {
             binding.lifeCounterTv.text = "${it.size} советов"
+        }
+    }
+    private suspend fun happySize(){
+        repository.fetchHappy().asLiveData().observeForever {
+            binding.happyCounterTv.text = "${it.size} советов"
         }
     }
 }

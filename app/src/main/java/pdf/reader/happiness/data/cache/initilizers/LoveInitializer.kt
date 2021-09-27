@@ -1,12 +1,12 @@
 package pdf.reader.happiness.data.cache.initilizers
 
-import pdf.reader.happiness.data.room.dao.LoveDao
+import pdf.reader.happiness.data.room.dao.CoreDao
 
 interface LoveInitializer {
 
     fun init()
 
-    class Base(private val loveDao: LoveDao): LoveInitializer {
+    class Base(private val coreDao: CoreDao): LoveInitializer {
         override fun init() {
 
         }
