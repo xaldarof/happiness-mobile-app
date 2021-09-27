@@ -43,6 +43,12 @@
         <action
             android:id="@+id/action_mainFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/to_loveFragment"
+            app:destination="@id/loveFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_loveeFragment"
+            app:destination="@id/loveeFragment" />
     </fragment>
     <fragment
         android:id="@+id/lifeFragment"
@@ -68,6 +74,24 @@
         tools:layout="@layout/fragment_settings" >
         <action
             android:id="@+id/action_settingsFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loveFragment"
+        android:name="pdf.reader.happiness.presentation.fragments.LifeFragment"
+        android:label="fragment_love"
+        tools:layout="@layout/fragment_love" >
+        <action
+            android:id="@+id/action_loveFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loveeFragment"
+        android:name="pdf.reader.happiness.LoveeFragment"
+        android:label="fragment_lovee"
+        tools:layout="@layout/fragment_lovee" >
+        <action
+            android:id="@+id/action_loveeFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
 </navigation>

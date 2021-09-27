@@ -18,7 +18,7 @@ interface SuccessCacheDataSource {
         }
 
         override suspend fun updateFavoriteState(body: String, favorite: Boolean) {
-            dao.updateState(body,favorite)
+            dao.updateFavoriteState(body,favorite)
         }
     }
 }

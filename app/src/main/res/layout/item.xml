@@ -9,12 +9,11 @@
     android:elevation="2dp">
 
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
+    <TextView
+        android:id="@+id/stateIcon"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/style_line"
-        android:backgroundTint="#D67979"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHeight_percent="1"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +43,7 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/relativeLayout"
+        app:layout_constraintStart_toEndOf="@+id/stateIcon"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.8" />
 

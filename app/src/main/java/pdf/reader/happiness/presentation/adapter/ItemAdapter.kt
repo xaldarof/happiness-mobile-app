@@ -1,6 +1,8 @@
 package pdf.reader.happiness.presentation.adapter
 
 import android.R
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,17 +20,30 @@ class ItemAdapter(private val onClick: OnClick): RecyclerView.Adapter<RecyclerVi
     private var lastPosition = -1
 
     fun update(newList:List<InfoModel>){
-        val diffUtill = DiffUtill(list,newList)
-        val diff = DiffUtil.calculateDiff(diffUtill,true)
+      //  val diffUtill = DiffUtill(list,newList)
+      //  val diff = DiffUtil.calculateDiff(diffUtill,true)
         list.clear()
         list.addAll(newList)
-        diff.dispatchUpdatesTo(this)
+       // diff.dispatchUpdatesTo(this)
+        notifyDataSetChanged()
     }
 
     private inner class ItemViewHolder(private val itemBinding: ItemBinding):RecyclerView.ViewHolder(itemBinding.root){
         fun onBind(infoModel: InfoModel){
             itemBinding.titleTv.text = infoModel.title
             itemBinding.container.setOnClickListener { onClick.onClick(infoModel) }
+
+            when {
+                infoModel.isOpened -> {
+                    itemBinding.stateIcon.background.setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP)
+                }
+                infoModel.finished -> {
+                    itemBinding.stateIcon.background.setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_ATOP)
+                }
+                else -> {
+                    itemBinding.stateIcon.background.setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP)
+                }
+            }
         }
     }
 

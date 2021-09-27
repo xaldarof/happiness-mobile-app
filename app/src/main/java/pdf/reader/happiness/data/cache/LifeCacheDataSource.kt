@@ -9,17 +9,12 @@ import pdf.reader.happiness.data.room.dao.CoreDao
 interface LifeCacheDataSource {
 
     suspend fun fetchLife(): Flow<List<InfoModel>>
-    suspend fun updateFavoriteState(body:String,favorite:Boolean)
 
     class Base(private val coreDao: CoreDao): LifeCacheDataSource {
         override suspend fun fetchLife() : Flow<List<InfoModel>> {
             return coreDao.fetchLife(Type.LIFE).map {
                it.map { it.mapToInfoModel() }
             }
-        }
-
-        override suspend fun updateFavoriteState(body: String, favorite: Boolean) {
-            coreDao.updateState(body,favorite)
         }
     }
 }

@@ -15,23 +15,23 @@ import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import pdf.reader.happiness.data.models.InfoModel
-import pdf.reader.happiness.databinding.FragmentHappinessBinding
+import pdf.reader.happiness.databinding.FragmentLoveBinding
 import pdf.reader.happiness.presentation.ReadingActivity
 import pdf.reader.happiness.presentation.adapter.ItemAdapter
-import pdf.reader.happiness.vm.HappyViewModel
+import pdf.reader.happiness.vm.LoveViewModel
+
 
 @KoinApiExtension
-class HappinessFragment : Fragment(),ItemAdapter.OnClick,KoinComponent {
+class LoveFragment : Fragment(), ItemAdapter.OnClick,KoinComponent{
 
-    private lateinit var binding: FragmentHappinessBinding
-    private val viewModel:HappyViewModel = get()
+    private lateinit var binding : FragmentLoveBinding
     private lateinit var itemAdapter: ItemAdapter
+    private val viewModel:LoveViewModel = get()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentHappinessBinding.inflate(inflater,container,false)
+        savedInstanceState: Bundle?): View {
+        binding = FragmentLoveBinding.inflate(inflater,container,false)
         return binding.root
     }
 
@@ -39,7 +39,6 @@ class HappinessFragment : Fragment(),ItemAdapter.OnClick,KoinComponent {
         super.onViewCreated(view, savedInstanceState)
         itemAdapter = ItemAdapter(this)
         binding.rv.adapter = itemAdapter
-
         CoroutineScope(Dispatchers.Main).launch {
             updateData()
         }
@@ -48,8 +47,9 @@ class HappinessFragment : Fragment(),ItemAdapter.OnClick,KoinComponent {
     private suspend fun updateData() {
         while (true) {
             CoroutineScope(Dispatchers.Main).launch {
-                viewModel.fetchHappy().observeForever {
+                viewModel.fetchLove().observeForever {
                     itemAdapter.update(it)
+                    Log.d("pos","LOVE = $it")
                 }
             }
             delay(1000)
@@ -62,5 +62,4 @@ class HappinessFragment : Fragment(),ItemAdapter.OnClick,KoinComponent {
         intent.putExtra("data",infoModel)
         startActivity(intent)
     }
-
 }

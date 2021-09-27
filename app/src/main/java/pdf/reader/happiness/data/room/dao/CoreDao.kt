@@ -15,7 +15,10 @@ interface CoreDao {
     fun insertAll(coreModel: CoreModel)
 
     @Query("UPDATE db SET favorite = :favorite WHERE body = :body")
-    suspend fun updateState(body:String,favorite:Boolean)
+    suspend fun updateFavoriteState(body:String, favorite:Boolean)
+
+    @Query("UPDATE db SET isOpened = :isOpened WHERE body = :body")
+    suspend fun updateOpenedState(body:String, isOpened:Boolean)
 
 
 
@@ -27,4 +30,7 @@ interface CoreDao {
 
     @Query("SELECT * FROM db WHERE type=:type")
     fun fetchHappy(type: Type):Flow<List<CoreModel>>
+
+    @Query("SELECT * FROM db WHERE type=:type")
+    fun fetchLove(type: Type):Flow<List<CoreModel>>
 }

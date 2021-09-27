@@ -36,6 +36,7 @@ class ReadingActivity : AppCompatActivity(),KoinComponent,AssetReader.ExitCallBa
 
         CoroutineScope(Dispatchers.Main).launch {
            binding.bodyTv.text = assetReader.read(intent.body,this@ReadingActivity)
+            viewModel.updateOpened(intent.body,true)
         }
 
         binding.toolbar.titleTv.text = intent.title
