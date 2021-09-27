@@ -19,7 +19,7 @@ interface HappyInitializer {
             list.add(CoreModel("ТОП 20","happy/top20",type=Type.HAPPY))
             list.add(CoreModel("Люди о счастье","happy/citati_o_scaste",type=Type.HAPPY))
             list.add(CoreModel("Счастье в мелочах","happy/sekreti_scaste",type=Type.HAPPY))
-            list.add(CoreModel("","",type=Type.HAPPY))
+            list.add(CoreModel("sas","",type=Type.HAPPY))
             list.add(CoreModel("","",type=Type.HAPPY))
             list.add(CoreModel("","",type=Type.HAPPY))
 
