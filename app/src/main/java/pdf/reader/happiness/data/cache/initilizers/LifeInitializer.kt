@@ -27,7 +27,7 @@ interface LifeInitializer {
             list.add(CoreModel("Мы все умрем.", "life/mi_vse_umryom", type = Type.LIFE))
             list.add(CoreModel("Справедливости не существует", "life/spravedlivosti_net", type = Type.LIFE))
             list.add(CoreModel("Пустота на личном фронте.", "life/pustota_na_fronte", type = Type.LIFE))
-            list.add(CoreModel("Уверенность в себе и компетенция.", "life/uverenost_vsebe", type = Type.LIFE))
+            list.add(CoreModel("Уверенность в себе и компетенция.", "life/uverenost_v_sebe", type = Type.LIFE))
             list.add(CoreModel("Ощущение вкуса жизни.", "life/vkus_jizni", type = Type.LIFE))
             list.add(CoreModel("Многоточие", "life/mnogotociye", type = Type.LIFE))
             list.add(CoreModel("Выгорание", "life/vigoraniye", type = Type.LIFE))

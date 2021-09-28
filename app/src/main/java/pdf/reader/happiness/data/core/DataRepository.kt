@@ -17,6 +17,7 @@ interface DataRepository {
 
     suspend fun updateFavoriteState(body:String,favorite:Boolean)
     suspend fun updateOpenedState(body: String,opened:Boolean)
+    suspend fun updateFinishedState(body: String,finished:Boolean)
 
     class Base(private val successCacheDataSource: SuccessCacheDataSource,
                private val lifeCacheDataSource: LifeCacheDataSource,
@@ -36,6 +37,10 @@ interface DataRepository {
 
         override suspend fun updateOpenedState(body: String, opened: Boolean) {
             coreDao.updateOpenedState(body,opened)
+        }
+
+        override suspend fun updateFinishedState(body: String, finished: Boolean) {
+            coreDao.updateFinishedState(body,finished)
         }
     }
 }

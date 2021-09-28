@@ -22,6 +22,9 @@ interface CoreDao {
     @Query("UPDATE db SET isOpened = :isOpened WHERE body = :body")
     suspend fun updateOpenedState(body:String, isOpened:Boolean)
 
+    @Query("UPDATE db SET finished = :finished WHERE body = :body")
+    suspend fun updateFinishedState(body:String, finished:Boolean)
+
 
 
     @Query("SELECT * FROM db WHERE type =:type")
