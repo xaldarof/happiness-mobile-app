@@ -20,12 +20,12 @@ class ItemAdapter(private val onClick: OnClick): RecyclerView.Adapter<RecyclerVi
     private var lastPosition = -1
 
     fun update(newList:List<InfoModel>){
-      //  val diffUtill = DiffUtill(list,newList)
-      //  val diff = DiffUtil.calculateDiff(diffUtill,true)
+        val diffUtill = DiffUtill(list,newList)
+        val diff = DiffUtil.calculateDiff(diffUtill)
         list.clear()
         list.addAll(newList)
-       // diff.dispatchUpdatesTo(this)
-        notifyDataSetChanged()
+        diff.dispatchUpdatesTo(this)
+
     }
 
     private inner class ItemViewHolder(private val itemBinding: ItemBinding):RecyclerView.ViewHolder(itemBinding.root){

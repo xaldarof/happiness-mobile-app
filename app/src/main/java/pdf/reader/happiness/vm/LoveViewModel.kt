@@ -6,7 +6,6 @@ import pdf.reader.happiness.data.core.DataRepository
 
 class LoveViewModel(private val dataRepository: DataRepository): ViewModel() {
 
-
     suspend fun fetchLove() = dataRepository.fetchLove().asLiveData()
 
 }

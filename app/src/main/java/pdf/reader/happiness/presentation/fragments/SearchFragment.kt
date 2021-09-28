@@ -1,37 +1,35 @@
-package pdf.reader.happiness
+package pdf.reader.happiness.presentation.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.asLiveData
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import pdf.reader.happiness.data.models.InfoModel
-import pdf.reader.happiness.databinding.FragmentFavoritesBinding
+import pdf.reader.happiness.databinding.FragmentSearchBinding
 import pdf.reader.happiness.presentation.ReadingActivity
 import pdf.reader.happiness.presentation.adapter.ItemAdapter
-import pdf.reader.happiness.vm.FavoritesViewModel
+import pdf.reader.happiness.tools.TextWatcherCallBack
+import pdf.reader.happiness.vm.SearchViewModel
 
 @KoinApiExtension
-class FavoritesFragment : Fragment(),ItemAdapter.OnClick,KoinComponent {
+class SearchFragment : Fragment(), ItemAdapter.OnClick, KoinComponent {
 
-    private lateinit var binding : FragmentFavoritesBinding
     private lateinit var itemAdapter: ItemAdapter
-    private val viewModel:FavoritesViewModel = get()
+    private lateinit var binding: FragmentSearchBinding
+    private val viewModel: SearchViewModel = get()
+    private var realQuery = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentFavoritesBinding.inflate(inflater,container,false)
+        binding = FragmentSearchBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -39,17 +37,24 @@ class FavoritesFragment : Fragment(),ItemAdapter.OnClick,KoinComponent {
         super.onViewCreated(view, savedInstanceState)
         itemAdapter = ItemAdapter(this)
         binding.rv.adapter = itemAdapter
-        CoroutineScope(Dispatchers.Main).launch {
-            updateData()
-        }
+
+        binding.searchView.addTextChangedListener(TextWatcherCallBack.Base(object :
+            TextWatcherCallBack.CustomTextWatcher {
+            override fun onTextChange(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                searchFromDatabase(p0.toString())
+            }
+        }))
     }
 
-    private suspend fun updateData(){
-        while (true) {
-            viewModel.fetchFavorites().observeForever {
-                itemAdapter.update(it)
-            }
-            delay(500)
+    override fun onResume() {
+        super.onResume()
+        searchFromDatabase(realQuery)
+    }
+
+    private fun searchFromDatabase(query: String) {
+        realQuery = "%$query%"
+        viewModel.fetchSearchResult(realQuery).observeForever {
+            itemAdapter.update(it)
         }
     }
 

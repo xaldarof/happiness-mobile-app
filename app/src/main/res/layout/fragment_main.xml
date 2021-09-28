@@ -29,6 +29,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="12dp"
         android:scrollbars="none"
+        android:paddingBottom="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHeight_percent="0.5"
         tools:layout_editor_absoluteX="18dp">

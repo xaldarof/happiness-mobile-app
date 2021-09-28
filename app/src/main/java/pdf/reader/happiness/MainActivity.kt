@@ -22,9 +22,12 @@ class MainActivity : AppCompatActivity() {
                 navController.navigate(R.id.mainFragment)
             }
             if (it == 1) {
-                navController.navigate(R.id.favoritesFragment)
+                navController.navigate(R.id.searchFragment)
             }
             if (it == 2) {
+                navController.navigate(R.id.favoritesFragment)
+            }
+            if (it ==3){
                 navController.navigate(R.id.settingsFragment)
             }
         }

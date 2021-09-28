@@ -1,14 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="12dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".SettingsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="0dp"
+        android:elevation="8dp"
+        android:layout_margin="12dp"
+        android:background="@drawable/item_style"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/darkTheme"
+                android:layout_width="wrap_content"
+                android:text="ТЕМНАЯ ТЕМА"
+                android:padding="12dp"
+                android:checked="true"
+                android:button="@android:color/transparent"
+                android:background="@drawable/radio_left_selector"
+                android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/lightTheme"
+                android:layout_width="wrap_content"
+                android:text="ДНЕВНАЯ ТЕМА"
+                android:padding="12dp"
+                android:button="@android:color/transparent"
+                android:background="@drawable/radio_btn_right_selector"
+                android:layout_height="wrap_content"/>
+        </RadioGroup>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

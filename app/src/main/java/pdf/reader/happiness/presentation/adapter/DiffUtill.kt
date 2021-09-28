@@ -25,6 +25,7 @@ class DiffUtill(private val oldList:List<InfoModel>, private val newList: List<I
         return oldInfo.favorite == newInfo.favorite &&
                 oldInfo.finished == newInfo.finished &&
                 oldInfo.body == newInfo.body &&
-                oldInfo.title == newInfo.title
+                oldInfo.title == newInfo.title &&
+                oldInfo.isOpened == newInfo.isOpened
     }
 }

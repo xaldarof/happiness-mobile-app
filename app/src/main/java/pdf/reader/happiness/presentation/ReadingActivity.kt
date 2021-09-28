@@ -31,7 +31,6 @@ class ReadingActivity : AppCompatActivity(),KoinComponent,AssetReader.ExitCallBa
         setContentView(binding.root)
         supportActionBar?.hide()
         val intent = intent.getSerializableExtra("data") as InfoModel
-
         binding.toolbar.likeBtn.isLiked = intent.favorite
 
         CoroutineScope(Dispatchers.Main).launch {

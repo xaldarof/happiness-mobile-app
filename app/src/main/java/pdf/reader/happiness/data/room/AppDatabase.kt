@@ -11,6 +11,7 @@ import pdf.reader.happiness.data.room.dao.*
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun coreDaoProvider():CoreDao
+    abstract fun toolsDaoProvider():ToolsDao
 
     companion object {
         private const val DATABASE_NAME = "DATABASE"

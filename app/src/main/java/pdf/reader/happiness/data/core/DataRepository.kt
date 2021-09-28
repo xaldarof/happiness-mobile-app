@@ -24,6 +24,7 @@ interface DataRepository {
                private val loveCacheDataSource: LoveCacheDataSource,
                private val coreDao: CoreDao) : DataRepository {
 
+
         override suspend fun fetchSuccess(): Flow<List<InfoModel>> = successCacheDataSource.fetchSuccess()
         override suspend fun fetchLife(): Flow<List<InfoModel>> = lifeCacheDataSource.fetchLife()
         override suspend fun fetchHappy(): Flow<List<InfoModel>> = happyCacheDataSource.fetchHappy()

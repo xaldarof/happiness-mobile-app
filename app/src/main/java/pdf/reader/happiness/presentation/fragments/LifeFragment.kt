@@ -19,9 +19,9 @@ import pdf.reader.happiness.presentation.adapter.ItemAdapter
 import pdf.reader.happiness.vm.LifeViewModel
 
 
-class LifeFragment : Fragment() , ItemAdapter.OnClick {
+class LifeFragment : Fragment(), ItemAdapter.OnClick {
 
-    private lateinit var binding : FragmentLifeBinding
+    private lateinit var binding: FragmentLifeBinding
     private lateinit var itemAdapter: ItemAdapter
     private val viewModel: LifeViewModel = get()
 
@@ -37,28 +37,25 @@ class LifeFragment : Fragment() , ItemAdapter.OnClick {
         super.onViewCreated(view, savedInstanceState)
         itemAdapter = ItemAdapter(this)
         binding.rv.adapter = itemAdapter
+    }
 
+    override fun onResume() {
+        super.onResume()
         CoroutineScope(Dispatchers.Main).launch {
             updateData()
         }
-
     }
 
     private suspend fun updateData() {
-        while (true) {
-            CoroutineScope(Dispatchers.Main).launch {
-                viewModel.fetchLife().observeForever {
-                    itemAdapter.update(it)
-                }
-            }
-            delay(1000)
+        viewModel.fetchLife().observeForever {
+            itemAdapter.update(it)
         }
     }
 
     @KoinApiExtension
     override fun onClick(infoModel: InfoModel) {
         val intent = Intent(requireActivity(), ReadingActivity::class.java)
-        intent.putExtra("data",infoModel)
+        intent.putExtra("data", infoModel)
         startActivity(intent)
     }
 

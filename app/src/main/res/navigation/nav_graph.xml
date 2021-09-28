@@ -49,6 +49,9 @@
         <action
             android:id="@+id/action_mainFragment_to_loveeFragment"
             app:destination="@id/loveeFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/lifeFragment"
@@ -87,11 +90,25 @@
     </fragment>
     <fragment
         android:id="@+id/loveeFragment"
-        android:name="pdf.reader.happiness.LoveeFragment"
+        android:name="pdf.reader.happiness.presentation.fragments.LoveFragment"
         android:label="fragment_lovee"
         tools:layout="@layout/fragment_lovee" >
         <action
             android:id="@+id/action_loveeFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="pdf.reader.happiness.presentation.fragments.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/readingActivity"
+        android:name="pdf.reader.happiness.presentation.ReadingActivity"
+        android:label="activity_reading"
+        tools:layout="@layout/activity_reading" />
 </navigation>
