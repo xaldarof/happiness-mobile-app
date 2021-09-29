@@ -36,7 +36,7 @@ class MainFragment : Fragment(),KoinComponent,MainFragmentPresenter.MyView {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMainBinding.inflate(inflater, container, false)
-        val wordsAdapter = WordsAdapter(listOf(), layoutInflater, requireContext())
+        val wordsAdapter = WordsAdapter(listOf("sas","sas","sa"), layoutInflater, requireContext())
         binding.viewPager.adapter = wordsAdapter
         binding.dotsIndicator.setViewPager(binding.viewPager)
 
