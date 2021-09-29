@@ -45,7 +45,8 @@ dependencies {
     implementation 'com.tbuonomo:dotsindicator:4.2'
     implementation 'com.github.ibrahimsn98:SmoothBottomBar:1.7.8'
     implementation 'com.github.MackHartley:RoundedProgressBar:2.1.1'
-
+    //noinspection GradleCompatible
+    implementation 'com.android.support:design:28.0.0'
 
     kapt "android.arch.persistence.room:compiler:1.1.1"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'

@@ -14,6 +14,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
 import org.koin.core.component.inject
 import pdf.reader.happiness.R
 import pdf.reader.happiness.data.core.DataRepository
@@ -21,6 +22,7 @@ import pdf.reader.happiness.data.models.InfoModel
 import pdf.reader.happiness.databinding.FragmentMainBinding
 import pdf.reader.happiness.presentation.MainFragmentPresenter
 import pdf.reader.happiness.presentation.adapter.WordsAdapter
+import pdf.reader.happiness.vm.MainFragmentViewModel
 
 @KoinApiExtension
 class MainFragment : Fragment(),KoinComponent,MainFragmentPresenter.MyView {
@@ -34,12 +36,7 @@ class MainFragment : Fragment(),KoinComponent,MainFragmentPresenter.MyView {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMainBinding.inflate(inflater, container, false)
-        val wordsAdapter = WordsAdapter(
-            listOf(
-                "Жизнь состоит не в том, чтобы найти себя. Жизнь состоит в том, чтобы создать себя.",
-                "sasasasqe",
-                "1111"), layoutInflater, requireContext()
-        )
+        val wordsAdapter = WordsAdapter(listOf(), layoutInflater, requireContext())
         binding.viewPager.adapter = wordsAdapter
         binding.dotsIndicator.setViewPager(binding.viewPager)
 
@@ -59,21 +56,34 @@ class MainFragment : Fragment(),KoinComponent,MainFragmentPresenter.MyView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        observeProgress()
         binding.successBtn.setOnClickListener {
-            Navigation.findNavController(binding.root).navigate(R.id.action_mainFragment_to_successFragment)
+            navigate(SuccessFragment())
         }
         binding.lifeBtn.setOnClickListener {
-            Navigation.findNavController(binding.root).navigate(R.id.action_mainFragment_to_lifeFragment)
+            navigate(LifeFragment())
         }
         binding.happyBtn.setOnClickListener {
-            Navigation.findNavController(binding.root).navigate(R.id.action_mainFragment_to_happinessFragment)
+            navigate(HappinessFragment())
         }
 
         binding.loveBtn.setOnClickListener {
-            Navigation.findNavController(binding.root).navigate(R.id.action_mainFragment_to_loveeFragment)
+            navigate(LoveFragment())
         }
 
+
+    }
+
+    private fun navigate(fragment: Fragment) {
+        parentFragmentManager.beginTransaction().replace(R.id.containerMain,fragment).addToBackStack("back").commit()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        observeProgress()
+    }
+
+    private fun observeProgress(){
         CoroutineScope(Dispatchers.Main).launch {
             observeSuccess()
             observeLife()
@@ -82,12 +92,11 @@ class MainFragment : Fragment(),KoinComponent,MainFragmentPresenter.MyView {
         }
     }
 
-    private suspend fun observeSuccess(){
-        val list = ArrayList<InfoModel>()
+    private suspend fun observeSuccess() {
         repository.fetchSuccess().asLiveData().observeForever {
             binding.successCountTv.text = "${it.size} советов"
-            list.addAll(it)
-            mainFragmentPresenter.updatePercentSuccess(list)
+            mainFragmentPresenter.updatePercentSuccess(it)
+            Log.d("pos","==================")
         }
     }
     private suspend fun observeLife(){

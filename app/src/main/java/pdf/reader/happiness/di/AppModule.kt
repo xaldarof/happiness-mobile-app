@@ -45,4 +45,7 @@ val viewModels = module {
     single { LoveViewModel(get()) }
     single { SearchViewModel(get()) }
     single { FavoritesViewModel(get()) }
+
+    single { MainActivityViewModel() }
+    single { MainFragmentViewModel() }
 }

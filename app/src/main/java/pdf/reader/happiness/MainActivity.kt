@@ -2,10 +2,15 @@ package pdf.reader.happiness
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.Navigation
+import org.koin.core.component.KoinApiExtension
+import org.koin.core.component.KoinComponent
 import pdf.reader.happiness.databinding.ActivityMainBinding
+import pdf.reader.happiness.presentation.adapter.*
+import pdf.reader.happiness.presentation.fragments.MainFragment
+import pdf.reader.happiness.presentation.fragments.SearchFragment
 
-class MainActivity : AppCompatActivity() {
+@KoinApiExtension
+class MainActivity : AppCompatActivity(),KoinComponent {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -14,22 +19,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
-        val navController = Navigation.findNavController(this, R.id.nav_host_fragment)
-        navController.navigate(R.id.mainFragment)
+        FragmentController(this, listOf(MainFragment(),SearchFragment(),FavoritesFragment(),SettingsFragment()))
 
-        binding.bottomBar.setOnItemSelectedListener {
-            if (it == 0) {
-                navController.navigate(R.id.mainFragment)
-            }
-            if (it == 1) {
-                navController.navigate(R.id.searchFragment)
-            }
-            if (it == 2) {
-                navController.navigate(R.id.favoritesFragment)
-            }
-            if (it ==3){
-                navController.navigate(R.id.settingsFragment)
-            }
-        }
     }
 }
