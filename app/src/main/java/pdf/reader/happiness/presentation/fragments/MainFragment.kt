@@ -1,5 +1,6 @@
 package pdf.reader.happiness.presentation.fragments
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -37,8 +38,12 @@ class MainFragment : Fragment(),KoinComponent,MainFragmentPresenter.MyView {
     ): View {
         binding = FragmentMainBinding.inflate(inflater, container, false)
         val wordsAdapter = WordsAdapter(listOf("sas","sas","sa"), layoutInflater, requireContext())
-        binding.viewPager.adapter = wordsAdapter
-        binding.dotsIndicator.setViewPager(binding.viewPager)
+//        binding.viewPager.adapter = wordsAdapter
+//        binding.dotsIndicator.setViewPager(binding.viewPager)
+        binding.progressViewCircle.setStartProgress(0F)
+        binding.progressViewCircle.setEndProgress(90F)
+        binding.progressViewCircle.setProgressDuration(2000)
+        binding.progressViewCircle.startProgressAnimation()
 
         CoroutineScope(Dispatchers.Main).launch {
             updateWords()
@@ -48,10 +53,10 @@ class MainFragment : Fragment(),KoinComponent,MainFragmentPresenter.MyView {
     }
 
     private suspend fun updateWords(){
-        while (true) {
-            binding.viewPager.currentItem = (0..3).random()
-            delay(5000)
-        }
+//        while (true) {
+//            binding.viewPager.currentItem = (0..3).random()
+//            delay(5000)
+//        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -96,7 +101,6 @@ class MainFragment : Fragment(),KoinComponent,MainFragmentPresenter.MyView {
         repository.fetchSuccess().asLiveData().observeForever {
             binding.successCountTv.text = "${it.size} советов"
             mainFragmentPresenter.updatePercentSuccess(it)
-            Log.d("pos","==================")
         }
     }
     private suspend fun observeLife(){
@@ -121,18 +125,23 @@ class MainFragment : Fragment(),KoinComponent,MainFragmentPresenter.MyView {
 
 
     override fun updateLifePercent(percent: Double) {
-        binding.progressBarLife.setProgressPercentage(percent)
+        binding.progressViewLife.setProgressDuration(2000)
+        binding.progressViewLife.setEndProgress(percent.toFloat())
+        binding.progressViewLife.startProgressAnimation()
     }
 
     override fun updateSuccessPercent(percent: Double) {
-        binding.progressBarSuccess.setProgressPercentage(percent)
-    }
+        binding.progressViewSuccess.setProgressDuration(2000)
+        binding.progressViewSuccess.setEndProgress(percent.toFloat())
+        binding.progressViewSuccess.startProgressAnimation()    }
 
     override fun updateHappyPercent(percent: Double) {
-        binding.progressBarHappy.setProgressPercentage(percent)
-    }
+        binding.progressViewHappy.setProgressDuration(2000)
+        binding.progressViewHappy.setEndProgress(percent.toFloat())
+        binding.progressViewHappy.startProgressAnimation()    }
 
     override fun updateLovePercent(percent: Double) {
-        binding.progressBarLove.setProgressPercentage(percent)
-    }
+        binding.progressViewLove.setProgressDuration(2000)
+        binding.progressViewLove.setEndProgress(percent.toFloat())
+        binding.progressViewLove.startProgressAnimation()    }
 }

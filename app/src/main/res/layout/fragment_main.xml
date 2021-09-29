@@ -21,8 +21,16 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.03" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.45" />
+
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:paddingBottom="12dp"
@@ -52,29 +60,23 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/guideline2">
 
-                <com.mackhartley.roundedprogressbar.RoundedProgressBar
-                    android:id="@+id/progress_barLife"
+                <com.moos.library.HorizontalProgressView
+                    android:id="@+id/progressViewLife"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_marginBottom="16dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView4"
-                    app:layout_constraintHeight_percent="0.2"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/life_counterTv"
+                    android:layout_marginTop="8dp"
+                    app:corner_radius="12dp"
+                    app:end_color="@color/red_end"
+                    app:end_progress="100"
+                    app:isTracked="true"
+                    app:layout_constraintHeight_percent="0.3"
+                    app:layout_constraintStart_toStartOf="@+id/tv1"
+                    app:layout_constraintTop_toBottomOf="@+id/life_counterTv"
                     app:layout_constraintWidth_percent="0.6"
-                    app:rpbBackgroundColor="#4CAF50"
-                    app:rpbBackgroundTextColor="#FFFFFF"
-                    app:rpbCornerRadius="2dp"
-                    app:rpbCornerRadiusBottomLeft="4dp"
-                    app:rpbCornerRadiusBottomRight="4dp"
-                    app:rpbCornerRadiusTopLeft="4dp"
-                    app:rpbCornerRadiusTopRight="4dp"
-                    app:rpbProgress="40"
-                    app:rpbProgressColor="#30CC36"
-                    app:rpbProgressTextColor="#FFFFFF"
-                    app:rpbShowProgressText="true"
-                    app:rpbTextSize="18sp" />
+                    app:progressTextColor="#FFFFFF"
+                    app:start_color="@color/red_start"
+                    app:trackColor="#f4f4f4"
+                    app:track_width="18dp" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guidelineLife"
@@ -136,28 +138,24 @@
                 app:layout_constraintTop_toBottomOf="@+id/lifeBtn"
                 app:layout_constraintWidth_percent="0.49">
 
-                <com.mackhartley.roundedprogressbar.RoundedProgressBar
-                    android:id="@+id/progress_barSuccess"
+
+                <com.moos.library.HorizontalProgressView
+                    android:id="@+id/progressViewSuccess"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_marginBottom="16dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintHeight_percent="0.2"
+                    android:layout_marginTop="8dp"
+                    app:corner_radius="12dp"
+                    app:end_color="@color/red_end"
+                    app:end_progress="100"
+                    app:isTracked="true"
+                    app:layout_constraintHeight_percent="0.3"
                     app:layout_constraintStart_toStartOf="@+id/successCountTv"
+                    app:layout_constraintTop_toBottomOf="@+id/successCountTv"
                     app:layout_constraintWidth_percent="0.55"
-                    app:rpbBackgroundColor="#9783A8"
-                    app:rpbBackgroundTextColor="#FFFFFF"
-                    app:rpbCornerRadius="2dp"
-                    app:rpbCornerRadiusBottomLeft="4dp"
-                    app:rpbCornerRadiusBottomRight="4dp"
-                    app:rpbCornerRadiusTopLeft="4dp"
-                    app:rpbCornerRadiusTopRight="4dp"
-                    app:rpbProgress="60"
-                    app:rpbProgressColor="#64408A"
-                    app:rpbProgressTextColor="#FFFFFF"
-                    app:rpbShowProgressText="true"
-                    app:rpbTextSize="18sp" />
-
+                    app:progressTextColor="#FFFFFF"
+                    app:start_color="@color/red_start"
+                    app:trackColor="#f4f4f4"
+                    app:track_width="18dp" />
 
                 <ImageView
                     android:id="@+id/imageView"
@@ -212,27 +210,22 @@
                 app:layout_constraintTop_toBottomOf="@+id/lifeBtn"
                 app:layout_constraintWidth_percent="0.49">
 
-                <com.mackhartley.roundedprogressbar.RoundedProgressBar
-                    android:id="@+id/progress_barHappy"
+                <com.moos.library.HorizontalProgressView
+                    android:id="@+id/progressViewHappy"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_marginBottom="16dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintHeight_percent="0.2"
+                    app:corner_radius="12dp"
+                    app:end_color="@color/red_end"
+                    app:end_progress="100"
+                    app:isTracked="true"
+                    app:layout_constraintHeight_percent="0.3"
                     app:layout_constraintStart_toStartOf="@+id/happyCounterTv"
+                    app:layout_constraintTop_toBottomOf="@+id/happyCounterTv"
                     app:layout_constraintWidth_percent="0.55"
-                    app:rpbBackgroundColor="#9783A8"
-                    app:rpbBackgroundTextColor="#FFFFFF"
-                    app:rpbCornerRadius="2dp"
-                    app:rpbCornerRadiusBottomLeft="4dp"
-                    app:rpbCornerRadiusBottomRight="4dp"
-                    app:rpbCornerRadiusTopLeft="4dp"
-                    app:rpbCornerRadiusTopRight="4dp"
-                    app:rpbProgress="10"
-                    app:rpbProgressColor="#64408A"
-                    app:rpbProgressTextColor="#FFFFFF"
-                    app:rpbShowProgressText="true"
-                    app:rpbTextSize="18sp" />
+                    app:progressTextColor="#FFFFFF"
+                    app:start_color="@color/red_start"
+                    app:trackColor="#f4f4f4"
+                    app:track_width="18dp" />
 
 
                 <ImageView
@@ -294,27 +287,23 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/successBtn">
 
-                <com.mackhartley.roundedprogressbar.RoundedProgressBar
-                    android:id="@+id/progress_barLove"
+                <com.moos.library.HorizontalProgressView
+                    android:id="@+id/progressViewLove"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_marginBottom="16dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintHeight_percent="0.2"
+                    android:layout_marginTop="8dp"
+                    app:corner_radius="12dp"
+                    app:end_color="@color/red_end"
+                    app:end_progress="100"
+                    app:isTracked="true"
+                    app:layout_constraintHeight_percent="0.3"
                     app:layout_constraintStart_toStartOf="@+id/loveCountTv"
+                    app:layout_constraintTop_toBottomOf="@+id/loveCountTv"
                     app:layout_constraintWidth_percent="0.55"
-                    app:rpbBackgroundColor="#9783A8"
-                    app:rpbBackgroundTextColor="#FFFFFF"
-                    app:rpbCornerRadius="2dp"
-                    app:rpbCornerRadiusBottomLeft="4dp"
-                    app:rpbCornerRadiusBottomRight="4dp"
-                    app:rpbCornerRadiusTopLeft="4dp"
-                    app:rpbCornerRadiusTopRight="4dp"
-                    app:rpbProgress="80"
-                    app:rpbProgressColor="#64408A"
-                    app:rpbProgressTextColor="#FFFFFF"
-                    app:rpbShowProgressText="true"
-                    app:rpbTextSize="18sp" />
+                    app:progressTextColor="#FFFFFF"
+                    app:start_color="@color/red_start"
+                    app:trackColor="#f4f4f4"
+                    app:track_width="18dp" />
 
 
                 <androidx.constraintlayout.widget.Guideline
@@ -369,39 +358,55 @@
     </ScrollView>
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="12dp"
+    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--        android:id="@+id/constraintLayout"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="0dp"-->
+    <!--        android:layout_marginStart="12dp"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        android:layout_marginEnd="12dp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHeight_percent="0.2"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent">-->
+
+    <!--        <androidx.viewpager.widget.ViewPager-->
+    <!--            android:id="@+id/viewPager"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            tools:ignore="SpeakableTextPresentCheck" />-->
+
+    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+    <!--    <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator-->
+    <!--        android:id="@+id/dots_indicator"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_centerHorizontal="true"-->
+    <!--        android:layout_marginTop="4dp"-->
+    <!--        app:dotsColor="#FFC107"-->
+    <!--        app:dotsSize="12dp"-->
+    <!--        app:dotsWidthFactor="3"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />-->
+
+    <com.moos.library.CircleProgressView
+        android:id="@+id/progressView_circle"
+        android:layout_width="270dp"
+        android:layout_height="270dp"
+        android:layout_marginBottom="-36dp"
+        android:textAlignment="center"
+        app:circleBroken="true"
+        app:end_color="@color/purple_700"
+        app:end_progress="100"
+        app:isTracked="true"
+        app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
-        android:id="@+id/dots_indicator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="4dp"
-        app:dotsColor="#FFC107"
-        app:dotsSize="12dp"
-        app:dotsWidthFactor="3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
-
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:progressTextSize="36dp"
+        app:start_color="#E41548"
+        app:start_progress="20"
+        app:track_width="26dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

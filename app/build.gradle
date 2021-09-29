@@ -47,6 +47,8 @@ dependencies {
     implementation 'com.github.MackHartley:RoundedProgressBar:2.1.1'
     //noinspection GradleCompatible
     implementation 'com.android.support:design:28.0.0'
+    implementation 'com.moos:Material-ProgressView:1.0.6'
+
 
     kapt "android.arch.persistence.room:compiler:1.1.1"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
