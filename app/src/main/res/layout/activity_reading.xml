@@ -28,6 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/myWhite"
+                android:fontFamily="sans-serif"
                 android:padding="6dp"
                 android:text="@string/test"
                 android:textColor="@color/to_right_color"

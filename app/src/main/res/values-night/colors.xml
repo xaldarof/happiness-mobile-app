@@ -16,8 +16,9 @@
     <color name="item_click">#4E5F73</color>
     <color name="search_color">#24303E</color>
     <color name="empty_box_color">#BAB7B7</color>
-    <color name="core_progress_color">#495665</color>
+    <color name="core_progress_color">#DD5E7D</color>
 
+    <color name="progress_text_color">#DD5E7D</color>
 
     <color name="light_black">#24303E</color>
     <color name="purple_life">#24303E</color>

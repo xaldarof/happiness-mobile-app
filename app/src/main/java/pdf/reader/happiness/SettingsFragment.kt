@@ -1,50 +1,64 @@
 package pdf.reader.happiness
 
-import android.content.Context.MODE_PRIVATE
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
-import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
+import org.koin.core.component.KoinApiExtension
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+import pdf.reader.happiness.data.settings_cache.FontController
 import pdf.reader.happiness.data.settings_cache.ThemeController
 import pdf.reader.happiness.databinding.FragmentSettingsBinding
+import pdf.reader.happiness.presentation.SettingFragmentPresenter
 
-class SettingsFragment : Fragment() {
+@KoinApiExtension
+class SettingsFragment : Fragment(),KoinComponent,SettingFragmentPresenter.SettingsView {
 
     private lateinit var binding: FragmentSettingsBinding
-    private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var themeController: ThemeController
+    private val themeController: ThemeController by inject()
+    private val fontController:FontController by inject()
+    private lateinit var settingFragmentPresenter: SettingFragmentPresenter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        sharedPreferences = requireContext().getSharedPreferences("cache",MODE_PRIVATE)
-        themeController = ThemeController.Base(sharedPreferences)
+        settingFragmentPresenter = SettingFragmentPresenter(this,themeController,fontController)
 
         binding = FragmentSettingsBinding.inflate(inflater, container, false)
         binding.themeSwitch.isChecked = themeController.isDarkThemeOn()
-
+        binding.fontSwitch.isChecked = fontController.isBoldFont()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.themeSwitch.setOnCheckedChangeListener { p0, p1 ->
+        binding.themeSwitch.setOnCheckedChangeListener { p0, _ ->
             if (p0!!.isChecked) {
-                themeController.setTheme(true)
-                AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
+                settingFragmentPresenter.updateDarkThemeSwitchState(true)
             } else {
-                themeController.setTheme(false)
-                AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO)
+                settingFragmentPresenter.updateDarkThemeSwitchState(false)
             }
         }
 
+        binding.fontSwitch.setOnCheckedChangeListener { p0, _ ->
+            if (p0!!.isChecked) {
+                settingFragmentPresenter.updateFontSwitchState(true)
+            } else {
+                settingFragmentPresenter.updateFontSwitchState(false)
+            }
+        }
+    }
+
+    override fun updateDarkThemeSwitchState(state:Boolean) {
+        binding.themeSwitch.isChecked = state
+    }
+
+    override fun updateFontSwitchState(state: Boolean) {
+        binding.fontSwitch.isChecked = state
     }
 }

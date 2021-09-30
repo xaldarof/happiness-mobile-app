@@ -20,7 +20,7 @@ class MainFragmentPresenter(private val view: MyView) {
         view.updateSuccessPercent(calculatePercent(list))
     }
 
-    fun updatePercentCore(list: List<InfoModel>){
+    fun updatePercentCore(list: List<InfoModel>) {
         view.updateCorePercent(calculatePercent(list))
     }
 
@@ -35,6 +35,42 @@ class MainFragmentPresenter(private val view: MyView) {
         return 100 * (count.toFloat() / list.size.toFloat())
     }
 
+
+    fun updateAllLifeFinished(list: List<InfoModel>) {
+        if (calculateIsAllFinished(list)) {
+            view.updateAllLifeFinished()
+        }
+    }
+
+    fun updateAllSuccessFinished(list: List<InfoModel>) {
+        if (calculateIsAllFinished(list)) {
+            view.updateAllSuccessFinished()
+        }
+    }
+
+    fun updateAllHappyFinished(list: List<InfoModel>) {
+        if (calculateIsAllFinished(list)) {
+            view.updateAllHappyFinished()
+        }
+    }
+
+    fun updateAllLoveFinished(list: List<InfoModel>) {
+        if (calculateIsAllFinished(list)) {
+            view.updateAllLoveFinished()
+        }
+    }
+
+    private fun calculateIsAllFinished(list: List<InfoModel>): Boolean {
+        var finishedCounter = 0
+        val total = list.size
+        list.forEach {
+            if (it.finished) {
+                finishedCounter++
+            }
+        }
+        return finishedCounter == total
+    }
+
     interface MyView {
         fun updateLifePercent(percent: Float)
         fun updateSuccessPercent(percent: Float)
@@ -42,5 +78,10 @@ class MainFragmentPresenter(private val view: MyView) {
         fun updateLovePercent(percent: Float)
 
         fun updateCorePercent(percent: Float)
+
+        fun updateAllLifeFinished()
+        fun updateAllSuccessFinished()
+        fun updateAllHappyFinished()
+        fun updateAllLoveFinished()
     }
 }

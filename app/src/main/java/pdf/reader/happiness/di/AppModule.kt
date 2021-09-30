@@ -13,13 +13,15 @@ import pdf.reader.happiness.data.cache.initilizers.SuccessInitializer
 import pdf.reader.happiness.data.core.DataRepository
 import pdf.reader.happiness.data.core.ToolsRepository
 import pdf.reader.happiness.data.room.AppDatabase
+import pdf.reader.happiness.data.settings_cache.FontController
 import pdf.reader.happiness.data.settings_cache.ThemeController
+import pdf.reader.happiness.presentation.ReadingActivityPresenter
 import pdf.reader.happiness.vm.*
 
 val cacheModule = module {
     single<RoomDatabase> { AppDatabase.getInstance(androidContext()) }
-    factory<DataRepository> { DataRepository.Base(get(), get(),get(),get(),get(),get()) }
-    factory<ToolsRepository>{ ToolsRepository.Base(get()) }
+    factory<DataRepository> { DataRepository.Base(get(), get(), get(), get(), get(), get()) }
+    factory<ToolsRepository> { ToolsRepository.Base(get()) }
 
     factory<SuccessCacheDataSource> { SuccessCacheDataSource.Base(get()) }
     factory<HappyCacheDataSource> { HappyCacheDataSource.Base(get()) }
@@ -27,8 +29,10 @@ val cacheModule = module {
     factory<LoveCacheDataSource> { LoveCacheDataSource.Base(get()) }
     factory<AllTypesCacheDataSource> { AllTypesCacheDataSource.Base(get()) }
 
-    factory<SharedPreferences>{ androidContext().getSharedPreferences("cache",MODE_PRIVATE) }
+    factory<SharedPreferences> { androidContext().getSharedPreferences("cache", MODE_PRIVATE) }
     factory<ThemeController> { ThemeController.Base(get()) }
+    factory<FontController> { FontController.Base(get()) }
+    factory<ReadingActivityPresenter> { ReadingActivityPresenter(get(), get()) }
 }
 
 val initializers = module {

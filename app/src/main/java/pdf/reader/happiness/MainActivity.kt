@@ -33,6 +33,5 @@ class MainActivity : AppCompatActivity(),KoinComponent {
         FragmentController(this, listOf(MainFragment(),SearchFragment(),FavoritesFragment(),SettingsFragment()))
 
 
-
     }
 }

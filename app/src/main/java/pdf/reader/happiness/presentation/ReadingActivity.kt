@@ -1,13 +1,8 @@
 package pdf.reader.happiness.presentation
 
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
-import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import pdf.reader.happiness.databinding.ActivityReadingBinding
-
 import com.like.LikeButton
 import com.like.OnLikeListener
 import kotlinx.coroutines.CoroutineScope
@@ -18,18 +13,19 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import org.koin.core.component.inject
 import pdf.reader.happiness.data.models.InfoModel
-import pdf.reader.happiness.data.settings_cache.ThemeController
 import pdf.reader.happiness.tools.AssetReader
 import pdf.reader.happiness.vm.ReadingViewModel
 
 
 @KoinApiExtension
-class ReadingActivity : AppCompatActivity(), KoinComponent, AssetReader.ExitCallBack {
+class ReadingActivity : AppCompatActivity(), KoinComponent,
+    AssetReader.ExitCallBack{
 
     private lateinit var binding: ActivityReadingBinding
     private val assetReader: AssetReader by inject()
     private val viewModel: ReadingViewModel = get()
-    private val theme:ThemeController by inject()
+    private val presenter:ReadingActivityPresenter by inject()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,11 +37,8 @@ class ReadingActivity : AppCompatActivity(), KoinComponent, AssetReader.ExitCall
         binding.toolbar.backBtn.setOnClickListener { finish() }
         binding.toolbar.likeBtn.isLiked = intent.favorite
 
-        if (theme.isDarkThemeOn()) {
-            AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
-        } else {
-            AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO)
-        }
+        presenter.checkFontState(binding.bodyTv)
+        presenter.checkThemeState()
 
         CoroutineScope(Dispatchers.Main).launch {
             binding.bodyTv.text = assetReader.read(intent.body, this@ReadingActivity)
@@ -76,7 +69,7 @@ class ReadingActivity : AppCompatActivity(), KoinComponent, AssetReader.ExitCall
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putBoolean("like",binding.toolbar.likeBtn.isLiked)
+        outState.putBoolean("like", binding.toolbar.likeBtn.isLiked)
     }
 
     override fun exitCommand() {
