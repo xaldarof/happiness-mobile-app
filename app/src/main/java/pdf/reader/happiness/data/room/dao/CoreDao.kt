@@ -26,6 +26,9 @@ interface CoreDao {
     suspend fun updateFinishedState(body:String, finished:Boolean)
 
 
+    @Query("SELECT * FROM db")
+    fun fetchAllTypes():Flow<List<CoreModel>>
+
 
     @Query("SELECT * FROM db WHERE type =:type")
     fun fetchSuccess(type: Type):Flow<List<CoreModel>>

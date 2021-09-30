@@ -1,7 +1,11 @@
 package pdf.reader.happiness.presentation
 
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import pdf.reader.happiness.databinding.ActivityReadingBinding
 
 import com.like.LikeButton
@@ -14,16 +18,18 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import org.koin.core.component.inject
 import pdf.reader.happiness.data.models.InfoModel
+import pdf.reader.happiness.data.settings_cache.ThemeController
 import pdf.reader.happiness.tools.AssetReader
 import pdf.reader.happiness.vm.ReadingViewModel
 
 
 @KoinApiExtension
-class ReadingActivity : AppCompatActivity(),KoinComponent,AssetReader.ExitCallBack {
+class ReadingActivity : AppCompatActivity(), KoinComponent, AssetReader.ExitCallBack {
 
-    private lateinit var binding : ActivityReadingBinding
-    private val assetReader:AssetReader by inject()
-    private val viewModel:ReadingViewModel = get()
+    private lateinit var binding: ActivityReadingBinding
+    private val assetReader: AssetReader by inject()
+    private val viewModel: ReadingViewModel = get()
+    private val theme:ThemeController by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,19 +37,24 @@ class ReadingActivity : AppCompatActivity(),KoinComponent,AssetReader.ExitCallBa
         setContentView(binding.root)
         supportActionBar?.hide()
         val intent = intent.getSerializableExtra("data") as InfoModel
+        binding.toolbar.titleTv.text = intent.title
+        binding.toolbar.backBtn.setOnClickListener { finish() }
         binding.toolbar.likeBtn.isLiked = intent.favorite
 
+        if (theme.isDarkThemeOn()) {
+            AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO)
+        }
+
         CoroutineScope(Dispatchers.Main).launch {
-           binding.bodyTv.text = assetReader.read(intent.body,this@ReadingActivity)
-            viewModel.updateOpened(intent.body,true)
-            viewModel.updateFinishedState(intent.body,true)
+            binding.bodyTv.text = assetReader.read(intent.body, this@ReadingActivity)
+            viewModel.updateOpened(intent.body, true)
+            viewModel.updateFinishedState(intent.body, true)
 
         }
 
-        binding.toolbar.titleTv.text = intent.title
-        binding.toolbar.backBtn.setOnClickListener { finish() }
-
-        binding.toolbar.likeBtn.setOnLikeListener(object :OnLikeListener{
+        binding.toolbar.likeBtn.setOnLikeListener(object : OnLikeListener {
             override fun liked(likeButton: LikeButton?) {
                 CoroutineScope(Dispatchers.IO).launch {
                     viewModel.updateFavorite(intent.body, true)
@@ -56,6 +67,16 @@ class ReadingActivity : AppCompatActivity(),KoinComponent,AssetReader.ExitCallBa
                 }
             }
         })
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        binding.toolbar.likeBtn.isLiked = savedInstanceState.getBoolean("like")
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean("like",binding.toolbar.likeBtn.isLiked)
     }
 
     override fun exitCommand() {

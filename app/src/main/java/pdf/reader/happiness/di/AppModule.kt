@@ -1,12 +1,11 @@
 package pdf.reader.happiness.di
 
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import androidx.room.RoomDatabase
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
-import pdf.reader.happiness.data.cache.HappyCacheDataSource
-import pdf.reader.happiness.data.cache.LifeCacheDataSource
-import pdf.reader.happiness.data.cache.LoveCacheDataSource
-import pdf.reader.happiness.data.cache.SuccessCacheDataSource
+import pdf.reader.happiness.data.cache.*
 import pdf.reader.happiness.data.cache.initilizers.HappyInitializer
 import pdf.reader.happiness.data.cache.initilizers.LifeInitializer
 import pdf.reader.happiness.data.cache.initilizers.LoveInitializer
@@ -14,17 +13,22 @@ import pdf.reader.happiness.data.cache.initilizers.SuccessInitializer
 import pdf.reader.happiness.data.core.DataRepository
 import pdf.reader.happiness.data.core.ToolsRepository
 import pdf.reader.happiness.data.room.AppDatabase
+import pdf.reader.happiness.data.settings_cache.ThemeController
 import pdf.reader.happiness.vm.*
 
 val cacheModule = module {
     single<RoomDatabase> { AppDatabase.getInstance(androidContext()) }
-    factory<DataRepository> { DataRepository.Base(get(), get(),get(),get(),get()) }
+    factory<DataRepository> { DataRepository.Base(get(), get(),get(),get(),get(),get()) }
     factory<ToolsRepository>{ ToolsRepository.Base(get()) }
 
     factory<SuccessCacheDataSource> { SuccessCacheDataSource.Base(get()) }
     factory<HappyCacheDataSource> { HappyCacheDataSource.Base(get()) }
     factory<LifeCacheDataSource> { LifeCacheDataSource.Base(get()) }
     factory<LoveCacheDataSource> { LoveCacheDataSource.Base(get()) }
+    factory<AllTypesCacheDataSource> { AllTypesCacheDataSource.Base(get()) }
+
+    factory<SharedPreferences>{ androidContext().getSharedPreferences("cache",MODE_PRIVATE) }
+    factory<ThemeController> { ThemeController.Base(get()) }
 }
 
 val initializers = module {
@@ -37,6 +41,7 @@ val initializers = module {
     single<HappyInitializer> { HappyInitializer.Base(get()) }
 
 }
+
 val viewModels = module {
     single { SuccessViewModel(get()) }
     single { LifeViewModel(get()) }

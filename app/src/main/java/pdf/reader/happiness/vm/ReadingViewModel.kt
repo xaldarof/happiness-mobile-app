@@ -16,4 +16,6 @@ class ReadingViewModel(private val dataRepository: DataRepository): ViewModel() 
     suspend fun updateFinishedState(body: String,finished:Boolean){
         dataRepository.updateFinishedState(body,finished)
     }
+
+
 }

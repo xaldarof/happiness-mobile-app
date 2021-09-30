@@ -5,4 +5,6 @@
     <string name="test">TEST</string>
     <string name="dark_theme">Темная тема</string>
     <string name="search">Поиск…</string>
+    <string name="settings">Настройки</string>
+    <string name="is_empty_favorites">Пока здесь пусто…</string>
 </resources>

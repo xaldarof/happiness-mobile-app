@@ -20,23 +20,27 @@ class MainFragmentPresenter(private val view: MyView) {
         view.updateSuccessPercent(calculatePercent(list))
     }
 
-    private fun calculatePercent(list: List<InfoModel>) : Double {
+    fun updatePercentCore(list: List<InfoModel>){
+        view.updateCorePercent(calculatePercent(list))
+    }
+
+    private fun calculatePercent(list: List<InfoModel>): Float {
         var count = 0
         list.forEach {
             if (it.finished) {
                 count++
             }
         }
-        val percent = 100 * (count.toFloat() / list.size.toFloat())
 
-        return percent.toDouble()
+        return 100 * (count.toFloat() / list.size.toFloat())
     }
 
-
     interface MyView {
-        fun updateLifePercent(percent: Double)
-        fun updateSuccessPercent(percent: Double)
-        fun updateHappyPercent(percent: Double)
-        fun updateLovePercent(percent: Double)
+        fun updateLifePercent(percent: Float)
+        fun updateSuccessPercent(percent: Float)
+        fun updateHappyPercent(percent: Float)
+        fun updateLovePercent(percent: Float)
+
+        fun updateCorePercent(percent: Float)
     }
 }

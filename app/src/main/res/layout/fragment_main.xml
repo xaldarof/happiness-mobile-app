@@ -36,7 +36,8 @@
         android:paddingBottom="12dp"
         android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintHeight_percent="0.55"
+        app:layout_constraintTop_toTopOf="@+id/guideline5"
         tools:layout_editor_absoluteX="18dp">
 
         <LinearLayout
@@ -53,7 +54,7 @@
                 android:background="@drawable/life_item_style"
                 android:elevation="8dp"
                 android:paddingStart="24dp"
-                android:paddingEnd="18dp"
+                android:paddingEnd="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_percent="0.2"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -91,13 +92,24 @@
                     android:layout_height="0dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerInParent="true"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginEnd="36dp"
                     android:src="@drawable/ic_goldfish"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHeight_percent="0.6"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.3"
+                    app:layout_constraintWidth_percent="0.25"
+                    app:tint="@color/white" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="4dp"
+                    android:rotation="320"
+                    android:src="@drawable/ic_right"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:tint="@color/white" />
 
                 <TextView
@@ -139,6 +151,18 @@
                 app:layout_constraintWidth_percent="0.49">
 
 
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_margin="8dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="16dp"
+                    android:rotation="320"
+                    android:src="@drawable/ic_right"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/white" />
+
                 <com.moos.library.HorizontalProgressView
                     android:id="@+id/progressViewSuccess"
                     android:layout_width="0dp"
@@ -161,13 +185,13 @@
                     android:id="@+id/imageView"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_marginEnd="24dp"
+                    android:layout_marginEnd="36dp"
                     android:src="@drawable/ic_goal"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHeight_percent="0.8"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.3"
+                    app:layout_constraintWidth_percent="0.25"
                     app:tint="@color/white" />
 
                 <TextView
@@ -210,6 +234,18 @@
                 app:layout_constraintTop_toBottomOf="@+id/lifeBtn"
                 app:layout_constraintWidth_percent="0.49">
 
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_margin="8dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="16dp"
+                    android:rotation="320"
+                    android:src="@drawable/ic_right"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/white" />
+
                 <com.moos.library.HorizontalProgressView
                     android:id="@+id/progressViewHappy"
                     android:layout_width="0dp"
@@ -234,7 +270,7 @@
                     android:layout_height="0dp"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginEnd="18dp"
+                    android:layout_marginEnd="36dp"
                     android:src="@drawable/ic_diagram"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -280,12 +316,24 @@
                 android:background="@drawable/love_item_style"
                 android:elevation="8dp"
                 android:paddingStart="24dp"
-                android:paddingEnd="12dp"
+                android:paddingEnd="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_percent="0.2"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/successBtn">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_margin="8dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="16dp"
+                    android:rotation="320"
+                    android:src="@drawable/ic_right"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/white" />
 
                 <com.moos.library.HorizontalProgressView
                     android:id="@+id/progressViewLove"
@@ -318,13 +366,13 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="18dp"
+                    android:layout_marginEnd="36dp"
                     android:src="@drawable/ic_talk"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHeight_percent="0.8"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.3"
+                    app:layout_constraintWidth_percent="0.25"
                     app:tint="@color/white" />
 
                 <TextView
@@ -392,13 +440,13 @@
     <!--        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />-->
 
     <com.moos.library.CircleProgressView
-        android:id="@+id/progressView_circle"
+        android:id="@+id/progressCore"
         android:layout_width="270dp"
         android:layout_height="270dp"
         android:layout_marginBottom="-36dp"
         android:textAlignment="center"
         app:circleBroken="true"
-        app:end_color="@color/purple_700"
+        app:end_color="@color/core_progress_color"
         app:end_progress="100"
         app:isTracked="true"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
@@ -406,7 +454,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:progressTextSize="36dp"
-        app:start_color="#E41548"
-        app:start_progress="20"
+        app:start_color="@color/myWhite"
+        app:start_progress="0"
         app:track_width="26dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -33,7 +33,7 @@ class FragmentController(
 
         tabLayout.setOnTabSelectedListener(object :TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                tab!!.icon?.setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN)
+                tab!!.icon?.setColorFilter(activity.resources.getColor(R.color.to_right_color), PorterDuff.Mode.SRC_IN)
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
