@@ -1,12 +1,16 @@
 package pdf.reader.happiness
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
+import kotlinx.coroutines.delay
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -16,6 +20,7 @@ import pdf.reader.happiness.databinding.FragmentSettingsBinding
 import pdf.reader.happiness.presentation.SettingFragmentPresenter
 import pdf.reader.happiness.tools.CacheClear
 import pdf.reader.happiness.tools.ClearDialog
+import pdf.reader.happiness.tools.RestartDialog
 
 @KoinApiExtension
 class SettingsFragment : Fragment(),KoinComponent,SettingFragmentPresenter.SettingsView,ClearDialog.ClearDialogCallBack {
@@ -79,6 +84,6 @@ class SettingsFragment : Fragment(),KoinComponent,SettingFragmentPresenter.Setti
 
     override fun onClickYes() {
         cacheClear.clear()
-        binding.restartInfo.text = resources.getString(R.string.restart_info)
+        RestartDialog.Base().show(requireContext())
     }
 }
