@@ -14,27 +14,32 @@ import org.koin.core.component.get
 import org.koin.core.component.inject
 import pdf.reader.happiness.data.models.InfoModel
 import pdf.reader.happiness.tools.AssetReader
+import pdf.reader.happiness.tools.ReadingWarningDialog
 import pdf.reader.happiness.vm.ReadingViewModel
 
 
 @KoinApiExtension
 class ReadingActivity : AppCompatActivity(), KoinComponent,
-    AssetReader.ExitCallBack{
+    AssetReader.ExitCallBack,ReadingWarningDialog.DialogCallBack {
 
     private lateinit var binding: ActivityReadingBinding
     private val assetReader: AssetReader by inject()
     private val viewModel: ReadingViewModel = get()
     private val presenter:ReadingActivityPresenter by inject()
-
+    private lateinit var intent: InfoModel
+    private val warningDialog = ReadingWarningDialog.Base(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityReadingBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
-        val intent = intent.getSerializableExtra("data") as InfoModel
+        intent = getIntent().getSerializableExtra("data") as InfoModel
+
         binding.toolbar.titleTv.text = intent.title
-        binding.toolbar.backBtn.setOnClickListener { finish() }
+        binding.toolbar.backBtn.setOnClickListener {
+            warningDialog.show(this)
+        }
         binding.toolbar.likeBtn.isLiked = intent.favorite
 
         presenter.checkFontState(binding.bodyTv)
@@ -43,7 +48,6 @@ class ReadingActivity : AppCompatActivity(), KoinComponent,
         CoroutineScope(Dispatchers.Main).launch {
             binding.bodyTv.text = assetReader.read(intent.body, this@ReadingActivity)
             viewModel.updateOpened(intent.body, true)
-            viewModel.updateFinishedState(intent.body, true)
 
         }
 
@@ -72,7 +76,16 @@ class ReadingActivity : AppCompatActivity(), KoinComponent,
         outState.putBoolean("like", binding.toolbar.likeBtn.isLiked)
     }
 
-    override fun exitCommand() {
-        finish()
+    override fun onBackPressed() { warningDialog.show(this) }
+
+    override fun exitCommand() { finish() }
+    override fun exitCallBack() { finish() }
+
+    override fun updateCallBack(state: Boolean) {
+        CoroutineScope(Dispatchers.IO).launch {
+            viewModel.updateFinishedState(intent.body, state)
+            finish()
+        }
     }
+
 }
