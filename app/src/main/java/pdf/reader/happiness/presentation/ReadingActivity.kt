@@ -38,7 +38,11 @@ class ReadingActivity : AppCompatActivity(), KoinComponent,
 
         binding.toolbar.titleTv.text = intent.title
         binding.toolbar.backBtn.setOnClickListener {
-            warningDialog.show(this)
+            if (!intent.finished) {
+                warningDialog.show(this)
+            }else{
+                finish()
+            }
         }
         binding.toolbar.likeBtn.isLiked = intent.favorite
 
@@ -76,7 +80,13 @@ class ReadingActivity : AppCompatActivity(), KoinComponent,
         outState.putBoolean("like", binding.toolbar.likeBtn.isLiked)
     }
 
-    override fun onBackPressed() { warningDialog.show(this) }
+    override fun onBackPressed() {
+        if (!intent.finished) {
+            warningDialog.show(this)
+        }else {
+            finish()
+        }
+    }
 
     override fun exitCommand() { finish() }
     override fun exitCallBack() { finish() }
