@@ -71,13 +71,14 @@
             android:layout_centerInParent="true"
             android:layout_marginStart="0dp"
             android:layout_toEndOf="@+id/img"
-            android:text="Темная тема"
+            android:text="@string/dark_theme"
             android:textColor="@color/to_right_color"
             android:textSize="20sp" />
 
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/relativeLayout2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="12dp"
@@ -118,10 +119,108 @@
             android:layout_centerInParent="true"
             android:layout_marginStart="0dp"
             android:layout_toEndOf="@+id/img2"
-            android:text="Жирный шрифт"
+            android:text="@string/bold_font"
             android:textColor="@color/to_right_color"
             android:textSize="20sp" />
 
     </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="12dp"
+        android:background="@drawable/item_style"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2">
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/implementBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/ic_baseline_file_download_24"
+            android:thumb="@drawable/switch_thumb"
+            app:tint="@color/black"
+            app:track="@drawable/thumb_track" />
+
+        <ImageView
+            android:id="@+id/img3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="12dp"
+            android:src="@drawable/ic_baseline_cloud_download_24"
+            app:tint="@color/to_right_color" />
+
+        <TextView
+            android:id="@+id/implement_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/img3"
+            android:text="@string/implement_data"
+            android:textColor="@color/to_right_color"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/clearBtn"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="12dp"
+        android:background="@drawable/clear_item"
+        android:clickable="true"
+        android:elevation="4dp"
+        android:focusable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout4">
+
+        <ImageView
+            android:id="@+id/img5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="12dp"
+            android:src="@drawable/ic_baseline_heart_broken_24"
+            app:tint="@color/to_right_color" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/img5"
+            android:text="@string/clear_all"
+            android:textColor="@color/to_right_color"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/restart_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:textColor="@color/red_end"
+        app:layout_constraintEnd_toEndOf="@+id/clearBtn"
+        app:layout_constraintStart_toStartOf="@+id/clearBtn"
+        app:layout_constraintTop_toBottomOf="@+id/clearBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,5 @@
 package pdf.reader.happiness.data.core
 
-import androidx.lifecycle.map
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import pdf.reader.happiness.data.models.InfoModel

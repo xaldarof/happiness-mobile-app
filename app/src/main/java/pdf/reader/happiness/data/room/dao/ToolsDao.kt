@@ -17,4 +17,6 @@ interface ToolsDao {
     @Query("SELECT * FROM db WHERE favorite==1")
     fun fetchFavorites(): Flow<List<CoreModel>>
 
+    @Query("DELETE FROM db")
+    fun delete()
 }

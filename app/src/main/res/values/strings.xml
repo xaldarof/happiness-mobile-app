@@ -8,4 +8,10 @@
     <string name="settings">Настройки</string>
     <string name="is_empty_favorites">Здесь пока пусто…</string>
     <string name="your_progress">Ваш общий прогресс</string>
+    <string name="implement_data">Внедрить данные</string>
+    <string name="bold_font">Жирный шрифт</string>
+    <string name="no_support">Пока недоступно на вашем устройстве.</string>
+    <string name="clear_all">Обнулить данные</string>
+    <string name="restart_info">Требуеться перезапуск программы</string>
+
 </resources>

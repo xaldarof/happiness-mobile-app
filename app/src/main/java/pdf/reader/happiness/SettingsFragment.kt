@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
@@ -13,14 +14,17 @@ import pdf.reader.happiness.data.settings_cache.FontController
 import pdf.reader.happiness.data.settings_cache.ThemeController
 import pdf.reader.happiness.databinding.FragmentSettingsBinding
 import pdf.reader.happiness.presentation.SettingFragmentPresenter
+import pdf.reader.happiness.tools.CacheClear
+import pdf.reader.happiness.tools.ClearDialog
 
 @KoinApiExtension
-class SettingsFragment : Fragment(),KoinComponent,SettingFragmentPresenter.SettingsView {
+class SettingsFragment : Fragment(),KoinComponent,SettingFragmentPresenter.SettingsView,ClearDialog.ClearDialogCallBack {
 
     private lateinit var binding: FragmentSettingsBinding
     private val themeController: ThemeController by inject()
     private val fontController:FontController by inject()
     private lateinit var settingFragmentPresenter: SettingFragmentPresenter
+    private val cacheClear:CacheClear by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,7 +42,7 @@ class SettingsFragment : Fragment(),KoinComponent,SettingFragmentPresenter.Setti
         super.onViewCreated(view, savedInstanceState)
 
         binding.themeSwitch.setOnCheckedChangeListener { p0, _ ->
-            if (p0!!.isChecked) {
+            if (p0.isChecked) {
                 settingFragmentPresenter.updateDarkThemeSwitchState(true)
             } else {
                 settingFragmentPresenter.updateDarkThemeSwitchState(false)
@@ -46,11 +50,22 @@ class SettingsFragment : Fragment(),KoinComponent,SettingFragmentPresenter.Setti
         }
 
         binding.fontSwitch.setOnCheckedChangeListener { p0, _ ->
-            if (p0!!.isChecked) {
+            if (p0.isChecked) {
                 settingFragmentPresenter.updateFontSwitchState(true)
             } else {
                 settingFragmentPresenter.updateFontSwitchState(false)
             }
+        }
+
+        binding.implementBtn.setOnCheckedChangeListener { p0, _ ->
+            if (p0.isChecked){
+                Toast.makeText(requireContext(), R.string.no_support, Toast.LENGTH_LONG).show()
+                binding.implementBtn.isChecked = false
+            }
+        }
+
+        binding.clearBtn.setOnClickListener {
+            ClearDialog.Base(this).show(requireContext())
         }
     }
 
@@ -60,5 +75,9 @@ class SettingsFragment : Fragment(),KoinComponent,SettingFragmentPresenter.Setti
 
     override fun updateFontSwitchState(state: Boolean) {
         binding.fontSwitch.isChecked = state
+    }
+
+    override fun onClickYes() {
+        cacheClear.clear()
     }
 }

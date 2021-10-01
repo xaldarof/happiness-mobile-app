@@ -17,6 +17,7 @@ import pdf.reader.happiness.data.settings_cache.CongratulationController
 import pdf.reader.happiness.data.settings_cache.FontController
 import pdf.reader.happiness.data.settings_cache.ThemeController
 import pdf.reader.happiness.presentation.ReadingActivityPresenter
+import pdf.reader.happiness.tools.CacheClear
 import pdf.reader.happiness.vm.*
 
 val cacheModule = module {
@@ -35,6 +36,7 @@ val cacheModule = module {
     factory<FontController> { FontController.Base(get()) }
     factory<CongratulationController>{ CongratulationController.Base(get()) }
     factory<ReadingActivityPresenter> { ReadingActivityPresenter(get(), get()) }
+    factory<CacheClear>{ CacheClear.Base(get(),get(),get(),get()) }
 }
 
 val initializers = module {
