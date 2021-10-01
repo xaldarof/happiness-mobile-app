@@ -1,6 +1,7 @@
 package pdf.reader.happiness.presentation.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import pdf.reader.happiness.R
 import pdf.reader.happiness.data.core.DataRepository
+import pdf.reader.happiness.data.settings_cache.CongratulationController
 import pdf.reader.happiness.databinding.FragmentMainBinding
 import pdf.reader.happiness.presentation.MainFragmentPresenter
 import pdf.reader.happiness.tools.CongratulationView
@@ -26,6 +28,7 @@ class MainFragment : Fragment(), KoinComponent, MainFragmentPresenter.MyView {
     private val repository: DataRepository by inject()
     private val mainFragmentPresenter = MainFragmentPresenter(this)
     private lateinit var konfettiView: KonfettiView
+    private val congratulation:CongratulationController by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,13 +62,11 @@ class MainFragment : Fragment(), KoinComponent, MainFragmentPresenter.MyView {
         binding.loveBtn.setOnClickListener {
             navigate(LoveFragment())
         }
-
-
     }
 
     private fun navigate(fragment: Fragment) {
         parentFragmentManager.beginTransaction().replace(R.id.containerMain, fragment)
-            .addToBackStack("back").commit()
+            .addToBackStack(null).commit()
     }
 
     override fun onResume() {
@@ -86,6 +87,7 @@ class MainFragment : Fragment(), KoinComponent, MainFragmentPresenter.MyView {
     private suspend fun observeCorePercent() {
         repository.fetchAllTypes().asLiveData().observeForever {
             mainFragmentPresenter.updatePercentCore(it)
+            mainFragmentPresenter.updateAllFinished(it)
         }
     }
 
@@ -121,30 +123,26 @@ class MainFragment : Fragment(), KoinComponent, MainFragmentPresenter.MyView {
         }
     }
 
-
     override fun updateLifePercent(percent: Float) {
-        binding.progressViewLife.setProgressDuration(2000)
         binding.progressViewLife.setEndProgress(percent)
         binding.progressViewLife.startProgressAnimation()
     }
 
     override fun updateSuccessPercent(percent: Float) {
-        binding.progressViewSuccess.setProgressDuration(2000)
         binding.progressViewSuccess.setEndProgress(percent)
         binding.progressViewSuccess.startProgressAnimation()
     }
 
     override fun updateHappyPercent(percent: Float) {
-        binding.progressViewHappy.setProgressDuration(2000)
         binding.progressViewHappy.setEndProgress(percent)
         binding.progressViewHappy.startProgressAnimation()
     }
 
     override fun updateLovePercent(percent: Float) {
-        binding.progressViewLove.setProgressDuration(2000)
         binding.progressViewLove.setEndProgress(percent)
         binding.progressViewLove.startProgressAnimation()
     }
+
 
     override fun updateCorePercent(percent: Float) {
         binding.progressCore.setEndProgress(percent)
@@ -153,19 +151,40 @@ class MainFragment : Fragment(), KoinComponent, MainFragmentPresenter.MyView {
 
     override fun updateAllLifeFinished() {
         binding.lifeFinishedIcon.visibility = View.VISIBLE
+        if (!congratulation.isLifeCongratulated()){
+            CongratulationView(konfettiView).show()
+            congratulation.setLiveCongratulated(true)
+        }
     }
 
     override fun updateAllSuccessFinished() {
         binding.successFinishedIcon.visibility = View.VISIBLE
-        CongratulationView(konfettiView).show()
+        if (!congratulation.isSuccessCongratulated()) {
+            CongratulationView(konfettiView).show()
+            congratulation.setSuccessCongratulated(true)
+        }
     }
 
     override fun updateAllHappyFinished() {
-        CongratulationView(konfettiView).show()
         binding.happyFinishedIcon.visibility = View.VISIBLE
+        if (!congratulation.isHappyCongratulated()){
+            CongratulationView(konfettiView).show()
+            congratulation.setHappyCongratulated(true)
+        }
     }
 
     override fun updateAllLoveFinished() {
         binding.loveFinishedIcon.visibility = View.VISIBLE
+        if (!congratulation.isLoveCongratulated()){
+            CongratulationView(konfettiView).show()
+            congratulation.setLoveCongratulated(true)
+        }
+    }
+
+    override fun updateAllFinished() {
+        if (!congratulation.isAllCongratulated()){
+            CongratulationView(konfettiView).show()
+            congratulation.setAllCongratulated(true)
+        }
     }
 }

@@ -60,6 +60,19 @@ class MainFragmentPresenter(private val view: MyView) {
         }
     }
 
+
+    fun updateAllFinished(list: List<InfoModel>){
+        var count = 0
+        list.forEach {
+            if (!it.finished){
+                count++
+            }
+        }
+        if (count==0){
+            view.updateAllFinished()
+        }
+    }
+
     private fun calculateIsAllFinished(list: List<InfoModel>): Boolean {
         var finishedCounter = 0
         val total = list.size
@@ -83,5 +96,7 @@ class MainFragmentPresenter(private val view: MyView) {
         fun updateAllSuccessFinished()
         fun updateAllHappyFinished()
         fun updateAllLoveFinished()
+
+        fun updateAllFinished()
     }
 }

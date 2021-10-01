@@ -29,7 +29,7 @@ class FragmentController(
         viewPager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         tabLayout = activity.findViewById(R.id.tab_layout)
         viewPager2.adapter = fragmentAdapter
-        viewPager2.offscreenPageLimit = 4
+        viewPager2.offscreenPageLimit = fragmentAdapter.itemCount
 
         tabLayout.setOnTabSelectedListener(object :TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {

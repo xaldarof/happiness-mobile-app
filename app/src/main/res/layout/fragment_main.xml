@@ -78,6 +78,7 @@
                     android:layout_marginTop="8dp"
                     app:corner_radius="12dp"
                     app:end_color="@color/red_end"
+                    app:progressDuration="1000"
                     app:end_progress="100"
                     app:isTracked="true"
                     app:layout_constraintHeight_percent="0.3"
@@ -191,6 +192,7 @@
                     android:layout_marginTop="8dp"
                     app:corner_radius="12dp"
                     app:end_color="@color/red_end"
+                    app:progressDuration="1000"
                     app:end_progress="100"
                     app:isTracked="true"
                     app:layout_constraintHeight_percent="0.3"
@@ -285,6 +287,7 @@
                     app:corner_radius="12dp"
                     app:end_color="@color/red_end"
                     app:end_progress="100"
+                    app:progressDuration="1000"
                     app:isTracked="true"
                     app:layout_constraintHeight_percent="0.3"
                     app:layout_constraintStart_toStartOf="@+id/happyCounterTv"
@@ -385,6 +388,7 @@
                     app:corner_radius="12dp"
                     app:end_color="@color/red_end"
                     app:end_progress="100"
+                    app:progressDuration="1000"
                     app:isTracked="true"
                     app:layout_constraintHeight_percent="0.3"
                     app:layout_constraintStart_toStartOf="@+id/loveCountTv"
@@ -447,40 +451,6 @@
         </LinearLayout>
     </ScrollView>
 
-
-    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-    <!--        android:id="@+id/constraintLayout"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="0dp"-->
-    <!--        android:layout_marginStart="12dp"-->
-    <!--        android:layout_marginTop="10dp"-->
-    <!--        android:layout_marginEnd="12dp"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHeight_percent="0.2"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent">-->
-
-    <!--        <androidx.viewpager.widget.ViewPager-->
-    <!--            android:id="@+id/viewPager"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            tools:ignore="SpeakableTextPresentCheck" />-->
-
-    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-    <!--    <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator-->
-    <!--        android:id="@+id/dots_indicator"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_centerHorizontal="true"-->
-    <!--        android:layout_marginTop="4dp"-->
-    <!--        app:dotsColor="#FFC107"-->
-    <!--        app:dotsSize="12dp"-->
-    <!--        app:dotsWidthFactor="3"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />-->
-
     <com.moos.library.CircleProgressView
         android:id="@+id/progressCore"
         android:layout_width="270dp"
@@ -498,7 +468,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:progressTextColor="@color/progress_text_color"
         app:progressTextSize="36dp"
-        app:start_color="@color/myWhite"
+        app:start_color="@color/core_progress_color"
         app:start_progress="0"
         app:track_width="26dp" />
 
