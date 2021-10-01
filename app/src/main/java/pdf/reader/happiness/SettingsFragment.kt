@@ -79,5 +79,6 @@ class SettingsFragment : Fragment(),KoinComponent,SettingFragmentPresenter.Setti
 
     override fun onClickYes() {
         cacheClear.clear()
+        binding.restartInfo.text = resources.getString(R.string.restart_info)
     }
 }

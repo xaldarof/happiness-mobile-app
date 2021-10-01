@@ -37,5 +37,6 @@
     <color name="core_progress_color">#591BE4</color>
     <color name="like_color">#000000</color>
     <color name="progress_text_color">#DD5E7D</color>
+    <color name="clear_color">#D8D1D1</color>
 
 </resources>
