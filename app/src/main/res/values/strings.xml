@@ -13,5 +13,6 @@
     <string name="no_support">Пока недоступно на вашем устройстве.</string>
     <string name="clear_all">Обнулить данные</string>
     <string name="restart_info">Требуеться перезапуск программы</string>
+    <string name="motivation_txt">#Развивайся</string>
 
 </resources>
