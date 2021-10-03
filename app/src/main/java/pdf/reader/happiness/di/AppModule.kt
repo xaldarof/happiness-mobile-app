@@ -22,7 +22,7 @@ import pdf.reader.happiness.vm.*
 
 val cacheModule = module {
     single<RoomDatabase> { AppDatabase.getInstance(androidContext()) }
-    factory<DataRepository> { DataRepository.Base(get(), get(), get(), get(), get(), get()) }
+    factory<DataRepository> { DataRepository.Base(get(), get(), get(), get(), get()) }
     factory<ToolsRepository> { ToolsRepository.Base(get()) }
 
     factory<SuccessCacheDataSource> { SuccessCacheDataSource.Base(get()) }

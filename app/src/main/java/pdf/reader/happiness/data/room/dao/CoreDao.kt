@@ -15,17 +15,6 @@ interface CoreDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertAll(coreModel: CoreModel)
 
-
-    @Query("UPDATE db SET favorite = :favorite WHERE body = :body")
-    suspend fun updateFavoriteState(body:String, favorite:Boolean)
-
-    @Query("UPDATE db SET isOpened = :isOpened WHERE body = :body")
-    suspend fun updateOpenedState(body:String, isOpened:Boolean)
-
-    @Query("UPDATE db SET finished = :finished WHERE body = :body")
-    suspend fun updateFinishedState(body:String, finished:Boolean)
-
-
     @Query("SELECT * FROM db")
     fun fetchAllTypes():Flow<List<CoreModel>>
 

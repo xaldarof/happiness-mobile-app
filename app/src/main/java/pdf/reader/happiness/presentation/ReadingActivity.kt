@@ -16,6 +16,7 @@ import pdf.reader.happiness.data.models.InfoModel
 import pdf.reader.happiness.tools.AssetReader
 import pdf.reader.happiness.tools.ReadingWarningDialog
 import pdf.reader.happiness.vm.ReadingViewModel
+import java.lang.Exception
 
 
 @KoinApiExtension
@@ -88,7 +89,7 @@ class ReadingActivity : AppCompatActivity(), KoinComponent,
         }
     }
 
-    override fun exitCommand() { finish() }
+    override fun exitCommand(message: Exception) { finish() }
     override fun exitCallBack() { finish() }
 
     override fun updateCallBack(state: Boolean) {

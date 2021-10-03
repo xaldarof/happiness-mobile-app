@@ -19,4 +19,15 @@ interface ToolsDao {
 
     @Query("DELETE FROM db")
     fun delete()
+
+
+    @Query("UPDATE db SET favorite = :favorite WHERE body = :body")
+    suspend fun updateFavoriteState(body:String, favorite:Boolean)
+
+    @Query("UPDATE db SET isOpened = :isOpened WHERE body = :body")
+    suspend fun updateOpenedState(body:String, isOpened:Boolean)
+
+    @Query("UPDATE db SET finished = :finished WHERE body = :body")
+    suspend fun updateFinishedState(body:String, finished:Boolean)
+
 }
