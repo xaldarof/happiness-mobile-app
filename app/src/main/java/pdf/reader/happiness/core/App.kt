@@ -10,10 +10,7 @@ import pdf.reader.happiness.data.cache.initilizers.HappyInitializer
 import pdf.reader.happiness.data.cache.initilizers.LifeInitializer
 import pdf.reader.happiness.data.cache.initilizers.LoveInitializer
 import pdf.reader.happiness.data.cache.initilizers.SuccessInitializer
-import pdf.reader.happiness.di.cacheModule
-import pdf.reader.happiness.di.initializers
-import pdf.reader.happiness.di.tools
-import pdf.reader.happiness.di.viewModels
+import pdf.reader.happiness.di.*
 
 @KoinApiExtension
 class App : Application(),KoinComponent{
@@ -27,7 +24,7 @@ class App : Application(),KoinComponent{
         super.onCreate()
         startKoin {
             androidContext(this@App)
-            modules(cacheModule, viewModels, initializers, tools)
+            modules(cacheDataModule, viewModels, initializers, tools, settingsCacheModule)
         }
 
         successInitializer.init()
