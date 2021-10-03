@@ -3,16 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="250dp"
-    android:background="@drawable/bottom_sheet_style">
+    android:background="@drawable/bottom_sheet_style"
+    android:backgroundTint="@color/light_black">
 
     <TextView
-        android:background="@drawable/item_style"
         android:layout_width="40dp"
-        android:layout_centerInParent="true"
+        android:layout_height="2dp"
         android:layout_alignParentTop="true"
-        android:layout_margin="8dp"
-        android:backgroundTint="@color/black"
-        android:layout_height="2dp"/>
+        android:layout_centerInParent="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/item_style"
+        android:backgroundTint="@color/to_right_color" />
 
     <ImageView
         android:id="@+id/img"
