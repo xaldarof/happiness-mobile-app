@@ -2,6 +2,8 @@ package pdf.reader.happiness.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import pdf.reader.happiness.databinding.ActivityReadingBinding
 import com.like.LikeButton
 import com.like.OnLikeListener
@@ -14,6 +16,7 @@ import org.koin.core.component.get
 import org.koin.core.component.inject
 import pdf.reader.happiness.data.models.InfoModel
 import pdf.reader.happiness.tools.AssetReader
+import pdf.reader.happiness.tools.BarAnimator
 import pdf.reader.happiness.tools.ReadingWarningDialog
 import pdf.reader.happiness.vm.ReadingViewModel
 import java.lang.Exception
@@ -21,12 +24,12 @@ import java.lang.Exception
 
 @KoinApiExtension
 class ReadingActivity : AppCompatActivity(), KoinComponent,
-    AssetReader.ExitCallBack,ReadingWarningDialog.DialogCallBack {
+    AssetReader.ExitCallBack, ReadingWarningDialog.DialogCallBack {
 
     private lateinit var binding: ActivityReadingBinding
     private val assetReader: AssetReader by inject()
     private val viewModel: ReadingViewModel = get()
-    private val presenter:ReadingActivityPresenter by inject()
+    private val presenter: ReadingActivityPresenter by inject()
     private lateinit var intent: InfoModel
     private val warningDialog = ReadingWarningDialog.Base(this)
 
@@ -41,7 +44,7 @@ class ReadingActivity : AppCompatActivity(), KoinComponent,
         binding.toolbar.backBtn.setOnClickListener {
             if (!intent.finished) {
                 warningDialog.show(this)
-            }else{
+            } else {
                 finish()
             }
         }
@@ -69,6 +72,7 @@ class ReadingActivity : AppCompatActivity(), KoinComponent,
                 }
             }
         })
+
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -84,13 +88,18 @@ class ReadingActivity : AppCompatActivity(), KoinComponent,
     override fun onBackPressed() {
         if (!intent.finished) {
             warningDialog.show(this)
-        }else {
+        } else {
             finish()
         }
     }
 
-    override fun exitCommand(message: Exception) { finish() }
-    override fun exitCallBack() { finish() }
+    override fun exitCommand(message: Exception) {
+        finish()
+    }
+
+    override fun exitCallBack() {
+        finish()
+    }
 
     override fun updateCallBack(state: Boolean) {
         CoroutineScope(Dispatchers.IO).launch {

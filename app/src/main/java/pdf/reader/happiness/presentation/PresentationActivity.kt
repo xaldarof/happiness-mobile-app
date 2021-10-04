@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import org.koin.core.component.KoinApiExtension
 import pdf.reader.happiness.MainActivity
 import pdf.reader.happiness.R
@@ -27,5 +28,6 @@ class PresentationActivity : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }, 2500)
+
     }
 }
