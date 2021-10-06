@@ -13,24 +13,28 @@ import kotlinx.coroutines.launch
 import nl.dionsegijn.konfetti.KonfettiView
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
 import org.koin.core.component.inject
 import pdf.reader.happiness.R
 import pdf.reader.happiness.data.core.AchievementRepository
 import pdf.reader.happiness.data.core.DataRepository
 import pdf.reader.happiness.data.core.ToolsRepository
+import pdf.reader.happiness.data.settings_cache.BadgeController
 import pdf.reader.happiness.data.settings_cache.CongratulationController
 import pdf.reader.happiness.databinding.FragmentMainBinding
 import pdf.reader.happiness.presentation.MainFragmentPresenter
 import pdf.reader.happiness.tools.AchievementUpdater
 import pdf.reader.happiness.tools.CongratulationView
 import pdf.reader.happiness.tools.CustomSnackBar
+import pdf.reader.happiness.vm.MainFragmentViewModel
 
 @KoinApiExtension
 class MainFragment : Fragment(), KoinComponent, MainFragmentPresenter.MyView {
 
     private lateinit var binding: FragmentMainBinding
-    private val repository: DataRepository by inject()
+    private val viewModel:MainFragmentViewModel = get()
     private val achievementUpdater:AchievementUpdater by inject()
+    private val badgeController:BadgeController by inject()
     private val mainFragmentPresenter = MainFragmentPresenter(this,achievementUpdater)
     private lateinit var konfettiView: KonfettiView
     private val congratulation:CongratulationController by inject()
@@ -90,14 +94,14 @@ class MainFragment : Fragment(), KoinComponent, MainFragmentPresenter.MyView {
     }
 
     private suspend fun observeCorePercent() {
-        repository.fetchAllTypes().asLiveData().observeForever {
+        viewModel.fetchAll().observeForever {
             mainFragmentPresenter.updatePercentCore(it)
             mainFragmentPresenter.updateAllFinished(it)
         }
     }
 
     private suspend fun observeSuccess() {
-        repository.fetchSuccess().asLiveData().observeForever {
+        viewModel.fetchSuccess().observeForever {
             binding.successCountTv.text = "${it.size} советов"
             mainFragmentPresenter.updatePercentSuccess(it)
             mainFragmentPresenter.updateAllSuccessFinished(it)
@@ -105,7 +109,7 @@ class MainFragment : Fragment(), KoinComponent, MainFragmentPresenter.MyView {
     }
 
     private suspend fun observeLife() {
-        repository.fetchLife().asLiveData().observeForever {
+        viewModel.fetchLife().observeForever {
             binding.lifeCounterTv.text = "${it.size} советов"
             mainFragmentPresenter.updatePercentLife(it)
             mainFragmentPresenter.updateAllLifeFinished(it)
@@ -113,7 +117,7 @@ class MainFragment : Fragment(), KoinComponent, MainFragmentPresenter.MyView {
     }
 
     private suspend fun observeHappy() {
-        repository.fetchHappy().asLiveData().observeForever {
+        viewModel.fetchHappy().observeForever {
             binding.happyCounterTv.text = "${it.size} советов"
             mainFragmentPresenter.updatePercentHappy(it)
             mainFragmentPresenter.updateAllHappyFinished(it)
@@ -121,7 +125,7 @@ class MainFragment : Fragment(), KoinComponent, MainFragmentPresenter.MyView {
     }
 
     private suspend fun observeLove() {
-        repository.fetchLove().asLiveData().observeForever {
+        viewModel.fetchLove().observeForever {
             binding.loveCountTv.text = "${it.size} советов"
             mainFragmentPresenter.updatePercentLove(it)
             mainFragmentPresenter.updateAllLoveFinished(it)
@@ -160,6 +164,7 @@ class MainFragment : Fragment(), KoinComponent, MainFragmentPresenter.MyView {
             CongratulationView(konfettiView).show()
             congratulation.setLiveCongratulated(true)
             parentFragmentManager.popBackStack()
+            badgeController.updateBadge()
         }
     }
 
@@ -169,6 +174,7 @@ class MainFragment : Fragment(), KoinComponent, MainFragmentPresenter.MyView {
             CongratulationView(konfettiView).show()
             congratulation.setSuccessCongratulated(true)
             parentFragmentManager.popBackStack()
+            badgeController.updateBadge()
         }
     }
 
@@ -178,6 +184,7 @@ class MainFragment : Fragment(), KoinComponent, MainFragmentPresenter.MyView {
             CongratulationView(konfettiView).show()
             congratulation.setHappyCongratulated(true)
             parentFragmentManager.popBackStack()
+            badgeController.updateBadge()
         }
     }
 
@@ -187,6 +194,7 @@ class MainFragment : Fragment(), KoinComponent, MainFragmentPresenter.MyView {
             CongratulationView(konfettiView).show()
             congratulation.setLoveCongratulated(true)
             parentFragmentManager.popBackStack()
+            badgeController.updateBadge()
         }
     }
 
@@ -195,6 +203,7 @@ class MainFragment : Fragment(), KoinComponent, MainFragmentPresenter.MyView {
             CongratulationView(konfettiView).show()
             congratulation.setAllCongratulated(true)
             parentFragmentManager.popBackStack()
+            badgeController.updateBadge()
         }
     }
 }

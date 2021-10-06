@@ -2,13 +2,11 @@ package pdf.reader.happiness.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.renderscript.Script
 import androidx.appcompat.app.AppCompatDelegate
-import kotlinx.coroutines.*
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+import pdf.reader.happiness.data.settings_cache.BadgeController
 import pdf.reader.happiness.data.settings_cache.ThemeController
 import pdf.reader.happiness.databinding.ActivityMainBinding
 import pdf.reader.happiness.presentation.adapter.*
@@ -21,6 +19,7 @@ class MainActivity : AppCompatActivity(), KoinComponent {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var themeController: ThemeController
+    private val badgeController:BadgeController by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,8 +39,6 @@ class MainActivity : AppCompatActivity(), KoinComponent {
                 MainFragment(), SearchFragment(),
                 FavoritesFragment(),
                 AchievementsFragment(),
-                SettingsFragment()
-            )
-        )
+                SettingsFragment()),badgeController)
     }
 }

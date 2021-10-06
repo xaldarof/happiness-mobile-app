@@ -5,14 +5,21 @@ import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import pdf.reader.happiness.R
+import pdf.reader.happiness.data.settings_cache.BadgeController
 
 @SuppressLint("UseCompatLoadingForDrawables")
 class FragmentController(
     private val activity: AppCompatActivity,
-    private val fragments: List<Fragment>
+    private val fragments: List<Fragment>,
+    private val badgeController: BadgeController
 ) {
 
     private var viewPager2: ViewPager2 = activity.findViewById(R.id.pager)
@@ -31,6 +38,9 @@ class FragmentController(
         tabLayout.setOnTabSelectedListener(object :TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 tab!!.icon?.setColorFilter(activity.resources.getColor(R.color.to_right_color), PorterDuff.Mode.SRC_IN)
+                if (tab.position==3){
+                    badgeController.clearBadge()
+                }
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -63,8 +73,20 @@ class FragmentController(
                 4 ->{
                     tab.icon = activity.resources.getDrawable(R.drawable.ic_baseline_settings_24)
                 }
-
             }
+
+            CoroutineScope(Dispatchers.Main).launch {
+                badgeObserver(tabLayout.getTabAt(3)!!.orCreateBadge)
+            }
+
         }.attach()
+    }
+
+    private suspend fun badgeObserver(badgeDrawable: BadgeDrawable) {
+        while (true){
+            delay(1000)
+            badgeDrawable.number = badgeController.getBadge()
+            badgeDrawable.isVisible = badgeController.getBadge() != 0
+        }
     }
 }

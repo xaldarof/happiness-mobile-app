@@ -1,9 +1,11 @@
 package pdf.reader.happiness.presentation
 
 import pdf.reader.happiness.core.InfoModel
+import pdf.reader.happiness.data.settings_cache.BadgeController
 import pdf.reader.happiness.tools.AchievementUpdater
 
-class MainFragmentPresenter(private val view: MyView,private val achievementUpdater: AchievementUpdater) {
+class MainFragmentPresenter(private val view: MyView,
+                            private val achievementUpdater: AchievementUpdater) {
 
     fun updatePercentLife(list: List<InfoModel>) {
         view.updateLifePercent(calculatePercent(list))

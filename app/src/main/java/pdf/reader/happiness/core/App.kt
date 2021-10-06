@@ -24,7 +24,8 @@ class App : Application(),KoinComponent{
         super.onCreate()
         startKoin {
             androidContext(this@App)
-            modules(cacheDataModule, viewModels, initializers, tools, settingsCacheModule)
+            modules(cacheDataModule, viewModels, initializers, tools, settingsCacheModule,
+                presenters)
         }
 
         successInitializer.init()

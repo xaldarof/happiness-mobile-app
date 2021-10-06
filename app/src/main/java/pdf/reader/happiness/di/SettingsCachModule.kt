@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
+import pdf.reader.happiness.data.settings_cache.BadgeController
 import pdf.reader.happiness.data.settings_cache.CongratulationController
 import pdf.reader.happiness.data.settings_cache.FontController
 import pdf.reader.happiness.data.settings_cache.ThemeController
@@ -20,4 +21,6 @@ val settingsCacheModule = module {
     factory<CongratulationController>{ CongratulationController.Base(get()) }
     factory<ReadingActivityPresenter> { ReadingActivityPresenter(get(), get()) }
     factory<CacheClear>{ CacheClear.Base(get(),get(),get(),get()) }
+
+    factory<BadgeController>{ BadgeController.Base(get()) }
 }
