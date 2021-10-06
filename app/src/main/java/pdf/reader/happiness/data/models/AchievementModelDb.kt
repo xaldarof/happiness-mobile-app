@@ -9,9 +9,10 @@ import java.io.Serializable
 data class AchievementModelDb (
     @PrimaryKey
     val message:String,
-    val date:Long
+    val date:Long,
+    val type:AchievementModel.AchievementType
 ): Serializable {
 
-    fun mapToAchievementModel() : AchievementModel = AchievementModel(message,date)
+    fun mapToAchievementModel() : AchievementModel = AchievementModel(message,date,type)
 
 }

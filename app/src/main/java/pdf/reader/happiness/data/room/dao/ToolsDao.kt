@@ -34,7 +34,7 @@ interface ToolsDao {
 
 
 
-    @Query("SELECT * FROM ach")
+    @Query("SELECT * FROM ach ORDER BY date DESC")
     fun fetchAchievements():Flow<List<AchievementModelDb>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

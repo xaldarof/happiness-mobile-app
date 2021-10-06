@@ -38,7 +38,6 @@ class MainFragmentPresenter(private val view: MyView,
         return 100 * (count.toFloat() / list.size.toFloat())
     }
 
-
     fun updateAllLifeFinished(list: List<InfoModel>) {
         if (calculateIsAllFinished(list)) {
             view.updateAllLifeFinished()

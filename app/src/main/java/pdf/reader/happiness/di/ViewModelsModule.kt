@@ -13,7 +13,7 @@ val viewModels = module {
     single { SearchViewModel(get()) }
     single { FavoritesViewModel(get()) }
 
-    single { MainActivityViewModel() }
+    single { MainActivityViewModel(get(),get(),get()) }
     single { MainFragmentViewModel(get()) }
 
     single { AchievementsViewModel(get()) }

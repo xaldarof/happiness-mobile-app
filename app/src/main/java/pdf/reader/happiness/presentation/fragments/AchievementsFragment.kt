@@ -44,9 +44,6 @@ class AchievementsFragment : Fragment(), KoinComponent {
             update()
         }
 
-        viewModel.insertAchievement(
-            AchievementModel("Спасибо, что скачали наше приложение.",System.currentTimeMillis()))
-
     }
 
     override fun onResume() {
