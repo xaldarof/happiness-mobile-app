@@ -1,4 +1,4 @@
-package pdf.reader.simplepdfreader.presentation.adapter
+package pdf.reader.happiness.presentation.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

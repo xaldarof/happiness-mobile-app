@@ -48,11 +48,13 @@ dependencies {
     implementation 'com.github.MackHartley:RoundedProgressBar:2.1.1'
 
     implementation 'nl.dionsegijn:konfetti:1.3.2'
+    implementation 'com.cdev.android:achievement-view:0.9.1'
 
     //noinspection GradleCompatible
     implementation 'com.android.support:design:28.0.0'
     implementation 'com.moos:Material-ProgressView:1.0.6'
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
+    implementation 'androidx.test:core-ktx:1.4.0'
 
 
     kapt "android.arch.persistence.room:compiler:1.1.1"

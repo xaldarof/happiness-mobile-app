@@ -11,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
 import org.koin.core.component.KoinApiExtension
-import pdf.reader.happiness.data.models.InfoModel
+import pdf.reader.happiness.core.InfoModel
 import pdf.reader.happiness.databinding.FragmentSuccessBinding
 import pdf.reader.happiness.presentation.ReadingActivity
 import pdf.reader.happiness.presentation.adapter.ItemAdapter

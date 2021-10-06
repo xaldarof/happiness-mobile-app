@@ -2,6 +2,7 @@ package pdf.reader.happiness.data.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import pdf.reader.happiness.core.InfoModel
 import java.io.Serializable
 
 @Entity(tableName = "db")

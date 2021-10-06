@@ -6,7 +6,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 import pdf.reader.happiness.data.models.CoreModel
-import pdf.reader.happiness.data.models.InfoModel
 import pdf.reader.happiness.data.models.Type
 
 @Dao

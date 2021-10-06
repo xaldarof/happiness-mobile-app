@@ -38,5 +38,6 @@
     <color name="like_color">#000000</color>
     <color name="progress_text_color">#DD5E7D</color>
     <color name="clear_color">#D8D1D1</color>
+    <color name="green">#2BCC31</color>
 
 </resources>

@@ -8,11 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
 import org.koin.core.component.KoinApiExtension
-import pdf.reader.happiness.data.models.InfoModel
+import pdf.reader.happiness.core.InfoModel
 import pdf.reader.happiness.databinding.FragmentLifeBinding
 import pdf.reader.happiness.presentation.ReadingActivity
 import pdf.reader.happiness.presentation.adapter.ItemAdapter

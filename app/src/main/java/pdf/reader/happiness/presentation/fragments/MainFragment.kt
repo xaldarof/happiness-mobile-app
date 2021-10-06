@@ -15,18 +15,23 @@ import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import pdf.reader.happiness.R
+import pdf.reader.happiness.data.core.AchievementRepository
 import pdf.reader.happiness.data.core.DataRepository
+import pdf.reader.happiness.data.core.ToolsRepository
 import pdf.reader.happiness.data.settings_cache.CongratulationController
 import pdf.reader.happiness.databinding.FragmentMainBinding
 import pdf.reader.happiness.presentation.MainFragmentPresenter
+import pdf.reader.happiness.tools.AchievementUpdater
 import pdf.reader.happiness.tools.CongratulationView
+import pdf.reader.happiness.tools.CustomSnackBar
 
 @KoinApiExtension
 class MainFragment : Fragment(), KoinComponent, MainFragmentPresenter.MyView {
 
     private lateinit var binding: FragmentMainBinding
     private val repository: DataRepository by inject()
-    private val mainFragmentPresenter = MainFragmentPresenter(this)
+    private val achievementUpdater:AchievementUpdater by inject()
+    private val mainFragmentPresenter = MainFragmentPresenter(this,achievementUpdater)
     private lateinit var konfettiView: KonfettiView
     private val congratulation:CongratulationController by inject()
 
@@ -154,6 +159,7 @@ class MainFragment : Fragment(), KoinComponent, MainFragmentPresenter.MyView {
         if (!congratulation.isLifeCongratulated()){
             CongratulationView(konfettiView).show()
             congratulation.setLiveCongratulated(true)
+            parentFragmentManager.popBackStack()
         }
     }
 
@@ -162,6 +168,7 @@ class MainFragment : Fragment(), KoinComponent, MainFragmentPresenter.MyView {
         if (!congratulation.isSuccessCongratulated()) {
             CongratulationView(konfettiView).show()
             congratulation.setSuccessCongratulated(true)
+            parentFragmentManager.popBackStack()
         }
     }
 
@@ -170,6 +177,7 @@ class MainFragment : Fragment(), KoinComponent, MainFragmentPresenter.MyView {
         if (!congratulation.isHappyCongratulated()){
             CongratulationView(konfettiView).show()
             congratulation.setHappyCongratulated(true)
+            parentFragmentManager.popBackStack()
         }
     }
 
@@ -178,6 +186,7 @@ class MainFragment : Fragment(), KoinComponent, MainFragmentPresenter.MyView {
         if (!congratulation.isLoveCongratulated()){
             CongratulationView(konfettiView).show()
             congratulation.setLoveCongratulated(true)
+            parentFragmentManager.popBackStack()
         }
     }
 
@@ -185,6 +194,7 @@ class MainFragment : Fragment(), KoinComponent, MainFragmentPresenter.MyView {
         if (!congratulation.isAllCongratulated()){
             CongratulationView(konfettiView).show()
             congratulation.setAllCongratulated(true)
+            parentFragmentManager.popBackStack()
         }
     }
 }

@@ -2,8 +2,7 @@ package pdf.reader.happiness.data.core
 
 import kotlinx.coroutines.flow.*
 import pdf.reader.happiness.data.cache.*
-import pdf.reader.happiness.data.models.InfoModel
-import pdf.reader.happiness.data.room.dao.CoreDao
+import pdf.reader.happiness.core.InfoModel
 
 interface DataRepository {
 

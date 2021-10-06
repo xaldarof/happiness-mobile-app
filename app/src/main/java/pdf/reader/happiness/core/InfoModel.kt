@@ -1,5 +1,6 @@
-package pdf.reader.happiness.data.models
+package pdf.reader.happiness.core
 
+import pdf.reader.happiness.data.models.Type
 import java.io.Serializable
 
 

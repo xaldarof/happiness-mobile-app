@@ -2,7 +2,7 @@ package pdf.reader.happiness.data.core
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import pdf.reader.happiness.data.models.InfoModel
+import pdf.reader.happiness.core.InfoModel
 import pdf.reader.happiness.data.room.dao.ToolsDao
 
 interface ToolsRepository {

@@ -4,15 +4,19 @@ import androidx.room.RoomDatabase
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import pdf.reader.happiness.data.cache.*
+import pdf.reader.happiness.data.core.AchievementRepository
 import pdf.reader.happiness.data.core.DataRepository
 import pdf.reader.happiness.data.core.ToolsRepository
 import pdf.reader.happiness.data.room.AppDatabase
+import pdf.reader.happiness.tools.AchievementUpdater
 
 
 val cacheDataModule = module {
     single<RoomDatabase> { AppDatabase.getInstance(androidContext()) }
     factory<DataRepository> { DataRepository.Base(get(), get(), get(), get(), get()) }
     factory<ToolsRepository> { ToolsRepository.Base(get()) }
+    factory<AchievementRepository> { AchievementRepository.Base(get()) }
+    factory<AchievementUpdater> { AchievementUpdater.Base(get()) }
 
     factory<SuccessCacheDataSource> { SuccessCacheDataSource.Base(get()) }
     factory<HappyCacheDataSource> { HappyCacheDataSource.Base(get()) }

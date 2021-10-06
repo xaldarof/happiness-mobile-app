@@ -1,21 +1,26 @@
-package pdf.reader.happiness
+package pdf.reader.happiness.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.renderscript.Script
 import androidx.appcompat.app.AppCompatDelegate
+import kotlinx.coroutines.*
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import pdf.reader.happiness.data.settings_cache.ThemeController
 import pdf.reader.happiness.databinding.ActivityMainBinding
 import pdf.reader.happiness.presentation.adapter.*
+import pdf.reader.happiness.presentation.fragments.AchievementsFragment
 import pdf.reader.happiness.presentation.fragments.MainFragment
 import pdf.reader.happiness.presentation.fragments.SearchFragment
 
 @KoinApiExtension
-class MainActivity : AppCompatActivity(),KoinComponent {
+class MainActivity : AppCompatActivity(), KoinComponent {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var themeController:ThemeController
+    private lateinit var themeController: ThemeController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,13 +30,18 @@ class MainActivity : AppCompatActivity(),KoinComponent {
         val sharedPreferences = getSharedPreferences("cache", MODE_PRIVATE)
         themeController = ThemeController.Base(sharedPreferences)
 
-        if (themeController.isDarkThemeOn()){
+        if (themeController.isDarkThemeOn()) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        }else{
+        } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
-        FragmentController(this, listOf(MainFragment(),SearchFragment(),FavoritesFragment(),SettingsFragment()))
-
-
+        FragmentController(
+            this, listOf(
+                MainFragment(), SearchFragment(),
+                FavoritesFragment(),
+                AchievementsFragment(),
+                SettingsFragment()
+            )
+        )
     }
 }

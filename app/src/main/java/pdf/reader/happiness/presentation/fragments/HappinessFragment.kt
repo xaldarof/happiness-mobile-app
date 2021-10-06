@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
-import pdf.reader.happiness.data.models.InfoModel
+import pdf.reader.happiness.core.InfoModel
 import pdf.reader.happiness.databinding.FragmentHappinessBinding
 import pdf.reader.happiness.presentation.ReadingActivity
 import pdf.reader.happiness.presentation.adapter.ItemAdapter

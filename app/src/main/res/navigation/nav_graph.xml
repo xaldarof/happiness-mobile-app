@@ -63,7 +63,7 @@
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
-        android:name="pdf.reader.happiness.FavoritesFragment"
+        android:name="pdf.reader.happiness.presentation.FavoritesFragment"
         android:label="fragment_favorites"
         tools:layout="@layout/fragment_favorites" >
         <action
@@ -72,7 +72,7 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="pdf.reader.happiness.SettingsFragment"
+        android:name="pdf.reader.happiness.presentation.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" >
         <action

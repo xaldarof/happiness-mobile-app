@@ -1,7 +1,6 @@
 package pdf.reader.happiness.data.cache.initilizers
 
 import pdf.reader.happiness.data.models.CoreModel
-import pdf.reader.happiness.data.models.InfoModel
 import pdf.reader.happiness.data.models.Type
 import pdf.reader.happiness.data.room.dao.CoreDao
 

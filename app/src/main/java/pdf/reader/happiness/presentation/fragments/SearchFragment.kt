@@ -2,7 +2,6 @@ package pdf.reader.happiness.presentation.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,7 @@ import android.view.ViewGroup
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
-import pdf.reader.happiness.data.models.InfoModel
+import pdf.reader.happiness.core.InfoModel
 import pdf.reader.happiness.databinding.FragmentSearchBinding
 import pdf.reader.happiness.presentation.ReadingActivity
 import pdf.reader.happiness.presentation.adapter.ItemAdapter

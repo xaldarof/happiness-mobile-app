@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/myWhite"
     android:padding="12dp"
-    tools:context=".SettingsFragment">
+    tools:context=".presentation.SettingsFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"

@@ -1,8 +1,9 @@
 package pdf.reader.happiness.presentation
 
-import pdf.reader.happiness.data.models.InfoModel
+import pdf.reader.happiness.core.InfoModel
+import pdf.reader.happiness.tools.AchievementUpdater
 
-class MainFragmentPresenter(private val view: MyView) {
+class MainFragmentPresenter(private val view: MyView,private val achievementUpdater: AchievementUpdater) {
 
     fun updatePercentLife(list: List<InfoModel>) {
         view.updateLifePercent(calculatePercent(list))
@@ -39,24 +40,28 @@ class MainFragmentPresenter(private val view: MyView) {
     fun updateAllLifeFinished(list: List<InfoModel>) {
         if (calculateIsAllFinished(list)) {
             view.updateAllLifeFinished()
+            achievementUpdater.addAchievementAllLifeFinished()
         }
     }
 
     fun updateAllSuccessFinished(list: List<InfoModel>) {
         if (calculateIsAllFinished(list)) {
             view.updateAllSuccessFinished()
+            achievementUpdater.addAchievementAllSuccessFinished()
         }
     }
 
     fun updateAllHappyFinished(list: List<InfoModel>) {
         if (calculateIsAllFinished(list)) {
             view.updateAllHappyFinished()
+            achievementUpdater.addAchievementAllHappyFinished()
         }
     }
 
     fun updateAllLoveFinished(list: List<InfoModel>) {
         if (calculateIsAllFinished(list)) {
             view.updateAllLoveFinished()
+            achievementUpdater.addAchievementAllLoveFinished()
         }
     }
 
@@ -70,6 +75,7 @@ class MainFragmentPresenter(private val view: MyView) {
         }
         if (count==0){
             view.updateAllFinished()
+            achievementUpdater.addAchievementAllFinished()
         }
     }
 

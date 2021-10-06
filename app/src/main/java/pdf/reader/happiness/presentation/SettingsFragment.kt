@@ -1,23 +1,18 @@
-package pdf.reader.happiness
+package pdf.reader.happiness.presentation
 
-import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatDelegate
-import kotlinx.coroutines.delay
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import pdf.reader.happiness.R
 import pdf.reader.happiness.data.settings_cache.FontController
 import pdf.reader.happiness.data.settings_cache.ThemeController
 import pdf.reader.happiness.databinding.FragmentSettingsBinding
-import pdf.reader.happiness.presentation.SettingFragmentPresenter
 import pdf.reader.happiness.tools.CacheClear
 import pdf.reader.happiness.tools.ClearDialog
 import pdf.reader.happiness.tools.RestartDialog

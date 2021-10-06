@@ -2,8 +2,6 @@ package pdf.reader.happiness.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
 import pdf.reader.happiness.databinding.ActivityReadingBinding
 import com.like.LikeButton
 import com.like.OnLikeListener
@@ -14,9 +12,8 @@ import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import org.koin.core.component.inject
-import pdf.reader.happiness.data.models.InfoModel
+import pdf.reader.happiness.core.InfoModel
 import pdf.reader.happiness.tools.AssetReader
-import pdf.reader.happiness.tools.BarAnimator
 import pdf.reader.happiness.tools.ReadingWarningDialog
 import pdf.reader.happiness.vm.ReadingViewModel
 import java.lang.Exception
@@ -72,7 +69,6 @@ class ReadingActivity : AppCompatActivity(), KoinComponent,
                 }
             }
         })
-
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {

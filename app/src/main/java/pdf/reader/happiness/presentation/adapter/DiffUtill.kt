@@ -1,7 +1,7 @@
 package pdf.reader.happiness.presentation.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import pdf.reader.happiness.data.models.InfoModel
+import pdf.reader.happiness.core.InfoModel
 
 class DiffUtill(private val oldList:List<InfoModel>, private val newList: List<InfoModel>): DiffUtil.Callback() {
     override fun getOldListSize(): Int {

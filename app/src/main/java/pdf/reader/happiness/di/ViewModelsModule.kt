@@ -15,4 +15,6 @@ val viewModels = module {
 
     single { MainActivityViewModel() }
     single { MainFragmentViewModel() }
+
+    single { AchievementsViewModel(get()) }
 }

@@ -11,7 +11,7 @@ import pdf.reader.happiness.databinding.ItemBinding
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.DiffUtil
-import pdf.reader.happiness.data.models.InfoModel
+import pdf.reader.happiness.core.InfoModel
 
 
 class ItemAdapter(private val onClick: OnClick) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
