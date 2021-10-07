@@ -45,7 +45,7 @@ interface LoveInitializer {
                 coreDao.insertAll(data)
             }
             chaptersDao.insertChapter(ChapterModelDb("ЛЮБОВЬ",list.size, R.drawable.ic_talk,0f,
-                fragmentName = ChapterModelDb.FragmentName.LOVE))
+                fragmentName = ChapterModelDb.FragmentName.LOVE,colorLight = "#B32438",colorNight = "#24303E"))
         }
     }
 }

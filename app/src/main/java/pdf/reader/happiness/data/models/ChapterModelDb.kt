@@ -2,6 +2,7 @@ package pdf.reader.happiness.data.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import pdf.reader.happiness.R
 import pdf.reader.happiness.core.ChapterModel
 
 @Entity(tableName = "chapters")
@@ -14,10 +15,12 @@ data class ChapterModelDb (
     val progress:Float,
     val isFinished:Boolean = false,
     val isCongratulated:Boolean=false,
-    val fragmentName:FragmentName
+    val fragmentName:FragmentName,
+    val colorLight:String,
+    val colorNight:String
 ){
     fun mapToChapter():ChapterModel {
-        return ChapterModel(name, size, image, progress,isFinished,isCongratulated,fragmentName)
+        return ChapterModel(name, size, image, progress,isFinished,isCongratulated,fragmentName,colorLight,colorNight)
     }
     enum class FragmentName{
         SUCCESS,

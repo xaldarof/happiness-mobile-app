@@ -27,6 +27,7 @@ interface HappyInitializer {
             list.add(CoreModel("Слушаем тело","happy/sluwayem_telo",type=Type.HAPPY))
             list.add(CoreModel("Лучшая версия себя","happy/lucshaya_versiya_sebya",type=Type.HAPPY))
             list.add(CoreModel("Счастье в глазах смотрящего","happy/scaste_v_glazax_smotryashevo",type=Type.HAPPY))
+
             list.add(CoreModel("Цитаты про счастье","happy/cicati100",type=Type.HAPPY))
 
 
@@ -34,8 +35,8 @@ interface HappyInitializer {
                 coreDao.insertAll(data)
             }
 
-            chaptersDao.insertChapter(ChapterModelDb("СЧАСТЬЕ",list.size,
-                R.drawable.ic_diagram,0f,fragmentName = ChapterModelDb.FragmentName.HAPPY))
+            chaptersDao.insertChapter(ChapterModelDb("СЧАСТЬЕ",list.size, R.drawable.ic_diagram,0f
+                ,fragmentName = ChapterModelDb.FragmentName.HAPPY,colorLight = "#60966f",colorNight = "#24303E"))
         }
     }
 }

@@ -1,7 +1,6 @@
 package pdf.reader.happiness.core
 
 import pdf.reader.happiness.data.models.ChapterModelDb
-import pdf.reader.happiness.presentation.fragments.SuccessFragment
 import java.io.Serializable
 
 data class ChapterModel(
@@ -11,5 +10,7 @@ data class ChapterModel(
     val progress:Float,
     val isFinished:Boolean=false,
     val isCongratulated:Boolean=false,
-    val fragmentName:ChapterModelDb.FragmentName
+    val fragmentName:ChapterModelDb.FragmentName,
+    val colorLight : String,
+    val colorNight:String
 ):Serializable

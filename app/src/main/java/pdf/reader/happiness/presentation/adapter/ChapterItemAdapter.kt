@@ -2,6 +2,8 @@ package pdf.reader.happiness.presentation.adapter
 
 import android.R
 import android.annotation.SuppressLint
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +12,11 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.DiffUtil
 import pdf.reader.happiness.core.ChapterModel
+import pdf.reader.happiness.data.settings_cache.ThemeController
 import pdf.reader.happiness.databinding.ChapterItemBinding
 
 
-class ChapterItemAdapter(private val onClick: OnClick) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ChapterItemAdapter(private val onClick: OnClick,private val themeController: ThemeController) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val list = ArrayList<ChapterModel>()
     private var lastPosition = -1
@@ -34,9 +37,17 @@ class ChapterItemAdapter(private val onClick: OnClick) : RecyclerView.Adapter<Re
             chapterItemBinding.chapterIcon.setImageResource(chapter.image)
             chapterItemBinding.chapterName.text = chapter.name
             chapterItemBinding.chapterSize.text = "${chapter.size} Советов"
+
+//            if (themeController.isDarkThemeOn()){
+//                chapterItemBinding.chapterBtn.background.setColorFilter(Color.parseColor(chapter.colorNight),PorterDuff.Mode.SRC_ATOP)
+//            }else{
+//                chapterItemBinding.chapterBtn.background.setColorFilter(Color.parseColor(chapter.colorLight),PorterDuff.Mode.SRC_ATOP)
+//            }
+
             chapterItemBinding.chapterProgress.progress = chapter.progress
             chapterItemBinding.chapterProgress.setEndProgress(chapter.progress)
             chapterItemBinding.chapterProgress.startProgressAnimation()
+
 
             chapterItemBinding.chapterBtn.setOnClickListener { onClick.onClick(chapter) }
 

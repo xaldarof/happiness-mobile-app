@@ -53,7 +53,7 @@ interface SuccessInitializer {
                     coreDao.insertAll(data)
                 }
                 chaptersDao.insertChapter(ChapterModelDb("УСПЕХ",list.size, R.drawable.ic_goal,0f,
-                    fragmentName = ChapterModelDb.FragmentName.SUCCESS))
+                    fragmentName = ChapterModelDb.FragmentName.SUCCESS,colorLight = "#D4ad2b",colorNight = "#24303E"))
             }
         }
     }

@@ -38,9 +38,9 @@
         app:layout_constraintTop_toBottomOf="@+id/chapterSize"
         app:layout_constraintWidth_percent="0.6"
         app:progressDuration="1500"
-        app:progressTextColor="#FFFFFF"
+        app:progressTextColor="#423D3D"
         app:start_color="@color/red_start"
-        app:trackColor="#f4f4f4"
+        app:trackColor="#F3ECEC"
         app:track_width="18dp" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -63,7 +63,7 @@
         app:layout_constraintHeight_percent="0.6"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.25"
-        app:tint="@color/white" />
+        app:tint="@color/to_right_color" />
 
     <ImageView
         android:layout_width="20dp"
@@ -71,11 +71,10 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="4dp"
         android:rotation="320"
-
         android:src="@drawable/ic_right"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/white" />
+        app:tint="@color/green" />
 
     <TextView
         android:id="@+id/chapterName"
@@ -83,7 +82,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/bold"
         android:text="ЖИЗНЬ"
-        android:textColor="@color/white"
+        android:textColor="@color/to_right_color"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/guidelineLife"
         app:layout_constraintStart_toStartOf="parent" />
@@ -95,7 +94,7 @@
         android:layout_below="@+id/chapterName"
         android:layout_alignStart="@+id/chapterName"
         android:text="16 Советов"
-        android:textColor="@color/white"
+        android:textColor="@color/to_right_color"
         android:textSize="12sp"
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="@+id/chapterName"

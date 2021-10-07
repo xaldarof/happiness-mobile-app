@@ -19,6 +19,7 @@ import pdf.reader.happiness.R
 import pdf.reader.happiness.core.ChapterModel
 import pdf.reader.happiness.data.core.DataRepository
 import pdf.reader.happiness.data.settings_cache.CongratulationController
+import pdf.reader.happiness.data.settings_cache.ThemeController
 import pdf.reader.happiness.databinding.FragmentMainBinding
 import pdf.reader.happiness.presentation.MainFragmentPresenter
 import pdf.reader.happiness.presentation.adapter.ChapterItemAdapter
@@ -37,6 +38,7 @@ class MainFragment : Fragment(), KoinComponent, ChapterItemAdapter.OnClick,
     private val presenter = MainFragmentPresenter(this,achievementUpdater,congratulationController)
     private val dataRepository: DataRepository by inject()
     private lateinit var konfettiView: KonfettiView
+    private val themeController:ThemeController by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +46,7 @@ class MainFragment : Fragment(), KoinComponent, ChapterItemAdapter.OnClick,
     ): View {
         binding = FragmentMainBinding.inflate(inflater, container, false)
         konfettiView = requireActivity().findViewById(R.id.congratulationView)
-        chapterItemAdapter = ChapterItemAdapter(this)
+        chapterItemAdapter = ChapterItemAdapter(this,themeController)
         return binding.root
     }
 
