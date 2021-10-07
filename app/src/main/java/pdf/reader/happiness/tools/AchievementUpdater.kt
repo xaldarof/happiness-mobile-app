@@ -12,8 +12,6 @@ interface AchievementUpdater {
     fun addAchievementAllLoveFinished()
     fun addAchievementAllHappyFinished()
 
-    fun addAchievementWastedHourTime()
-
     class Base(private val achievementRepository: AchievementRepository,private val badgeController: BadgeController) : AchievementUpdater {
         override fun addAchievementAllFinished() {
             achievementRepository.insertAchievement(
@@ -47,13 +45,6 @@ interface AchievementUpdater {
             achievementRepository.insertAchievement(
                 AchievementModel("Поздравляем, вы завершили раздел 'Счастье'",
                     System.currentTimeMillis(), AchievementModel.AchievementType.UNIT_FINISHED))
-            badgeController.updateBadge()
-        }
-
-        override fun addAchievementWastedHourTime() {
-            achievementRepository.insertAchievement(
-                AchievementModel("Вы получили достижение 'Мудрец'",
-                    System.currentTimeMillis(), AchievementModel.AchievementType.TIME_WASTED))
             badgeController.updateBadge()
         }
     }

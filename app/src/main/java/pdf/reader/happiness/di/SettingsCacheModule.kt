@@ -10,10 +10,12 @@ import pdf.reader.happiness.presentation.MainFragmentPresenter
 import pdf.reader.happiness.presentation.MainPresenter
 import pdf.reader.happiness.presentation.ReadingActivityPresenter
 import pdf.reader.happiness.presentation.fragments.MainFragment
+import pdf.reader.happiness.tools.AchievementUpdater
 import pdf.reader.happiness.tools.CacheClear
+import pdf.reader.happiness.tools.WastedTimeAchievement
+import pdf.reader.happiness.tools.WastedTimeAchievementController
 
 
-@OptIn(KoinApiExtension::class)
 val settingsCacheModule = module {
     factory<SharedPreferences> {
         androidContext().getSharedPreferences(
@@ -29,6 +31,8 @@ val settingsCacheModule = module {
 
     factory<CacheClear> { CacheClear.Base(get(), get(), get(), get(),get()) }
 
+    factory<WastedTimeAchievement>{ WastedTimeAchievement.Base(get(),get()) }
     factory<BadgeController> { BadgeController.Base(get()) }
     factory<WastedTimeController> { WastedTimeController.Base(get()) }
+    factory<WastedTimeAchievementController>{ WastedTimeAchievementController.Base(get()) }
 }
