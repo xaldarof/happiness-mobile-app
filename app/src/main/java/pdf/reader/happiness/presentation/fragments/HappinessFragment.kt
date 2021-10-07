@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
+import pdf.reader.happiness.core.ChapterModel
 import pdf.reader.happiness.core.InfoModel
 import pdf.reader.happiness.databinding.FragmentHappinessBinding
 import pdf.reader.happiness.presentation.ReadingActivity
@@ -24,6 +25,7 @@ class HappinessFragment : Fragment(), ItemAdapter.OnClick, KoinComponent {
     private lateinit var binding: FragmentHappinessBinding
     private val viewModel: HappyViewModel = get()
     private lateinit var itemAdapter: ItemAdapter
+    private var chapter:ChapterModel? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +37,7 @@ class HappinessFragment : Fragment(), ItemAdapter.OnClick, KoinComponent {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        chapter = arguments?.getSerializable("chapter") as ChapterModel
         itemAdapter = ItemAdapter(this)
         binding.rv.adapter = itemAdapter
 
@@ -50,6 +53,11 @@ class HappinessFragment : Fragment(), ItemAdapter.OnClick, KoinComponent {
     private suspend fun updateData() {
         viewModel.fetchHappy().observeForever {
             itemAdapter.update(it)
+
+            CoroutineScope(Dispatchers.IO).launch {
+                viewModel.updateChapterFinishedState(it,chapter!!.name)
+                viewModel.updateChapterProgress(it,chapter!!.name)
+            }
         }
     }
 

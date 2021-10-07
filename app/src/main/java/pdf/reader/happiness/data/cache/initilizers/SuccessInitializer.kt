@@ -3,15 +3,18 @@ package pdf.reader.happiness.data.cache.initilizers
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import pdf.reader.happiness.R
+import pdf.reader.happiness.data.models.ChapterModelDb
 import pdf.reader.happiness.data.models.CoreModel
 import pdf.reader.happiness.data.models.Type
-import pdf.reader.happiness.data.room.dao.CoreDao
+import pdf.reader.happiness.data.dao.ChaptersDao
+import pdf.reader.happiness.data.dao.CoreDao
 
 interface SuccessInitializer {
 
     fun init()
 
-    class Base(private val coreDao: CoreDao): SuccessInitializer {
+    class Base(private val coreDao: CoreDao,private val chaptersDao: ChaptersDao): SuccessInitializer {
         override fun init() {
             val list = ArrayList<CoreModel>()
             list.add(CoreModel("Что такое успех","success/tobe_success", type = Type.SUCCESS))
@@ -49,6 +52,8 @@ interface SuccessInitializer {
                 list.forEach { data ->
                     coreDao.insertAll(data)
                 }
+                chaptersDao.insertChapter(ChapterModelDb("УСПЕХ",list.size, R.drawable.ic_goal,0f,
+                    fragmentName = ChapterModelDb.FragmentName.SUCCESS))
             }
         }
     }

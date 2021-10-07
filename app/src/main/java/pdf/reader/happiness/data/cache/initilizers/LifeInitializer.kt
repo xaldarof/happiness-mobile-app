@@ -3,15 +3,18 @@ package pdf.reader.happiness.data.cache.initilizers
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import pdf.reader.happiness.R
+import pdf.reader.happiness.data.models.ChapterModelDb
 import pdf.reader.happiness.data.models.CoreModel
 import pdf.reader.happiness.data.models.Type
-import pdf.reader.happiness.data.room.dao.CoreDao
+import pdf.reader.happiness.data.dao.ChaptersDao
+import pdf.reader.happiness.data.dao.CoreDao
 
 interface LifeInitializer {
 
     fun init()
 
-    class Base(private val coreDao: CoreDao) : LifeInitializer {
+    class Base(private val coreDao: CoreDao,private val chaptersDao: ChaptersDao) : LifeInitializer {
         override fun init() {
             val list = ArrayList<CoreModel>()
             list.add(CoreModel("Перестань себя ЖАЛЕТЬ", "life/ne_jaley_sebya", type = Type.LIFE))
@@ -58,7 +61,10 @@ interface LifeInitializer {
                 list.forEach { life ->
                     coreDao.insertAll(life)
                 }
+                chaptersDao.insertChapter(ChapterModelDb("ЖИЗНЬ",list.size, R.drawable.ic_goldfish,0f
+                ,fragmentName = ChapterModelDb.FragmentName.LIFE))
             }
+
         }
     }
 }

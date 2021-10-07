@@ -5,16 +5,16 @@ import pdf.reader.happiness.vm.*
 
 
 val viewModels = module {
-    single { SuccessViewModel(get()) }
-    single { LifeViewModel(get()) }
+    single { SuccessViewModel(get(),get(),get()) }
+    single { LifeViewModel(get(),get(),get()) }
     single { ReadingViewModel(get()) }
-    single { HappyViewModel(get()) }
-    single { LoveViewModel(get()) }
+    single { HappyViewModel(get(),get(),get()) }
+    single { LoveViewModel(get(),get(),get()) }
     single { SearchViewModel(get()) }
     single { FavoritesViewModel(get()) }
 
     single { MainActivityViewModel(get(),get(),get()) }
-    single { MainFragmentViewModel(get()) }
+    single { MainFragmentViewModel(get(),get()) }
 
     single { AchievementsViewModel(get()) }
 }

@@ -1,6 +1,6 @@
 package pdf.reader.happiness.tools
 
-import pdf.reader.happiness.data.room.dao.ToolsDao
+import pdf.reader.happiness.data.dao.ToolsDao
 import pdf.reader.happiness.data.settings_cache.CongratulationController
 import pdf.reader.happiness.data.settings_cache.FontController
 import pdf.reader.happiness.data.settings_cache.ThemeController

@@ -1,9 +1,9 @@
-package pdf.reader.happiness.data.cache
+package pdf.reader.happiness.data.cache.data_source
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import pdf.reader.happiness.core.InfoModel
-import pdf.reader.happiness.data.room.dao.CoreDao
+import pdf.reader.happiness.data.dao.CoreDao
 
 interface AllTypesCacheDataSource {
 

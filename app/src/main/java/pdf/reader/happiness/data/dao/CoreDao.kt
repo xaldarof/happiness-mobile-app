@@ -1,4 +1,4 @@
-package pdf.reader.happiness.data.room.dao
+package pdf.reader.happiness.data.dao
 
 import androidx.room.Dao
 import androidx.room.Insert

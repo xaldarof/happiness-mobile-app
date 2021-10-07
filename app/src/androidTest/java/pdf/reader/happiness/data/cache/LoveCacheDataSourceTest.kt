@@ -10,7 +10,7 @@ import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import pdf.reader.happiness.data.models.Type
-import pdf.reader.happiness.data.room.dao.CoreDao
+import pdf.reader.happiness.data.dao.CoreDao
 
 @KoinApiExtension
 class LoveCacheDataSourceTest: KoinComponent {

@@ -1,14 +1,17 @@
 package pdf.reader.happiness.data.cache.initilizers
 
+import pdf.reader.happiness.R
+import pdf.reader.happiness.data.models.ChapterModelDb
 import pdf.reader.happiness.data.models.CoreModel
 import pdf.reader.happiness.data.models.Type
-import pdf.reader.happiness.data.room.dao.CoreDao
+import pdf.reader.happiness.data.dao.ChaptersDao
+import pdf.reader.happiness.data.dao.CoreDao
 
 interface LoveInitializer {
 
     fun init()
 
-    class Base(private val coreDao: CoreDao): LoveInitializer {
+    class Base(private val coreDao: CoreDao,private val chaptersDao: ChaptersDao): LoveInitializer {
         override fun init() {
             val list = ArrayList<CoreModel>()
 
@@ -41,6 +44,8 @@ interface LoveInitializer {
             list.forEach { data ->
                 coreDao.insertAll(data)
             }
+            chaptersDao.insertChapter(ChapterModelDb("ЛЮБОВЬ",list.size, R.drawable.ic_talk,0f,
+                fragmentName = ChapterModelDb.FragmentName.LOVE))
         }
     }
 }

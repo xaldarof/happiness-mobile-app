@@ -1,8 +1,8 @@
 package pdf.reader.happiness.data.core
 
 import kotlinx.coroutines.flow.*
-import pdf.reader.happiness.data.cache.*
 import pdf.reader.happiness.core.InfoModel
+import pdf.reader.happiness.data.cache.data_source.*
 
 interface DataRepository {
 
@@ -16,7 +16,8 @@ interface DataRepository {
                private val lifeCacheDataSource: LifeCacheDataSource,
                private val happyCacheDataSource: HappyCacheDataSource,
                private val loveCacheDataSource: LoveCacheDataSource,
-               private val allTypesCacheDataSource: AllTypesCacheDataSource) : DataRepository {
+               private val allTypesCacheDataSource: AllTypesCacheDataSource
+    ) : DataRepository {
 
 
         override suspend fun fetchSuccess(): Flow<List<InfoModel>> = successCacheDataSource.fetchSuccess()

@@ -1,14 +1,18 @@
 package pdf.reader.happiness.data.cache.initilizers
 
+
+import pdf.reader.happiness.R
+import pdf.reader.happiness.data.models.ChapterModelDb
 import pdf.reader.happiness.data.models.CoreModel
 import pdf.reader.happiness.data.models.Type
-import pdf.reader.happiness.data.room.dao.CoreDao
+import pdf.reader.happiness.data.dao.ChaptersDao
+import pdf.reader.happiness.data.dao.CoreDao
 
 interface HappyInitializer {
 
     fun init()
 
-    class Base (private val coreDao: CoreDao): HappyInitializer {
+    class Base (private val coreDao: CoreDao,private val chaptersDao: ChaptersDao): HappyInitializer {
         override fun init() {
             val list = ArrayList<CoreModel>()
             list.add(CoreModel("Что такое счастье","happy/cto_takoy_scaste",type=Type.HAPPY))
@@ -33,6 +37,9 @@ interface HappyInitializer {
             list.forEach { data->
                 coreDao.insertAll(data)
             }
+
+            chaptersDao.insertChapter(ChapterModelDb("СЧАСТЬЕ",list.size,
+                R.drawable.ic_diagram,0f,fragmentName = ChapterModelDb.FragmentName.HAPPY))
         }
     }
 }
