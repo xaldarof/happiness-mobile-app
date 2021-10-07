@@ -24,8 +24,8 @@ class MainActivityViewModel(
         }
     }
 
-    fun checkWastedTime() {
-        if (wastedTimeController.getTime()>700){
+    fun startWastingTime() {
+        if (wastedTimeController.getTime()==50){
             achievementUpdater.addAchievementWastedHourTime()
             badgeController.updateBadge()
         }

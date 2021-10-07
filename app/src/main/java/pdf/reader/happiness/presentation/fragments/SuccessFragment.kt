@@ -24,7 +24,7 @@ import pdf.reader.happiness.tools.CongratulationView
 import pdf.reader.happiness.tools.PercentCalculator
 import pdf.reader.happiness.vm.SuccessViewModel
 
-class SuccessFragment : Fragment(), ItemAdapter.OnClick,SuccessViewModel.SuccessCallBack {
+class SuccessFragment : Fragment(), ItemAdapter.OnClick,SuccessViewModel.CallBack {
 
     private val viewModel: SuccessViewModel = get()
     private lateinit var binding: FragmentSuccessBinding
@@ -62,7 +62,7 @@ class SuccessFragment : Fragment(), ItemAdapter.OnClick,SuccessViewModel.Success
 
             CoroutineScope(Dispatchers.IO).launch {
                 viewModel.updateChapterFinishedState(it,chapter!!.name)
-                viewModel.updateChapterProgress(it,chapter!!.name,this@SuccessFragment)
+                viewModel.updateChapterProgress(it,chapter!!,this@SuccessFragment)
             }
         }
     }

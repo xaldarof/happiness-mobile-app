@@ -26,4 +26,7 @@ interface ChaptersDao {
     @Query("UPDATE chapters SET isFinished=:isFinished WHERE name=:chapterName")
     fun updateAllChapterFinished(isFinished: Boolean,chapterName:String)
 
+    @Query("UPDATE chapters SET isCongratulated=:isCongratulated WHERE name=:chapterName")
+    fun updateChapterCongratulated(isCongratulated: Boolean,chapterName:String)
+
 }

@@ -40,9 +40,6 @@ class AchievementsFragment : Fragment(), KoinComponent {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.rv.adapter = adapter
-        CoroutineScope(Dispatchers.Main).launch {
-            update()
-        }
 
     }
 

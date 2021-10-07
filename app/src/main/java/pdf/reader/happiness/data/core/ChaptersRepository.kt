@@ -10,6 +10,7 @@ interface ChaptersRepository {
     fun updateChapterFinishedState(isFinished:Boolean,chapterName:String)
     fun updateChapterProgress(progress:Float,chapterName:String)
     fun updateAllChapterFinished(isFinished: Boolean,chapterName:String)
+    fun updateChapterCongratulated(isCongratulated: Boolean,chapterName:String)
 
     class Base(private val chapterDataSource: ChapterDataSource): ChaptersRepository {
 
@@ -25,6 +26,10 @@ interface ChaptersRepository {
 
         override fun updateAllChapterFinished(isFinished: Boolean, chapterName: String) {
             chapterDataSource.updateAllChapterFinished(isFinished,chapterName)
+        }
+
+        override fun updateChapterCongratulated(isCongratulated: Boolean, chapterName: String) {
+            chapterDataSource.updateChapterCongratulated(isCongratulated,chapterName)
         }
     }
 }

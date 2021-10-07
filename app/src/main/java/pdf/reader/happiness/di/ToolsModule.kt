@@ -9,4 +9,6 @@ import pdf.reader.happiness.tools.PercentCalculator
 val tools = module {
     factory<AssetReader> { AssetReader.Base(androidContext()) }
     factory<PercentCalculator>{ PercentCalculator.Base() }
+
+
 }

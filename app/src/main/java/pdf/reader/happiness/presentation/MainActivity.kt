@@ -57,6 +57,6 @@ class MainActivity : AppCompatActivity(), KoinComponent {
 
     override fun onResume() {
         super.onResume()
-        viewModel.checkWastedTime()
+        viewModel.startWastingTime()
     }
 }

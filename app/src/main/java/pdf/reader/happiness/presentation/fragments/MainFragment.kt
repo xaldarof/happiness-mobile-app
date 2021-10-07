@@ -1,7 +1,6 @@
 package pdf.reader.happiness.presentation.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,17 +11,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import nl.dionsegijn.konfetti.KonfettiView
-import org.jetbrains.annotations.NonNls
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import org.koin.core.component.inject
 import pdf.reader.happiness.R
 import pdf.reader.happiness.core.ChapterModel
-import pdf.reader.happiness.data.core.AchievementRepository
 import pdf.reader.happiness.data.core.DataRepository
-import pdf.reader.happiness.data.core.ToolsRepository
-import pdf.reader.happiness.data.settings_cache.BadgeController
 import pdf.reader.happiness.data.settings_cache.CongratulationController
 import pdf.reader.happiness.databinding.FragmentMainBinding
 import pdf.reader.happiness.presentation.MainFragmentPresenter
@@ -37,17 +32,19 @@ class MainFragment : Fragment(), KoinComponent, ChapterItemAdapter.OnClick,
     private lateinit var binding: FragmentMainBinding
     private val viewModel: MainFragmentViewModel = get()
     private lateinit var chapterItemAdapter: ChapterItemAdapter
-    private lateinit var presenter: MainFragmentPresenter
+    private val achievementUpdater:AchievementUpdater by inject()
+    private val congratulationController:CongratulationController by inject()
+    private val presenter = MainFragmentPresenter(this,achievementUpdater,congratulationController)
     private val dataRepository: DataRepository by inject()
+    private lateinit var konfettiView: KonfettiView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMainBinding.inflate(inflater, container, false)
+        konfettiView = requireActivity().findViewById(R.id.congratulationView)
         chapterItemAdapter = ChapterItemAdapter(this)
-        presenter = MainFragmentPresenter(this)
-
         return binding.root
     }
 
@@ -69,7 +66,6 @@ class MainFragment : Fragment(), KoinComponent, ChapterItemAdapter.OnClick,
     private suspend fun updateCore() {
         dataRepository.fetchAllTypes().asLiveData().observeForever {
             presenter.updateCoreProgress(it)
-            Log.d("pos", "$it")
         }
     }
 
@@ -86,6 +82,10 @@ class MainFragment : Fragment(), KoinComponent, ChapterItemAdapter.OnClick,
         binding.progressCore.progress = percent
         binding.progressCore.setEndProgress(percent)
         binding.progressCore.startProgressAnimation()
+    }
+
+    override fun allChaptersFinished() {
+        CongratulationView(konfettiView).show()
     }
 
     override fun onClick(chapter: ChapterModel) {

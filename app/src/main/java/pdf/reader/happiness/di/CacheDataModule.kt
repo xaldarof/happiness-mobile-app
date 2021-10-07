@@ -20,7 +20,7 @@ val cacheDataModule = module {
     factory<ChaptersRepository> { ChaptersRepository.Base(get()) }
 
 
-    factory<AchievementUpdater> { AchievementUpdater.Base(get()) }
+    factory<AchievementUpdater> { AchievementUpdater.Base(get(),get()) }
 
     factory<SuccessCacheDataSource> { SuccessCacheDataSource.Base(get()) }
     factory<HappyCacheDataSource> { HappyCacheDataSource.Base(get()) }

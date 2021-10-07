@@ -9,12 +9,14 @@ import pdf.reader.happiness.core.ChapterModel
 import pdf.reader.happiness.core.InfoModel
 import pdf.reader.happiness.data.core.ChaptersRepository
 import pdf.reader.happiness.data.core.DataRepository
+import pdf.reader.happiness.tools.AchievementUpdater
 import pdf.reader.happiness.tools.CongratulationView
 import pdf.reader.happiness.tools.PercentCalculator
 
 class HappyViewModel(private val dataRepository: DataRepository,
                      private val chaptersRepository: ChaptersRepository,
-                     private val percentCalculator: PercentCalculator): ViewModel() {
+                     private val percentCalculator: PercentCalculator,
+                     private val achievementUpdater: AchievementUpdater): ViewModel() {
 
     suspend fun fetchHappy() = dataRepository.fetchHappy().asLiveData()
 
@@ -32,7 +34,9 @@ class HappyViewModel(private val dataRepository: DataRepository,
 
             if (percentCalculator.calculatePercent(list)>99f && !chapterModel.isCongratulated){
                 chaptersRepository.updateAllChapterFinished(true,chapterModel.name)
+                chaptersRepository.updateChapterCongratulated(true,chapterModel.name)
                 callback.chapterFinished()
+                achievementUpdater.addAchievementAllHappyFinished()
             }
         }
     }
