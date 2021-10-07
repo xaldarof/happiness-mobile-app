@@ -9,29 +9,34 @@ import android.view.ViewGroup
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import nl.dionsegijn.konfetti.KonfettiView
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
+import pdf.reader.happiness.R
 import pdf.reader.happiness.core.ChapterModel
 import pdf.reader.happiness.core.InfoModel
 import pdf.reader.happiness.databinding.FragmentLoveeBinding
 import pdf.reader.happiness.presentation.ReadingActivity
 import pdf.reader.happiness.presentation.adapter.ItemAdapter
+import pdf.reader.happiness.tools.CongratulationView
 import pdf.reader.happiness.vm.LoveViewModel
 
 @KoinApiExtension
-class LoveFragment : Fragment(), KoinComponent, ItemAdapter.OnClick {
+class LoveFragment : Fragment(), KoinComponent, ItemAdapter.OnClick,LoveViewModel.CallBack {
 
     private lateinit var binding: FragmentLoveeBinding
     private lateinit var itemAdapter: ItemAdapter
     private val viewModel: LoveViewModel = get()
     private var chapter:ChapterModel?=null
+    private lateinit var konfettiView: KonfettiView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentLoveeBinding.inflate(inflater, container, false)
+        konfettiView = requireActivity().findViewById(R.id.congratulationView)
         return binding.root
     }
 
@@ -54,7 +59,7 @@ class LoveFragment : Fragment(), KoinComponent, ItemAdapter.OnClick {
         viewModel.fetchLove().observeForever {
             itemAdapter.update(it)
             viewModel.updateChapterFinishedState(it,chapter!!.name)
-            viewModel.updateChapterProgress(it,chapter!!.name)
+            viewModel.updateChapterProgress(it,chapter!!,this)
         }
     }
 
@@ -63,5 +68,10 @@ class LoveFragment : Fragment(), KoinComponent, ItemAdapter.OnClick {
         val intent = Intent(requireActivity(), ReadingActivity::class.java)
         intent.putExtra("data", infoModel)
         startActivity(intent)
+    }
+
+    override fun chapterFinished() {
+        requireActivity().supportFragmentManager.popBackStack()
+        CongratulationView(konfettiView).show()
     }
 }

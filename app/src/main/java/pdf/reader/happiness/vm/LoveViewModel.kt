@@ -5,6 +5,7 @@ import androidx.lifecycle.asLiveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import pdf.reader.happiness.core.ChapterModel
 import pdf.reader.happiness.core.InfoModel
 import pdf.reader.happiness.data.core.ChaptersRepository
 import pdf.reader.happiness.data.core.DataRepository
@@ -26,9 +27,18 @@ class LoveViewModel(private val dataRepository: DataRepository,
         }
     }
 
-    fun updateChapterProgress(list: List<InfoModel>, name: String) {
+    fun updateChapterProgress(list: List<InfoModel>, chapterModel: ChapterModel, callback: CallBack) {
         CoroutineScope(Dispatchers.IO).launch {
-            chaptersRepository.updateChapterProgress(percentCalculator.calculatePercent(list), name)
+            chaptersRepository.updateChapterProgress(percentCalculator.calculatePercent(list), chapterModel.name)
+
+            if (percentCalculator.calculatePercent(list)>99f && !chapterModel.isCongratulated){
+                chaptersRepository.updateAllChapterFinished(true,chapterModel.name)
+                callback.chapterFinished()
+            }
         }
+    }
+
+    interface CallBack{
+        fun chapterFinished()
     }
 }

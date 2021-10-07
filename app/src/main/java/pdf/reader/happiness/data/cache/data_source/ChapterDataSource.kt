@@ -10,6 +10,8 @@ interface ChapterDataSource {
     fun fetchChapter():Flow<List<ChapterModel>>
     fun updateChapterFinishedState(isFinished:Boolean,chapterName:String)
     fun updateChapterProgress(progress:Float,chapterName:String)
+    fun updateAllChapterFinished(isFinished: Boolean,chapterName:String)
+
 
     class Base(private val chaptersDao: ChaptersDao): ChapterDataSource {
         override fun fetchChapter(): Flow<List<ChapterModel>> =
@@ -21,6 +23,10 @@ interface ChapterDataSource {
 
         override fun updateChapterProgress(progress: Float, chapterName: String) {
             chaptersDao.updateChapterProgress(progress,chapterName)
+        }
+
+        override fun updateAllChapterFinished(isFinished: Boolean, chapterName: String) {
+            chaptersDao.updateAllChapterFinished(isFinished,chapterName)
         }
     }
 }

@@ -1,6 +1,5 @@
 package pdf.reader.happiness.vm
 
-import android.content.IntentSender
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import kotlinx.coroutines.CoroutineScope
@@ -27,9 +26,17 @@ class SuccessViewModel(private val repository: DataRepository,
         }
     }
 
-    fun updateChapterProgress(list: List<InfoModel>, name: String) {
+    fun updateChapterProgress(list: List<InfoModel>, name: String,successCallBack: SuccessCallBack) {
         CoroutineScope(Dispatchers.IO).launch {
             chaptersRepository.updateChapterProgress(percentCalculator.calculatePercent(list), name)
+            if (percentCalculator.calculatePercent(list)>99f){
+                chaptersRepository.updateAllChapterFinished(true,name)
+                successCallBack.chapterFinished()
+            }
         }
+    }
+
+    interface SuccessCallBack{
+        fun chapterFinished()
     }
 }

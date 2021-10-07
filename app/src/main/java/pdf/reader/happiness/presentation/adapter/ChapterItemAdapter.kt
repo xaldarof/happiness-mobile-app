@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import androidx.recyclerview.widget.DiffUtil
 import pdf.reader.happiness.core.ChapterModel
 import pdf.reader.happiness.databinding.ChapterItemBinding
 
@@ -18,9 +19,11 @@ class ChapterItemAdapter(private val onClick: OnClick) : RecyclerView.Adapter<Re
     private var lastPosition = -1
 
     fun update(newList: List<ChapterModel>) {
+        val diffUtil = ChapterDiffUtilCallBack(list,newList)
+        val diff = DiffUtil.calculateDiff(diffUtil)
         list.clear()
         list.addAll(newList)
-        notifyDataSetChanged()
+        diff.dispatchUpdatesTo(this)
     }
 
     private inner class ItemViewHolder(private val chapterItemBinding: ChapterItemBinding) :

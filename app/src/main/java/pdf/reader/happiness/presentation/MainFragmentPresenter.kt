@@ -1,8 +1,6 @@
 package pdf.reader.happiness.presentation
 
-import androidx.lifecycle.asLiveData
 import pdf.reader.happiness.core.InfoModel
-import pdf.reader.happiness.data.core.DataRepository
 import pdf.reader.happiness.tools.PercentCalculator
 
 

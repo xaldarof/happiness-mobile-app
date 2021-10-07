@@ -17,7 +17,13 @@ interface ToolsDao {
     fun fetchFavorites(): Flow<List<CoreModel>>
 
     @Query("DELETE FROM db")
-    fun delete()
+    fun deleteTypes()
+
+    @Query("DELETE FROM chapters")
+    fun deleteChapters()
+
+    @Query("DELETE FROM ach")
+    fun deleteAchievement()
 
 
     @Query("UPDATE db SET favorite = :favorite WHERE body = :body")

@@ -1,5 +1,6 @@
 package pdf.reader.happiness.tools
 
+import pdf.reader.happiness.data.dao.ChaptersDao
 import pdf.reader.happiness.data.dao.ToolsDao
 import pdf.reader.happiness.data.settings_cache.CongratulationController
 import pdf.reader.happiness.data.settings_cache.FontController
@@ -13,11 +14,14 @@ interface CacheClear {
         private val toolsDao: ToolsDao,
         private val fontController: FontController,
         private val themeController: ThemeController,
-        private val congratulationController: CongratulationController
+        private val congratulationController: CongratulationController,
     ) : CacheClear {
 
         override fun clear() {
-            toolsDao.delete()
+            toolsDao.deleteTypes()
+            toolsDao.deleteChapters()
+            toolsDao.deleteAchievement()
+
             fontController.setBoldFont(false)
             themeController.setTheme(false)
             congratulationController.setAllCongratulated(false)

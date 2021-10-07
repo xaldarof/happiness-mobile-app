@@ -9,6 +9,7 @@ interface ChaptersRepository {
     suspend fun fetchChapters():Flow<List<ChapterModel>>
     fun updateChapterFinishedState(isFinished:Boolean,chapterName:String)
     fun updateChapterProgress(progress:Float,chapterName:String)
+    fun updateAllChapterFinished(isFinished: Boolean,chapterName:String)
 
     class Base(private val chapterDataSource: ChapterDataSource): ChaptersRepository {
 
@@ -20,6 +21,10 @@ interface ChaptersRepository {
 
         override fun updateChapterProgress(progress: Float, chapterName: String) {
             chapterDataSource.updateChapterProgress(progress,chapterName)
+        }
+
+        override fun updateAllChapterFinished(isFinished: Boolean, chapterName: String) {
+            chapterDataSource.updateAllChapterFinished(isFinished,chapterName)
         }
     }
 }
