@@ -1,6 +1,19 @@
 <resources>
-    <string name="app_name">Happiness</string>
+    <string name="app_name">Саморазвитие</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="test">TEST</string>
+    <string name="dark_theme">Темная тема</string>
+    <string name="search">Поиск…</string>
+    <string name="settings">Настройки</string>
+    <string name="is_empty_favorites">Здесь пока пусто…</string>
+    <string name="your_progress">Ваш общий прогресс</string>
+    <string name="implement_data">Внедрить данные</string>
+    <string name="bold_font">Жирный шрифт</string>
+    <string name="no_support">Пока недоступно на вашем устройстве.</string>
+    <string name="clear_all">Обнулить данные</string>
+    <string name="restart_info">Требуеться перезапуск программы</string>
+    <string name="motivation_txt">#Развивайся</string>
+    <string name="ach_finished">Всего достижении были выполнены:</string>
+
 </resources>

@@ -3,23 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
-    android:layout_margin="4dp"
+    android:layout_height="65dp"
+    android:layout_margin="10dp"
     android:background="@drawable/item_style"
-    android:elevation="2dp">
+    android:elevation="1.5dp">
 
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
+    <TextView
+        android:id="@+id/stateIcon"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/style_line"
-        android:backgroundTint="#D67979"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/indicator_tint"
+        android:backgroundTint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHeight_percent="1"
+        app:layout_constraintHeight_percent="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.07" />
+        app:layout_constraintWidth_percent="0.02" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -28,23 +29,24 @@
         android:src="@drawable/ic_baseline_navigate_next_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/to_right_color" />
 
     <TextView
         android:id="@+id/titleTv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="12dp"
         android:ellipsize="end"
-        android:lines="2"
         android:gravity="center|start"
+        android:lines="2"
         android:maxLines="2"
         android:text="Как стать богатымsasasaassassasasasas ?"
-        android:textColor="@color/black"
+        android:textColor="@color/to_right_color"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/relativeLayout"
+        app:layout_constraintStart_toEndOf="@+id/stateIcon"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.8" />
 

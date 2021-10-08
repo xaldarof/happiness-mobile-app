@@ -5,6 +5,7 @@ import android.widget.Toast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.FileNotFoundException
+import java.lang.Exception
 
 interface AssetReader {
 
@@ -23,12 +24,12 @@ interface AssetReader {
                 }
             } catch (e: FileNotFoundException) {
                 Toast.makeText(context, "Кэш приложения поврежден пожалуйста сбросьте  настройки.", Toast.LENGTH_LONG).show()
-                exitCallBack.exitCommand()
+                exitCallBack.exitCommand(e)
             }
             return body
         }
     }
     interface ExitCallBack{
-        fun exitCommand()
+        fun exitCommand(message:Exception)
     }
 }

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/app/src/main/assets/success/tobe_success" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/assets/success/tobe_success_practise" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/pdf/reader/happiness/data/cache/initilizers/SuccessInitializer.kt" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/pdf/reader/happiness/presentation/fragments/MainFragment.kt" charset="UTF-8" />
+  </component>
+</project>

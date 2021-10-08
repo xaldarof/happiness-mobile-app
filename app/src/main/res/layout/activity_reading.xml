@@ -2,16 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:fitsSystemWindows="true"
     android:layout_height="match_parent"
-    android:id="@+id/containerReading"
-    android:background="#E9E8ED"
+    android:background="@color/myWhite"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context=".presentation.ReadingActivity">
 
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/success_toolbar" />
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/success_toolbar" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -19,6 +18,9 @@
         tools:ignore="UselessParent">
 
         <LinearLayout
+            android:id="@+id/containerReading"
+            android:clickable="true"
+            android:focusable="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -27,11 +29,11 @@
                 android:id="@+id/bodyTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#E9E8ED"
+                android:background="@color/myWhite"
+                android:fontFamily="sans-serif"
                 android:padding="6dp"
                 android:text="@string/test"
-                android:textIsSelectable="true"
-                android:textColor="@color/black"
+                android:textColor="@color/to_right_color"
                 android:textSize="18sp"
                 android:textStyle="normal" />
 

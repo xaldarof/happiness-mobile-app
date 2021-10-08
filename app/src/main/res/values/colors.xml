@@ -7,6 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="defColor">#C1BBBB</color>
+    <color name="reading_toolbar_color">#FFFFFF</color>
 
 <!--    My colors-->
     <color name="myWhite">#FFFFFFFF</color>
@@ -16,4 +18,26 @@
     <color name="light_salat">#BEE0FB</color>
     <color name="light_green">#B9EDBB</color>
     <color name="salat_2">#DAE6E6</color>
+    <color name="purple_life">#591BE4</color>
+    <color name="purple_life2">#591BE4</color>
+    <color name="success_color">#FF9800</color>
+    <color name="love_start_color">#E41548</color>
+    <color name="love_center_color">#FF003F</color>
+    <color name="love_end_color">#DD5E7D</color>
+    <color name="happy_start_color">#9C27B0</color>
+    <color name="happy_end_color">#9C27B0</color>
+    <color name="light_black">#FFFFFFFF</color>
+
+
+    <color name="to_right_color">#000000</color>
+    <color name="item_click">#BAB7B7</color>
+    <color name="search_color">#F3F6F3</color>
+
+    <color name="empty_box_color">#000000</color>
+    <color name="core_progress_color">#591BE4</color>
+    <color name="like_color">#000000</color>
+    <color name="progress_text_color">#DD5E7D</color>
+    <color name="clear_color">#D8D1D1</color>
+    <color name="green">#2BCC31</color>
+
 </resources>

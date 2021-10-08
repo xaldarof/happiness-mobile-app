@@ -37,6 +37,21 @@
         <action
             android:id="@+id/action_mainFragment_to_lifeFragment"
             app:destination="@id/lifeFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/to_loveFragment"
+            app:destination="@id/loveFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_loveeFragment"
+            app:destination="@id/loveeFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/lifeFragment"
@@ -46,4 +61,54 @@
             android:id="@+id/action_lifeFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="pdf.reader.happiness.presentation.FavoritesFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="pdf.reader.happiness.presentation.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loveFragment"
+        android:name="pdf.reader.happiness.presentation.fragments.LifeFragment"
+        android:label="fragment_love"
+        tools:layout="@layout/fragment_love" >
+        <action
+            android:id="@+id/action_loveFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loveeFragment"
+        android:name="pdf.reader.happiness.presentation.fragments.LoveFragment"
+        android:label="fragment_lovee"
+        tools:layout="@layout/fragment_lovee" >
+        <action
+            android:id="@+id/action_loveeFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="pdf.reader.happiness.presentation.fragments.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/readingActivity"
+        android:name="pdf.reader.happiness.presentation.ReadingActivity"
+        android:label="activity_reading"
+        tools:layout="@layout/activity_reading" />
 </navigation>
