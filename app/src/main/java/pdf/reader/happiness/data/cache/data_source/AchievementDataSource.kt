@@ -3,7 +3,7 @@ package pdf.reader.happiness.data.cache.data_source
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import pdf.reader.happiness.core.AchievementModel
-import pdf.reader.happiness.data.dao.AchievementDao
+import pdf.reader.happiness.data.cache.dao.AchievementDao
 
 interface AchievementDataSource {
 

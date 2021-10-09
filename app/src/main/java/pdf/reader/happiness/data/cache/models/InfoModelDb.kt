@@ -1,4 +1,4 @@
-package pdf.reader.happiness.data.models
+package pdf.reader.happiness.data.cache.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -6,7 +6,7 @@ import pdf.reader.happiness.core.InfoModel
 import java.io.Serializable
 
 @Entity(tableName = "db")
-data class CoreModel (
+data class InfoModelDb (
     val title: String,
     @PrimaryKey
     val body: String,
@@ -25,5 +25,6 @@ enum class Type {
     SUCCESS,
     LIFE,
     LOVE,
-    HAPPY
+    HAPPY,
+    DEFAULT
 }

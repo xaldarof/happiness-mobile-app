@@ -52,6 +52,7 @@
                     android:layout_height="270dp"
                     android:layout_marginBottom="-36dp"
                     android:textAlignment="center"
+                    app:animateType="AccelerateDecelerateInterpolator"
                     app:circleBroken="false"
                     app:cpv_textMode="Percent"
                     app:end_color="@color/core_progress_color"
@@ -63,7 +64,6 @@
                     app:progressTextSize="60dp"
                     app:start_color="@color/core_progress_color"
                     app:start_progress="0"
-                    app:animateType="AccelerateDecelerateInterpolator"
                     app:trackColor="#E3DDDD"
                     app:track_width="26dp" />
 

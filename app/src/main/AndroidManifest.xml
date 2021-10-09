@@ -3,6 +3,7 @@
     package="pdf.reader.happiness">
 
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name=".core.App"
@@ -12,30 +13,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Happiness">
-
+        <activity
+            android:name=".presentation.DataImportingActivity"
+            android:exported="true" />
         <activity
             android:name=".presentation.PresentationActivity"
-            android:exported="true" >
-
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
         <activity
             android:name=".presentation.ReadingActivity"
-            android:launchMode="singleTask"
-            android:exported="true" />
+            android:exported="true"
+            android:launchMode="singleTask" />
         <activity
             android:name=".presentation.MainActivity"
-            android:launchMode="singleTask"
             android:exported="true"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"></activity>
 
         <meta-data
             android:name="preloaded_fonts"

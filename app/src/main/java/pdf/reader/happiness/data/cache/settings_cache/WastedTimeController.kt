@@ -1,4 +1,4 @@
-package pdf.reader.happiness.data.settings_cache
+package pdf.reader.happiness.data.cache.settings_cache
 
 import android.content.SharedPreferences
 

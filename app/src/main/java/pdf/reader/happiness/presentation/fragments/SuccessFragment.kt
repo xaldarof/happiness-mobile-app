@@ -11,17 +11,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import nl.dionsegijn.konfetti.KonfettiView
 import org.koin.android.ext.android.get
-import org.koin.android.ext.android.inject
 import org.koin.core.component.KoinApiExtension
 import pdf.reader.happiness.R
 import pdf.reader.happiness.core.ChapterModel
 import pdf.reader.happiness.core.InfoModel
-import pdf.reader.happiness.data.core.ChaptersRepository
 import pdf.reader.happiness.databinding.FragmentSuccessBinding
 import pdf.reader.happiness.presentation.ReadingActivity
 import pdf.reader.happiness.presentation.adapter.ItemAdapter
 import pdf.reader.happiness.tools.CongratulationView
-import pdf.reader.happiness.tools.PercentCalculator
 import pdf.reader.happiness.vm.SuccessViewModel
 
 class SuccessFragment : Fragment(), ItemAdapter.OnClick,SuccessViewModel.CallBack {

@@ -3,11 +3,7 @@ package pdf.reader.happiness.vm
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.delay
-import pdf.reader.happiness.core.AchievementModel
-import pdf.reader.happiness.data.core.AchievementRepository
-import pdf.reader.happiness.data.settings_cache.BadgeController
-import pdf.reader.happiness.data.settings_cache.WastedTimeController
-import pdf.reader.happiness.tools.AchievementUpdater
+import pdf.reader.happiness.data.cache.settings_cache.WastedTimeController
 import pdf.reader.happiness.tools.WastedTimeAchievement
 import pdf.reader.happiness.tools.WastedTimeAchievementController
 

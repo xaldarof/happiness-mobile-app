@@ -1,9 +1,8 @@
 package pdf.reader.happiness.presentation
 
-import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
-import pdf.reader.happiness.data.settings_cache.FontController
-import pdf.reader.happiness.data.settings_cache.ThemeController
+import pdf.reader.happiness.data.cache.settings_cache.FontController
+import pdf.reader.happiness.data.cache.settings_cache.ThemeController
 
 class SettingFragmentPresenter(private val view:SettingsView,
                                private val themeController: ThemeController,

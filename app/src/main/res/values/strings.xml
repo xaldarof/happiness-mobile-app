@@ -15,5 +15,7 @@
     <string name="restart_info">Требуеться перезапуск программы</string>
     <string name="motivation_txt">#Развивайся</string>
     <string name="ach_finished">Всего достижении были выполнены:</string>
+    <string name="start">НАЧАТЬ</string>
+    <string name="what_is_it">Внедрение данных из облака - при этом новые данные будут импортированы и внедрены в приложение. Это предзначен для пользовтелей которые хотят узнать большего</string>
 
 </resources>

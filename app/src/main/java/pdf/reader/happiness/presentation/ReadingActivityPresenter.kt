@@ -2,11 +2,8 @@ package pdf.reader.happiness.presentation
 
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import pdf.reader.happiness.data.settings_cache.FontController
-import pdf.reader.happiness.data.settings_cache.ThemeController
+import pdf.reader.happiness.data.cache.settings_cache.FontController
+import pdf.reader.happiness.data.cache.settings_cache.ThemeController
 import pdf.reader.happiness.tools.TypeFaceController
 
 class ReadingActivityPresenter(private val font: FontController,private val theme: ThemeController){

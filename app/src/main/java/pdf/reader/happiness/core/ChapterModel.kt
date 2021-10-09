@@ -1,6 +1,6 @@
 package pdf.reader.happiness.core
 
-import pdf.reader.happiness.data.models.ChapterModelDb
+import pdf.reader.happiness.data.cache.models.ChapterModelDb
 import java.io.Serializable
 
 data class ChapterModel(

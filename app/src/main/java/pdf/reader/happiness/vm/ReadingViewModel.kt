@@ -1,8 +1,7 @@
 package pdf.reader.happiness.vm
 
 import androidx.lifecycle.ViewModel
-import pdf.reader.happiness.data.core.DataRepository
-import pdf.reader.happiness.data.core.ToolsRepository
+import pdf.reader.happiness.data.cache.core.ToolsRepository
 
 class ReadingViewModel(private val repository : ToolsRepository): ViewModel() {
 

@@ -3,7 +3,7 @@ package pdf.reader.happiness.data.cache.data_source
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import pdf.reader.happiness.core.ChapterModel
-import pdf.reader.happiness.data.dao.ChaptersDao
+import pdf.reader.happiness.data.cache.dao.ChaptersDao
 
 interface ChapterDataSource {
 

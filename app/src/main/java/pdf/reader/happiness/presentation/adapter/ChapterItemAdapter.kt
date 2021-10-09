@@ -2,8 +2,6 @@ package pdf.reader.happiness.presentation.adapter
 
 import android.R
 import android.annotation.SuppressLint
-import android.graphics.Color
-import android.graphics.PorterDuff
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +10,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.DiffUtil
 import pdf.reader.happiness.core.ChapterModel
-import pdf.reader.happiness.data.settings_cache.ThemeController
+import pdf.reader.happiness.data.cache.settings_cache.ThemeController
 import pdf.reader.happiness.databinding.ChapterItemBinding
 
 

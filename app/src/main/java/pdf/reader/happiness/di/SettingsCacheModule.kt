@@ -3,14 +3,9 @@ package pdf.reader.happiness.di
 import android.content.Context
 import android.content.SharedPreferences
 import org.koin.android.ext.koin.androidContext
-import org.koin.core.component.KoinApiExtension
 import org.koin.dsl.module
-import pdf.reader.happiness.data.settings_cache.*
-import pdf.reader.happiness.presentation.MainFragmentPresenter
-import pdf.reader.happiness.presentation.MainPresenter
+import pdf.reader.happiness.data.cache.settings_cache.*
 import pdf.reader.happiness.presentation.ReadingActivityPresenter
-import pdf.reader.happiness.presentation.fragments.MainFragment
-import pdf.reader.happiness.tools.AchievementUpdater
 import pdf.reader.happiness.tools.CacheClear
 import pdf.reader.happiness.tools.WastedTimeAchievement
 import pdf.reader.happiness.tools.WastedTimeAchievementController

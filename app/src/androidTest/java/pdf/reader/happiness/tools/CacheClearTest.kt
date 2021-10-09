@@ -9,20 +9,20 @@ import org.junit.Test
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import pdf.reader.happiness.data.core.DataRepository
+import pdf.reader.happiness.data.cache.core.CacheDataRepository
 
 @KoinApiExtension
 class CacheClearTest : KoinComponent {
 
     private val cacheClear: CacheClear by inject()
-    private val dataRepository: DataRepository by inject()
+    private val cacheDataRepository: CacheDataRepository by inject()
 
     @Test
     fun check_is_all_data_cleared() {
         cacheClear.clear()
 
         CoroutineScope(Dispatchers.Main).launch {
-            dataRepository.fetchAllTypes().asLiveData().observeForever {
+            cacheDataRepository.fetchAllTypes().asLiveData().observeForever {
                 assertTrue(it.isEmpty())
             }
         }

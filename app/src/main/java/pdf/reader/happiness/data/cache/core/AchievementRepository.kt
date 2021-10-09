@@ -1,4 +1,4 @@
-package pdf.reader.happiness.data.core
+package pdf.reader.happiness.data.cache.core
 
 import kotlinx.coroutines.flow.Flow
 import pdf.reader.happiness.core.AchievementModel

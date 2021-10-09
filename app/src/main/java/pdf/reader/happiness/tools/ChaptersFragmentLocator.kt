@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import org.koin.core.component.KoinApiExtension
 import pdf.reader.happiness.R
 import pdf.reader.happiness.core.ChapterModel
-import pdf.reader.happiness.data.models.ChapterModelDb
+import pdf.reader.happiness.data.cache.models.ChapterModelDb
 import pdf.reader.happiness.presentation.fragments.HappinessFragment
 import pdf.reader.happiness.presentation.fragments.LifeFragment
 import pdf.reader.happiness.presentation.fragments.LoveFragment

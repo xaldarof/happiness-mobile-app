@@ -1,8 +1,7 @@
-package pdf.reader.happiness.data.models
+package pdf.reader.happiness.data.cache.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import pdf.reader.happiness.R
 import pdf.reader.happiness.core.ChapterModel
 
 @Entity(tableName = "chapters")

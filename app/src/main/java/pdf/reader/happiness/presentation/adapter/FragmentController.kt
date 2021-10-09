@@ -13,7 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import pdf.reader.happiness.R
-import pdf.reader.happiness.data.settings_cache.BadgeController
+import pdf.reader.happiness.data.cache.settings_cache.BadgeController
 
 @SuppressLint("UseCompatLoadingForDrawables")
 class FragmentController(

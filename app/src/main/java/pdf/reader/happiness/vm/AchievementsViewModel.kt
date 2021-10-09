@@ -3,7 +3,7 @@ package pdf.reader.happiness.vm
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import pdf.reader.happiness.core.AchievementModel
-import pdf.reader.happiness.data.core.AchievementRepository
+import pdf.reader.happiness.data.cache.core.AchievementRepository
 
 class AchievementsViewModel(private val achievementRepository: AchievementRepository): ViewModel() {
 

@@ -1,8 +1,8 @@
 package pdf.reader.happiness.tools
 
 import pdf.reader.happiness.core.AchievementModel
-import pdf.reader.happiness.data.core.AchievementRepository
-import pdf.reader.happiness.data.settings_cache.BadgeController
+import pdf.reader.happiness.data.cache.core.AchievementRepository
+import pdf.reader.happiness.data.cache.settings_cache.BadgeController
 
 interface AchievementUpdater {
 

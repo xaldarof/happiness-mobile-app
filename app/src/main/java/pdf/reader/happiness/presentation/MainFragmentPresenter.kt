@@ -1,7 +1,7 @@
 package pdf.reader.happiness.presentation
 
 import pdf.reader.happiness.core.InfoModel
-import pdf.reader.happiness.data.settings_cache.CongratulationController
+import pdf.reader.happiness.data.cache.settings_cache.CongratulationController
 import pdf.reader.happiness.tools.AchievementUpdater
 import pdf.reader.happiness.tools.PercentCalculator
 

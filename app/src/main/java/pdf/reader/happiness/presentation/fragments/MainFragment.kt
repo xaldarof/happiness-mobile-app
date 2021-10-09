@@ -17,9 +17,9 @@ import org.koin.core.component.get
 import org.koin.core.component.inject
 import pdf.reader.happiness.R
 import pdf.reader.happiness.core.ChapterModel
-import pdf.reader.happiness.data.core.DataRepository
-import pdf.reader.happiness.data.settings_cache.CongratulationController
-import pdf.reader.happiness.data.settings_cache.ThemeController
+import pdf.reader.happiness.data.cache.core.CacheDataRepository
+import pdf.reader.happiness.data.cache.settings_cache.CongratulationController
+import pdf.reader.happiness.data.cache.settings_cache.ThemeController
 import pdf.reader.happiness.databinding.FragmentMainBinding
 import pdf.reader.happiness.presentation.MainFragmentPresenter
 import pdf.reader.happiness.presentation.adapter.ChapterItemAdapter
@@ -36,7 +36,7 @@ class MainFragment : Fragment(), KoinComponent, ChapterItemAdapter.OnClick,
     private val achievementUpdater:AchievementUpdater by inject()
     private val congratulationController:CongratulationController by inject()
     private val presenter = MainFragmentPresenter(this,achievementUpdater,congratulationController)
-    private val dataRepository: DataRepository by inject()
+    private val cacheDataRepository: CacheDataRepository by inject()
     private lateinit var konfettiView: KonfettiView
     private val themeController:ThemeController by inject()
 
@@ -72,7 +72,7 @@ class MainFragment : Fragment(), KoinComponent, ChapterItemAdapter.OnClick,
     }
 
     private suspend fun updateCore() {
-        dataRepository.fetchAllTypes().asLiveData().observeForever {
+        cacheDataRepository.fetchAllTypes().asLiveData().observeForever {
             presenter.updateCoreProgress(it)
         }
     }

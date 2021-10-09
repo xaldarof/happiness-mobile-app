@@ -1,11 +1,10 @@
 package pdf.reader.happiness.tools
 
-import pdf.reader.happiness.data.dao.ChaptersDao
-import pdf.reader.happiness.data.dao.ToolsDao
-import pdf.reader.happiness.data.settings_cache.CongratulationController
-import pdf.reader.happiness.data.settings_cache.FontController
-import pdf.reader.happiness.data.settings_cache.ThemeController
-import pdf.reader.happiness.data.settings_cache.WastedTimeController
+import pdf.reader.happiness.data.cache.dao.ToolsDao
+import pdf.reader.happiness.data.cache.settings_cache.CongratulationController
+import pdf.reader.happiness.data.cache.settings_cache.FontController
+import pdf.reader.happiness.data.cache.settings_cache.ThemeController
+import pdf.reader.happiness.data.cache.settings_cache.WastedTimeController
 
 interface CacheClear {
 

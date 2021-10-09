@@ -1,4 +1,4 @@
-package pdf.reader.happiness.data.core
+package pdf.reader.happiness.data.cache.core
 
 import androidx.lifecycle.asLiveData
 import kotlinx.coroutines.CoroutineScope
@@ -9,12 +9,12 @@ import org.junit.Test
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import pdf.reader.happiness.data.models.Type
+import pdf.reader.happiness.data.cache.models.Type
 
 @KoinApiExtension
-class DataRepositoryTest :KoinComponent {
+class CacheDataRepositoryTest :KoinComponent {
 
-    private val repository:DataRepository by inject()
+    private val repositoryCache:CacheDataRepository by inject()
 
     /**
      *  checked when actual size of data was 105
@@ -23,7 +23,7 @@ class DataRepositoryTest :KoinComponent {
     @Test
     fun check_is_repo_returns_data() {
         CoroutineScope(Dispatchers.Main).launch {
-            repository.fetchAllTypes().asLiveData().observeForever {
+            repositoryCache.fetchAllTypes().asLiveData().observeForever {
                 assertEquals(105,it.size)
             }
         }
@@ -33,7 +33,7 @@ class DataRepositoryTest :KoinComponent {
     @Test
     fun check_repo_return_only_happy_type_data(){
         CoroutineScope(Dispatchers.Main).launch {
-            repository.fetchHappy().asLiveData().observeForever { it ->
+            repositoryCache.fetchHappy().asLiveData().observeForever { it ->
                 it.forEach {
                     assertEquals(Type.HAPPY,it.type)
                 }
@@ -47,7 +47,7 @@ class DataRepositoryTest :KoinComponent {
     @Test
     fun check_repo_return_only_life_type_data(){
         CoroutineScope(Dispatchers.Main).launch {
-            repository.fetchLife().asLiveData().observeForever { it ->
+            repositoryCache.fetchLife().asLiveData().observeForever { it ->
                 it.forEach {
                     assertEquals(Type.LIFE,it.type)
                 }
@@ -60,7 +60,7 @@ class DataRepositoryTest :KoinComponent {
     @Test
     fun check_repo_return_only_love_type_data(){
         CoroutineScope(Dispatchers.Main).launch {
-            repository.fetchLove().asLiveData().observeForever { it ->
+            repositoryCache.fetchLove().asLiveData().observeForever { it ->
                 it.forEach {
                     assertEquals(Type.LOVE,it.type)
                 }
@@ -73,7 +73,7 @@ class DataRepositoryTest :KoinComponent {
     @Test
     fun check_repo_return_only_success_type_data(){
         CoroutineScope(Dispatchers.Main).launch {
-            repository.fetchSuccess().asLiveData().observeForever { it ->
+            repositoryCache.fetchSuccess().asLiveData().observeForever { it ->
                 it.forEach {
                     assertEquals(Type.SUCCESS,it.type)
                 }

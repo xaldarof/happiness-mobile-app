@@ -9,7 +9,7 @@ import org.junit.Test
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import pdf.reader.happiness.data.dao.CoreDao
+import pdf.reader.happiness.data.cache.dao.CoreDao
 
 @KoinApiExtension
 class AllTypesCacheDataSourceTest: KoinComponent {

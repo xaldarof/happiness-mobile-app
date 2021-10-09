@@ -7,18 +7,17 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pdf.reader.happiness.core.ChapterModel
 import pdf.reader.happiness.core.InfoModel
-import pdf.reader.happiness.data.core.ChaptersRepository
-import pdf.reader.happiness.data.core.DataRepository
+import pdf.reader.happiness.data.cache.core.ChaptersRepository
+import pdf.reader.happiness.data.cache.core.CacheDataRepository
 import pdf.reader.happiness.tools.AchievementUpdater
-import pdf.reader.happiness.tools.CongratulationView
 import pdf.reader.happiness.tools.PercentCalculator
 
-class HappyViewModel(private val dataRepository: DataRepository,
+class HappyViewModel(private val cacheDataRepository: CacheDataRepository,
                      private val chaptersRepository: ChaptersRepository,
                      private val percentCalculator: PercentCalculator,
                      private val achievementUpdater: AchievementUpdater): ViewModel() {
 
-    suspend fun fetchHappy() = dataRepository.fetchHappy().asLiveData()
+    suspend fun fetchHappy() = cacheDataRepository.fetchHappy().asLiveData()
 
     fun updateChapterFinishedState(list: List<InfoModel>, name:String){
         CoroutineScope(Dispatchers.IO).launch {

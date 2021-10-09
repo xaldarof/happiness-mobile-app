@@ -1,5 +1,6 @@
 package pdf.reader.happiness.presentation
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,8 +11,8 @@ import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import pdf.reader.happiness.R
-import pdf.reader.happiness.data.settings_cache.FontController
-import pdf.reader.happiness.data.settings_cache.ThemeController
+import pdf.reader.happiness.data.cache.settings_cache.FontController
+import pdf.reader.happiness.data.cache.settings_cache.ThemeController
 import pdf.reader.happiness.databinding.FragmentSettingsBinding
 import pdf.reader.happiness.tools.CacheClear
 import pdf.reader.happiness.tools.ClearDialog
@@ -59,6 +60,7 @@ class SettingsFragment : Fragment(),KoinComponent,SettingFragmentPresenter.Setti
 
         binding.implementBtn.setOnCheckedChangeListener { p0, _ ->
             if (p0.isChecked){
+                startActivity(Intent(requireContext(),DataImportingActivity::class.java))
                 Toast.makeText(requireContext(), R.string.no_support, Toast.LENGTH_LONG).show()
                 binding.implementBtn.isChecked = false
             }

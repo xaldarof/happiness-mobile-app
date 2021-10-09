@@ -1,4 +1,4 @@
-package pdf.reader.happiness.data.core
+package pdf.reader.happiness.data.cache.core
 
 import androidx.lifecycle.asLiveData
 import kotlinx.coroutines.CoroutineScope
