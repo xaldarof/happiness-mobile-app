@@ -60,8 +60,14 @@ class MainFragment : Fragment(), KoinComponent, ChapterItemAdapter.OnClick,
     override fun onResume() {
         super.onResume()
         CoroutineScope(Dispatchers.Main).launch {
-            updateCore()
             update()
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        CoroutineScope(Dispatchers.Main).launch {
+            updateCore()
         }
     }
 

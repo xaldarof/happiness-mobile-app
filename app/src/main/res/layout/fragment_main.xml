@@ -63,6 +63,7 @@
                     app:progressTextSize="60dp"
                     app:start_color="@color/core_progress_color"
                     app:start_progress="0"
+                    app:animateType="AccelerateDecelerateInterpolator"
                     app:trackColor="#E3DDDD"
                     app:track_width="26dp" />
 
