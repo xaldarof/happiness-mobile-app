@@ -37,7 +37,7 @@
         app:layout_constraintTop_toBottomOf="@+id/chapterSize"
         app:layout_constraintWidth_percent="0.6"
         app:progressDuration="1500"
-        app:progressTextColor="#423D3D"
+        app:progressTextColor="@color/to_right_color"
         app:start_color="@color/red_start"
         app:trackColor="#F3ECEC"
         app:track_width="18dp" />
