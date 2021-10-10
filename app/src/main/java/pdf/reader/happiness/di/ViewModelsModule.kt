@@ -20,5 +20,5 @@ val viewModels = module {
 
     single { AchievementsViewModel(get()) }
 
-    single { ImportingActivityViewModel(get(),get(),get()) }
+    single { ImportingActivityViewModel(get(),get(),get(),get()) }
 }

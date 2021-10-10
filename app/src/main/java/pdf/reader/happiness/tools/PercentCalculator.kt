@@ -8,6 +8,7 @@ interface PercentCalculator {
     fun updateAllFinished(list: List<InfoModel>):Boolean
     fun calculateIsAllFinished(list: List<InfoModel>): Boolean
 
+    fun calculatePercentOf(count:Float,total:Float):Float
 
     class Base : PercentCalculator {
         override fun calculatePercent(list: List<InfoModel>): Float {
@@ -42,6 +43,9 @@ interface PercentCalculator {
             return finishedCounter == total
         }
 
+        override fun calculatePercentOf(count: Float, total: Float) : Float{
+            return 100 * (count / total)
+        }
     }
 
 }

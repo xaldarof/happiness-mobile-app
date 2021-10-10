@@ -30,6 +30,10 @@ interface ChaptersDao {
     fun updateChapterCongratulated(isCongratulated: Boolean,chapterName:String)
 
 
+    @Query("UPDATE chapters SET size=:size WHERE name=:chapterName")
+    fun updateChapterSize(size: Int,chapterName:String)
+
+
     //FOR DB INSPECTOR
     @Query("UPDATE chapters SET colorLight = '' WHERE name=:chapterName")
     fun updateChapterColor(chapterName:String)

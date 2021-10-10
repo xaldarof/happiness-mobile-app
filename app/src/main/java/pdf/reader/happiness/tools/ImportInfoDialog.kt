@@ -12,7 +12,7 @@ interface ImportInfoDialog {
         override fun show(context: Context) {
             val alertDialog = MaterialAlertDialogBuilder(context, R.style.AlertDialogTheme)
                 .setMessage(R.string.what_is_it)
-                .setTitle("Информация о 'Внедрение данных из облака'(бета)")
+                .setTitle("Информация о Внедрение данных из облака. (бета)")
                 .setPositiveButton(
                     "Понятно"
                 ) { p0, p1 -> }

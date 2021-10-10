@@ -36,16 +36,9 @@ class ChapterItemAdapter(private val onClick: OnClick,private val themeControlle
             chapterItemBinding.chapterName.text = chapter.name
             chapterItemBinding.chapterSize.text = "${chapter.size} Советов"
 
-//            if (themeController.isDarkThemeOn()){
-//                chapterItemBinding.chapterBtn.background.setColorFilter(Color.parseColor(chapter.colorNight),PorterDuff.Mode.SRC_ATOP)
-//            }else{
-//                chapterItemBinding.chapterBtn.background.setColorFilter(Color.parseColor(chapter.colorLight),PorterDuff.Mode.SRC_ATOP)
-//            }
-
             chapterItemBinding.chapterProgress.progress = chapter.progress
             chapterItemBinding.chapterProgress.setEndProgress(chapter.progress)
             chapterItemBinding.chapterProgress.startProgressAnimation()
-
 
             chapterItemBinding.chapterBtn.setOnClickListener { onClick.onClick(chapter) }
 

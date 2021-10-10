@@ -4,6 +4,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import pdf.reader.happiness.core.InfoModel
 import pdf.reader.happiness.data.cache.dao.ToolsDao
+import pdf.reader.happiness.data.cache.models.InfoModelDb
 
 interface ToolsRepository {
 
@@ -14,6 +15,8 @@ interface ToolsRepository {
     suspend fun updateFavoriteState(body:String,favorite:Boolean)
     suspend fun updateOpenedState(body: String,opened:Boolean)
     suspend fun updateFinishedState(body: String,finished:Boolean)
+
+    suspend fun fetchAll():List<InfoModelDb>
 
     class Base(private val toolsDao: ToolsDao): ToolsRepository {
 
@@ -35,6 +38,10 @@ interface ToolsRepository {
 
         override suspend fun updateFinishedState(body: String, finished: Boolean) {
             toolsDao.updateFinishedState(body,finished)
+        }
+
+        override suspend fun fetchAll(): List<InfoModelDb> {
+            return toolsDao.fetchAll()
         }
     }
 }

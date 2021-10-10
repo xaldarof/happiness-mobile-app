@@ -126,7 +126,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/relativeLayout4"
+        android:id="@+id/importData"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="12dp"
@@ -137,16 +137,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout2">
 
-        <androidx.appcompat.widget.SwitchCompat
+        <ImageView
             android:id="@+id/implementBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
             android:layout_marginEnd="12dp"
-            android:src="@drawable/ic_baseline_file_download_24"
+            android:src="@drawable/ic_baseline_chevron_right_24"
             android:thumb="@drawable/switch_thumb"
-            app:tint="@color/black"
+            app:tint="@color/to_right_color"
             app:track="@drawable/thumb_track" />
 
         <ImageView
@@ -187,7 +187,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout4">
+        app:layout_constraintTop_toBottomOf="@+id/importData">
 
         <ImageView
             android:id="@+id/img5"

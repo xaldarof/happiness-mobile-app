@@ -40,7 +40,8 @@ android {
 dependencies {
     //view
     implementation 'com.github.gayanvoice:android-animations:1.0.2'
-    
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+
     implementation 'com.github.jakob-grabner:Circle-Progress-View:1.4'
     implementation 'com.mikhaellopez:circularprogressbar:3.1.0'
     implementation 'com.github.jd-alexander:LikeButton:0.2.3'

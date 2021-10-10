@@ -17,6 +17,7 @@ val initializers = module {
     factory<LoveInitializer> { LoveInitializer.Base(get(), get()) }
     factory<HappyInitializer> { HappyInitializer.Base(get(), get()) }
 
-    factory { AllInitializer(get(),get(),get(),get()) }
+    factory<ChapterInitializer>{ ChapterInitializer.Base(get(),get()) }
+    factory<AllInitializer>{ AllInitializer(get(),get(),get(),get()) }
 
 }

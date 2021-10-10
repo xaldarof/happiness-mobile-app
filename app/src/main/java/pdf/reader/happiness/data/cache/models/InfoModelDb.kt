@@ -15,7 +15,8 @@ data class InfoModelDb (
     val finished: Boolean=false,
     val isOpened:Boolean=false,
     val type: Type,
-    val dataType:Type = Type.CACHE
+    val dataType:Type = Type.CACHE,
+    val addedTime:Long = System.currentTimeMillis()
     ): Serializable {
 
     fun mapToInfoModel() : InfoModel {
@@ -29,5 +30,5 @@ enum class Type {
     HAPPY,
     DEFAULT,
     CACHE,
-    CLOUD
+    CLOUD,
 }

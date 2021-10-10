@@ -10,8 +10,11 @@ import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import org.koin.core.component.inject
+import pdf.reader.happiness.data.cache.models.Type
 import pdf.reader.happiness.data.cache.settings_cache.BadgeController
 import pdf.reader.happiness.data.cache.settings_cache.ThemeController
+import pdf.reader.happiness.data.cloud.data_insert.CloudDataSendService
+import pdf.reader.happiness.data.cloud.models.InfoCloudModel
 import pdf.reader.happiness.databinding.ActivityMainBinding
 import pdf.reader.happiness.presentation.adapter.*
 import pdf.reader.happiness.presentation.fragments.AchievementsFragment

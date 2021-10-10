@@ -19,8 +19,11 @@ import org.koin.core.component.inject
 import pdf.reader.happiness.R
 import pdf.reader.happiness.core.ChapterModel
 import pdf.reader.happiness.data.cache.core.CacheDataRepository
+import pdf.reader.happiness.data.cache.models.Type
 import pdf.reader.happiness.data.cache.settings_cache.CongratulationController
 import pdf.reader.happiness.data.cache.settings_cache.ThemeController
+import pdf.reader.happiness.data.cloud.data_insert.CloudDataSendService
+import pdf.reader.happiness.data.cloud.models.InfoCloudModel
 import pdf.reader.happiness.databinding.FragmentMainBinding
 import pdf.reader.happiness.presentation.MainFragmentPresenter
 import pdf.reader.happiness.presentation.adapter.ChapterItemAdapter
@@ -39,6 +42,7 @@ class MainFragment : Fragment(), KoinComponent, ChapterItemAdapter.OnClick,
     private val presenter = MainFragmentPresenter(this,achievementUpdater,congratulationController)
     private lateinit var konfettiView: KonfettiView
     private val themeController:ThemeController by inject()
+    private val cloudDataSendService: CloudDataSendService by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,6 +51,7 @@ class MainFragment : Fragment(), KoinComponent, ChapterItemAdapter.OnClick,
         binding = FragmentMainBinding.inflate(inflater, container, false)
         konfettiView = requireActivity().findViewById(R.id.congratulationView)
         chapterItemAdapter = ChapterItemAdapter(this,themeController)
+        Log.d("pos2","ON CREATE")
         return binding.root
     }
 
@@ -55,6 +60,12 @@ class MainFragment : Fragment(), KoinComponent, ChapterItemAdapter.OnClick,
         binding.rv.adapter = chapterItemAdapter
         binding.rv.isNestedScrollingEnabled = false
 
+        binding.progressCore.setOnClickListener {
+            CoroutineScope(Dispatchers.Main).launch {
+                Animator(requireContext()).animation(binding.progressCore, 3000)
+                Animator(requireContext()).animation(binding.tv1, 3000)
+            }
+        }
     }
 
     override fun onResume() {

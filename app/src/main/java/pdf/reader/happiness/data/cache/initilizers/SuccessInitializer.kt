@@ -9,6 +9,7 @@ import pdf.reader.happiness.data.cache.models.InfoModelDb
 import pdf.reader.happiness.data.cache.models.Type
 import pdf.reader.happiness.data.cache.dao.ChaptersDao
 import pdf.reader.happiness.data.cache.dao.CoreDao
+import pdf.reader.happiness.tools.PercentCalculator
 
 interface SuccessInitializer {
 
@@ -55,8 +56,13 @@ interface SuccessInitializer {
                 chaptersDao.insertChapter(ChapterModelDb("УСПЕХ",list.size, R.drawable.ic_goal,0f,
                     fragmentName = ChapterModelDb.FragmentName.SUCCESS,colorLight = "#D4ad2b",colorNight = "#24303E"))
 
-                coreDao.updateChapterSize("УСПЕХ",coreDao.fetchSuccessCount(Type.SUCCESS).size)
-            }
+                val chapter = coreDao.fetchSuccessCount(Type.SUCCESS)
+                chaptersDao.updateChapterSize(chapter.size,"УСПЕХ")
+                chaptersDao
+                    .updateChapterProgress(
+                        PercentCalculator
+                            .Base()
+                            .calculatePercent(chapter.map { it.mapToInfoModel() }),"УСПЕХ")            }
         }
     }
 }

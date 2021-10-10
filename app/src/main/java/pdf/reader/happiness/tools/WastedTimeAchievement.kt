@@ -13,8 +13,6 @@ interface WastedTimeAchievement {
     class Base(private val achievementRepository: AchievementRepository,
                private val badgeController: BadgeController): WastedTimeAchievement {
 
-
-
         override fun addAchievementWasted1HourTime() {
                 achievementRepository.insertAchievement(
                     AchievementModel("Вы получили достижение 'Мудрец'",

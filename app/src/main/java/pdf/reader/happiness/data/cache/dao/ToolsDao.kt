@@ -12,6 +12,9 @@ interface ToolsDao {
     @Query("SELECT * FROM db WHERE title LIKE :query")
     fun fetchSearchResult(query:String): Flow<List<InfoModelDb>>
 
+    @Query("SELECT * FROM db")
+    fun fetchAll(): List<InfoModelDb>
+
 
     @Query("SELECT * FROM db WHERE favorite==1")
     fun fetchFavorites(): Flow<List<InfoModelDb>>

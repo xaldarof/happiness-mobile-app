@@ -24,10 +24,12 @@ val settingsCacheModule = module {
     factory<CongratulationController> { CongratulationController.Base(get()) }
     factory<ReadingActivityPresenter> { ReadingActivityPresenter(get(), get()) }
 
-    factory<CacheClear> { CacheClear.Base(get(), get(), get(), get(),get()) }
+    factory<CacheClear> { CacheClear.Base(get(), get(), get(), get(), get(),get()) }
 
-    factory<WastedTimeAchievement>{ WastedTimeAchievement.Base(get(),get()) }
+    factory<WastedTimeAchievement> { WastedTimeAchievement.Base(get(), get()) }
     factory<BadgeController> { BadgeController.Base(get()) }
     factory<WastedTimeController> { WastedTimeController.Base(get()) }
-    factory<WastedTimeAchievementController>{ WastedTimeAchievementController.Base(get()) }
+    factory<WastedTimeAchievementController> { WastedTimeAchievementController.Base(get()) }
+
+    factory<AllChaptersFinished> { AllChaptersFinished.Base(get()) }
 }

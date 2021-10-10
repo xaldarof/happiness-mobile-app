@@ -18,34 +18,34 @@ interface CoreDao {
     fun insertAll(list: List<InfoModelDb>)
 
     @Query("SELECT * FROM db")
-    fun fetchAllTypes():Flow<List<InfoModelDb>>
+    fun fetchAllTypes(): Flow<List<InfoModelDb>>
+
+
+    @Query("SELECT * FROM db WHERE type =:type ORDER BY addedTime DESC")
+    fun fetchSuccess(type: Type): Flow<List<InfoModelDb>>
+
+    @Query("SELECT * FROM db WHERE type =:type ORDER BY addedTime DESC")
+    fun fetchLife(type: Type): Flow<List<InfoModelDb>>
+
+    @Query("SELECT * FROM db WHERE type=:type  ORDER BY addedTime DESC")
+    fun fetchHappy(type: Type): Flow<List<InfoModelDb>>
+
+    @Query("SELECT * FROM db WHERE type=:type  ORDER BY addedTime DESC")
+    fun fetchLove(type: Type): Flow<List<InfoModelDb>>
 
 
     @Query("SELECT * FROM db WHERE type =:type")
-    fun fetchSuccess(type: Type):Flow<List<InfoModelDb>>
+    fun fetchSuccessCount(type: Type): List<InfoModelDb>
 
     @Query("SELECT * FROM db WHERE type =:type")
-    fun fetchLife(type: Type):Flow<List<InfoModelDb>>
+    fun fetchLifeCount(type: Type): List<InfoModelDb>
 
     @Query("SELECT * FROM db WHERE type=:type")
-    fun fetchHappy(type: Type):Flow<List<InfoModelDb>>
+    fun fetchHappyCount(type: Type): List<InfoModelDb>
 
     @Query("SELECT * FROM db WHERE type=:type")
-    fun fetchLove(type: Type):Flow<List<InfoModelDb>>
-
-
-    @Query("SELECT * FROM db WHERE type =:type")
-    fun fetchSuccessCount(type: Type):List<InfoModelDb>
-
-    @Query("SELECT * FROM db WHERE type =:type")
-    fun fetchLifeCount(type: Type):List<InfoModelDb>
-
-    @Query("SELECT * FROM db WHERE type=:type")
-    fun fetchHappyCount(type: Type):List<InfoModelDb>
-
-    @Query("SELECT * FROM db WHERE type=:type")
-    fun fetchLoveCount(type: Type):List<InfoModelDb>
+    fun fetchLoveCount(type: Type): List<InfoModelDb>
 
     @Query("UPDATE chapters SET size=:size WHERE name=:name")
-    fun updateChapterSize(name: String,size:Int)
+    fun updateChapterSize(name: String, size: Int)
 }

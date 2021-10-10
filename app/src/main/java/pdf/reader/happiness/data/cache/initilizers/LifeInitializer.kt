@@ -9,6 +9,7 @@ import pdf.reader.happiness.data.cache.models.InfoModelDb
 import pdf.reader.happiness.data.cache.models.Type
 import pdf.reader.happiness.data.cache.dao.ChaptersDao
 import pdf.reader.happiness.data.cache.dao.CoreDao
+import pdf.reader.happiness.tools.PercentCalculator
 
 interface LifeInitializer {
 
@@ -63,8 +64,14 @@ interface LifeInitializer {
                 }
                 chaptersDao.insertChapter(ChapterModelDb("ЖИЗНЬ",list.size, R.drawable.ic_goldfish,0f
                 ,fragmentName = ChapterModelDb.FragmentName.LIFE,colorLight = "#607196",colorNight = "#24303E"))
-                coreDao.updateChapterSize("ЖИЗНЬ",coreDao.fetchLifeCount(Type.LIFE).size)
 
+                val chapter = coreDao.fetchLifeCount(Type.LIFE)
+                chaptersDao.updateChapterSize(chapter.size,"ЖИЗНЬ")
+                chaptersDao
+                    .updateChapterProgress(
+                        PercentCalculator
+                        .Base()
+                        .calculatePercent(chapter.map { it.mapToInfoModel() }),"ЖИЗНЬ")
             }
 
         }

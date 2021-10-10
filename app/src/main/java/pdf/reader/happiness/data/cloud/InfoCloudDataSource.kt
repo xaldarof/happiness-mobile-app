@@ -35,7 +35,7 @@ interface InfoCloudDataSource {
                 override fun onCancelled(p0: DatabaseError) {
                 }
             })
-            delay(500)
+            delay(800)
             return if (cloudInfoList.isEmpty()) fetchInfo() else flow { emit(cloudInfoList)
                 cloudInfoList.clear()
             }
