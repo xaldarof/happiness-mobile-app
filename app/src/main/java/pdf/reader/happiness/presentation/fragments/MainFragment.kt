@@ -51,7 +51,6 @@ class MainFragment : Fragment(), KoinComponent, ChapterItemAdapter.OnClick,
         binding = FragmentMainBinding.inflate(inflater, container, false)
         konfettiView = requireActivity().findViewById(R.id.congratulationView)
         chapterItemAdapter = ChapterItemAdapter(this,themeController)
-        Log.d("pos2","ON CREATE")
         return binding.root
     }
 

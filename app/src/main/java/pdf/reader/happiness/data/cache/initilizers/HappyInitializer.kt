@@ -5,6 +5,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pdf.reader.happiness.R
+import pdf.reader.happiness.core.Name
 import pdf.reader.happiness.data.cache.models.ChapterModelDb
 import pdf.reader.happiness.data.cache.models.InfoModelDb
 import pdf.reader.happiness.data.cache.models.Type
@@ -39,16 +40,17 @@ interface HappyInitializer {
                     coreDao.insertAll(data)
                 }
                 chaptersDao.insertChapter(
-                    ChapterModelDb("СЧАСТЬЕ", list.size, R.drawable.ic_diagram, 0f,
+                    ChapterModelDb(
+                        Name.HAPPY, list.size, R.drawable.ic_diagram, 0f,
                         fragmentName = ChapterModelDb.FragmentName.HAPPY, colorLight = "#60966f",
                         colorNight = "#24303E"))
 
                 val chapter = coreDao.fetchHappyCount(Type.HAPPY)
-                chaptersDao.updateChapterSize(chapter.size,"СЧАСТЬЕ")
+                chaptersDao.updateChapterSize(chapter.size,Name.HAPPY)
                 chaptersDao
                     .updateChapterProgress(PercentCalculator
                         .Base()
-                        .calculatePercent(chapter.map { it.mapToInfoModel() }),"СЧАСТЬЕ")
+                        .calculatePercent(chapter.map { it.mapToInfoModel() }),Name.HAPPY)
             }
         }
     }
