@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/myWhite"
     android:backgroundTint="@color/myWhite"
+    android:clickable="true"
+    android:focusable="true"
     tools:context=".presentation.fragments.ShareFragment">
 
 

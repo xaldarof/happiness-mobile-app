@@ -13,7 +13,8 @@ data class InfoCloudModel(
     val isOpened: Boolean = false,
     val type: Type = Type.DEFAULT,
     val dataType:Type = Type.CLOUD,
-    val addedTime:Long = System.currentTimeMillis()
+    val addedTime:Long = System.currentTimeMillis(),
+    val access:Boolean = false
 
 ) : Serializable {
 

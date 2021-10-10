@@ -25,7 +25,9 @@ interface InfoCloudDataSource {
                     child.forEach {
                         val value = it.getValue(InfoCloudModel::class.java)
                         value?.let { model ->
-                            list.add(model)
+                            if (model.access) {
+                                list.add(model)
+                            }
                         }
                     }
                     cloudInfoList.clear()

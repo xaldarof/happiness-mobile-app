@@ -7,6 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -60,6 +63,10 @@ class SettingsFragment : Fragment(),KoinComponent,SettingFragmentPresenter.Setti
             }
         }
 
+        binding.clearBtn.setOnClickListener {
+            ClearDialog.Base(this).show(requireContext())
+        }
+        
         binding.importData.setOnClickListener {
             startActivity(Intent(requireContext(),DataImportingActivity::class.java))
 //            if (settingFragmentPresenter.isAllChaptersFinished()){
@@ -69,8 +76,17 @@ class SettingsFragment : Fragment(),KoinComponent,SettingFragmentPresenter.Setti
 //            }
         }
 
-        binding.clearBtn.setOnClickListener {
-            ClearDialog.Base(this).show(requireContext())
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        CoroutineScope(Dispatchers.Main).launch {
+            if (allChaptersFinished.isAllChaptersFinished()) {
+                binding.implementBtn.setImageResource(R.drawable.ic_baseline_lock_open_24)
+            }else{
+                binding.implementBtn.setImageResource(R.drawable.ic_baseline_lock_24)
+            }
         }
     }
 

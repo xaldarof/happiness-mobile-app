@@ -46,6 +46,7 @@ class DataImportingActivity : AppCompatActivity(), KoinComponent,
 
         binding.start.setOnClickListener {
             binding.progressView.visibility = View.VISIBLE
+            binding.start.isEnabled = false
 
             binding.cloudImg.setColorFilter(Color.BLACK)
             Animator(this).animation(binding.cloudImg,5000)
@@ -63,6 +64,7 @@ class DataImportingActivity : AppCompatActivity(), KoinComponent,
     override fun callback(count: Int) {
         CoroutineScope(Dispatchers.Main).launch {
             binding.progressView.visibility = View.INVISIBLE
+            binding.start.isEnabled = true
             Toast.makeText(
                 this@DataImportingActivity, "Импортирован $count новых данных",
                 Toast.LENGTH_SHORT

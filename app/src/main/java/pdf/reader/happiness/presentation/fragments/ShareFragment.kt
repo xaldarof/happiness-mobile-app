@@ -59,9 +59,14 @@ class ShareFragment : Fragment(), KoinComponent {
         }
 
         binding.sendBtn.setOnClickListener {
-            sendData(type)
-            requireActivity().supportFragmentManager.popBackStack()
-            Toast.makeText(requireContext(), "Успешно отправлено на проверку", Toast.LENGTH_SHORT).show()
+            val title = binding.titleEditText.text.toString()
+            val body = binding.bodyEditText.text.toString()
+            if (title.isNotEmpty() && body.isNotEmpty()) {
+                sendData(type)
+                requireActivity().supportFragmentManager.popBackStack()
+                Toast.makeText(requireContext(), "Успешно отправлено на проверку",
+                    Toast.LENGTH_SHORT).show()
+            }
         }
 
 
