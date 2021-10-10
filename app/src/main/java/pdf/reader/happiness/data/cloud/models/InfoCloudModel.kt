@@ -10,11 +10,12 @@ data class InfoCloudModel(
     val favorite: Boolean = false,
     val finished: Boolean = false,
     val isOpened: Boolean = false,
-    val type: Type = Type.DEFAULT
+    val type: Type = Type.DEFAULT,
+    val dataType:Type = Type.CLOUD
 ) : Serializable {
 
 
     fun mapToCacheInfoModel(): InfoModelDb {
-        return InfoModelDb(title, body, favorite, finished, isOpened, type)
+        return InfoModelDb(title, body, favorite, finished, isOpened, type,dataType)
     }
 }

@@ -32,6 +32,5 @@ class App : Application(),KoinComponent{
         lifeInitializer.init()
         loveInitializer.init()
         happyInitializer.init()
-
     }
 }

@@ -4,7 +4,10 @@ import androidx.recyclerview.widget.DiffUtil
 import pdf.reader.happiness.core.ChapterModel
 
 
-class ChapterDiffUtilCallBack(private val oldList:List<ChapterModel>, private val newList: List<ChapterModel>): DiffUtil.Callback() {
+class ChapterDiffUtilCallBack(
+    private val oldList: List<ChapterModel>,
+    private val newList: List<ChapterModel>
+) : DiffUtil.Callback() {
 
     override fun getOldListSize(): Int {
         return oldList.size
@@ -24,10 +27,10 @@ class ChapterDiffUtilCallBack(private val oldList:List<ChapterModel>, private va
         val oldInfo = oldList[oldItemPosition]
         val newInfo = newList[newItemPosition]
 
-        return  oldInfo.name == newInfo.name &&
-                oldInfo.size== newInfo.size &&
-                oldInfo.image     == newInfo.image &&
-                oldInfo.progress    == newInfo.progress &&
+        return oldInfo.name == newInfo.name &&
+                oldInfo.size == newInfo.size &&
+                oldInfo.image == newInfo.image &&
+                oldInfo.progress == newInfo.progress &&
                 oldInfo.isFinished == newInfo.isFinished &&
                 oldInfo.isCongratulated == newInfo.isCongratulated &&
                 oldInfo.fragmentName == newInfo.fragmentName

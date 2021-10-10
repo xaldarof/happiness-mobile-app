@@ -1,6 +1,7 @@
 package pdf.reader.happiness.presentation.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -36,7 +37,6 @@ class MainFragment : Fragment(), KoinComponent, ChapterItemAdapter.OnClick,
     private val achievementUpdater:AchievementUpdater by inject()
     private val congratulationController:CongratulationController by inject()
     private val presenter = MainFragmentPresenter(this,achievementUpdater,congratulationController)
-    private val cacheDataRepository: CacheDataRepository by inject()
     private lateinit var konfettiView: KonfettiView
     private val themeController:ThemeController by inject()
 
@@ -72,7 +72,7 @@ class MainFragment : Fragment(), KoinComponent, ChapterItemAdapter.OnClick,
     }
 
     private suspend fun updateCore() {
-        cacheDataRepository.fetchAllTypes().asLiveData().observeForever {
+        viewModel.fetchAll().observeForever {
             presenter.updateCoreProgress(it)
         }
     }

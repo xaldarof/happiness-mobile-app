@@ -29,9 +29,8 @@ interface CacheDataRepository {
         override suspend fun fetchLove(): Flow<List<InfoModel>> = loveCacheDataSource.fetchLove()
         override suspend fun fetchAllTypes(): Flow<List<InfoModel>> = allTypesCacheDataSource.fetchAllTypes()
 
-        override suspend fun insertData(list: List<InfoModelDb>) {
+       override suspend fun insertData(list: List<InfoModelDb>) {
             allTypesCacheDataSource.insertData(list)
         }
-
     }
 }

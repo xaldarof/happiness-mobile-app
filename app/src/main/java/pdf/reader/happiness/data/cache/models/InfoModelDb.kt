@@ -14,11 +14,12 @@ data class InfoModelDb (
     val favorite: Boolean=false,
     val finished: Boolean=false,
     val isOpened:Boolean=false,
-    val type: Type
+    val type: Type,
+    val dataType:Type = Type.CACHE
     ): Serializable {
 
     fun mapToInfoModel() : InfoModel {
-        return InfoModel(title, body, favorite, finished,isOpened,type)
+        return InfoModel(title, body, favorite, finished,isOpened,type,dataType)
     }
 }
 enum class Type {
@@ -26,5 +27,7 @@ enum class Type {
     LIFE,
     LOVE,
     HAPPY,
-    DEFAULT
+    DEFAULT,
+    CACHE,
+    CLOUD
 }

@@ -10,5 +10,6 @@ data class InfoModel (
         val favorite: Boolean=false,
         val finished: Boolean=false,
         val isOpened:Boolean=false,
-        val type: Type
+        val type: Type,
+        val dataType:Type=Type.CACHE
     ): Serializable

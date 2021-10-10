@@ -2,6 +2,7 @@ package pdf.reader.happiness.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -11,10 +12,11 @@ import org.koin.core.component.get
 import pdf.reader.happiness.databinding.ActivityDataImportingBinding
 import pdf.reader.happiness.tools.ImportInfoDialog
 import pdf.reader.happiness.vm.ImportingActivityViewModel
+import render.animations.Attention
 
 
 @KoinApiExtension
-class DataImportingActivity : AppCompatActivity(),KoinComponent {
+class DataImportingActivity : AppCompatActivity(),KoinComponent,ImportingActivityViewModel.CallBack {
 
     private lateinit var binding:ActivityDataImportingBinding
     private val viewModel:ImportingActivityViewModel = get()
@@ -31,8 +33,17 @@ class DataImportingActivity : AppCompatActivity(),KoinComponent {
 
         binding.start.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
-                viewModel.invoke()
+                importData()
             }
+        }
+    }
+    private suspend fun importData(){
+        viewModel.invoke(this@DataImportingActivity)
+    }
+
+    override fun callback(count: Int) {
+        CoroutineScope(Dispatchers.Main).launch {
+            Toast.makeText(this@DataImportingActivity, "Импортирован $count новых данных", Toast.LENGTH_SHORT).show()
         }
     }
 }

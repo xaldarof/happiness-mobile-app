@@ -63,6 +63,8 @@ interface LifeInitializer {
                 }
                 chaptersDao.insertChapter(ChapterModelDb("ЖИЗНЬ",list.size, R.drawable.ic_goldfish,0f
                 ,fragmentName = ChapterModelDb.FragmentName.LIFE,colorLight = "#607196",colorNight = "#24303E"))
+                coreDao.updateChapterSize("ЖИЗНЬ",coreDao.fetchLifeCount(Type.LIFE).size)
+
             }
 
         }

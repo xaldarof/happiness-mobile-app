@@ -13,6 +13,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import org.koin.core.component.inject
 import pdf.reader.happiness.core.InfoModel
+import pdf.reader.happiness.data.cache.models.Type
 import pdf.reader.happiness.tools.AssetReader
 import pdf.reader.happiness.tools.ReadingWarningDialog
 import pdf.reader.happiness.vm.ReadingViewModel
@@ -51,9 +52,10 @@ class ReadingActivity : AppCompatActivity(), KoinComponent,
         presenter.checkThemeState()
 
         CoroutineScope(Dispatchers.Main).launch {
-            binding.bodyTv.text = assetReader.read(intent.body, this@ReadingActivity)
-            viewModel.updateOpened(intent.body, true)
+            binding.bodyTv.text = if(intent.dataType== Type.CACHE)
+                assetReader.read(intent.body, this@ReadingActivity) else intent.body
 
+            viewModel.updateOpened(intent.body, true)
         }
 
         binding.toolbar.likeBtn.setOnLikeListener(object : OnLikeListener {

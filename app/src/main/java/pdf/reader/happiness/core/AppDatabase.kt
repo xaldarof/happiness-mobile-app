@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import pdf.reader.happiness.data.cache.models.*
 import pdf.reader.happiness.data.cache.dao.*
 
-@Database(entities = [InfoModelDb::class,AchievementModelDb::class,ChapterModelDb::class],version = 18,exportSchema = false)
+@Database(entities = [InfoModelDb::class,AchievementModelDb::class,ChapterModelDb::class],version = 19,exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun coreDaoProvider():CoreDao

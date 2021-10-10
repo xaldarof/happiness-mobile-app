@@ -1,43 +1,42 @@
 package pdf.reader.happiness.data.cloud
 
-import android.util.Log
 import com.google.firebase.database.*
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import pdf.reader.happiness.data.cache.models.Type
 import pdf.reader.happiness.data.cloud.models.InfoCloudModel
+import java.util.concurrent.CopyOnWriteArrayList
 
 interface InfoCloudDataSource {
 
-    suspend fun fetchInfo(): Flow<List<InfoCloudModel>>
+    suspend fun fetchInfo(): Flow<CopyOnWriteArrayList<InfoCloudModel>>
 
     class Base(private val databaseReference: DatabaseReference) : InfoCloudDataSource {
 
-        private val cloudInfoList = ArrayList<InfoCloudModel>()
+        private val cloudInfoList = CopyOnWriteArrayList<InfoCloudModel>()
 
-        override suspend fun fetchInfo(): Flow<List<InfoCloudModel>> {
-            val list = ArrayList<InfoCloudModel>()
-            databaseReference.push().setValue(InfoCloudModel("TEST CLOUD DATA","CLOUD BODY",type=Type.SUCCESS))
+        override suspend fun fetchInfo(): Flow<CopyOnWriteArrayList<InfoCloudModel>> {
+            val list = CopyOnWriteArrayList<InfoCloudModel>()
 
             databaseReference.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(p0: DataSnapshot) {
+                    list.clear()
                     val child = p0.children
-
                     child.forEach {
                         val value = it.getValue(InfoCloudModel::class.java)
                         value?.let { model ->
                             list.add(model)
-                            Log.d("pos2","CLOUD = $model")
                         }
                     }
+                    cloudInfoList.clear()
                     cloudInfoList.addAll(list)
                 }
 
                 override fun onCancelled(p0: DatabaseError) {
                 }
             })
-            Log.d("pos2","LIST = $list")
-            return flow { emit(cloudInfoList)
+            delay(500)
+            return if (cloudInfoList.isEmpty()) fetchInfo() else flow { emit(cloudInfoList)
                 cloudInfoList.clear()
             }
         }
