@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import nl.dionsegijn.konfetti.KonfettiView
 import org.koin.android.ext.android.get
 import org.koin.core.component.KoinApiExtension
@@ -44,6 +45,8 @@ class LifeFragment : Fragment(), ItemAdapter.OnClick,LifeViewModel.CallBack {
         chapter = arguments?.getSerializable("chapter") as ChapterModel
         itemAdapter = ItemAdapter(this)
         binding.rv.adapter = itemAdapter
+        OverScrollDecoratorHelper.setUpOverScroll(binding.rv, OverScrollDecoratorHelper.ORIENTATION_VERTICAL)
+
     }
 
     override fun onResume() {

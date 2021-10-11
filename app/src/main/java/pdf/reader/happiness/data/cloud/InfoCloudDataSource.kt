@@ -5,6 +5,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import pdf.reader.happiness.data.cloud.models.InfoCloudModel
+import java.lang.Exception
 import java.util.concurrent.CopyOnWriteArrayList
 
 interface InfoCloudDataSource {
@@ -20,20 +21,21 @@ interface InfoCloudDataSource {
 
             databaseReference.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(p0: DataSnapshot) {
-                    list.clear()
-                    val child = p0.children
-                    child.forEach {
-                        val value = it.getValue(InfoCloudModel::class.java)
-                        value?.let { model ->
-                            if (model.access) {
-                                list.add(model)
+                    try {
+                        list.clear()
+                        val child = p0.children
+                        child.forEach {
+                            val value = it.getValue(InfoCloudModel::class.java)
+                            value?.let { model ->
+                                if (model.access) {
+                                    list.add(model)
+                                }
                             }
                         }
-                    }
-                    cloudInfoList.clear()
-                    cloudInfoList.addAll(list)
+                        cloudInfoList.clear()
+                        cloudInfoList.addAll(list)
+                    }catch (e:Exception){e.printStackTrace()}
                 }
-
                 override fun onCancelled(p0: DatabaseError) {
                 }
             })

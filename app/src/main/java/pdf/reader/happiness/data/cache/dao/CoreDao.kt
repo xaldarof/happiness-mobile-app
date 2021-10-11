@@ -21,16 +21,16 @@ interface CoreDao {
     fun fetchAllTypes(): Flow<List<InfoModelDb>>
 
 
-    @Query("SELECT * FROM db WHERE type =:type ORDER BY addedTime DESC")
+    @Query("SELECT * FROM db WHERE type =:type ORDER BY addedTime ASC")
     fun fetchSuccess(type: Type): Flow<List<InfoModelDb>>
 
-    @Query("SELECT * FROM db WHERE type =:type ORDER BY addedTime DESC")
+    @Query("SELECT * FROM db WHERE type =:type ORDER BY addedTime ASC")
     fun fetchLife(type: Type): Flow<List<InfoModelDb>>
 
-    @Query("SELECT * FROM db WHERE type=:type  ORDER BY addedTime DESC")
+    @Query("SELECT * FROM db WHERE type=:type  ORDER BY addedTime ASC")
     fun fetchHappy(type: Type): Flow<List<InfoModelDb>>
 
-    @Query("SELECT * FROM db WHERE type=:type  ORDER BY addedTime DESC")
+    @Query("SELECT * FROM db WHERE type=:type  ORDER BY addedTime ASC")
     fun fetchLove(type: Type): Flow<List<InfoModelDb>>
 
 

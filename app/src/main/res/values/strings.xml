@@ -22,4 +22,10 @@
 
     <string name="success_send_check">"Успешно отправлено на проверку"</string>
     <string name="when_my_publish">Ваша публикация успешно отправлено на проверку, если ваша публикация успешно пройдет проверку, мы разрешим его для внедрение для других пользователей. Пожалуйста старайтесь писать коротко и ясно.</string>
+    <string name="title">Заголовок</string>
+    <string name="your_text">Ваша статья...</string>
+    <string name="share_your_text">Поделитесь с другими что-то интересное</string>
+    <string name="rate_us">Оценить приложение</string>
+    <string name="dev_mode_enabled">Включен режим разработчика</string>
+    <string name="no_connection">Нет подключения к интернету</string>
 </resources>

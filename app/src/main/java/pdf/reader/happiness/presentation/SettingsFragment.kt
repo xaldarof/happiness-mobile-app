@@ -1,6 +1,7 @@
 package pdf.reader.happiness.presentation
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -21,6 +22,7 @@ import pdf.reader.happiness.databinding.FragmentSettingsBinding
 import pdf.reader.happiness.tools.CacheClear
 import pdf.reader.happiness.tools.ClearDialog
 import pdf.reader.happiness.tools.RestartDialog
+import pdf.reader.happiness.tools.openPlayMarket
 
 @KoinApiExtension
 class SettingsFragment : Fragment(),KoinComponent,SettingFragmentPresenter.SettingsView,ClearDialog.ClearDialogCallBack {
@@ -31,6 +33,8 @@ class SettingsFragment : Fragment(),KoinComponent,SettingFragmentPresenter.Setti
     private lateinit var settingFragmentPresenter: SettingFragmentPresenter
     private val cacheClear:CacheClear by inject()
     private val allChaptersFinished:AllChaptersFinished by inject()
+    private var isDeveloperModeEnabled = false
+    private var clickCount = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,14 +70,22 @@ class SettingsFragment : Fragment(),KoinComponent,SettingFragmentPresenter.Setti
         binding.clearBtn.setOnClickListener {
             ClearDialog.Base(this).show(requireContext())
         }
+        binding.rateBtn.setOnClickListener {
+            requireContext().openPlayMarket()
+        }
         
         binding.importData.setOnClickListener {
-            startActivity(Intent(requireContext(),DataImportingActivity::class.java))
-//            if (settingFragmentPresenter.isAllChaptersFinished()){
-//
-//            }else {
-//                Toast.makeText(requireContext(), R.string.not_finished_all, Toast.LENGTH_LONG).show()
-//            }
+            clickCount++
+            if (clickCount>15) {
+                isDeveloperModeEnabled = true
+                Toast.makeText(requireContext(), R.string.dev_mode_enabled, Toast.LENGTH_SHORT).show()
+            }
+
+            if (settingFragmentPresenter.isAllChaptersFinished() || isDeveloperModeEnabled){
+                startActivity(Intent(requireContext(),DataImportingActivity::class.java))
+            }else {
+                Toast.makeText(requireContext(), R.string.not_finished_all, Toast.LENGTH_LONG).show()
+            }
         }
     }
 

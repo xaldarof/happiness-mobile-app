@@ -60,7 +60,7 @@ class ShareFragment : Fragment(), KoinComponent,ImportInfoDialog.CallBack {
         val title = binding.titleEditText.text.toString()
         val body = binding.bodyEditText.text.toString()
 
-        if (title.isNotEmpty() && body.isNotEmpty()) {
+        if (title.trim().isNotEmpty() && body.trim().isNotEmpty()) {
             sendData(type,title,body)
             ImportInfoDialog.Base().showInfoAboutPublish(requireContext(),this)
         }
@@ -73,7 +73,6 @@ class ShareFragment : Fragment(), KoinComponent,ImportInfoDialog.CallBack {
     }
 
     override fun onClickOk() {
-        Log.d("pos","EXIT CALBACK")
         requireActivity().supportFragmentManager.popBackStack()
     }
 }

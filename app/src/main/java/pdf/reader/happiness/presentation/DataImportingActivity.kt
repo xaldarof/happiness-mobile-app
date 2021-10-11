@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.Toast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
@@ -16,10 +15,9 @@ import pdf.reader.happiness.R
 import pdf.reader.happiness.databinding.ActivityDataImportingBinding
 import pdf.reader.happiness.presentation.fragments.ShareFragment
 import pdf.reader.happiness.tools.Animator
+import pdf.reader.happiness.tools.ConnectionManager
 import pdf.reader.happiness.tools.ImportInfoDialog
 import pdf.reader.happiness.vm.ImportingActivityViewModel
-import render.animations.Attention
-import render.animations.Render
 
 
 @KoinApiExtension
@@ -28,6 +26,7 @@ class DataImportingActivity : AppCompatActivity(), KoinComponent,
 
     private lateinit var binding: ActivityDataImportingBinding
     private val viewModel: ImportingActivityViewModel = get()
+    private val connectionManager = ConnectionManager(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +58,11 @@ class DataImportingActivity : AppCompatActivity(), KoinComponent,
     }
 
     private suspend fun importData() {
-        viewModel.invoke(this@DataImportingActivity)
+        if (connectionManager.isConnected()) {
+            viewModel.invoke(this@DataImportingActivity)
+        }else {
+            Toast.makeText(this, R.string.no_connection, Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun callback(count: Int) {
