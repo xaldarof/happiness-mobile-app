@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
@@ -33,6 +34,8 @@ class FavoritesFragment : Fragment(), ItemAdapter.OnClick, KoinComponent {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         itemAdapter = ItemAdapter(this)
+        OverScrollDecoratorHelper.setUpOverScroll(binding.rv, OverScrollDecoratorHelper.ORIENTATION_VERTICAL)
+
         binding.rv.adapter = itemAdapter
         updateData()
 

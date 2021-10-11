@@ -11,6 +11,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import nl.dionsegijn.konfetti.KonfettiView
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
@@ -42,7 +43,6 @@ class MainFragment : Fragment(), KoinComponent, ChapterItemAdapter.OnClick,
     private val presenter = MainFragmentPresenter(this,achievementUpdater,congratulationController)
     private lateinit var konfettiView: KonfettiView
     private val themeController:ThemeController by inject()
-    private val cloudDataSendService: CloudDataSendService by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,6 +58,7 @@ class MainFragment : Fragment(), KoinComponent, ChapterItemAdapter.OnClick,
         super.onViewCreated(view, savedInstanceState)
         binding.rv.adapter = chapterItemAdapter
         binding.rv.isNestedScrollingEnabled = false
+        OverScrollDecoratorHelper.setUpOverScroll(binding.scroll)
 
         binding.progressCore.setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {

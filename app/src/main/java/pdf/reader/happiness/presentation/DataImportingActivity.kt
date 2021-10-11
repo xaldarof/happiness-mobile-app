@@ -50,6 +50,7 @@ class DataImportingActivity : AppCompatActivity(), KoinComponent,
 
             binding.cloudImg.setColorFilter(Color.BLACK)
             Animator(this).animation(binding.cloudImg,5000)
+            binding.cloudImg.animate().rotation(360f).setDuration(10000).start()
 
             CoroutineScope(Dispatchers.IO).launch {
                 importData()
