@@ -1,6 +1,5 @@
 package pdf.reader.happiness.presentation
 
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -14,9 +13,9 @@ import org.koin.core.component.get
 import pdf.reader.happiness.R
 import pdf.reader.happiness.databinding.ActivityDataImportingBinding
 import pdf.reader.happiness.presentation.fragments.ShareFragment
-import pdf.reader.happiness.tools.Animator
 import pdf.reader.happiness.tools.ConnectionManager
 import pdf.reader.happiness.tools.ImportInfoDialog
+import pdf.reader.happiness.tools.animation
 import pdf.reader.happiness.vm.ImportingActivityViewModel
 
 
@@ -44,13 +43,6 @@ class DataImportingActivity : AppCompatActivity(), KoinComponent,
         }
 
         binding.start.setOnClickListener {
-            binding.progressView.visibility = View.VISIBLE
-            binding.start.isEnabled = false
-
-            binding.cloudImg.setColorFilter(Color.BLACK)
-            Animator(this).animation(binding.cloudImg,5000)
-            binding.cloudImg.animate().rotation(360f).setDuration(10000).start()
-
             CoroutineScope(Dispatchers.IO).launch {
                 importData()
             }
@@ -59,9 +51,18 @@ class DataImportingActivity : AppCompatActivity(), KoinComponent,
 
     private suspend fun importData() {
         if (connectionManager.isConnected()) {
+            CoroutineScope(Dispatchers.Main).launch {
+                binding.progressView.visibility = View.VISIBLE
+                binding.start.isEnabled = false
+                binding.cloudImg.animation()
+            }
             viewModel.invoke(this@DataImportingActivity)
+
         }else {
-            Toast.makeText(this, R.string.no_connection, Toast.LENGTH_SHORT).show()
+            CoroutineScope(Dispatchers.Main).launch {
+                Toast.makeText(this@DataImportingActivity, R.string.no_connection, Toast.LENGTH_SHORT).show()
+                connectionManager.enableWifi()
+            }
         }
     }
 

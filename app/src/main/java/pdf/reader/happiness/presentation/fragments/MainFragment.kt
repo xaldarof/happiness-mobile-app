@@ -62,8 +62,8 @@ class MainFragment : Fragment(), KoinComponent, ChapterItemAdapter.OnClick,
 
         binding.progressCore.setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {
-                Animator(requireContext()).animation(binding.progressCore, 3000)
-                Animator(requireContext()).animation(binding.tv1, 3000)
+                binding.progressCore.pulseAnimation(2000)
+                binding.tv1.pulseAnimation(2000)
             }
         }
     }
