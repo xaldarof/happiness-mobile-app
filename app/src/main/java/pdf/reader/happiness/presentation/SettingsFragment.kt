@@ -70,13 +70,11 @@ class SettingsFragment : Fragment(),KoinComponent,SettingFragmentPresenter.Setti
         binding.importData.setOnClickListener {
             startActivity(Intent(requireContext(),DataImportingActivity::class.java))
 //            if (settingFragmentPresenter.isAllChaptersFinished()){
-//                startActivity(Intent(requireContext(),DataImportingActivity::class.java))
+//
 //            }else {
 //                Toast.makeText(requireContext(), R.string.not_finished_all, Toast.LENGTH_LONG).show()
 //            }
         }
-
-
     }
 
     override fun onResume() {

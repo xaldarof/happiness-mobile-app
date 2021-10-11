@@ -10,20 +10,22 @@ import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import android.R
+import android.util.Log
 import android.widget.AdapterView
 import android.widget.Toast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import pdf.reader.happiness.core.Name
 import pdf.reader.happiness.data.cache.models.Type
 import pdf.reader.happiness.data.cloud.data_insert.CloudDataSendService
 import pdf.reader.happiness.data.cloud.models.InfoCloudModel
 import pdf.reader.happiness.databinding.FragmentShareBinding
-import pdf.reader.happiness.tools.TypeLocator
+import pdf.reader.happiness.tools.*
 
 
 @KoinApiExtension
-class ShareFragment : Fragment(), KoinComponent {
+class ShareFragment : Fragment(), KoinComponent,ImportInfoDialog.CallBack {
 
     private lateinit var binding: FragmentShareBinding
     private val typeLocator = TypeLocator()
@@ -41,43 +43,37 @@ class ShareFragment : Fragment(), KoinComponent {
         super.onViewCreated(view, savedInstanceState)
         binding.backBtn.setOnClickListener { requireActivity().supportFragmentManager.popBackStack() }
         var type = ""
-        val adapter = ArrayAdapter(
-            requireContext(),
-            R.layout.simple_spinner_dropdown_item,
-            arrayListOf("СЧАСТЬЕ", "ЛЮБОВЬ","УСПЕХ","ЖИЗНЬ"))
-
+        val adapter = ArrayAdapter(requireContext(), R.layout.simple_spinner_dropdown_item,
+            arrayListOf(Name.HAPPY, Name.LOVE,Name.SUCCESS,Name.LIFE))
         binding.spinner.adapter = adapter
 
-        binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+        binding.spinner.onItemSelectedListener = SpinnerClickCallBack(object :CallBackSpinner {
+            override fun onSelect(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 type = p0?.getItemAtPosition(p2).toString()
             }
+        })
 
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-
-            }
-        }
-
-        binding.sendBtn.setOnClickListener {
-            val title = binding.titleEditText.text.toString()
-            val body = binding.bodyEditText.text.toString()
-            if (title.isNotEmpty() && body.isNotEmpty()) {
-                sendData(type)
-                requireActivity().supportFragmentManager.popBackStack()
-                Toast.makeText(requireContext(), "Успешно отправлено на проверку",
-                    Toast.LENGTH_SHORT).show()
-            }
-        }
-
-
+        binding.sendBtn.setOnClickListener { checkData(type) }
     }
-    private fun sendData(type:String){
-        CoroutineScope(Dispatchers.Main).launch {
-            sendService.sendData(
-                InfoCloudModel(
-                    binding.titleEditText.text.toString(),
-                    binding.bodyEditText.text.toString(),
-                    type = typeLocator.locate(type), dataType = Type.CLOUD))
+
+    private fun checkData(type: String) {
+        val title = binding.titleEditText.text.toString()
+        val body = binding.bodyEditText.text.toString()
+
+        if (title.isNotEmpty() && body.isNotEmpty()) {
+            sendData(type,title,body)
+            ImportInfoDialog.Base().showInfoAboutPublish(requireContext(),this)
         }
+    }
+
+    private fun sendData(type:String,title:String,body:String){
+        CoroutineScope(Dispatchers.Main).launch {
+            sendService.sendData(InfoCloudModel(title, body, type = typeLocator.locate(type), dataType = Type.CLOUD))
+        }
+    }
+
+    override fun onClickOk() {
+        Log.d("pos","EXIT CALBACK")
+        requireActivity().supportFragmentManager.popBackStack()
     }
 }
