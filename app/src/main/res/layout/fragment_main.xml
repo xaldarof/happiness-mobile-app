@@ -9,10 +9,10 @@
     tools:context=".presentation.MainActivity">
 
     <ScrollView
-        android:layout_width="match_parent"
         android:id="@+id/scroll"
-        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:overScrollMode="never"
         android:scrollbars="none">
 
@@ -83,13 +83,28 @@
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvMissions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/mission_item" />
+
+            </RelativeLayout>
 
             <RelativeLayout
+                android:layout_marginTop="24dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv"
+                    tools:listitem="@layout/chapter_item"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />

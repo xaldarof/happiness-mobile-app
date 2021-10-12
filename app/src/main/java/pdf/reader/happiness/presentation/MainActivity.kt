@@ -3,7 +3,9 @@ package pdf.reader.happiness.presentation
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -40,7 +42,6 @@ class MainActivity : AppCompatActivity(), KoinComponent {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
-
         val sharedPreferences = getSharedPreferences("cache", MODE_PRIVATE)
         themeController = ThemeController.Base(sharedPreferences)
 

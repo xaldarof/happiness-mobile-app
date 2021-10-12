@@ -24,6 +24,7 @@
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/fragment_share.xml" value="0.22" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/item.xml" value="0.33" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/item_achievment.xml" value="0.25" />
+        <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/mission_item.xml" value="0.5" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/should_restart.xml" value="0.22" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/snackbar_style.xml" value="0.5" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/success_toolbar.xml" value="0.2916666666666667" />
@@ -96,5 +97,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.5" />
+      </ProjectState>
+    </option>
   </component>
 </project>

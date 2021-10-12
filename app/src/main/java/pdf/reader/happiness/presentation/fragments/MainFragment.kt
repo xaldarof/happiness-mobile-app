@@ -19,6 +19,7 @@ import org.koin.core.component.get
 import org.koin.core.component.inject
 import pdf.reader.happiness.R
 import pdf.reader.happiness.core.ChapterModel
+import pdf.reader.happiness.core.MissionModel
 import pdf.reader.happiness.data.cache.core.CacheDataRepository
 import pdf.reader.happiness.data.cache.models.Type
 import pdf.reader.happiness.data.cache.settings_cache.CongratulationController
@@ -28,6 +29,7 @@ import pdf.reader.happiness.data.cloud.models.InfoCloudModel
 import pdf.reader.happiness.databinding.FragmentMainBinding
 import pdf.reader.happiness.presentation.MainFragmentPresenter
 import pdf.reader.happiness.presentation.adapter.ChapterItemAdapter
+import pdf.reader.happiness.presentation.adapter.MissionItemAdapter
 import pdf.reader.happiness.tools.*
 import pdf.reader.happiness.vm.MainFragmentViewModel
 
@@ -38,6 +40,7 @@ class MainFragment : Fragment(), KoinComponent, ChapterItemAdapter.OnClick,
     private lateinit var binding: FragmentMainBinding
     private val viewModel: MainFragmentViewModel = get()
     private lateinit var chapterItemAdapter: ChapterItemAdapter
+    private lateinit var missionItemAdapter: MissionItemAdapter
     private val achievementUpdater:AchievementUpdater by inject()
     private val congratulationController:CongratulationController by inject()
     private val presenter = MainFragmentPresenter(this,achievementUpdater,congratulationController)
@@ -51,6 +54,8 @@ class MainFragment : Fragment(), KoinComponent, ChapterItemAdapter.OnClick,
         binding = FragmentMainBinding.inflate(inflater, container, false)
         konfettiView = requireActivity().findViewById(R.id.congratulationView)
         chapterItemAdapter = ChapterItemAdapter(this,themeController)
+        missionItemAdapter = MissionItemAdapter()
+
         return binding.root
     }
 
@@ -59,6 +64,10 @@ class MainFragment : Fragment(), KoinComponent, ChapterItemAdapter.OnClick,
         binding.rv.adapter = chapterItemAdapter
         binding.rv.isNestedScrollingEnabled = false
         OverScrollDecoratorHelper.setUpOverScroll(binding.scroll)
+        OverScrollDecoratorHelper.setUpOverScroll(binding.rvMissions,OverScrollDecoratorHelper.ORIENTATION_HORIZONTAL)
+        binding.rvMissions.adapter = missionItemAdapter
+        missionItemAdapter.update(arrayListOf(MissionModel("Temur",13f),MissionModel("Temur",13f),MissionModel("Temur",13f)))
+
 
         binding.progressCore.setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {
