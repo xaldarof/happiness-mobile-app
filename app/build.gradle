@@ -13,7 +13,7 @@ android {
         applicationId "pdf.reader.happiness"
         minSdk 21
         targetSdk 31
-        versionCode 6
+        versionCode 7
         versionName "3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -58,6 +58,9 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
     implementation 'androidx.test:core-ktx:1.4.0'
     implementation 'com.google.firebase:firebase-database:19.2.1'
+    implementation 'com.google.firebase:firebase-messaging-ktx:22.0.0'
+    implementation 'com.google.firebase:firebase-messaging:22.0.0'
+    implementation 'com.google.firebase:firebase-inappmessaging-display:20.1.0'
 
 
     kapt "android.arch.persistence.room:compiler:1.1.1"

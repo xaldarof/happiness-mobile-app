@@ -24,6 +24,7 @@ import pdf.reader.happiness.presentation.adapter.*
 import pdf.reader.happiness.presentation.fragments.AchievementsFragment
 import pdf.reader.happiness.presentation.fragments.MainFragment
 import pdf.reader.happiness.presentation.fragments.SearchFragment
+import pdf.reader.happiness.tools.MyFirebaseMessagingService
 import pdf.reader.happiness.vm.MainActivityViewModel
 
 @KoinApiExtension
@@ -39,6 +40,7 @@ class MainActivity : AppCompatActivity(), KoinComponent {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
+
         val sharedPreferences = getSharedPreferences("cache", MODE_PRIVATE)
         themeController = ThemeController.Base(sharedPreferences)
 
