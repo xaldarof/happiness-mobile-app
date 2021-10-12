@@ -39,5 +39,6 @@
     <color name="progress_text_color">#DD5E7D</color>
     <color name="clear_color">#D8D1D1</color>
     <color name="green">#2BCC31</color>
+    <color name="clickColor">#F1EDED</color>
 
 </resources>

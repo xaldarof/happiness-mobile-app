@@ -1,6 +1,5 @@
 package pdf.reader.happiness.presentation.adapter
 
-import android.R
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.DiffUtil
+import pdf.reader.happiness.R
 import pdf.reader.happiness.core.ChapterModel
+import pdf.reader.happiness.core.Name
 import pdf.reader.happiness.data.cache.settings_cache.ThemeController
 import pdf.reader.happiness.databinding.ChapterItemBinding
 
@@ -32,10 +33,8 @@ class ChapterItemAdapter(private val onClick: OnClick,private val themeControlle
         @SuppressLint("SetTextI18n")
 
         fun onBind(chapter: ChapterModel) {
-            chapterItemBinding.chapterIcon.setImageResource(chapter.image)
             chapterItemBinding.chapterName.text = chapter.name
             chapterItemBinding.chapterSize.text = "${chapter.size} Советов"
-
             chapterItemBinding.chapterProgress.progress = chapter.progress
             chapterItemBinding.chapterProgress.setEndProgress(chapter.progress)
             chapterItemBinding.chapterProgress.startProgressAnimation()
@@ -47,6 +46,11 @@ class ChapterItemAdapter(private val onClick: OnClick,private val themeControlle
             }else{
                 chapterItemBinding.finishedIcon.visibility = View.INVISIBLE
             }
+
+            if (chapter.name== Name.SUCCESS) chapterItemBinding.chapterIcon.setImageResource(R.drawable.ic_goal)
+            if (chapter.name== Name.LIFE) chapterItemBinding.chapterIcon.setImageResource(R.drawable.ic_goldfish)
+            if (chapter.name== Name.LOVE) chapterItemBinding.chapterIcon.setImageResource(R.drawable.ic_talk)
+            if (chapter.name== Name.HAPPY) chapterItemBinding.chapterIcon.setImageResource(R.drawable.ic_diagram)
         }
     }
 
@@ -68,7 +72,7 @@ class ChapterItemAdapter(private val onClick: OnClick,private val themeControlle
     private fun setAnimation(viewToAnimate: View, position: Int) {
         if (position > lastPosition) {
             val animation: Animation =
-                AnimationUtils.loadAnimation(viewToAnimate.context, R.anim.slide_in_left)
+                AnimationUtils.loadAnimation(viewToAnimate.context, R.anim.slide_in_left_custom)
             animation.duration = 800
             viewToAnimate.startAnimation(animation)
             lastPosition = position

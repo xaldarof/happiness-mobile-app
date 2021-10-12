@@ -16,7 +16,7 @@ class CongratulationView(private val confetti: KonfettiView) {
         vibrate()
         val context = confetti.context
         val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
-        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 50, 0);
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 50, 0)
         val mediaPlayer = MediaPlayer.create(context, R.raw.hand_clapping)
         mediaPlayer.start()
 

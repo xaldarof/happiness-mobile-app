@@ -1,24 +1,25 @@
 package pdf.reader.happiness.presentation.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import pdf.reader.happiness.R
 import pdf.reader.happiness.core.MissionModel
+import pdf.reader.happiness.databinding.MissionItemBinding
 
-class MissionItemAdapter : RecyclerView.Adapter<MissionItemAdapter.VH>(){
+class MissionItemAdapter(private val onClick:OnClick): RecyclerView.Adapter<MissionItemAdapter.VH>(){
 
     private val oldList = ArrayList<MissionModel>()
+    init {
+        oldList.add(MissionModel("Temur",14f))
+    }
 
-    inner class VH(private val view:View):RecyclerView.ViewHolder(view){
+    inner class VH(private val binding:MissionItemBinding):RecyclerView.ViewHolder(binding.root){
 
-        val textView: TextView = view.findViewById(R.id.name)
-
-//        fun onBind(missionModel: MissionModel){
-//            textView = view.findViewById(R.id.name)
-//        }
+        fun onBind(missionModel: MissionModel){
+            binding.containerMain.setOnClickListener {
+                onClick.onClickOpen(missionModel)
+            }
+        }
     }
 
     fun update(newList:List<MissionModel>){
@@ -28,16 +29,19 @@ class MissionItemAdapter : RecyclerView.Adapter<MissionItemAdapter.VH>(){
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.mission_item,parent,false)
+        val view = MissionItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return VH(view)
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        holder.textView.text = oldList[position].name
+        holder.onBind(oldList[position])
 
     }
 
     override fun getItemCount(): Int {
         return oldList.size
+    }
+    interface OnClick {
+        fun onClickOpen(missionModel: MissionModel)
     }
 }

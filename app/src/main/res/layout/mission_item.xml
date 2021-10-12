@@ -1,22 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="130dp"
-    android:layout_height="130dp"
-    android:elevation="6dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
     android:layout_margin="12dp"
-    android:background="@drawable/item_style"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:id="@+id/containerMain"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="@drawable/clear_item"
+    android:elevation="6dp">
 
-    <com.moos.library.CircleProgressView
-        android:id="@+id/progress"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:layout_centerHorizontal="true"
+    <!--    <com.moos.library.CircleProgressView-->
+    <!--        android:id="@+id/progress"-->
+    <!--        android:layout_width="90dp"-->
+    <!--        android:layout_height="90dp"-->
+    <!--        android:layout_centerHorizontal="true"-->
+    <!--        android:layout_marginTop="12dp"-->
+    <!--        app:circleBroken="false"-->
+    <!--        app:isTracked="true"-->
+    <!--        app:progressTextVisibility="false"-->
+    <!--        app:start_progress="0"-->
+    <!--        app:track_width="8dp" />-->
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="70dp"
         android:layout_marginTop="12dp"
-        app:circleBroken="false"
-        app:isTracked="true"
-        app:progressTextVisibility="false"
-        app:track_width="8dp" />
+        android:layout_height="70dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_baseline_headset_24"
+        app:tint="@color/to_right_color" />
+
 
     <TextView
         android:id="@+id/name"
@@ -24,8 +39,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="4dp"
         android:text="Медитация"
+        android:textColor="@color/to_right_color"
         android:textStyle="bold" />
 
 </RelativeLayout>

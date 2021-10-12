@@ -1,12 +1,10 @@
 package pdf.reader.happiness.presentation.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.asLiveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -19,13 +17,10 @@ import org.koin.core.component.get
 import org.koin.core.component.inject
 import pdf.reader.happiness.R
 import pdf.reader.happiness.core.ChapterModel
+import pdf.reader.happiness.core.FragmentName
 import pdf.reader.happiness.core.MissionModel
-import pdf.reader.happiness.data.cache.core.CacheDataRepository
-import pdf.reader.happiness.data.cache.models.Type
 import pdf.reader.happiness.data.cache.settings_cache.CongratulationController
 import pdf.reader.happiness.data.cache.settings_cache.ThemeController
-import pdf.reader.happiness.data.cloud.data_insert.CloudDataSendService
-import pdf.reader.happiness.data.cloud.models.InfoCloudModel
 import pdf.reader.happiness.databinding.FragmentMainBinding
 import pdf.reader.happiness.presentation.MainFragmentPresenter
 import pdf.reader.happiness.presentation.adapter.ChapterItemAdapter
@@ -35,17 +30,18 @@ import pdf.reader.happiness.vm.MainFragmentViewModel
 
 @KoinApiExtension
 class MainFragment : Fragment(), KoinComponent, ChapterItemAdapter.OnClick,
-    MainFragmentPresenter.MyView {
+    MainFragmentPresenter.MyView, MissionItemAdapter.OnClick {
 
     private lateinit var binding: FragmentMainBinding
     private val viewModel: MainFragmentViewModel = get()
     private lateinit var chapterItemAdapter: ChapterItemAdapter
     private lateinit var missionItemAdapter: MissionItemAdapter
-    private val achievementUpdater:AchievementUpdater by inject()
-    private val congratulationController:CongratulationController by inject()
-    private val presenter = MainFragmentPresenter(this,achievementUpdater,congratulationController)
+    private val achievementUpdater: AchievementUpdater by inject()
+    private val congratulationController: CongratulationController by inject()
+    private val presenter =
+        MainFragmentPresenter(this, achievementUpdater, congratulationController)
     private lateinit var konfettiView: KonfettiView
-    private val themeController:ThemeController by inject()
+    private val themeController: ThemeController by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,8 +49,8 @@ class MainFragment : Fragment(), KoinComponent, ChapterItemAdapter.OnClick,
     ): View {
         binding = FragmentMainBinding.inflate(inflater, container, false)
         konfettiView = requireActivity().findViewById(R.id.congratulationView)
-        chapterItemAdapter = ChapterItemAdapter(this,themeController)
-        missionItemAdapter = MissionItemAdapter()
+        chapterItemAdapter = ChapterItemAdapter(this, themeController)
+        missionItemAdapter = MissionItemAdapter(this)
 
         return binding.root
     }
@@ -64,10 +60,10 @@ class MainFragment : Fragment(), KoinComponent, ChapterItemAdapter.OnClick,
         binding.rv.adapter = chapterItemAdapter
         binding.rv.isNestedScrollingEnabled = false
         OverScrollDecoratorHelper.setUpOverScroll(binding.scroll)
-        OverScrollDecoratorHelper.setUpOverScroll(binding.rvMissions,OverScrollDecoratorHelper.ORIENTATION_HORIZONTAL)
+        OverScrollDecoratorHelper.setUpOverScroll(
+            binding.rvMissions,
+            OverScrollDecoratorHelper.ORIENTATION_HORIZONTAL)
         binding.rvMissions.adapter = missionItemAdapter
-        missionItemAdapter.update(arrayListOf(MissionModel("Temur",13f),MissionModel("Temur",13f),MissionModel("Temur",13f)))
-
 
         binding.progressCore.setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {
@@ -111,6 +107,10 @@ class MainFragment : Fragment(), KoinComponent, ChapterItemAdapter.OnClick,
     }
 
     override fun onClick(chapter: ChapterModel) {
-        ChaptersFragmentLocator(this, chapter).locateFragment(chapter.fragmentName)
+        FragmentLocator(this, chapter).locateFragment(chapter.fragmentName)
+    }
+
+    override fun onClickOpen(missionModel: MissionModel) {
+        FragmentLocator(this, missionModel).locateFragment(FragmentName.MEDITATION)
     }
 }

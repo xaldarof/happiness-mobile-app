@@ -30,4 +30,7 @@
     <color name="love_end_color">#24303E</color>
     <color name="happy_start_color">#24303E</color>
     <color name="happy_end_color">#24303E</color>
+
+
+    <color name="clickColor">#4E5F73</color>
 </resources>

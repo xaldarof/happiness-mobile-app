@@ -8,6 +8,7 @@ import java.io.Serializable
 @Entity(tableName = "db")
 data class InfoModelDb (
     val title: String,
+
     @PrimaryKey
     val body: String,
 

@@ -1,3 +1,5 @@
 package pdf.reader.happiness.core
 
-data class MissionModel(val name:String,val progress:Float)
+import java.io.Serializable
+
+data class MissionModel(val name:String,val progress:Float):Serializable

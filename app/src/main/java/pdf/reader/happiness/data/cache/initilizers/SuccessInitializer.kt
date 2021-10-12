@@ -4,6 +4,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pdf.reader.happiness.R
+import pdf.reader.happiness.core.FragmentName
 import pdf.reader.happiness.core.Name
 import pdf.reader.happiness.data.cache.models.ChapterModelDb
 import pdf.reader.happiness.data.cache.models.InfoModelDb
@@ -56,7 +57,7 @@ interface SuccessInitializer {
                 }
                 chaptersDao.insertChapter(ChapterModelDb(
                     Name.SUCCESS,list.size, R.drawable.ic_goal,0f,
-                    fragmentName = ChapterModelDb.FragmentName.SUCCESS,colorLight = "#D4ad2b",colorNight = "#24303E"))
+                    fragmentName = FragmentName.SUCCESS,colorLight = "#D4ad2b",colorNight = "#24303E"))
 
                 val chapter = coreDao.fetchSuccessCount(Type.SUCCESS)
                 chaptersDao.updateChapterSize(chapter.size,Name.SUCCESS)

@@ -4,6 +4,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pdf.reader.happiness.R
+import pdf.reader.happiness.core.FragmentName
 import pdf.reader.happiness.core.Name
 import pdf.reader.happiness.data.cache.models.ChapterModelDb
 import pdf.reader.happiness.data.cache.models.InfoModelDb
@@ -51,7 +52,7 @@ interface LoveInitializer {
                     coreDao.insertAll(data)
                 }
                 chaptersDao.insertChapter(ChapterModelDb(Name.LOVE, list.size, R.drawable.ic_talk, 0f, fragmentName =
-                ChapterModelDb.FragmentName.LOVE, colorLight = "#B32438", colorNight = "#24303E"))
+                FragmentName.LOVE, colorLight = "#B32438", colorNight = "#24303E"))
 
                 val chapter = coreDao.fetchLoveCount(Type.LOVE)
                 chaptersDao.updateChapterSize(chapter.size, Name.LOVE)
