@@ -5,20 +5,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
+import pdf.reader.happiness.R
 import pdf.reader.happiness.databinding.FragmentMeditationBinding
 import pdf.reader.happiness.vm.MeditationFragmentViewModel
+import pdf.reader.happiness.tools.hideUi
+import pdf.reader.happiness.tools.showUi
+
 
 @KoinApiExtension
 class MeditationFragment : Fragment(), KoinComponent {
 
     private lateinit var binding: FragmentMeditationBinding
     private val viewModel: MeditationFragmentViewModel = get()
+    private var isOpened = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,6 +36,16 @@ class MeditationFragment : Fragment(), KoinComponent {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Toast.makeText(requireContext(), R.string.connect_headphones, Toast.LENGTH_LONG).show()
+
+        if (!isOpened){
+            requireActivity().hideUi()
+            isOpened = true
+        }
+
+        binding.containerMain.setOnClickListener {
+            if (isOpened) requireActivity().hideUi()
+        }
 
         CoroutineScope(Dispatchers.Main).launch {
             viewModel.startMeditation()
@@ -48,6 +64,7 @@ class MeditationFragment : Fragment(), KoinComponent {
 
     override fun onPause() {
         super.onPause()
+        requireActivity().showUi()
         viewModel.stopMusic()
     }
 }

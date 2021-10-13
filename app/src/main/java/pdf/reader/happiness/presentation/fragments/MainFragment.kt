@@ -111,6 +111,6 @@ class MainFragment : Fragment(), KoinComponent, ChapterItemAdapter.OnClick,
     }
 
     override fun onClickOpen(missionModel: MissionModel) {
-        FragmentLocator(this, missionModel).locateFragment(FragmentName.MEDITATION)
+        FragmentLocator(this, missionModel).locateFragment(missionModel.fragmentName)
     }
 }

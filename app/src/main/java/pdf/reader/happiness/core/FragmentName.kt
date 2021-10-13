@@ -5,5 +5,7 @@ enum class FragmentName{
     LIFE,
     LOVE,
     HAPPY,
-    MEDITATION
+    MEDITATION,
+    STATISTIC,
+    INFORMATION
 }

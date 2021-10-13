@@ -10,7 +10,7 @@ interface MusicPathDataSource {
 
         override fun fetRandomPath(): String {
 
-            val paths = listOf("meditation1.mp3", "meditation8d.mp3")
+            val paths = listOf("med1.mp3", "med2.mp3", "waterfall.mp3")
 
             return startPath.plus(paths[(paths.indices).random()])
         }

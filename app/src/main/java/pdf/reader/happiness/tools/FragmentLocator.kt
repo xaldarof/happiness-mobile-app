@@ -37,6 +37,10 @@ class FragmentLocator<T>(
             navigate(MeditationFragment())
         }
 
+        if (fragmentName == FragmentName.STATISTIC) {
+            navigate(StatisticFragment())
+        }
+
     }
 
     private fun navigate(fragment: Fragment) {
