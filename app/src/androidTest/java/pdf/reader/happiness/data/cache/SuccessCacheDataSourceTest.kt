@@ -26,7 +26,7 @@ class SuccessCacheDataSourceTest: KoinComponent {
     @Test
     fun check_is_db_returns_data(){
         CoroutineScope(Dispatchers.Main).launch {
-            dao.fetchSuccess(Type.SUCCESS).asLiveData().observeForever {
+            dao.fetchInfoByType(Type.SUCCESS).asLiveData().observeForever {
                 assertEquals(29,it.size)
             }
         }
@@ -35,7 +35,7 @@ class SuccessCacheDataSourceTest: KoinComponent {
     @Test
     fun check_is_db_returns_only_life_type_data(){
         CoroutineScope(Dispatchers.Main).launch {
-            dao.fetchSuccess(Type.SUCCESS).asLiveData().observeForever { it ->
+            dao.fetchInfoByType(Type.SUCCESS).asLiveData().observeForever { it ->
                 it.forEach {
                     assertEquals(Type.SUCCESS,it.type)
 

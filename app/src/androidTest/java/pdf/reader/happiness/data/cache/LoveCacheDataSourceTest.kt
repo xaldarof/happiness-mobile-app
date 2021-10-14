@@ -25,7 +25,7 @@ class LoveCacheDataSourceTest: KoinComponent {
     @Test
     fun check_is_db_returns_data(){
         CoroutineScope(Dispatchers.Main).launch {
-            dao.fetchLove(Type.LOVE).asLiveData().observeForever {
+            dao.fetchInfoByType(Type.LOVE).asLiveData().observeForever {
                 assertEquals(25,it.size)
             }
         }
@@ -34,7 +34,7 @@ class LoveCacheDataSourceTest: KoinComponent {
     @Test
     fun check_is_db_returns_only_life_type_data(){
         CoroutineScope(Dispatchers.Main).launch {
-            dao.fetchLove(Type.LOVE).asLiveData().observeForever { it ->
+            dao.fetchInfoByType(Type.LOVE).asLiveData().observeForever { it ->
                 it.forEach {
                     assertEquals(Type.LOVE,it.type)
 

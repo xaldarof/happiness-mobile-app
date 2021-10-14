@@ -24,7 +24,7 @@ class HappyCacheDataSourceTest:KoinComponent {
     @Test
     fun check_is_db_returns_data(){
         CoroutineScope(Dispatchers.Main).launch {
-            dao.fetchHappy(Type.HAPPY).asLiveData().observeForever {
+            dao.fetchInfoByType(Type.HAPPY).asLiveData().observeForever {
                 assertEquals(13,it.size)
             }
         }
@@ -33,7 +33,7 @@ class HappyCacheDataSourceTest:KoinComponent {
     @Test
     fun check_is_db_returns_only_happy_type_data(){
         CoroutineScope(Dispatchers.Main).launch {
-            dao.fetchHappy(Type.HAPPY).asLiveData().observeForever { it ->
+            dao.fetchInfoByType(Type.HAPPY).asLiveData().observeForever { it ->
                 it.forEach {
                     assertEquals(Type.HAPPY,it.type)
                     assertNotEquals(Type.LIFE,it.type)
