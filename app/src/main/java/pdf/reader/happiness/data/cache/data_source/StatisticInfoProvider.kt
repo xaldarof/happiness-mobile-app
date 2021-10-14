@@ -12,6 +12,9 @@ interface StatisticInfoProvider {
     suspend fun fetchLoveWastedTime():Float
     suspend fun fetchSuccessWastedTime():Float
 
+
+
+    suspend fun fetchFinishedCount():Int
     suspend fun fetchWastedTime():String
 
     fun fetchHappyFinishedCount():Int
@@ -87,6 +90,14 @@ interface StatisticInfoProvider {
                 time+=it.readTimeSeconds
             }
             return time
+        }
+
+        override suspend fun fetchFinishedCount(): Int {
+            var count = 0
+            coreDao.fetchAll().forEach {
+                if (it.finished) count++
+            }
+            return count
         }
 
         override suspend fun fetchWastedTime(): String {

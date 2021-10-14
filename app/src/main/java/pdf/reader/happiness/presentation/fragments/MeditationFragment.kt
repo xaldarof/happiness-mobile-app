@@ -1,11 +1,13 @@
 package pdf.reader.happiness.presentation.fragments
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,10 +19,11 @@ import pdf.reader.happiness.databinding.FragmentMeditationBinding
 import pdf.reader.happiness.vm.MeditationFragmentViewModel
 import pdf.reader.happiness.tools.hideUi
 import pdf.reader.happiness.tools.showUi
+import pdf.reader.happiness.tools.vibrate
 
 
 @KoinApiExtension
-class MeditationFragment : Fragment(), KoinComponent {
+class MeditationFragment : Fragment(), KoinComponent,MeditationFragmentViewModel.CallBack {
 
     private lateinit var binding: FragmentMeditationBinding
     private val viewModel: MeditationFragmentViewModel = get()
@@ -34,6 +37,7 @@ class MeditationFragment : Fragment(), KoinComponent {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Toast.makeText(requireContext(), R.string.connect_headphones, Toast.LENGTH_LONG).show()
@@ -48,7 +52,7 @@ class MeditationFragment : Fragment(), KoinComponent {
         }
 
         CoroutineScope(Dispatchers.Main).launch {
-            viewModel.startMeditation()
+            viewModel.startMeditation(this@MeditationFragment)
         }
 
         CoroutineScope(Dispatchers.Main).launch {
@@ -66,5 +70,13 @@ class MeditationFragment : Fragment(), KoinComponent {
         super.onPause()
         requireActivity().showUi()
         viewModel.stopMusic()
+    }
+
+    override fun onFinish() {
+        CoroutineScope(Dispatchers.Main).launch {
+            Toast.makeText(requireContext(), R.string.have_good_day, Toast.LENGTH_LONG).show()
+            requireActivity().supportFragmentManager.popBackStack()
+            requireContext().vibrate()
+        }
     }
 }

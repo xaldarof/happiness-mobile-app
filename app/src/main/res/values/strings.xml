@@ -29,4 +29,5 @@
     <string name="dev_mode_enabled">Включен режим разработчика</string>
     <string name="no_connection">Нет подключения к интернету</string>
     <string name="connect_headphones">Подключите наушники для максимального погружения</string>
+    <string name="have_good_day">Медитация окончено, желаю вас приятного дня.</string>
 </resources>

@@ -8,7 +8,8 @@ import pdf.reader.happiness.data.cache.data_source.MusicPathDataSource
 import pdf.reader.happiness.tools.MusicPlayer
 
 class MeditationFragmentViewModel(private val musicPlayer: MusicPlayer,
-                                  private val musicPathDataSource: MusicPathDataSource,application: Application):
+                                  private val musicPathDataSource: MusicPathDataSource,
+                                  application: Application):
     AndroidViewModel(application) {
 
     private var isMoreZero: Boolean = true
@@ -26,7 +27,7 @@ class MeditationFragmentViewModel(private val musicPlayer: MusicPlayer,
         return minuteLiveData
     }
 
-    suspend fun startMeditation() {
+    suspend fun startMeditation(callBack: CallBack) {
         val context = getApplication<Application>().applicationContext
         musicPlayer.play(context,musicPathDataSource.fetRandomPath())
 
@@ -42,12 +43,18 @@ class MeditationFragmentViewModel(private val musicPlayer: MusicPlayer,
             if (minute < 0) {
                 isMoreZero = false
                 musicPlayer.pause()
+                callBack.onFinish()
             }
 
             delay(1000)
         }
     }
+
     fun stopMusic(){
         musicPlayer.pause()
+    }
+
+    interface CallBack{
+        fun onFinish()
     }
 }

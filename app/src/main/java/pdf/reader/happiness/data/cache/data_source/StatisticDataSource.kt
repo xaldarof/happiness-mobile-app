@@ -24,16 +24,20 @@ interface StatisticDataSource {
 
             //Enter count
             val maxEnteredInfo = all.sortedByDescending { it.enterCount }
-            finishedData.add(StatisticModel(maxEnteredInfo[0].type.translateToRu(),
-                "Статья которая вы больше всего входили для прочтения:",
-                "Название: ${maxEnteredInfo[0].title}"))
+            if (maxEnteredInfo[0].enterCount!=0){
+                finishedData.add(StatisticModel(maxEnteredInfo[0].type.translateToRu(),
+                    "Статья которая вы больше всего входили для прочтения:",
+                    "Название: ${maxEnteredInfo[0].title}"))
+            }
 
 
             //Max Time Wasted
             val maxReadTime = all.sortedByDescending { it.readTimeSeconds }
-            finishedData.add(StatisticModel(maxReadTime[0].type.translateToRu(),
-                "Статья которая вы потратили наибольшее время для прочтения:",
-                 "Название: ${maxReadTime[0].title}"))
+            if (maxReadTime[0].readTimeSeconds.toInt()!=0){
+                finishedData.add(StatisticModel(maxReadTime[0].type.translateToRu(),
+                    "Статья которая вы потратили наибольшее время для прочтения:",
+                    "Название: ${maxReadTime[0].title}"))
+            }
 
 
             //All wasted Time
@@ -49,6 +53,10 @@ interface StatisticDataSource {
 
 
             //Calculate finished
+
+            finishedData.add(StatisticModel("Все","Количество прочитанных информации :",
+                "Счетчик: ${statistic.fetchFinishedCount()}"))
+
             finishedData.add(StatisticModel(Name.LOVE,"Количество прочитанных информации :",
                     "Прочитано: ${statistic.fetchLoveFinishedCount()}"))
 
