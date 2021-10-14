@@ -2,8 +2,14 @@ package pdf.reader.happiness.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -13,6 +19,7 @@ import org.koin.core.component.get
 import pdf.reader.happiness.R
 import pdf.reader.happiness.databinding.ActivityDataImportingBinding
 import pdf.reader.happiness.presentation.fragments.ShareFragment
+import pdf.reader.happiness.tools.AdManager
 import pdf.reader.happiness.tools.ConnectionManager
 import pdf.reader.happiness.tools.ImportInfoDialog
 import pdf.reader.happiness.tools.animation
@@ -33,6 +40,10 @@ class DataImportingActivity : AppCompatActivity(), KoinComponent,
         setContentView(binding.root)
         supportActionBar?.hide()
         binding.progressView.visibility = View.INVISIBLE
+        val adManager = AdManager(this).apply {
+            setUseRealId(false)
+            setUpAd()
+        }
 
         binding.info.setOnClickListener {
             ImportInfoDialog.Base().show(this@DataImportingActivity)
@@ -40,13 +51,18 @@ class DataImportingActivity : AppCompatActivity(), KoinComponent,
         binding.share.setOnClickListener {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.mainContainer,ShareFragment()).addToBackStack("").commit()
+            adManager.showAd()
         }
 
         binding.start.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 importData()
             }
+            adManager.showAd()
         }
+
+        MobileAds.initialize(this)
+
     }
 
     private suspend fun importData() {
@@ -60,7 +76,8 @@ class DataImportingActivity : AppCompatActivity(), KoinComponent,
 
         }else {
             CoroutineScope(Dispatchers.Main).launch {
-                Toast.makeText(this@DataImportingActivity, R.string.no_connection, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@DataImportingActivity, R.string.no_connection,
+                    Toast.LENGTH_SHORT).show()
                 connectionManager.enableWifi()
             }
         }
@@ -70,10 +87,8 @@ class DataImportingActivity : AppCompatActivity(), KoinComponent,
         CoroutineScope(Dispatchers.Main).launch {
             binding.progressView.visibility = View.INVISIBLE
             binding.start.isEnabled = true
-            Toast.makeText(
-                this@DataImportingActivity, "Импортирован $count новых данных",
-                Toast.LENGTH_SHORT
-            ).show()
+            Toast.makeText(this@DataImportingActivity, "Импортирован $count новых данных",
+                Toast.LENGTH_SHORT).show()
             finish()
         }
     }
