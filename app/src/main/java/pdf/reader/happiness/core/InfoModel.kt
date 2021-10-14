@@ -12,5 +12,7 @@ data class InfoModel (
         val isOpened:Boolean=false,
         val type: Type,
         val dataType:Type=Type.CACHE,
-        val addedTime:Long = System.currentTimeMillis()
+        val addedTime:Long = System.currentTimeMillis(),
+        val readTimeSeconds:Long = 0,
+        val enterCount:Int = 0
 ): Serializable

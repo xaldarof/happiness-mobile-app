@@ -24,4 +24,6 @@ val viewModels = module {
     factory { ImportingActivityViewModel(get(), get(), get(), get()) }
 
     factory { MeditationFragmentViewModel(get(), get(), androidApplication()) }
+
+    factory { StatisticViewModel(get()) }
 }

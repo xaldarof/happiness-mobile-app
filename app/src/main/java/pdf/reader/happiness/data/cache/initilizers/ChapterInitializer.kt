@@ -13,25 +13,25 @@ interface ChapterInitializer {
         private val coreDao: CoreDao
     ) : ChapterInitializer {
         override suspend fun update() {
-            coreDao.fetchHappyCount(Type.HAPPY).forEach {
+            coreDao.fetchInfoCountByType(Type.HAPPY).forEach {
                 if (!it.finished) {
                     chaptersRepository.updateChapterFinishedState(false, "СЧАСТЬЕ")
                     chaptersRepository.updateChapterCongratulated(false,"СЧАСТЬЕ")
                 }
             }
-            coreDao.fetchLifeCount(Type.LIFE).forEach {
+            coreDao.fetchInfoCountByType(Type.LIFE).forEach {
                 if (!it.finished) {
                     chaptersRepository.updateChapterFinishedState(false, "ЖИЗНЬ")
                     chaptersRepository.updateChapterCongratulated(false,"ЖИЗНЬ")
                 }
             }
-            coreDao.fetchLoveCount(Type.LOVE).forEach {
+            coreDao.fetchInfoCountByType(Type.LOVE).forEach {
                 if (!it.finished) {
                     chaptersRepository.updateChapterFinishedState(false, "ЛЮБОВЬ")
                     chaptersRepository.updateChapterCongratulated(false,"ЛЮБОВЬ")
                 }
             }
-            coreDao.fetchSuccessCount(Type.SUCCESS).forEach {
+            coreDao.fetchInfoCountByType(Type.SUCCESS).forEach {
                 if (!it.finished) {
                     chaptersRepository.updateChapterFinishedState(false, "УСПЕХ")
                     chaptersRepository.updateChapterCongratulated(false,"УСПЕХ")

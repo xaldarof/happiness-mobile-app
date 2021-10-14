@@ -12,7 +12,7 @@ interface SuccessCacheDataSource {
 
     class Base(private val dao: CoreDao) : SuccessCacheDataSource {
         override suspend fun fetchSuccess(): Flow<List<InfoModel>> {
-            return dao.fetchSuccess(Type.SUCCESS).map {
+            return dao.fetchInfoByType(Type.SUCCESS).map {
                 it.map { it.mapToInfoModel() }}
         }
     }

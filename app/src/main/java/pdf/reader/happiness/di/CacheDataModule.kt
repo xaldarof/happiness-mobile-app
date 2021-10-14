@@ -4,11 +4,8 @@ import androidx.room.RoomDatabase
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import pdf.reader.happiness.data.cache.data_source.*
-import pdf.reader.happiness.data.cache.core.AchievementRepository
-import pdf.reader.happiness.data.cache.core.ChaptersRepository
-import pdf.reader.happiness.data.cache.core.CacheDataRepository
-import pdf.reader.happiness.data.cache.core.ToolsRepository
 import pdf.reader.happiness.core.AppDatabase
+import pdf.reader.happiness.data.cache.core.*
 import pdf.reader.happiness.tools.AchievementUpdater
 
 
@@ -18,9 +15,11 @@ val cacheDataModule = module {
     factory<ToolsRepository> { ToolsRepository.Base(get()) }
     factory<AchievementRepository> { AchievementRepository.Base(get()) }
     factory<ChaptersRepository> { ChaptersRepository.Base(get()) }
+    factory<StatisticRepository> { StatisticRepository.Base(get()) }
 
 
     factory<AchievementUpdater> { AchievementUpdater.Base(get(), get()) }
+    factory<StatisticInfoProvider> { StatisticInfoProvider.Base(get(), get()) }
 
     factory<SuccessCacheDataSource> { SuccessCacheDataSource.Base(get()) }
     factory<HappyCacheDataSource> { HappyCacheDataSource.Base(get()) }
@@ -30,5 +29,7 @@ val cacheDataModule = module {
     factory<AchievementDataSource> { AchievementDataSource.Base(get()) }
     factory<ChapterDataSource> { ChapterDataSource.Base(get()) }
     factory<MusicPathDataSource> { MusicPathDataSource.Base() }
+    factory<StatisticDataSource> { StatisticDataSource.Base(get(), get()) }
+
 
 }

@@ -14,7 +14,7 @@ interface WastedTimeController {
     class Base(private val sharedPreferences: SharedPreferences): WastedTimeController {
 
         override fun updateWastedTime() {
-            sharedPreferences.edit().putInt(WASTED_TIME,getTime()+3).apply()
+            sharedPreferences.edit().putInt(WASTED_TIME,getTime()+1).apply()
         }
 
         override fun getTime() = sharedPreferences.getInt(WASTED_TIME,0)

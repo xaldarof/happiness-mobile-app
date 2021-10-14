@@ -12,7 +12,7 @@ interface LifeCacheDataSource {
 
     class Base(private val coreDao: CoreDao): LifeCacheDataSource {
         override suspend fun fetchLife() : Flow<List<InfoModel>> {
-            return coreDao.fetchLife(Type.LIFE).map {
+            return coreDao.fetchInfoByType(Type.LIFE).map {
                it.map { it.mapToInfoModel() }
             }
         }

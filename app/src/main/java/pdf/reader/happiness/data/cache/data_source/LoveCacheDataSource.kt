@@ -12,7 +12,7 @@ interface LoveCacheDataSource {
 
     class Base(private val coreDao: CoreDao) : LoveCacheDataSource {
         override fun fetchLove(): Flow<List<InfoModel>> {
-            return coreDao.fetchLove(Type.LOVE).map {
+            return coreDao.fetchInfoByType(Type.LOVE).map {
                 it.map { it.mapToInfoModel() }
             }
         }

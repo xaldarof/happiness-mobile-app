@@ -7,13 +7,16 @@ import androidx.room.RoomDatabase
 import pdf.reader.happiness.data.cache.models.*
 import pdf.reader.happiness.data.cache.dao.*
 
-@Database(entities = [InfoModelDb::class,AchievementModelDb::class,ChapterModelDb::class],version = 20,exportSchema = false)
+@Database(
+    entities = [InfoModelDb::class, AchievementModelDb::class, ChapterModelDb::class],
+    version = 22, exportSchema = false)
+
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun coreDaoProvider():CoreDao
-    abstract fun toolsDaoProvider():ToolsDao
-    abstract fun chaptersDaoProvider():ChaptersDao
-    abstract fun achievementDaoProvider():AchievementDao
+    abstract fun coreDaoProvider(): CoreDao
+    abstract fun toolsDaoProvider(): ToolsDao
+    abstract fun chaptersDaoProvider(): ChaptersDao
+    abstract fun achievementDaoProvider(): AchievementDao
 
     companion object {
         private const val DATABASE_NAME = "DATABASE"

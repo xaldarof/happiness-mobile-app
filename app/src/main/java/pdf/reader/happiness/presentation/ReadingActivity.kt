@@ -58,6 +58,12 @@ class ReadingActivity : AppCompatActivity(), KoinComponent,
             viewModel.updateOpened(intent.body, true)
         }
 
+        CoroutineScope(Dispatchers.IO).launch {
+            viewModel.updateEnterCount(intent.body)
+            viewModel.startCountingSeconds(intent.body)
+        }
+
+
         binding.toolbar.likeBtn.setOnLikeListener(object : OnLikeListener {
             override fun liked(likeButton: LikeButton?) {
                 CoroutineScope(Dispatchers.IO).launch {
@@ -71,6 +77,11 @@ class ReadingActivity : AppCompatActivity(), KoinComponent,
                 }
             }
         })
+    }
+
+    override fun onStop() {
+        super.onStop()
+        viewModel.setUserIsOff(false)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {

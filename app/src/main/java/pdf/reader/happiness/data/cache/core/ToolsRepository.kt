@@ -15,6 +15,8 @@ interface ToolsRepository {
     suspend fun updateFavoriteState(body:String,favorite:Boolean)
     suspend fun updateOpenedState(body: String,opened:Boolean)
     suspend fun updateFinishedState(body: String,finished:Boolean)
+    suspend fun updateReadTimeSeconds(body: String)
+    suspend fun updateEnterCount(body: String)
 
     suspend fun fetchAll():List<InfoModelDb>
 
@@ -38,6 +40,14 @@ interface ToolsRepository {
 
         override suspend fun updateFinishedState(body: String, finished: Boolean) {
             toolsDao.updateFinishedState(body,finished)
+        }
+
+        override suspend fun updateReadTimeSeconds(body: String) {
+            toolsDao.updateReadTimeSeconds(body)
+        }
+
+        override suspend fun updateEnterCount(body: String) {
+            toolsDao.updateEnterCount(body)
         }
 
         override suspend fun fetchAll(): List<InfoModelDb> {

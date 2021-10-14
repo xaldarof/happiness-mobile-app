@@ -16,24 +16,24 @@ class MainActivityViewModel(
 
     suspend fun updateWastedTime(){
         while (true){
-            delay(3000)
             wastedTimeController.updateWastedTime()
             Log.d("pos",wastedTimeController.getTime().toString())
+            delay(3000)
         }
     }
 
     fun startWastingTime() {
-        if (wastedTimeController.getTime()>3600 && !wastedTimeAchievementController.isCongratulated("1")){
+        if (wastedTimeController.getTime()>12000 && !wastedTimeAchievementController.isCongratulated("1")){
             wastedTimeAchievement.addAchievementWasted1HourTime()
             wastedTimeAchievementController.setCongratulated("1",true)
         }
 
-        if (wastedTimeController.getTime()>7200 && !wastedTimeAchievementController.isCongratulated("2")){
+        if (wastedTimeController.getTime()>23000 && !wastedTimeAchievementController.isCongratulated("2")){
             wastedTimeAchievement.addAchievementWasted2HourTime()
             wastedTimeAchievementController.setCongratulated("2",true)
         }
 
-        if (wastedTimeController.getTime()>10000 && !wastedTimeAchievementController.isCongratulated("3")){
+        if (wastedTimeController.getTime()>50000 && !wastedTimeAchievementController.isCongratulated("3")){
             wastedTimeAchievement.addAchievementWasted3HourTime()
             wastedTimeAchievementController.setCongratulated("3",true)
         }

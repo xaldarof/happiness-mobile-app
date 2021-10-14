@@ -67,7 +67,7 @@ interface LifeInitializer {
                 chaptersDao.insertChapter(ChapterModelDb(Name.LIFE,list.size, R.drawable.ic_goldfish,0f
                 ,fragmentName = FragmentName.LIFE,colorLight = "#607196",colorNight = "#24303E"))
 
-                val chapter = coreDao.fetchLifeCount(Type.LIFE)
+                val chapter = coreDao.fetchInfoCountByType(Type.LIFE)
                 chaptersDao.updateChapterSize(chapter.size, Name.LIFE)
                 chaptersDao
                     .updateChapterProgress(

@@ -46,7 +46,7 @@ interface HappyInitializer {
                         fragmentName = FragmentName.HAPPY, colorLight = "#60966f",
                         colorNight = "#24303E"))
 
-                val chapter = coreDao.fetchHappyCount(Type.HAPPY)
+                val chapter = coreDao.fetchInfoCountByType(Type.HAPPY)
                 chaptersDao.updateChapterSize(chapter.size,Name.HAPPY)
                 chaptersDao
                     .updateChapterProgress(PercentCalculator

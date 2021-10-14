@@ -12,7 +12,7 @@ interface HappyCacheDataSource {
 
     class Base(private val coreDao: CoreDao) : HappyCacheDataSource {
         override fun fetchHappy(): Flow<List<InfoModel>> {
-            return coreDao.fetchHappy(Type.HAPPY).map {
+            return coreDao.fetchInfoByType(Type.HAPPY).map {
                 it.map { it.mapToInfoModel() }
             }
         }

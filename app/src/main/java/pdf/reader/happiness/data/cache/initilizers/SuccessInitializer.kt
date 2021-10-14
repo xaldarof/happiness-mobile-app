@@ -59,7 +59,7 @@ interface SuccessInitializer {
                     Name.SUCCESS,list.size, R.drawable.ic_goal,0f,
                     fragmentName = FragmentName.SUCCESS,colorLight = "#D4ad2b",colorNight = "#24303E"))
 
-                val chapter = coreDao.fetchSuccessCount(Type.SUCCESS)
+                val chapter = coreDao.fetchInfoCountByType(Type.SUCCESS)
                 chaptersDao.updateChapterSize(chapter.size,Name.SUCCESS)
                 chaptersDao
                     .updateChapterProgress(

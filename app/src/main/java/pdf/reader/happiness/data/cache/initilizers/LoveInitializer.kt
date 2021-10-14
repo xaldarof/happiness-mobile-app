@@ -54,7 +54,7 @@ interface LoveInitializer {
                 chaptersDao.insertChapter(ChapterModelDb(Name.LOVE, list.size, R.drawable.ic_talk, 0f, fragmentName =
                 FragmentName.LOVE, colorLight = "#B32438", colorNight = "#24303E"))
 
-                val chapter = coreDao.fetchLoveCount(Type.LOVE)
+                val chapter = coreDao.fetchInfoCountByType(Type.LOVE)
                 chaptersDao.updateChapterSize(chapter.size, Name.LOVE)
                 chaptersDao
                     .updateChapterProgress(

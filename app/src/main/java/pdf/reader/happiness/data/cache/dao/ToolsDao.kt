@@ -38,4 +38,10 @@ interface ToolsDao {
     @Query("UPDATE db SET finished = :finished WHERE body = :body")
     suspend fun updateFinishedState(body:String, finished:Boolean)
 
+    @Query("UPDATE db SET readTimeSeconds = readTimeSeconds+3 WHERE body = :body")
+    suspend fun updateReadTimeSeconds(body:String)
+
+    @Query("UPDATE db SET enterCount = enterCount+1 WHERE body = :body")
+    suspend fun updateEnterCount(body:String)
+
 }
