@@ -40,6 +40,9 @@ class FragmentLocator<T>(
         if (fragmentName == FragmentName.STATISTIC) {
             navigate(StatisticFragment())
         }
+        if (fragmentName == FragmentName.BONUS){
+            navigate(BonusFragment())
+        }
 
     }
 

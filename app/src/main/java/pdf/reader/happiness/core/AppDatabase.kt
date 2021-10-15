@@ -8,8 +8,8 @@ import pdf.reader.happiness.data.cache.models.*
 import pdf.reader.happiness.data.cache.dao.*
 
 @Database(
-    entities = [InfoModelDb::class, AchievementModelDb::class, ChapterModelDb::class],
-    version = 22, exportSchema = false)
+    entities = [InfoModelDb::class, AchievementModelDb::class, ChapterModelDb::class,CoinModelDb::class],
+    version = 25, exportSchema = false)
 
 abstract class AppDatabase : RoomDatabase() {
 

@@ -40,10 +40,6 @@ class DataImportingActivity : AppCompatActivity(), KoinComponent,
         setContentView(binding.root)
         supportActionBar?.hide()
         binding.progressView.visibility = View.INVISIBLE
-        val adManager = AdManager(this).apply {
-            setUseRealId(false)
-            setUpAd()
-        }
 
         binding.info.setOnClickListener {
             ImportInfoDialog.Base().show(this@DataImportingActivity)
@@ -51,14 +47,12 @@ class DataImportingActivity : AppCompatActivity(), KoinComponent,
         binding.share.setOnClickListener {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.mainContainer,ShareFragment()).addToBackStack("").commit()
-            adManager.showAd()
         }
 
         binding.start.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 importData()
             }
-            adManager.showAd()
         }
 
         MobileAds.initialize(this)

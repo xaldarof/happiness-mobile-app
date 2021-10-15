@@ -6,24 +6,26 @@ import pdf.reader.happiness.vm.*
 
 
 val viewModels = module {
-    factory { SuccessViewModel(get(), get(), get(), get()) }
-    factory { HappyViewModel(get(), get(), get(), get()) }
-    factory { LoveViewModel(get(), get(), get(), get()) }
-    factory { LifeViewModel(get(), get(), get(), get()) }
+    single { SuccessViewModel(get(), get(), get(), get()) }
+    single { HappyViewModel(get(), get(), get(), get()) }
+    single { LoveViewModel(get(), get(), get(), get()) }
+    single { LifeViewModel(get(), get(), get(), get()) }
 
-    factory { ReadingViewModel(get()) }
+    single { ReadingViewModel(get()) }
 
-    factory { SearchViewModel(get()) }
-    factory { FavoritesViewModel(get()) }
+    single { SearchViewModel(get()) }
+    single { FavoritesViewModel(get()) }
 
-    factory { MainActivityViewModel(get(), get(), get()) }
-    factory { MainFragmentViewModel(get(), get()) }
+    single { MainActivityViewModel(get(), get(), get()) }
+    single { MainFragmentViewModel(get(), get()) }
 
-    factory { AchievementsViewModel(get()) }
+    single { AchievementsViewModel(get()) }
 
-    factory { ImportingActivityViewModel(get(), get(), get(), get()) }
+    single { ImportingActivityViewModel(get(), get(), get(), get()) }
 
-    factory { MeditationFragmentViewModel(get(), get(), androidApplication()) }
+    single { MeditationFragmentViewModel(get(), get(), androidApplication()) }
 
-    factory { StatisticViewModel(get()) }
+    single { StatisticViewModel(get()) }
+
+    single { BonusFragmentViewModel(get()) }
 }

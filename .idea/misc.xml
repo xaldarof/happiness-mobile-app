@@ -6,7 +6,9 @@
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/drawable/bottom_sheet_style.xml" value="0.33046875" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/drawable/clear_item.xml" value="0.33046875" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/drawable/edit_text_style.xml" value="0.2203125" />
+        <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/drawable/ic_baseline_cake_24.xml" value="0.33046875" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/drawable/ic_baseline_heart_broken_24.xml" value="0.2203125" />
+        <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/drawable/ic_baseline_play_circle_outline_24.xml" value="0.33046875" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/drawable/image_bcg.xml" value="0.33046875" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/drawable/item_style.xml" value="0.33046875" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/drawable/life_item_style.xml" value="0.2203125" />
@@ -18,8 +20,9 @@
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/activity_reading.xml" value="0.2916666666666667" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/chapter_item.xml" value="0.5" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/fragment_achievements.xml" value="0.25" />
+        <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/fragment_bonus.xml" value="0.33" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/fragment_favorites.xml" value="0.20416666666666666" />
-        <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/fragment_main.xml" value="0.2545454545454545" />
+        <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/fragment_main.xml" value="0.5" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/fragment_meditation.xml" value="0.5" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/fragment_search.xml" value="0.20416666666666666" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/fragment_settings.xml" value="0.33" />
@@ -105,7 +108,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.5" />
+        <option name="scale" value="0.22" />
       </ProjectState>
     </option>
   </component>

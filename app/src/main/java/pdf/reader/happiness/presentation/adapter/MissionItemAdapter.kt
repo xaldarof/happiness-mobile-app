@@ -16,6 +16,8 @@ class MissionItemAdapter(private val onClick: OnClick) :
     init {
         oldList.add(MissionModel("Медитация",0f,FragmentName.MEDITATION))
         oldList.add(MissionModel("Статистика",0f,FragmentName.STATISTIC))
+        oldList.add(MissionModel("Бонусы",0f,FragmentName.BONUS))
+
     }
 
     inner class VH(private val binding: MissionItemBinding) :
@@ -34,6 +36,9 @@ class MissionItemAdapter(private val onClick: OnClick) :
 
             if (missionModel.fragmentName == FragmentName.STATISTIC) {
                 binding.icon.setImageResource(R.drawable.ic_baseline_show_chart_24)
+            }
+            if (missionModel.fragmentName == FragmentName.BONUS) {
+                binding.icon.setImageResource(R.drawable.ic_baseline_cake_24)
             }
 
         }

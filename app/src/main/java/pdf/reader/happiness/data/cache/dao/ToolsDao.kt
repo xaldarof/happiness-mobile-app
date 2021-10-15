@@ -1,8 +1,11 @@
 package pdf.reader.happiness.data.cache.dao
 
 import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
+import pdf.reader.happiness.data.cache.models.CoinModelDb
 import pdf.reader.happiness.data.cache.models.InfoModelDb
 
 
@@ -44,4 +47,13 @@ interface ToolsDao {
     @Query("UPDATE db SET enterCount = enterCount+1 WHERE body = :body")
     suspend fun updateEnterCount(body:String)
 
+
+    @Query("UPDATE coins SET coinCount=coinCount+1 WHERE name='UCC'")
+    fun updateUserCoin()
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun initUserCoin(coinModelDb: CoinModelDb)
+
+    @Query("SELECT coinCount FROM coins WHERE name='UCC'")
+    fun fetchUserCoinCount():Flow<Int>
 }

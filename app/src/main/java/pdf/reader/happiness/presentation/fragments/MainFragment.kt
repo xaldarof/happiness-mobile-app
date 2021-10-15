@@ -59,10 +59,11 @@ class MainFragment : Fragment(), KoinComponent, ChapterItemAdapter.OnClick,
         super.onViewCreated(view, savedInstanceState)
         binding.rv.adapter = chapterItemAdapter
         binding.rv.isNestedScrollingEnabled = false
+
         OverScrollDecoratorHelper.setUpOverScroll(binding.scroll)
         OverScrollDecoratorHelper.setUpOverScroll(
-            binding.rvMissions,
-            OverScrollDecoratorHelper.ORIENTATION_HORIZONTAL)
+            binding.rvMissions, OverScrollDecoratorHelper.ORIENTATION_HORIZONTAL)
+
         binding.rvMissions.adapter = missionItemAdapter
 
         binding.progressCore.setOnClickListener {
