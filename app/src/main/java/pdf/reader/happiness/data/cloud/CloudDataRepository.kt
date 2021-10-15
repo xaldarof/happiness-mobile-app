@@ -9,7 +9,7 @@ interface CloudDataRepository {
 
     class Base(private val cloudDataSource: InfoCloudDataSource): CloudDataRepository {
         override suspend fun fetchCloudData(): Flow<List<InfoCloudModel>> {
-            return cloudDataSource.fetchInfo()
+            return cloudDataSource.fetchInfoAsFlow()
         }
     }
 }

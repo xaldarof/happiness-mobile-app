@@ -10,13 +10,13 @@ import java.util.concurrent.CopyOnWriteArrayList
 
 interface InfoCloudDataSource {
 
-    suspend fun fetchInfo(): Flow<CopyOnWriteArrayList<InfoCloudModel>>
+    suspend fun fetchInfoAsFlow(): Flow<CopyOnWriteArrayList<InfoCloudModel>>
 
     class Base(private val databaseReference: DatabaseReference) : InfoCloudDataSource {
 
         private val cloudInfoList = CopyOnWriteArrayList<InfoCloudModel>()
 
-        override suspend fun fetchInfo(): Flow<CopyOnWriteArrayList<InfoCloudModel>> {
+        override suspend fun fetchInfoAsFlow(): Flow<CopyOnWriteArrayList<InfoCloudModel>> {
             val list = CopyOnWriteArrayList<InfoCloudModel>()
 
             databaseReference.addValueEventListener(object : ValueEventListener {
@@ -40,7 +40,7 @@ interface InfoCloudDataSource {
                 }
             })
             delay(2000)
-            return if (cloudInfoList.isEmpty()) fetchInfo() else flow { emit(cloudInfoList)
+            return if (cloudInfoList.isEmpty()) fetchInfoAsFlow() else flow { emit(cloudInfoList)
                 cloudInfoList.clear()
             }
         }

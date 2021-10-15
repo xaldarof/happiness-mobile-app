@@ -18,7 +18,7 @@ class InfoCloudDataSourceTest : KoinComponent {
     @Test
     fun check_is_cloud_data_source_returns_data() {
         CoroutineScope(Dispatchers.Main).launch {
-            infoCloudDataSource.fetchInfo().asLiveData().observeForever {
+            infoCloudDataSource.fetchInfoAsFlow().asLiveData().observeForever {
                 assertTrue(it.size>1)
             }
         }

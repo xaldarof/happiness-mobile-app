@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.google.android.gms.ads.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
@@ -34,17 +37,22 @@ class BonusFragment : Fragment(), RewardedAdManager.CallBack,KoinComponent {
         binding.progress.visibility = View.INVISIBLE
         binding.backBtn.setOnClickListener { requireActivity().supportFragmentManager.popBackStack() }
 
-        viewModel.fetchUserCoinCount().observe(viewLifecycleOwner) {
+        viewModel.fetchUserCoinCountAsFlow().observe(viewLifecycleOwner) {
             binding.countTv.text = it.toString()
         }
 
 
         binding.startBtn.setOnClickListener {
             onStartAd()
-            RewardedAdManager(this).showRewardedAd(requireContext())
+            CoroutineScope(Dispatchers.Main).launch {
+                RewardedAdManager(this@BonusFragment).showRewardedAd(requireContext())
+            }
             binding.startBtn.setImageResource(R.drawable.ic_baseline_pause_circle_outline_24)
         }
-        MobileAds.initialize(requireContext())
+
+        CoroutineScope(Dispatchers.IO).launch {
+            MobileAds.initialize(requireContext())
+        }
 
     }
 
@@ -67,12 +75,12 @@ class BonusFragment : Fragment(), RewardedAdManager.CallBack,KoinComponent {
     }
 
     override fun onNetworkError() {
-        Toast.makeText(requireContext(), "Произошла ошибка соединения", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireActivity().applicationContext, "Произошла ошибка соединения", Toast.LENGTH_SHORT).show()
         onAdFinish()
     }
 
     override fun handledAnError() {
-        Toast.makeText(requireContext(), "Произошла ошибка при показе рекламы", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext().applicationContext, "Произошла ошибка при показе рекламы", Toast.LENGTH_SHORT).show()
         onAdFinish()
     }
 
@@ -81,7 +89,7 @@ class BonusFragment : Fragment(), RewardedAdManager.CallBack,KoinComponent {
     }
 
     override fun onAdIsNotReady() {
-        Toast.makeText(requireContext(), "Реклама еще не готова к показу", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext().applicationContext, "Реклама еще не готова к показу", Toast.LENGTH_SHORT).show()
         onAdFinish()
     }
 }

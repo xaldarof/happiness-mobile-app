@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/myWhite"
@@ -144,7 +145,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
             android:layout_marginEnd="12dp"
-            android:src="@drawable/ic_baseline_lock_24"
+            android:src="@drawable/ic_baseline_chevron_right_24"
             android:thumb="@drawable/switch_thumb"
             app:tint="@color/to_right_color"
             app:track="@drawable/thumb_track" />
@@ -159,7 +160,7 @@
             android:layout_marginTop="12dp"
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="12dp"
-            android:src="@drawable/ic_baseline_cloud_download_24"
+            android:src="@drawable/ic_baseline_cloud_sync_24"
             app:tint="@color/to_right_color" />
 
         <TextView
@@ -169,7 +170,7 @@
             android:layout_centerInParent="true"
             android:layout_marginStart="0dp"
             android:layout_toEndOf="@+id/img3"
-            android:text="@string/implement_data"
+            android:text="@string/exchange_coin"
             android:textColor="@color/to_right_color"
             android:textSize="20sp" />
     </RelativeLayout>
@@ -187,7 +188,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rateBtn">
+        app:layout_constraintTop_toBottomOf="@+id/shareBtn">
 
         <ImageView
             android:id="@+id/img5"
@@ -248,6 +249,45 @@
             android:layout_marginStart="0dp"
             android:layout_toEndOf="@+id/img6"
             android:text="@string/rate_us"
+            android:textColor="@color/to_right_color"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/shareBtn"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="12dp"
+        android:background="@drawable/clear_item"
+        android:clickable="true"
+        android:elevation="2dp"
+        android:focusable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rateBtn">
+
+
+        <ImageView
+            android:id="@+id/shareImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="12dp"
+            android:src="@drawable/ic_baseline_share_24"
+            app:tint="@color/to_right_color" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/shareImg"
+            android:text="@string/share"
             android:textColor="@color/to_right_color"
             android:textSize="20sp" />
     </RelativeLayout>

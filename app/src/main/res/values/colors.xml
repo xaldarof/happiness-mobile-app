@@ -40,5 +40,8 @@
     <color name="clear_color">#D8D1D1</color>
     <color name="green">#2BCC31</color>
     <color name="clickColor">#F1EDED</color>
+    <color name="light_color">#E6EAED</color>
+    <color name="koin_exchange_edt">#F4F0EF</color>
+    <color name="hint_color">#817B7B</color>
 
 </resources>

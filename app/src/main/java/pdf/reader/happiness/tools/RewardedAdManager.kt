@@ -9,14 +9,14 @@ import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 
 interface Ad {
-    fun showRewardedAd(context: Context)
+   suspend fun showRewardedAd(context: Context)
 }
 
 class RewardedAdManager(private val callback:CallBack): Ad {
 
     private var myRewardedAd: RewardedAd?=null
 
-    override fun showRewardedAd(context: Context) {
+    override suspend fun showRewardedAd(context: Context) {
         val adRequest = AdRequest.Builder().build()
 
         RewardedAd.load(context,"ca-app-pub-3940256099942544/5224354917", adRequest, object : RewardedAdLoadCallback() {

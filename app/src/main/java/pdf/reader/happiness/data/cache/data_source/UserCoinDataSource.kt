@@ -6,17 +6,26 @@ import pdf.reader.happiness.data.cache.models.CoinModelDb
 
 interface UserCoinDataSource {
 
-    fun fetchUserCoinCount():Flow<Int>
+    fun fetchUserCoinCountAsFlow():Flow<Int>
+    fun fetchUserCoinCount():Int
     fun updateUserCoinCount()
+    fun payWithCoin(price:Int)
 
     class Base(private val toolsDao: ToolsDao):UserCoinDataSource {
-        override fun fetchUserCoinCount(): Flow<Int> {
+
+        override fun fetchUserCoinCountAsFlow(): Flow<Int> = toolsDao.fetchUserCoinCountAsFlow()
+
+        override fun fetchUserCoinCount(): Int {
             return toolsDao.fetchUserCoinCount()
         }
 
         override fun updateUserCoinCount() {
             toolsDao.initUserCoin(CoinModelDb("UCC",0))
             toolsDao.updateUserCoin()
+        }
+
+        override fun payWithCoin(price: Int) {
+            toolsDao.payWithCoin(price)
         }
     }
 }

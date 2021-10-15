@@ -58,7 +58,6 @@ class StatisticFragment : Fragment(),KoinComponent {
 
     }
 
-
     private suspend fun setupChartView(){
         binding.chartView.apply {
             isDrawHoleEnabled = true
@@ -77,10 +76,18 @@ class StatisticFragment : Fragment(),KoinComponent {
         }
 
         val dataModel = ArrayList<PieEntry>()
-        dataModel.add(PieEntry(viewModel.fetchLoveWastedTime(), Name.LOVE))
-        dataModel.add(PieEntry(viewModel.fetchLifeWastedTime(), Name.LIFE))
-        dataModel.add(PieEntry(viewModel.fetchSuccessWastedTime(), Name.SUCCESS))
-        dataModel.add(PieEntry(viewModel.fetchHappyWastedTime(), Name.HAPPY))
+        dataModel.add(PieEntry(if (viewModel.fetchLoveWastedTime()==0f) 1f
+        else viewModel.fetchLoveWastedTime(), Name.LOVE))
+
+        dataModel.add(PieEntry(if (viewModel.fetchLifeWastedTime()==0f) 1f
+        else viewModel.fetchLifeWastedTime(), Name.LIFE))
+
+        dataModel.add(PieEntry(if (viewModel.fetchSuccessWastedTime()==0f) 1f
+        else viewModel.fetchSuccessWastedTime(), Name.SUCCESS))
+
+        dataModel.add(PieEntry(if (viewModel.fetchHappyWastedTime()==0f) 1f
+        else viewModel.fetchHappyWastedTime(), Name.HAPPY))
+
         val colors = ArrayList<Int>()
 
         ColorTemplate.MATERIAL_COLORS.forEach {

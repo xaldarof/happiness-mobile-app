@@ -46,6 +46,7 @@ dependencies {
     implementation 'com.scwang.wave:MultiWaveHeader:1.0.0-alpha-1'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation "com.github.skydoves:elasticviews:2.1.0"
+    implementation 'com.github.sephiroth74:NumberSlidingPicker:1.0.3'
 
     implementation 'com.github.jakob-grabner:Circle-Progress-View:1.4'
     implementation 'com.mikhaellopez:circularprogressbar:3.1.0'

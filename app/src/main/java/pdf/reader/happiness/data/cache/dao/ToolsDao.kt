@@ -48,12 +48,25 @@ interface ToolsDao {
     suspend fun updateEnterCount(body:String)
 
 
-    @Query("UPDATE coins SET coinCount=coinCount+1 WHERE name='UCC'")
+
+    //USER COIN
+
+    @Query("UPDATE coins SET coinCount=coinCount+1000 WHERE name='UCC'")
     fun updateUserCoin()
+
+
+    @Query("UPDATE coins SET coinCount=0 WHERE name='UCC'")
+    fun clearUserCoin()
+
+    @Query("UPDATE coins SET coinCount=coinCount-:money WHERE name='UCC'")
+    fun payWithCoin(money:Int)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun initUserCoin(coinModelDb: CoinModelDb)
 
     @Query("SELECT coinCount FROM coins WHERE name='UCC'")
-    fun fetchUserCoinCount():Flow<Int>
+    fun fetchUserCoinCountAsFlow():Flow<Int>
+
+    @Query("SELECT coinCount FROM coins WHERE name='UCC'")
+    fun fetchUserCoinCount():Int
 }

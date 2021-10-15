@@ -11,6 +11,7 @@
     <color name="reading_toolbar_color">#1A232C</color>
     <color name="like_color">#495665</color>
     <color name="clear_color">#41556C</color>
+    <color name="light_color">#232C35</color>
 
 
     <color name="to_right_color">#FFFFFF</color>
@@ -33,4 +34,7 @@
 
 
     <color name="clickColor">#4E5F73</color>
+    <color name="koin_exchange_edt">#24303E</color>
+    <color name="hint_color">#DDD7D7</color>
+
 </resources>
