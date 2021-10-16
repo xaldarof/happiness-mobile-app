@@ -12,9 +12,12 @@ interface UserCoinRepository {
     fun payWithCoin(price:Int)
 
     class Base(private val userCoinDataSource: UserCoinDataSource):UserCoinRepository {
+
+
         override fun fetchUserCoinCountAsFlow(): Flow<Int> = userCoinDataSource.fetchUserCoinCountAsFlow()
 
         override fun fetchUserCoinCount(): Int = userCoinDataSource.fetchUserCoinCount()
+
 
         override fun updateUserCoinCount() {
             userCoinDataSource.updateUserCoinCount()

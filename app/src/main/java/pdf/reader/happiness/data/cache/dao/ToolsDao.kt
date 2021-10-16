@@ -51,7 +51,7 @@ interface ToolsDao {
 
     //USER COIN
 
-    @Query("UPDATE coins SET coinCount=coinCount+1000 WHERE name='UCC'")
+    @Query("UPDATE coins SET coinCount=coinCount+1 WHERE name='UCC'")
     fun updateUserCoin()
 
 
@@ -63,6 +63,7 @@ interface ToolsDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun initUserCoin(coinModelDb: CoinModelDb)
+
 
     @Query("SELECT coinCount FROM coins WHERE name='UCC'")
     fun fetchUserCoinCountAsFlow():Flow<Int>

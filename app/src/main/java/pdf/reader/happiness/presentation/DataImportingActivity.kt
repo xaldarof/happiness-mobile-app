@@ -2,8 +2,13 @@ package pdf.reader.happiness.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.Observer
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,7 +31,6 @@ class DataImportingActivity : AppCompatActivity(), KoinComponent,
     private lateinit var binding: ActivityDataImportingBinding
     private val viewModel: ImportingActivityViewModel = get()
     private val connectionManager = ConnectionManager(this)
-    private val userCoin:UserCoinRepository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,12 +48,11 @@ class DataImportingActivity : AppCompatActivity(), KoinComponent,
                 .replace(R.id.mainContainer,ShareFragment()).addToBackStack("").commit()
         }
 
+
         binding.start.setOnClickListener {
-            val userEnteredPrice = binding.priceTv.text.toString().toInt()
+            val commonPrice = binding.priceTv.text.toString().toInt()
 
-            if (userCoin.fetchUserCoinCount()>=userEnteredPrice) {
-                userCoin.payWithCoin(userEnteredPrice)
-
+            if (viewModel.fetchUserCoinCount()>=commonPrice) {
                 CoroutineScope(Dispatchers.Main).launch {
                     importData(binding.editTextCount.text.toString().toInt())
                 }
@@ -59,14 +62,19 @@ class DataImportingActivity : AppCompatActivity(), KoinComponent,
             }
         }
 
+
         binding.editTextCount.addTextChangedListener(MyTextWatcher(object :CallBack{
             override fun onChange(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 binding.priceTv.text = if (binding.editTextCount.text.toString().isNotEmpty())
                         (binding.editTextCount.text.toString().toLong()*3).toString() else "0"
             }
         }))
-    }
 
+        viewModel.fetchUserCoinAsLiveData().observe(this, {
+            binding.balanceTv.text = it.toString()
+        })
+
+    }
 
     private suspend fun importData(userEnteredInfoCount: Int) {
         if (connectionManager.isConnected()) {
@@ -87,13 +95,29 @@ class DataImportingActivity : AppCompatActivity(), KoinComponent,
         }
     }
 
+    private fun onFinishExchange(){
+        binding.progressView.visibility = View.INVISIBLE
+        binding.start.isEnabled = true
+
+    }
+
     override fun onSuccessCallBack(count: Int) {
         CoroutineScope(Dispatchers.Main).launch {
-            binding.progressView.visibility = View.INVISIBLE
-            binding.start.isEnabled = true
+            onFinishExchange()
             Toast.makeText(this@DataImportingActivity, "Обмен успешно завершен. Вы получили $count новых данных",
                 Toast.LENGTH_SHORT).show()
+            viewModel.payWithCoin(binding.priceTv.text.toString().toInt())
 
+        }
+    }
+
+    override fun onOutOfBounds(count: Int) {
+        CoroutineScope(Dispatchers.Main).launch {
+            Toast.makeText(this@DataImportingActivity,
+                "Вы просите слишком большое количество данных, максимум: $count",
+                Toast.LENGTH_SHORT
+            ).show()
+            onFinishExchange()
         }
     }
 }

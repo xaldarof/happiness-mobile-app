@@ -9,4 +9,5 @@ class BonusFragmentViewModel(private val userCoinRepository: UserCoinRepository)
     fun updateUserCoinCount() = userCoinRepository.updateUserCoinCount()
 
     fun fetchUserCoinCountAsFlow() = userCoinRepository.fetchUserCoinCountAsFlow().asLiveData()
+
 }

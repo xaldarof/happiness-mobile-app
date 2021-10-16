@@ -23,17 +23,20 @@ class BonusFragment : Fragment(), RewardedAdManager.CallBack,KoinComponent {
 
     private lateinit var binding: FragmentBonusBinding
     private val viewModel: BonusFragmentViewModel = get()
+    private var isUserOn = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View {
         binding = FragmentBonusBinding.inflate(inflater, container, false)
+        isUserOn = true
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.shimmer.startShimmer()
+        val rewardedAdManager = RewardedAdManager(this,requireContext())
+
         binding.progress.visibility = View.INVISIBLE
         binding.backBtn.setOnClickListener { requireActivity().supportFragmentManager.popBackStack() }
 
@@ -45,7 +48,7 @@ class BonusFragment : Fragment(), RewardedAdManager.CallBack,KoinComponent {
         binding.startBtn.setOnClickListener {
             onStartAd()
             CoroutineScope(Dispatchers.Main).launch {
-                RewardedAdManager(this@BonusFragment).showRewardedAd(requireContext())
+                rewardedAdManager.showRewardedAd()
             }
             binding.startBtn.setImageResource(R.drawable.ic_baseline_pause_circle_outline_24)
         }
@@ -56,40 +59,52 @@ class BonusFragment : Fragment(), RewardedAdManager.CallBack,KoinComponent {
 
     }
 
+    override fun onStop() {
+        super.onStop()
+        isUserOn = false
+    }
+
     private fun onStartAd(){
         binding.progress.visibility = View.VISIBLE
         binding.startBtn.isEnabled = false
         binding.shimmer.stopShimmer()
     }
 
-    private fun onAdFinish() {
+    private fun onAdFinish(message:Int) {
         binding.startBtn.setImageResource(R.drawable.ic_baseline_play_circle_outline_24)
         binding.progress.visibility = View.INVISIBLE
         binding.startBtn.isEnabled = true
         binding.shimmer.startShimmer()
-
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT)
+        .show()
     }
 
     override fun onSuccessReward() {
         viewModel.updateUserCoinCount()
     }
 
+
     override fun onNetworkError() {
-        Toast.makeText(requireActivity().applicationContext, "Произошла ошибка соединения", Toast.LENGTH_SHORT).show()
-        onAdFinish()
+        if (isUserOn) {
+            onAdFinish(R.string.error_network)
+        }
     }
 
     override fun handledAnError() {
-        Toast.makeText(requireContext().applicationContext, "Произошла ошибка при показе рекламы", Toast.LENGTH_SHORT).show()
-        onAdFinish()
+        if (isUserOn) {
+            onAdFinish(R.string.handle_error)
+        }
     }
 
     override fun onDismiss() {
-        onAdFinish()
+        if (isUserOn) {
+            onAdFinish(R.string.success_reward)
+        }
     }
 
     override fun onAdIsNotReady() {
-        Toast.makeText(requireContext().applicationContext, "Реклама еще не готова к показу", Toast.LENGTH_SHORT).show()
-        onAdFinish()
+        if (isUserOn) {
+            onAdFinish(R.string.ad_not_ready)
+        }
     }
 }

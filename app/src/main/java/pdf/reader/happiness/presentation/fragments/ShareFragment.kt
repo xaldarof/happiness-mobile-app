@@ -8,33 +8,33 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
-import android.R
-import android.util.Log
 import android.widget.AdapterView
 import android.widget.Toast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.koin.core.component.get
+import android.R
 import pdf.reader.happiness.core.Name
 import pdf.reader.happiness.data.cache.models.Type
-import pdf.reader.happiness.data.cloud.data_insert.CloudDataSendService
 import pdf.reader.happiness.data.cloud.models.InfoCloudModel
 import pdf.reader.happiness.databinding.FragmentShareBinding
 import pdf.reader.happiness.tools.*
+import pdf.reader.happiness.vm.ShareViewModel
 
 
 @KoinApiExtension
 class ShareFragment : Fragment(), KoinComponent,ImportInfoDialog.CallBack {
 
     private lateinit var binding: FragmentShareBinding
+    private val viewModel:ShareViewModel = get()
     private val typeLocator = TypeLocator()
-    private val sendService: CloudDataSendService by inject()
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+        savedInstanceState: Bundle?): View {
         binding = FragmentShareBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -42,9 +42,10 @@ class ShareFragment : Fragment(), KoinComponent,ImportInfoDialog.CallBack {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.backBtn.setOnClickListener { requireActivity().supportFragmentManager.popBackStack() }
-        var type = ""
         val adapter = ArrayAdapter(requireContext(), R.layout.simple_spinner_dropdown_item,
             arrayListOf(Name.HAPPY, Name.LOVE,Name.SUCCESS,Name.LIFE))
+
+        var type = ""
         binding.spinner.adapter = adapter
 
         binding.spinner.onItemSelectedListener = SpinnerClickCallBack(object :CallBackSpinner {
@@ -61,14 +62,24 @@ class ShareFragment : Fragment(), KoinComponent,ImportInfoDialog.CallBack {
         val body = binding.bodyEditText.text.toString()
 
         if (title.trim().isNotEmpty() && body.trim().isNotEmpty()) {
-            sendData(type,title,body)
-            ImportInfoDialog.Base().showInfoAboutPublish(requireContext(),this)
+
+            if (viewModel.fetchUserCoinCount() >= 1) {
+
+                sendData(type, title, body)
+                ImportInfoDialog.Base().showInfoAboutPublish(requireContext(), this)
+
+            }else {
+
+                Toast.makeText(requireContext(),"У вас недостаточно монет для отправки данных",
+                    Toast.LENGTH_SHORT).show()
+            }
+
         }
     }
 
     private fun sendData(type:String,title:String,body:String){
         CoroutineScope(Dispatchers.Main).launch {
-            sendService.sendData(InfoCloudModel(title, body, type = typeLocator.locate(type), dataType = Type.CLOUD))
+            viewModel.sendDataToFirebase(InfoCloudModel(title, body, type = typeLocator.locate(type), dataType = Type.CLOUD))
         }
     }
 

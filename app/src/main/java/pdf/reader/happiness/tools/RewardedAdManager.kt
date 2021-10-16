@@ -4,22 +4,23 @@ import android.app.Activity
 import android.content.Context
 import android.util.Log
 import com.google.android.gms.ads.*
-import com.google.android.gms.ads.rewarded.RewardItem
 import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 
 interface Ad {
-   suspend fun showRewardedAd(context: Context)
+   suspend fun showRewardedAd()
 }
 
-class RewardedAdManager(private val callback:CallBack): Ad {
+class RewardedAdManager(private val callback:CallBack,private val context: Context): Ad {
 
     private var myRewardedAd: RewardedAd?=null
 
-    override suspend fun showRewardedAd(context: Context) {
+    override suspend fun showRewardedAd() {
         val adRequest = AdRequest.Builder().build()
 
-        RewardedAd.load(context,"ca-app-pub-3940256099942544/5224354917", adRequest, object : RewardedAdLoadCallback() {
+        RewardedAd.load(context,"ca-app-pub-3940256099942544/5224354917", adRequest,
+            object : RewardedAdLoadCallback() {
+
             override fun onAdFailedToLoad(adError: LoadAdError) {
                 Log.d("pos2", adError.message)
                 callback.onNetworkError()

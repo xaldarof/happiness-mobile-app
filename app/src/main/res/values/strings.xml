@@ -33,4 +33,12 @@
     <string name="exchange_coin">Обменить монеты</string>
     <string name="share">Поделиться</string>
     <string name="exchange">Обменить</string>
+    <string name="error_network">Произошла ошибка соединения</string>
+    <string name="handle_error">Произошла ошибка при показе рекламы</string>
+    <string name="success_reward">Вы успешно получили Tcoin</string>
+    <string name="ad_not_ready">Реклама еще не готова к показу</string>
+    <string name="not_enough_money">У вас недостаточно монет</string>
+    <string name="sum">Общая цена:</string>
+    <string name="balance">Ваш баланс :</string>
+    <string name="data_count">Количество статьей...</string>
 </resources>

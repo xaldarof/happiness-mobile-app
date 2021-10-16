@@ -1,5 +1,7 @@
 package pdf.reader.happiness.data.cache.data_source
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.flow.Flow
 import pdf.reader.happiness.data.cache.dao.ToolsDao
 import pdf.reader.happiness.data.cache.models.CoinModelDb
@@ -15,9 +17,7 @@ interface UserCoinDataSource {
 
         override fun fetchUserCoinCountAsFlow(): Flow<Int> = toolsDao.fetchUserCoinCountAsFlow()
 
-        override fun fetchUserCoinCount(): Int {
-            return toolsDao.fetchUserCoinCount()
-        }
+        override fun fetchUserCoinCount() = toolsDao.fetchUserCoinCount()
 
         override fun updateUserCoinCount() {
             toolsDao.initUserCoin(CoinModelDb("UCC",0))
