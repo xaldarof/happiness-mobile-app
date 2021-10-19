@@ -17,7 +17,7 @@ import pdf.reader.happiness.R
 import pdf.reader.happiness.core.ChapterModel
 import pdf.reader.happiness.core.InfoModel
 import pdf.reader.happiness.databinding.FragmentSuccessBinding
-import pdf.reader.happiness.presentation.ReadingActivity
+import pdf.reader.happiness.presentation.activity.ReadingActivity
 import pdf.reader.happiness.presentation.adapter.ItemAdapter
 import pdf.reader.happiness.tools.CongratulationView
 import pdf.reader.happiness.vm.SuccessViewModel

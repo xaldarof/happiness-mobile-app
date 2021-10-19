@@ -40,5 +40,12 @@
     <string name="not_enough_money">У вас недостаточно монет</string>
     <string name="sum">Общая цена:</string>
     <string name="balance">Ваш баланс :</string>
-    <string name="data_count">Количество статьей...</string>
+    <string name="data_count">Количество статьей…</string>
+    <string name="exchange_coin_to_data">Обменяйте монеты на новые статьи</string>
+    <string name="click_and_wait">Просто нажмите на кнопку \nи подождите.</string>
+    <string name="price_of_share">Цена отправки:</string>
+    <string name="date">Дата создания</string>
+    <string name="coin_count">Количество монет</string>
+    <string name="id">Идентификатор</string>
+    <string name="active">Активировать</string>
 </resources>

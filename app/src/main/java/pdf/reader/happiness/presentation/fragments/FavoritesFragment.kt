@@ -1,4 +1,4 @@
-package pdf.reader.happiness.presentation
+package pdf.reader.happiness.presentation.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,6 +12,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import pdf.reader.happiness.core.InfoModel
 import pdf.reader.happiness.databinding.FragmentFavoritesBinding
+import pdf.reader.happiness.presentation.activity.ReadingActivity
 import pdf.reader.happiness.presentation.adapter.ItemAdapter
 import pdf.reader.happiness.tools.showIfEmpty
 import pdf.reader.happiness.vm.FavoritesViewModel

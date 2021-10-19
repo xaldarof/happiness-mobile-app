@@ -6,7 +6,7 @@
     android:background="@color/myWhite"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".presentation.ReadingActivity">
+    tools:context=".presentation.activity.ReadingActivity">
 
     <include
         android:id="@+id/toolbar"

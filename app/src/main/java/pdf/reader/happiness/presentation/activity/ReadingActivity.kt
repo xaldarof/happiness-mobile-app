@@ -1,4 +1,4 @@
-package pdf.reader.happiness.presentation
+package pdf.reader.happiness.presentation.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,7 +14,7 @@ import org.koin.core.component.get
 import org.koin.core.component.inject
 import pdf.reader.happiness.core.InfoModel
 import pdf.reader.happiness.data.cache.models.Type
-import pdf.reader.happiness.tools.AssetReader
+import pdf.reader.happiness.data.cache.settings_cache.AssetReader
 import pdf.reader.happiness.tools.ReadingWarningDialog
 import pdf.reader.happiness.vm.ReadingViewModel
 import java.lang.Exception

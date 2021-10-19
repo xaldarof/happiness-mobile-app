@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/myWhite"
     android:orientation="vertical"
-    tools:context=".presentation.MainActivity">
+    tools:context=".presentation.activity.MainActivity">
 
     <ScrollView
         android:id="@+id/scroll"

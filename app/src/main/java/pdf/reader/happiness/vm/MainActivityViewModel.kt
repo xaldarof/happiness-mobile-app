@@ -4,8 +4,8 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.delay
 import pdf.reader.happiness.data.cache.settings_cache.WastedTimeController
-import pdf.reader.happiness.tools.WastedTimeAchievement
-import pdf.reader.happiness.tools.WastedTimeAchievementController
+import pdf.reader.happiness.data.cache.settings_cache.WastedTimeAchievement
+import pdf.reader.happiness.data.cache.settings_cache.WastedTimeAchievementController
 
 class MainActivityViewModel(
     private val wastedTimeController: WastedTimeController,

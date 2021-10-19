@@ -10,6 +10,7 @@ import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import pdf.reader.happiness.data.cache.core.CacheDataRepository
+import pdf.reader.happiness.data.cache.settings_cache.CacheClear
 
 @KoinApiExtension
 class CacheClearTest : KoinComponent {

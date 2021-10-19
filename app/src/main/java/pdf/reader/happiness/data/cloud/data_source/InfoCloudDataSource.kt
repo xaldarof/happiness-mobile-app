@@ -1,4 +1,4 @@
-package pdf.reader.happiness.data.cloud
+package pdf.reader.happiness.data.cloud.data_source
 
 import com.google.firebase.database.*
 import kotlinx.coroutines.delay
@@ -15,9 +15,11 @@ interface InfoCloudDataSource {
     class Base(private val databaseReference: DatabaseReference) : InfoCloudDataSource {
 
         private val cloudInfoList = CopyOnWriteArrayList<InfoCloudModel>()
+        private var tryCount = 0
 
-        override suspend fun fetchInfoAsFlow(): Flow<CopyOnWriteArrayList<InfoCloudModel>> {
+        override suspend fun fetchInfoAsFlow(): Flow<CopyOnWriteArrayList<InfoCloudModel>>{
             val list = CopyOnWriteArrayList<InfoCloudModel>()
+            tryCount++
 
             databaseReference.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(p0: DataSnapshot) {
@@ -40,7 +42,10 @@ interface InfoCloudDataSource {
                 }
             })
             delay(2000)
-            return if (cloudInfoList.isEmpty()) fetchInfoAsFlow() else flow { emit(cloudInfoList)
+
+            return if(cloudInfoList.isEmpty()) fetchInfoAsFlow()
+
+            else flow { emit(cloudInfoList)
                 cloudInfoList.clear()
             }
         }

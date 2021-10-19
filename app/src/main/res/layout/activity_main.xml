@@ -9,7 +9,7 @@
     android:background="@color/myWhite"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".presentation.MainActivity">
+    tools:context=".presentation.activity.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"

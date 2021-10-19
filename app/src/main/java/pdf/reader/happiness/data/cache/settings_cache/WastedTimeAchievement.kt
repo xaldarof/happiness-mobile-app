@@ -1,8 +1,7 @@
-package pdf.reader.happiness.tools
+package pdf.reader.happiness.data.cache.settings_cache
 
 import pdf.reader.happiness.core.AchievementModel
 import pdf.reader.happiness.data.cache.core.AchievementRepository
-import pdf.reader.happiness.data.cache.settings_cache.BadgeController
 
 interface WastedTimeAchievement {
 

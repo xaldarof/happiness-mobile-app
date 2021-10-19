@@ -6,7 +6,7 @@ import org.koin.dsl.module
 import pdf.reader.happiness.data.cache.data_source.*
 import pdf.reader.happiness.core.AppDatabase
 import pdf.reader.happiness.data.cache.core.*
-import pdf.reader.happiness.tools.AchievementUpdater
+import pdf.reader.happiness.data.cache.settings_cache.AchievementUpdater
 
 
 val cacheDataModule = module {

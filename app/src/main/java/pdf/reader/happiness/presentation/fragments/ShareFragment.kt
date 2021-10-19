@@ -14,7 +14,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.core.component.get
-import android.R
+import androidx.viewpager2.widget.ViewPager2
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
+import pdf.reader.happiness.R
 import pdf.reader.happiness.core.Name
 import pdf.reader.happiness.data.cache.models.Type
 import pdf.reader.happiness.data.cloud.models.InfoCloudModel
@@ -30,8 +32,6 @@ class ShareFragment : Fragment(), KoinComponent,ImportInfoDialog.CallBack {
     private val viewModel:ShareViewModel = get()
     private val typeLocator = TypeLocator()
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View {
@@ -41,8 +41,12 @@ class ShareFragment : Fragment(), KoinComponent,ImportInfoDialog.CallBack {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.backBtn.setOnClickListener { requireActivity().supportFragmentManager.popBackStack() }
-        val adapter = ArrayAdapter(requireContext(), R.layout.simple_spinner_dropdown_item,
+        OverScrollDecoratorHelper.setUpOverScroll(binding.scroll)
+
+        val viewPager2 = requireActivity().findViewById<ViewPager2>(R.id.pagerImportActivity)
+        binding.backBtn.setOnClickListener { viewPager2.currentItem-- }
+
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item,
             arrayListOf(Name.HAPPY, Name.LOVE,Name.SUCCESS,Name.LIFE))
 
         var type = ""

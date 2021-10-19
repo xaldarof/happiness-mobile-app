@@ -54,6 +54,9 @@ interface ToolsDao {
     @Query("UPDATE coins SET coinCount=coinCount+1 WHERE name='UCC'")
     fun updateUserCoin()
 
+    @Query("UPDATE coins SET coinCount=coinCount+:count WHERE name='UCC'")
+    fun updateUserCoin(count:Int)
+
 
     @Query("UPDATE coins SET coinCount=0 WHERE name='UCC'")
     fun clearUserCoin()

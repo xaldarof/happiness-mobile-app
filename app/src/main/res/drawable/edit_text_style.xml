@@ -3,7 +3,7 @@
     <item android:state_pressed="false">
         <shape android:shape="rectangle">
             <corners android:radius="16dp" />
-            <solid android:color="@color/koin_exchange_edt" />
+            <solid android:color="#FBF9F9" />
         </shape>
     </item>
 </selector>

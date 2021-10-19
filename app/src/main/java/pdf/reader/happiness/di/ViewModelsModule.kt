@@ -30,4 +30,6 @@ val viewModels = module {
     factory { BonusFragmentViewModel(get()) }
 
     factory { ShareViewModel(get(),get()) }
+
+    factory { TokenViewModel(get(),get()) }
 }

@@ -12,7 +12,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import pdf.reader.happiness.core.InfoModel
 import pdf.reader.happiness.databinding.FragmentSearchBinding
-import pdf.reader.happiness.presentation.ReadingActivity
+import pdf.reader.happiness.presentation.activity.ReadingActivity
 import pdf.reader.happiness.presentation.adapter.ItemAdapter
 import pdf.reader.happiness.tools.TextWatcherCallBack
 import pdf.reader.happiness.vm.SearchViewModel
@@ -50,6 +50,9 @@ class SearchFragment : Fragment(), ItemAdapter.OnClick, KoinComponent {
     override fun onResume() {
         super.onResume()
         searchFromDatabase(realQuery)
+
+    }
+    private fun update(){
     }
 
     private fun searchFromDatabase(query: String) {

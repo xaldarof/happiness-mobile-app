@@ -1,6 +1,5 @@
 package pdf.reader.happiness.vm
 
-import android.util.Log
 import androidx.lifecycle.*
 import kotlinx.coroutines.flow.collect
 import pdf.reader.happiness.data.cache.core.CacheDataRepository
@@ -24,7 +23,7 @@ class ImportingActivityViewModel(
     private val userCoin: UserCoinRepository
 ) : ViewModel(),Editable{
 
-    suspend fun invoke(callBack: CallBack,count: Int) {
+    suspend fun startImporting(callBack: CallBack,count: Int) {
         val limitedList = ArrayList<InfoCloudModel>()
 
         cloudDataRepository.fetchCloudData().collect { cloudData ->

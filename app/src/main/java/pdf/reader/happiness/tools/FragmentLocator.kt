@@ -44,6 +44,10 @@ class FragmentLocator<T>(
             navigate(BonusFragment())
         }
 
+        if (fragmentName == FragmentName.TOKENS){
+            navigate(TokensFragment())
+        }
+
     }
 
     private fun navigate(fragment: Fragment) {

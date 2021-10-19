@@ -9,13 +9,14 @@ import pdf.reader.happiness.core.ChapterModel
 import pdf.reader.happiness.core.InfoModel
 import pdf.reader.happiness.data.cache.core.ChaptersRepository
 import pdf.reader.happiness.data.cache.core.CacheDataRepository
-import pdf.reader.happiness.tools.AchievementUpdater
+import pdf.reader.happiness.data.cache.settings_cache.AchievementUpdater
 import pdf.reader.happiness.tools.PercentCalculator
 
 class LifeViewModel(private val cacheDataRepository: CacheDataRepository,
                     private val chaptersRepository: ChaptersRepository,
                     private val percentCalculator: PercentCalculator,
-                    private val achievementUpdater: AchievementUpdater): ViewModel() {
+                    private val achievementUpdater: AchievementUpdater
+): ViewModel() {
 
     suspend fun fetchLife() = cacheDataRepository.fetchLife().asLiveData()
 

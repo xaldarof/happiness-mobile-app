@@ -5,10 +5,10 @@ import android.content.SharedPreferences
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import pdf.reader.happiness.data.cache.settings_cache.*
-import pdf.reader.happiness.presentation.ReadingActivityPresenter
-import pdf.reader.happiness.tools.CacheClear
-import pdf.reader.happiness.tools.WastedTimeAchievement
-import pdf.reader.happiness.tools.WastedTimeAchievementController
+import pdf.reader.happiness.presentation.activity.ReadingActivityPresenter
+import pdf.reader.happiness.data.cache.settings_cache.CacheClear
+import pdf.reader.happiness.data.cache.settings_cache.WastedTimeAchievement
+import pdf.reader.happiness.data.cache.settings_cache.WastedTimeAchievementController
 
 
 val settingsCacheModule = module {

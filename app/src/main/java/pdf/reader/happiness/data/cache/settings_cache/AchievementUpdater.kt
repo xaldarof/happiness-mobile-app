@@ -1,8 +1,7 @@
-package pdf.reader.happiness.tools
+package pdf.reader.happiness.data.cache.settings_cache
 
 import pdf.reader.happiness.core.AchievementModel
 import pdf.reader.happiness.data.cache.core.AchievementRepository
-import pdf.reader.happiness.data.cache.settings_cache.BadgeController
 
 interface AchievementUpdater {
 
@@ -12,7 +11,8 @@ interface AchievementUpdater {
     fun addAchievementAllLoveFinished()
     fun addAchievementAllHappyFinished()
 
-    class Base(private val achievementRepository: AchievementRepository,private val badgeController: BadgeController) : AchievementUpdater {
+    class Base(private val achievementRepository: AchievementRepository,private val badgeController: BadgeController) :
+        AchievementUpdater {
         override fun addAchievementAllFinished() {
             achievementRepository.insertAchievement(
                 AchievementModel("Поздравляем, вы завершили все разделы",

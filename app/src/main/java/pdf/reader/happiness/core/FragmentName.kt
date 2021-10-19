@@ -8,5 +8,6 @@ enum class FragmentName{
     MEDITATION,
     STATISTIC,
     BONUS,
-    INFORMATION
+    INFORMATION,
+    TOKENS,
 }

@@ -1,6 +1,5 @@
 package pdf.reader.happiness.presentation.adapter
 
-import android.R
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.view.LayoutInflater
@@ -20,8 +19,8 @@ class ItemAdapter(private val onClick: OnClick) : RecyclerView.Adapter<RecyclerV
     private var lastPosition = -1
 
     fun update(newList: List<InfoModel>) {
-        val diffUtill = DiffUtill(list, newList)
-        val diff = DiffUtil.calculateDiff(diffUtill)
+        val diffUtil = DiffUtill(list, newList)
+        val diff = DiffUtil.calculateDiff(diffUtil)
         list.clear()
         list.addAll(newList)
         diff.dispatchUpdatesTo(this)
@@ -68,7 +67,7 @@ class ItemAdapter(private val onClick: OnClick) : RecyclerView.Adapter<RecyclerV
     private fun setAnimation(viewToAnimate: View, position: Int) {
         if (position > lastPosition) {
             val animation: Animation =
-                AnimationUtils.loadAnimation(viewToAnimate.context, R.anim.slide_in_left)
+                AnimationUtils.loadAnimation(viewToAnimate.context, android.R.anim.slide_in_left)
             animation.duration = 500
             viewToAnimate.startAnimation(animation)
             lastPosition = position

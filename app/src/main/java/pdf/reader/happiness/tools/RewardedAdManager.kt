@@ -14,11 +14,12 @@ interface Ad {
 class RewardedAdManager(private val callback:CallBack,private val context: Context): Ad {
 
     private var myRewardedAd: RewardedAd?=null
-
+    private val realId = "ca-app-pub-6592657632288197/6785212343"
+    private val testId = "ca-app-pub-3940256099942544/5224354917"
     override suspend fun showRewardedAd() {
         val adRequest = AdRequest.Builder().build()
 
-        RewardedAd.load(context,"ca-app-pub-3940256099942544/5224354917", adRequest,
+        RewardedAd.load(context,realId, adRequest,
             object : RewardedAdLoadCallback() {
 
             override fun onAdFailedToLoad(adError: LoadAdError) {

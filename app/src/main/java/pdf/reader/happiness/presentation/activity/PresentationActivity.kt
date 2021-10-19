@@ -1,4 +1,4 @@
-package pdf.reader.happiness.presentation
+package pdf.reader.happiness.presentation.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

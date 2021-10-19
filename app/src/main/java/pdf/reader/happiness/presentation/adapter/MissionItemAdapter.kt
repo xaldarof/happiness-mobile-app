@@ -16,8 +16,8 @@ class MissionItemAdapter(private val onClick: OnClick) :
     init {
         oldList.add(MissionModel("Медитация",0f,FragmentName.MEDITATION))
         oldList.add(MissionModel("Статистика",0f,FragmentName.STATISTIC))
-        oldList.add(MissionModel("Бонусы",0f,FragmentName.BONUS))
-
+        oldList.add(MissionModel("Заработать",0f,FragmentName.BONUS))
+        oldList.add(MissionModel("Токены",0f,FragmentName.TOKENS))
     }
 
     inner class VH(private val binding: MissionItemBinding) :
@@ -31,16 +31,17 @@ class MissionItemAdapter(private val onClick: OnClick) :
             binding.name.text = missionModel.name
 
             if (missionModel.fragmentName == FragmentName.MEDITATION) {
-                binding.icon.setImageResource(R.drawable.ic_baseline_headset_24)
+                binding.icon.setImageResource(R.drawable.ic_headphones_icon_icons_com_71177)
             }
-
             if (missionModel.fragmentName == FragmentName.STATISTIC) {
-                binding.icon.setImageResource(R.drawable.ic_baseline_show_chart_24)
+                binding.icon.setImageResource(R.drawable.ic_chart)
             }
             if (missionModel.fragmentName == FragmentName.BONUS) {
-                binding.icon.setImageResource(R.drawable.ic_baseline_cake_24)
+                binding.icon.setImageResource(R.drawable.ic_diamond)
             }
-
+            if (missionModel.fragmentName == FragmentName.TOKENS){
+                binding.icon.setImageResource(R.drawable.ic_baseline_local_atm_24)
+            }
         }
     }
 

@@ -18,6 +18,5 @@ interface RestartDialog {
             }
             dialog.show()
         }
-
     }
 }

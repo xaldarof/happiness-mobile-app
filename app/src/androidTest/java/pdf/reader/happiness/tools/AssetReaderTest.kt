@@ -6,14 +6,15 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
+import pdf.reader.happiness.data.cache.settings_cache.AssetReader
 
 
-class AssetReaderTest:AssetReader.ExitCallBack{
+class AssetReaderTest: AssetReader.ExitCallBack{
 
     private companion object {
         const val TEST_PATH = "happy/cicati100"
     }
-    private lateinit var assertReader:AssetReader
+    private lateinit var assertReader: AssetReader
 
     @Before
     fun setUp(){

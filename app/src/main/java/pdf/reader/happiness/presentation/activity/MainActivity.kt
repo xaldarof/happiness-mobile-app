@@ -1,32 +1,24 @@
-package pdf.reader.happiness.presentation
+package pdf.reader.happiness.presentation.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager.widget.ViewPager
-import androidx.viewpager2.widget.ViewPager2
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import me.everything.android.ui.overscroll.HorizontalOverScrollBounceEffectDecorator
-import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
-import me.everything.android.ui.overscroll.adapters.ViewPagerOverScrollDecorAdapter
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import org.koin.core.component.inject
-import pdf.reader.happiness.data.cache.models.Type
 import pdf.reader.happiness.data.cache.settings_cache.BadgeController
 import pdf.reader.happiness.data.cache.settings_cache.ThemeController
-import pdf.reader.happiness.data.cloud.data_insert.CloudDataSendService
-import pdf.reader.happiness.data.cloud.models.InfoCloudModel
 import pdf.reader.happiness.databinding.ActivityMainBinding
+import pdf.reader.happiness.presentation.fragments.FavoritesFragment
+import pdf.reader.happiness.presentation.SettingsFragment
 import pdf.reader.happiness.presentation.adapter.*
 import pdf.reader.happiness.presentation.fragments.AchievementsFragment
 import pdf.reader.happiness.presentation.fragments.MainFragment
 import pdf.reader.happiness.presentation.fragments.SearchFragment
-import pdf.reader.happiness.tools.MyFirebaseMessagingService
 import pdf.reader.happiness.vm.MainActivityViewModel
 
 @KoinApiExtension
@@ -50,12 +42,9 @@ class MainActivity : AppCompatActivity(), KoinComponent {
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
-        FragmentController(
-            this, listOf(
-                MainFragment(), SearchFragment(),
-                FavoritesFragment(),
-                AchievementsFragment(),
-                SettingsFragment()),badgeController)
+
+        FragmentController(this, listOf(MainFragment(), SearchFragment(),
+                FavoritesFragment(), AchievementsFragment(), SettingsFragment()),badgeController)
 
         CoroutineScope(Dispatchers.IO).launch {
             viewModel.updateWastedTime()

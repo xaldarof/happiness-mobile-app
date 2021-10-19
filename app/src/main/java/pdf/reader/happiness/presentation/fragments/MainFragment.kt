@@ -1,6 +1,7 @@
 package pdf.reader.happiness.presentation.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,12 +18,12 @@ import org.koin.core.component.get
 import org.koin.core.component.inject
 import pdf.reader.happiness.R
 import pdf.reader.happiness.core.ChapterModel
-import pdf.reader.happiness.core.FragmentName
 import pdf.reader.happiness.core.MissionModel
+import pdf.reader.happiness.data.cache.settings_cache.AchievementUpdater
 import pdf.reader.happiness.data.cache.settings_cache.CongratulationController
 import pdf.reader.happiness.data.cache.settings_cache.ThemeController
 import pdf.reader.happiness.databinding.FragmentMainBinding
-import pdf.reader.happiness.presentation.MainFragmentPresenter
+import pdf.reader.happiness.presentation.activity.MainFragmentPresenter
 import pdf.reader.happiness.presentation.adapter.ChapterItemAdapter
 import pdf.reader.happiness.presentation.adapter.MissionItemAdapter
 import pdf.reader.happiness.tools.*
@@ -78,8 +79,12 @@ class MainFragment : Fragment(), KoinComponent, ChapterItemAdapter.OnClick,
         super.onResume()
         CoroutineScope(Dispatchers.Main).launch {
             updateCore()
+        }
+
+        CoroutineScope(Dispatchers.Main).launch {
             update()
         }
+        Log.d("pos2","ON RESUME")
     }
 
     private suspend fun updateCore() {
@@ -92,8 +97,9 @@ class MainFragment : Fragment(), KoinComponent, ChapterItemAdapter.OnClick,
         while (true) {
             viewModel.fetchChapters().observeForever {
                 chapterItemAdapter.update(it)
+                Log.d("pos2", "DATA $it")
             }
-            delay(1000)
+            delay(4000)
         }
     }
 

@@ -9,6 +9,7 @@ import org.junit.Test
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import pdf.reader.happiness.data.cloud.data_source.InfoCloudDataSource
 
 @KoinApiExtension
 class InfoCloudDataSourceTest : KoinComponent {
