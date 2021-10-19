@@ -27,7 +27,7 @@
     <string name="share_your_text">Поделитесь с другими что-то интересное</string>
     <string name="rate_us">Оценить приложение</string>
     <string name="dev_mode_enabled">Включен режим разработчика</string>
-    <string name="no_connection">Нет подключения к интернету</string>
+    <string name="no_connection">Нет подключения к интернету…</string>
     <string name="connect_headphones">Подключите наушники для максимального погружения</string>
     <string name="have_good_day">Медитация окончено, желаю вас приятного дня.</string>
     <string name="exchange_coin">Обменить монеты</string>
@@ -48,4 +48,10 @@
     <string name="coin_count">Количество монет</string>
     <string name="id">Идентификатор</string>
     <string name="active">Активировать</string>
+    <string name="token_not_found">Данный токен не существует или ошибка подключения, повторите попытку</string>
+    <string name="check">ПРОВЕРИТЬ</string>
+    <string name="token_info">Токен нужен для создание чека для кого-либо, чтобы например ваш друг мог получить от вас монеты(Tcoin) для обмена на новые данные в приложении. Вы можете найти токены по id и потом активировать их. Но запомните токен будет удален после активации.</string>
+    <string name="token_after_activation">Токен будет удален после активации</string>
+    <string name="create">СОЗДАТЬ</string>
+    <string name="id_token">Вставьте id</string>
 </resources>

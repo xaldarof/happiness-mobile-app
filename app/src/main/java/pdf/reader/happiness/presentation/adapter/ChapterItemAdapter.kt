@@ -13,6 +13,7 @@ import pdf.reader.happiness.core.ChapterModel
 import pdf.reader.happiness.core.Name
 import pdf.reader.happiness.data.cache.settings_cache.ThemeController
 import pdf.reader.happiness.databinding.ChapterItemBinding
+import pdf.reader.happiness.tools.inAnimation
 
 
 class ChapterItemAdapter(private val onClick: OnClick,private val themeController: ThemeController) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -62,7 +63,8 @@ class ChapterItemAdapter(private val onClick: OnClick,private val themeControlle
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as ItemViewHolder).onBind(list[position])
-        setAnimation(holder.itemView, position)
+        holder.itemView.inAnimation()
+    // setAnimation(holder.itemView, position)
     }
 
     override fun getItemCount(): Int {
@@ -71,10 +73,7 @@ class ChapterItemAdapter(private val onClick: OnClick,private val themeControlle
 
     private fun setAnimation(viewToAnimate: View, position: Int) {
         if (position > lastPosition) {
-            val animation: Animation =
-                AnimationUtils.loadAnimation(viewToAnimate.context, R.anim.slide_in_left_custom)
-            animation.duration = 800
-            viewToAnimate.startAnimation(animation)
+            viewToAnimate.inAnimation()
             lastPosition = position
         }
     }

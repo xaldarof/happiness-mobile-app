@@ -11,6 +11,11 @@ class TokenViewModel(private val cloudDataRepository: CloudDataRepository,
 
     suspend fun createToken(tokenValue:Int)  = cloudDataRepository.createToken(tokenValue)
 
+    suspend fun createTokenByUser(tokenValue:Int,tokenId: String)  =
+        cloudDataRepository.createTokenByUser(tokenValue,tokenId)
+
+    suspend fun removeToken(tokenId:String) = cloudDataRepository.removeToken(tokenId)
+
     fun fetchUserCoinCount() = coinRepository.fetchUserCoinCount()
 
     fun updateUserCoinCount(count: Int) = coinRepository.updateUserCoinCount(count)

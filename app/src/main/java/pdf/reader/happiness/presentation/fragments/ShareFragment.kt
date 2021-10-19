@@ -66,18 +66,17 @@ class ShareFragment : Fragment(), KoinComponent,ImportInfoDialog.CallBack {
         val body = binding.bodyEditText.text.toString()
 
         if (title.trim().isNotEmpty() && body.trim().isNotEmpty()) {
-
             if (viewModel.fetchUserCoinCount() >= 1) {
-
                 sendData(type, title, body)
                 ImportInfoDialog.Base().showInfoAboutPublish(requireContext(), this)
-
-            }else {
-
+            }
+            else {
                 Toast.makeText(requireContext(),"У вас недостаточно монет для отправки данных",
                     Toast.LENGTH_SHORT).show()
             }
-
+        }else {
+            if (title.isEmpty()) binding.titleEditText.errorAnimation()
+            if (body.isEmpty()) binding.bodyEditText.errorAnimation()
         }
     }
 

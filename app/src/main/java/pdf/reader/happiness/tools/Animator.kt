@@ -3,15 +3,21 @@ package pdf.reader.happiness.tools
 import android.view.View
 import render.animations.Attention
 import render.animations.Render
+import render.animations.Zoom
 
 
-fun View.animation() {
+fun View.errorAnimation() {
     val render = Render(context)
-    render.setDuration(10000)
-    render.setAnimation(Attention.Pulse(this))
+    render.setDuration(1000)
+    render.setAnimation(Attention.Shake(this))
     render.start()
-    this.animate().rotation(360f).setDuration(20000).start()
+}
 
+fun View.inAnimation() {
+    val render = Render(context)
+    render.setDuration(1000)
+    render.setAnimation(Attention.RuberBand(this))
+    render.start()
 }
 
 fun View.pulseAnimation(duration: Long) {

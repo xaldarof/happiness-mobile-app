@@ -1,10 +1,12 @@
 package pdf.reader.happiness.presentation.fragments
 
+import android.animation.Animator
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
 import android.widget.Toast
 import androidx.viewpager2.widget.ViewPager2
 import kotlinx.coroutines.CoroutineScope
@@ -15,10 +17,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import pdf.reader.happiness.R
 import pdf.reader.happiness.databinding.FragmentExchangeBinding
-import pdf.reader.happiness.tools.CallBack
-import pdf.reader.happiness.tools.ConnectionManager
-import pdf.reader.happiness.tools.ImportInfoDialog
-import pdf.reader.happiness.tools.MyTextWatcher
+import pdf.reader.happiness.tools.*
 import pdf.reader.happiness.vm.ImportingActivityViewModel
 
 
@@ -57,8 +56,10 @@ class ExchangeFragment : Fragment(),KoinComponent,ImportingActivityViewModel.Cal
 
             }else {
                 if (binding.editTextCount.text.toString().isEmpty()) {
+                    binding.editTextCount.errorAnimation()
                     Toast.makeText(requireContext(), "Введите количетсво статьей !", Toast.LENGTH_SHORT).show()
                 } else {
+                    binding.balanceLayout.errorAnimation()
                     Toast.makeText(requireContext(), "У вас не хватает количество монет", Toast.LENGTH_SHORT).show()
                 }
             }

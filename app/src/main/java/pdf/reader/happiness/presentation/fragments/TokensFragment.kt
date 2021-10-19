@@ -14,10 +14,12 @@ import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
+import pdf.reader.happiness.R
 import pdf.reader.happiness.core.Status
 import pdf.reader.happiness.databinding.FragmentTokensBinding
 import pdf.reader.happiness.tools.ConnectionManager
 import pdf.reader.happiness.tools.TokenDialog
+import pdf.reader.happiness.tools.errorAnimation
 import pdf.reader.happiness.vm.TokenViewModel
 
 
@@ -27,6 +29,7 @@ class TokensFragment : Fragment(), KoinComponent,TokenDialog.CallBack {
     private lateinit var binding: FragmentTokensBinding
     private val viewModel: TokenViewModel = get()
     private var coinCount = 0
+    private var tokenIdForRemove = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,13 +43,20 @@ class TokensFragment : Fragment(), KoinComponent,TokenDialog.CallBack {
         super.onViewCreated(view, savedInstanceState)
         val connectionManager = ConnectionManager(requireContext())
 
-        CoroutineScope(Dispatchers.IO).launch {
-            viewModel.createToken(23)
-        }
+        binding.infoBtn.setOnClickListener { TokenDialog.Base(requireContext()).showInfo() }
+        binding.backBtn.setOnClickListener { requireActivity().supportFragmentManager.popBackStack() }
+
         binding.createTokenBtn.setOnClickListener {
-            if (connectionManager.isConnected()) {
-                val tokenId = binding.idEditText.text.toString()
+            TokenDialog.Base(requireContext()).showCreateTokenDialog(viewModel.fetchUserCoinCount(),this)
+        }
+
+        binding.checkTokenBtn.setOnClickListener {
+            val tokenId = binding.idEditText.text.toString()
+
+            if (connectionManager.isConnected() && tokenId.isNotEmpty()) {
+
                 CoroutineScope(Dispatchers.IO).launch {
+
                     val result = viewModel.fetchTokenById(tokenId)
 
                    withContext(Dispatchers.Main) {
@@ -55,26 +65,38 @@ class TokensFragment : Fragment(), KoinComponent,TokenDialog.CallBack {
                            Status.SUCCESS -> {
                                TokenDialog.Base(requireContext())
                                    .show(result.data!!.mapToTokenModel(), this@TokensFragment)
+
                                coinCount = result.data.tokenValue
+                               tokenIdForRemove = result.data.tokenId
                            }
 
                            Status.ERROR -> {
-                               Toast.makeText(requireContext(), "Данный токен не существует.", Toast.LENGTH_SHORT)
+                               Toast.makeText(requireContext(), R.string.token_not_found, Toast.LENGTH_SHORT)
                                    .show()
                            }
                        }
-
-
                    }
                 }
-            }else {
-                Toast.makeText(requireContext(), "Ошибка подключения...", Toast.LENGTH_LONG)
+            }
+            else {
+
+                if (tokenId.isEmpty()) binding.idEditText.errorAnimation()
+                else Toast.makeText(requireContext(), R.string.no_connection, Toast.LENGTH_LONG)
                     .show()
             }
         }
     }
 
     override fun onClickActive() {
-        viewModel.updateUserCoinCount(coinCount)
+        CoroutineScope(Dispatchers.IO).launch {
+            viewModel.removeToken(tokenIdForRemove)
+            viewModel.updateUserCoinCount(coinCount)
+        }
+    }
+
+    override fun onClickCreate(id: String, userEnteredCount:Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            viewModel.createTokenByUser(userEnteredCount, id)
+        }
     }
 }

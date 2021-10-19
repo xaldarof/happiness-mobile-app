@@ -12,9 +12,11 @@ interface TokenCloudDataSource {
     suspend fun fetchTokenById(id: String): CloudResult<TokenCloudModel>
 
     suspend fun createToken(tokenValue: Int)
+    suspend fun createTokenByUser(tokenValue: Int,tokenId:String)
 
-    class Base(
-        private val fireStore: FirebaseFirestore,
+    suspend fun removeToken(tokenId:String):Boolean
+
+    class Base(private val fireStore: FirebaseFirestore,
         private val tokenIdGenerator: TokenIdGenerator) : TokenCloudDataSource {
 
         override suspend fun fetchTokenById(id: String):  CloudResult<TokenCloudModel> {
@@ -40,6 +42,19 @@ interface TokenCloudDataSource {
             val token = TokenCloudModel(tokenValue, (System.currentTimeMillis()/1000).toString(), id)
 
             fireStore.collection("tokens").document(id).set(token)
+        }
+
+
+        override suspend fun createTokenByUser(tokenValue: Int,tokenId:String) {
+            val token = TokenCloudModel(tokenValue, (System.currentTimeMillis()/1000).toString(), tokenId)
+
+            fireStore.collection("tokens").document(tokenId).set(token)
+        }
+
+
+        override suspend fun removeToken(tokenId: String): Boolean{
+            return fireStore.document("tokens/$tokenId")
+                .delete().isSuccessful
         }
     }
 }

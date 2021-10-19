@@ -19,7 +19,7 @@
     <RelativeLayout
         android:id="@+id/relativeLayout1"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="62dp"
         android:layout_margin="16dp"
         android:background="@drawable/item_style"
         android:elevation="2dp"
@@ -27,50 +27,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6">
 
-        <TextView
+        <EditText
             android:id="@+id/tokenValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerInParent="true"
-            android:layout_marginEnd="24dp"
-            android:text="24"
-            android:textColor="@color/to_right_color"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:thumb="@drawable/switch_thumb"
-            app:track="@drawable/thumb_track" />
-
-        <ImageView
-            android:id="@+id/img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginBottom="12dp"
-            android:src="@drawable/ic_baseline_attach_money_24"
-            app:tint="@color/to_right_color" />
-
-        <TextView
-            android:id="@+id/tokenValueTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="0dp"
-            android:layout_toEndOf="@+id/img"
-            android:text="@string/coin_count"
-            android:textColor="@color/to_right_color"
-            android:textSize="20sp" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/edit_text_style_2"
+            android:drawableEnd="@drawable/ic_baseline_attach_money_24"
+            android:drawableTint="@color/to_right_color"
+            android:hint="@string/coin_count"
+            android:inputType="number"
+            android:lines="1"
+            android:maxLength="10"
+            android:maxLines="1"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp" />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/relativeLayout2"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="62dp"
         android:layout_margin="16dp"
         android:background="@drawable/item_style"
         android:elevation="2dp"
@@ -122,7 +99,7 @@
     <RelativeLayout
         android:id="@+id/relativeLayout3"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="62dp"
         android:layout_margin="16dp"
         android:layout_marginBottom="70dp"
         android:background="@drawable/item_style"
@@ -175,14 +152,14 @@
     </RelativeLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/activeBtn"
-        android:layout_width="wrap_content"
+        android:id="@+id/createBtn"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="32dp"
         android:background="@drawable/clear_item"
         android:padding="18dp"
-        android:text="@string/active"
+        android:text="СОЗДАТЬ"
         android:textColor="@color/to_right_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/relativeLayout3"

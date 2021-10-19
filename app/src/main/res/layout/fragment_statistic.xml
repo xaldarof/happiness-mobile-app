@@ -22,16 +22,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-<!--            <ImageView-->
-<!--                android:layout_width="32dp"-->
-<!--                android:layout_height="32dp"-->
-<!--                android:layout_margin="12dp"-->
-<!--                android:src="@drawable/ic_baseline_chevron_left_24"-->
-<!--                app:tint="@color/to_right_color" />-->
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="500dp">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_margin="12dp"
+                    android:src="@drawable/ic_baseline_chevron_left_24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/to_right_color" />
 
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/chartView"
@@ -40,7 +42,7 @@
                     android:padding="24dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"></com.github.mikephil.charting.charts.PieChart>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

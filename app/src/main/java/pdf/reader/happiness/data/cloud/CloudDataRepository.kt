@@ -10,13 +10,18 @@ import pdf.reader.happiness.data.cloud.models.TokenCloudModel
 
 interface CloudDataRepository {
 
-    suspend fun fetchCloudData():Flow<List<InfoCloudModel>>
+    suspend fun fetchCloudData(): Flow<List<InfoCloudModel>>
 
-    suspend fun fetchTokenById(id:String):CloudResult<TokenCloudModel>
-    suspend fun createToken(tokenValue:Int)
+    suspend fun fetchTokenById(id: String): CloudResult<TokenCloudModel>
+    suspend fun createToken(tokenValue: Int)
+    suspend fun createTokenByUser(tokenValue: Int,tokenId: String)
+    suspend fun removeToken(tokenId: String): Boolean
 
-    class Base(private val cloudDataSource: InfoCloudDataSource,
-               private val tokenCloudDataSource: TokenCloudDataSource): CloudDataRepository {
+    class Base(
+        private val cloudDataSource: InfoCloudDataSource,
+        private val tokenCloudDataSource: TokenCloudDataSource
+    ) : CloudDataRepository {
+
         override suspend fun fetchCloudData(): Flow<List<InfoCloudModel>> {
             return cloudDataSource.fetchInfoAsFlow()
         }
@@ -27,6 +32,14 @@ interface CloudDataRepository {
 
         override suspend fun createToken(tokenValue: Int) {
             tokenCloudDataSource.createToken(tokenValue)
+        }
+
+        override suspend fun createTokenByUser(tokenValue: Int, tokenId: String) {
+            tokenCloudDataSource.createTokenByUser(tokenValue, tokenId)
+        }
+
+        override suspend fun removeToken(tokenId: String): Boolean {
+            return tokenCloudDataSource.removeToken(tokenId)
         }
     }
 }
