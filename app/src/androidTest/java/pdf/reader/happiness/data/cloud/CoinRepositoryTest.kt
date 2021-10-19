@@ -4,7 +4,6 @@ import androidx.lifecycle.asLiveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import org.junit.Assert.*
 import org.junit.Test
 import org.koin.core.component.KoinApiExtension
@@ -12,9 +11,9 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 @KoinApiExtension
-class CloudDataRepositoryTest : KoinComponent {
+class CoinRepositoryTest : KoinComponent {
 
-    private val repository: CloudDataRepository by inject()
+    private val repository: CoinRepository by inject()
 
     @Test
     fun check_is_cloud_data_works() {

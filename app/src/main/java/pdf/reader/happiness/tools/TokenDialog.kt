@@ -30,6 +30,8 @@ interface TokenDialog {
 
             binding.activeBtn.setOnClickListener {
                 callback.onClickActive()
+                Toast.makeText(context, "Поздравляю, вы успешно активировали токен !", Toast.LENGTH_SHORT).show()
+                dialog.dismiss()
             }
 
             dialog.show()
@@ -54,17 +56,28 @@ interface TokenDialog {
             val randomId = TokenIdGenerator().getGeneratedId()
             binding.tokenDate.text = (System.currentTimeMillis()/1000).formatToDate()
             binding.tokenId.text = "${randomId.substring(0,8)}*****"
+            binding.balance.text = userBalance.toString()
 
 
             binding.createBtn.setOnClickListener {
-                val userEnteredCount = binding.tokenValue.text.toString().toInt()
+                val userEnteredCount = binding.tokenValue.text.toString()
 
-                if (userBalance < userEnteredCount) {
-                    Toast.makeText(context, R.string.not_enough_money, Toast.LENGTH_SHORT).show()
-                }else {
-                    callback.onClickCreate(randomId,userEnteredCount)
+                if (userEnteredCount.isNotEmpty()) {
+                    if (userBalance < userEnteredCount.toInt()) {
+                        Toast.makeText(context, R.string.not_enough_money, Toast.LENGTH_SHORT)
+                            .show()
+                    } else {
+                        callback.onClickCreate(randomId, userEnteredCount.toInt())
+                        dialog.dismiss()
+                        Toast.makeText(context,"Токен успешно создан !", Toast.LENGTH_LONG)
+                            .show()
+                    }
+                }
+                else {
+                    binding.relativeLayout1.errorAnimation()
                 }
             }
+
 
             dialog.show()
         }

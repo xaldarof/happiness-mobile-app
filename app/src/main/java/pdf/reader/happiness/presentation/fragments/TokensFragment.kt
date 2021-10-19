@@ -11,12 +11,16 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import pdf.reader.happiness.R
 import pdf.reader.happiness.core.Status
+import pdf.reader.happiness.core.TokenModel
+import pdf.reader.happiness.data.cloud.models.TokenCloudModel
 import pdf.reader.happiness.databinding.FragmentTokensBinding
+import pdf.reader.happiness.presentation.adapter.TokenHistoryItemAdapter
 import pdf.reader.happiness.tools.ConnectionManager
 import pdf.reader.happiness.tools.TokenDialog
 import pdf.reader.happiness.tools.errorAnimation
@@ -24,7 +28,8 @@ import pdf.reader.happiness.vm.TokenViewModel
 
 
 @KoinApiExtension
-class TokensFragment : Fragment(), KoinComponent,TokenDialog.CallBack {
+class TokensFragment : Fragment(), KoinComponent, TokenDialog.CallBack,
+    TokenHistoryItemAdapter.OnClick {
 
     private lateinit var binding: FragmentTokensBinding
     private val viewModel: TokenViewModel = get()
@@ -42,12 +47,23 @@ class TokensFragment : Fragment(), KoinComponent,TokenDialog.CallBack {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val connectionManager = ConnectionManager(requireContext())
+        OverScrollDecoratorHelper.setUpOverScroll(binding.scroll)
+        val adapter = TokenHistoryItemAdapter(this)
+        binding.rv.adapter = adapter
+        binding.rv.isNestedScrollingEnabled = false
+
+        CoroutineScope(Dispatchers.Main).launch {
+            viewModel.fetchTokenHistory().observe(viewLifecycleOwner, {
+                adapter.update(it)
+            })
+        }
 
         binding.infoBtn.setOnClickListener { TokenDialog.Base(requireContext()).showInfo() }
         binding.backBtn.setOnClickListener { requireActivity().supportFragmentManager.popBackStack() }
 
         binding.createTokenBtn.setOnClickListener {
-            TokenDialog.Base(requireContext()).showCreateTokenDialog(viewModel.fetchUserCoinCount(),this)
+            TokenDialog.Base(requireContext())
+                .showCreateTokenDialog(viewModel.fetchUserCoinCount(), this)
         }
 
         binding.checkTokenBtn.setOnClickListener {
@@ -59,26 +75,29 @@ class TokensFragment : Fragment(), KoinComponent,TokenDialog.CallBack {
 
                     val result = viewModel.fetchTokenById(tokenId)
 
-                   withContext(Dispatchers.Main) {
+                    withContext(Dispatchers.Main) {
 
-                       when (result.status) {
-                           Status.SUCCESS -> {
-                               TokenDialog.Base(requireContext())
-                                   .show(result.data!!.mapToTokenModel(), this@TokensFragment)
+                        when (result.status) {
+                            Status.SUCCESS -> {
+                                TokenDialog.Base(requireContext())
+                                    .show(result.data!!.mapToTokenModel(), this@TokensFragment)
 
-                               coinCount = result.data.tokenValue
-                               tokenIdForRemove = result.data.tokenId
-                           }
+                                coinCount = result.data.tokenValue
+                                tokenIdForRemove = result.data.tokenId
+                            }
 
-                           Status.ERROR -> {
-                               Toast.makeText(requireContext(), R.string.token_not_found, Toast.LENGTH_SHORT)
-                                   .show()
-                           }
-                       }
-                   }
+                            Status.ERROR -> {
+                                Toast.makeText(
+                                    requireContext(),
+                                    R.string.token_not_found,
+                                    Toast.LENGTH_SHORT
+                                )
+                                    .show()
+                            }
+                        }
+                    }
                 }
-            }
-            else {
+            } else {
 
                 if (tokenId.isEmpty()) binding.idEditText.errorAnimation()
                 else Toast.makeText(requireContext(), R.string.no_connection, Toast.LENGTH_LONG)
@@ -94,9 +113,17 @@ class TokensFragment : Fragment(), KoinComponent,TokenDialog.CallBack {
         }
     }
 
-    override fun onClickCreate(id: String, userEnteredCount:Int) {
+    override fun onClickCreate(id: String, userEnteredCount: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             viewModel.createTokenByUser(userEnteredCount, id)
+            viewModel.payWithCoin(userEnteredCount)
+            viewModel.addTokenHistory(TokenModel(userEnteredCount,(System.currentTimeMillis()/1000).toString(),id))
+        }
+    }
+
+    override fun onClick(tokenModel: TokenModel) {
+        CoroutineScope(Dispatchers.IO).launch {
+            viewModel.deleteTokenHistory(tokenModel)
         }
     }
 }

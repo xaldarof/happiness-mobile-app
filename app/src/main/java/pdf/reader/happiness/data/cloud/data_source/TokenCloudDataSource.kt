@@ -17,7 +17,8 @@ interface TokenCloudDataSource {
     suspend fun removeToken(tokenId:String):Boolean
 
     class Base(private val fireStore: FirebaseFirestore,
-        private val tokenIdGenerator: TokenIdGenerator) : TokenCloudDataSource {
+               private val tokenIdGenerator: TokenIdGenerator,
+               ) : TokenCloudDataSource {
 
         override suspend fun fetchTokenById(id: String):  CloudResult<TokenCloudModel> {
             var token: TokenCloudModel? = null
@@ -50,7 +51,6 @@ interface TokenCloudDataSource {
 
             fireStore.collection("tokens").document(tokenId).set(token)
         }
-
 
         override suspend fun removeToken(tokenId: String): Boolean{
             return fireStore.document("tokens/$tokenId")

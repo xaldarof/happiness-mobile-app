@@ -14,10 +14,11 @@ class MissionItemAdapter(private val onClick: OnClick) :
     private val oldList = ArrayList<MissionModel>()
 
     init {
-        oldList.add(MissionModel("Медитация",0f,FragmentName.MEDITATION))
+        oldList.add(MissionModel("Токены",0f,FragmentName.TOKENS))
         oldList.add(MissionModel("Статистика",0f,FragmentName.STATISTIC))
         oldList.add(MissionModel("Заработать",0f,FragmentName.BONUS))
-        oldList.add(MissionModel("Токены",0f,FragmentName.TOKENS))
+        oldList.add(MissionModel("Медитация",0f,FragmentName.MEDITATION))
+
     }
 
     inner class VH(private val binding: MissionItemBinding) :

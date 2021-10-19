@@ -2,53 +2,77 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="450dp"
-    android:layout_marginBottom="52dp">
+    android:layout_height="300dp"
+    android:layout_margin="16dp"
+    android:background="@drawable/item_style"
+    android:elevation="4dp">
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="40dp"
-        android:layout_height="2dp"
-        android:layout_margin="8dp"
-        android:background="@color/to_right_color"
+    <ImageView
+        android:id="@+id/deleteBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:src="@drawable/ic_baseline_close_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/red_end" />
 
     <RelativeLayout
-        android:id="@+id/relativeLayout1"
+        android:id="@+id/relativeLayout2"
         android:layout_width="match_parent"
         android:layout_height="62dp"
-        android:layout_margin="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/item_style"
         android:elevation="2dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/tokenValue"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/edit_text_style_2"
-            android:drawableEnd="@drawable/ic_baseline_attach_money_24"
-            android:drawableTint="@color/to_right_color"
-            android:hint="@string/coin_count"
-            android:inputType="number"
-            android:lines="1"
-            android:maxLength="10"
-            android:maxLines="1"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
+        <TextView
+            android:id="@+id/tokenId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="12dp"
+            android:text="выфвж11д****"
             android:textColor="@color/to_right_color"
-            android:textColorHint="@color/hint_color"
-            android:textSize="18sp" />
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:thumb="@drawable/switch_thumb"
+            app:track="@drawable/thumb_track" />
+
+        <ImageView
+            android:id="@+id/img2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="12dp"
+            android:src="@drawable/ic_baseline_credit_card_24"
+            app:tint="@color/to_right_color" />
+
+        <TextView
+            android:id="@+id/tokenValueTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/img2"
+            android:text="Токен (id)"
+            android:textColor="@color/to_right_color"
+            android:textSize="20sp" />
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/relativeLayout2"
+        android:id="@+id/relativeLayout3"
         android:layout_width="match_parent"
         android:layout_height="62dp"
         android:layout_margin="16dp"
@@ -57,7 +81,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout1">
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2">
 
         <TextView
             android:id="@+id/tokenDate"
@@ -74,7 +98,7 @@
             app:track="@drawable/thumb_track" />
 
         <ImageView
-            android:id="@+id/img2"
+            android:id="@+id/img3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -92,7 +116,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginStart="0dp"
-            android:layout_toEndOf="@+id/img2"
+            android:layout_toEndOf="@+id/img3"
             android:text="Дата"
             android:textColor="@color/to_right_color"
             android:textSize="20sp" />
@@ -100,28 +124,25 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/relativeLayout3"
+        android:id="@+id/relativeLayout4"
         android:layout_width="match_parent"
         android:layout_height="62dp"
         android:layout_margin="16dp"
-        android:layout_marginBottom="70dp"
         android:background="@drawable/item_style"
         android:elevation="2dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout3">
 
         <TextView
-            android:id="@+id/tokenId"
+            android:id="@+id/tokenCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
-            android:layout_marginEnd="12dp"
-            android:text="1212121*****"
+            android:layout_marginEnd="24dp"
+            android:text="123"
             android:textColor="@color/to_right_color"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -138,90 +159,19 @@
             android:layout_marginTop="12dp"
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="12dp"
-            android:src="@drawable/ic_baseline_key_24"
+            android:src="@drawable/ic_baseline_attach_money_24"
             app:tint="@color/to_right_color" />
 
         <TextView
-            android:id="@+id/tokenIdTv"
+            android:id="@+id/tokenCountTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginStart="0dp"
             android:layout_toEndOf="@+id/img4"
-            android:text="@string/id"
+            android:text="Количество"
             android:textColor="@color/to_right_color"
             android:textSize="20sp" />
 
     </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="62dp"
-        android:layout_margin="16dp"
-        android:layout_marginBottom="70dp"
-        android:background="@drawable/item_style"
-        android:elevation="2dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout3"
-        app:layout_constraintVertical_bias="0.0">
-
-        <TextView
-            android:id="@+id/balance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerInParent="true"
-            android:layout_marginEnd="24dp"
-            android:text="10"
-            android:textColor="@color/to_right_color"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:thumb="@drawable/switch_thumb"
-            app:track="@drawable/thumb_track" />
-
-        <ImageView
-            android:id="@+id/img3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginBottom="12dp"
-            android:src="@drawable/ic_baseline_credit_card_24"
-            app:tint="@color/to_right_color" />
-
-        <TextView
-            android:id="@+id/balanceTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="0dp"
-            android:layout_toEndOf="@+id/img3"
-            android:text="Ваш баланс"
-            android:textColor="@color/to_right_color"
-            android:textSize="20sp" />
-
-    </RelativeLayout>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/createBtn"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="32dp"
-        android:background="@drawable/clear_item"
-        android:padding="18dp"
-        android:text="@string/create"
-        android:textColor="@color/to_right_color"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/relativeLayout3"
-        app:layout_constraintStart_toStartOf="@+id/relativeLayout3"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout4" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

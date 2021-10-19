@@ -6,7 +6,7 @@ import pdf.reader.happiness.data.cache.core.CacheDataRepository
 import pdf.reader.happiness.data.cache.core.UserCoinRepository
 import pdf.reader.happiness.data.cache.initilizers.AllInitializer
 import pdf.reader.happiness.data.cache.initilizers.ChapterInitializer
-import pdf.reader.happiness.data.cloud.CloudDataRepository
+import pdf.reader.happiness.data.cloud.CoinRepository
 import pdf.reader.happiness.data.cloud.models.InfoCloudModel
 
 interface Editable{
@@ -16,7 +16,7 @@ interface Editable{
 
 
 class ImportingActivityViewModel(
-    private val cloudDataRepository: CloudDataRepository,
+    private val coinRepository: CoinRepository,
     private val cacheRepository: CacheDataRepository,
     private val allInitializer: AllInitializer,
     private val chapterInitializer: ChapterInitializer,
@@ -26,7 +26,7 @@ class ImportingActivityViewModel(
     suspend fun startImporting(callBack: CallBack,count: Int) {
         val limitedList = ArrayList<InfoCloudModel>()
 
-        cloudDataRepository.fetchCloudData().collect { cloudData ->
+        coinRepository.fetchCloudData().collect { cloudData ->
             if (cloudData.isNotEmpty()) {
                 if (count > cloudData.size) {
                     callBack.onOutOfBounds(cloudData.size)

@@ -45,7 +45,7 @@
     <string name="click_and_wait">Просто нажмите на кнопку \nи подождите.</string>
     <string name="price_of_share">Цена отправки:</string>
     <string name="date">Дата создания</string>
-    <string name="coin_count">Количество монет</string>
+    <string name="coin_count">Количество монет…</string>
     <string name="id">Идентификатор</string>
     <string name="active">Активировать</string>
     <string name="token_not_found">Данный токен не существует или ошибка подключения, повторите попытку</string>

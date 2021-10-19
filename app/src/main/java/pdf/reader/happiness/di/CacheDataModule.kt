@@ -32,6 +32,7 @@ val cacheDataModule = module {
     factory<MusicPathDataSource> { MusicPathDataSource.Base() }
     factory<StatisticDataSource> { StatisticDataSource.Base(get(), get()) }
     factory<UserCoinDataSource> { UserCoinDataSource.Base(get()) }
+    factory<TokenCacheDataSource> { TokenCacheDataSource.Base(get()) }
 
 
 }
