@@ -53,9 +53,9 @@ class TokensFragment : Fragment(), KoinComponent, TokenDialog.CallBack,
         binding.rv.isNestedScrollingEnabled = false
 
         CoroutineScope(Dispatchers.Main).launch {
-            viewModel.fetchTokenHistory().observe(viewLifecycleOwner, {
+            viewModel.fetchTokenHistory().observeForever {
                 adapter.update(it)
-            })
+            }
         }
 
         binding.infoBtn.setOnClickListener { TokenDialog.Base(requireContext()).showInfo() }

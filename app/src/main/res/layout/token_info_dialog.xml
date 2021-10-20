@@ -61,7 +61,7 @@
             android:layout_centerInParent="true"
             android:layout_marginStart="0dp"
             android:layout_toEndOf="@+id/img"
-            android:text="@string/coin_count"
+            android:text="Количество монет"
             android:textColor="@color/to_right_color"
             android:textSize="20sp" />
 

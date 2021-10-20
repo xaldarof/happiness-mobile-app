@@ -15,7 +15,7 @@ fun View.errorAnimation() {
 
 fun View.inAnimation() {
     val render = Render(context)
-    render.setDuration(1000)
+    render.setDuration(500)
     render.setAnimation(Attention.RuberBand(this))
     render.start()
 }

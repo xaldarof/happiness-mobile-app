@@ -46,6 +46,10 @@ class ShareFragment : Fragment(), KoinComponent,ImportInfoDialog.CallBack {
         val viewPager2 = requireActivity().findViewById<ViewPager2>(R.id.pagerImportActivity)
         binding.backBtn.setOnClickListener { viewPager2.currentItem-- }
 
+        binding.clearTextBtn.setOnClickListener {
+            ImportInfoDialog.Base().showClearText(requireContext(),this)
+        }
+
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item,
             arrayListOf(Name.HAPPY, Name.LOVE,Name.SUCCESS,Name.LIFE))
 
@@ -86,7 +90,8 @@ class ShareFragment : Fragment(), KoinComponent,ImportInfoDialog.CallBack {
         }
     }
 
-    override fun onClickOk() {
-        requireActivity().supportFragmentManager.popBackStack()
+    override fun onClickClear() {
+       binding.bodyEditText.setText("")
+        binding.titleEditText.setText("")
     }
 }

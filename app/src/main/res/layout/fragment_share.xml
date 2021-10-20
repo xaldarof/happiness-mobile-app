@@ -72,32 +72,56 @@
                     app:layout_constraintHeight_percent="0.07"
                     app:layout_constraintTop_toBottomOf="@+id/titleEditText" />
 
-                <EditText
-                    android:id="@+id/bodyEditText"
+                <RelativeLayout
+                    android:id="@+id/relativeLayout5"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:layout_margin="16dp"
-                    android:background="@drawable/edit_text_style_2"
-                    android:elevation="2dp"
-                    android:gravity="start|top"
-                    android:hint="@string/your_text"
-                    android:inputType="textMultiLine"
-                    android:padding="17dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHeight_percent="0.4"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/spinner" />
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/spinner">
+
+                    <EditText
+                        android:id="@+id/bodyEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/edit_text_style_2"
+                        android:elevation="2dp"
+                        android:gravity="start|top"
+                        android:hint="@string/your_text"
+                        android:inputType="textMultiLine"
+                        android:padding="17dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHeight_percent="0.4"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </RelativeLayout>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/sendBtn"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="24dp"
                     android:background="@drawable/clear_item"
                     android:elevation="4dp"
                     android:text="@string/send"
-                    app:layout_constraintEnd_toEndOf="@+id/bodyEditText"
-                    app:layout_constraintTop_toBottomOf="@+id/bodyEditText" />
+                    app:layout_constraintEnd_toEndOf="@+id/relativeLayout5"
+                    app:layout_constraintTop_toBottomOf="@+id/relativeLayout5" />
+
+                <com.skydoves.elasticviews.ElasticImageView
+                    android:id="@+id/clear_textBtn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="14dp"
+                    android:padding="4dp"
+                    android:elevation="4dp"
+                    android:background="@drawable/clear_item"
+                    android:src="@drawable/ic_baseline_delete_outline_24"
+                    android:tint="@color/to_right_color"
+                    app:layout_constraintBottom_toBottomOf="@+id/sendBtn"
+                    app:layout_constraintEnd_toStartOf="@+id/sendBtn"
+                    app:layout_constraintTop_toTopOf="@+id/sendBtn" />
 
                 <TextView
                     android:id="@+id/textView5"

@@ -10,6 +10,8 @@ interface ImportInfoDialog {
 
     fun showInfoAboutPublish(context: Context,callBack: CallBack)
 
+    fun showClearText(context: Context,callBack: CallBack)
+
     class Base : ImportInfoDialog {
         override fun show(context: Context) {
             val alertDialog = MaterialAlertDialogBuilder(context, R.style.AlertDialogTheme)
@@ -30,16 +32,29 @@ interface ImportInfoDialog {
                     "Понятно"
                 ) { p0, p1 -> }
 
-            alertDialog.setOnDismissListener {
-                callBack.onClickOk()
-            }
-
             alertDialog.show()
 
 
         }
+
+        override fun showClearText(context: Context,callBack: CallBack) {
+            val alertDialog = MaterialAlertDialogBuilder(context, R.style.AlertDialogTheme)
+                .setMessage("Очистить текст ?")
+                .setPositiveButton(
+                    "Да"
+                ) { p0, p1 ->
+                    callBack.onClickClear()
+                }
+                .setNegativeButton(
+                    "Нет"
+                ) { p0, p1 ->
+
+                }
+
+            alertDialog.show()
+        }
     }
     interface CallBack {
-        fun onClickOk()
+        fun onClickClear()
     }
 }
