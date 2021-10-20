@@ -54,4 +54,5 @@
     <string name="token_after_activation">Токен будет удален после активации</string>
     <string name="create">СОЗДАТЬ</string>
     <string name="id_token">Вставьте id</string>
+    <string name="copy">Идентификатор скопировано в буфер обмена</string>
 </resources>

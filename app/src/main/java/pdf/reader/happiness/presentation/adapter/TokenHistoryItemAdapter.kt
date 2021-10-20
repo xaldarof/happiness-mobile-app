@@ -7,8 +7,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.Toast
+import androidx.recyclerview.widget.DiffUtil
+import pdf.reader.happiness.R
 import pdf.reader.happiness.core.TokenModel
 import pdf.reader.happiness.databinding.TokenItemBinding
+import pdf.reader.happiness.tools.copyToClipBoard
 import pdf.reader.happiness.tools.formatToDate
 
 
@@ -19,20 +23,40 @@ class TokenHistoryItemAdapter(private val onClick: OnClick) :
     private var lastPosition = -1
 
     fun update(newList: List<TokenModel>) {
+        val diffUtilCallBack = TokenHistoryDiffUtilCallBack(list,newList)
+        val diffUtil = DiffUtil.calculateDiff(diffUtilCallBack,true)
         list.clear()
         list.addAll(newList)
-        notifyDataSetChanged()
+        diffUtil.dispatchUpdatesTo(this)
+
     }
+
+    private var isShowed = false
 
     private inner class ItemViewHolder(private val tokenItemBinding: TokenItemBinding) :
         RecyclerView.ViewHolder(tokenItemBinding.root) {
 
         fun onBind(token: TokenModel) {
             tokenItemBinding.tokenDate.text = token.tokenDate.toLong().formatToDate()
-            tokenItemBinding.tokenId.text = token.tokenId
+            tokenItemBinding.tokenId.text = "${token.tokenId.substring(0,6)}*******"
             tokenItemBinding.tokenCount.text = token.tokenValue.toString()
 
+            tokenItemBinding.tokenId.setOnClickListener {
+                if (isShowed) {
+                    tokenItemBinding.tokenId.text = "${token.tokenId.substring(0,6)}*******"
+                    isShowed = false
+                }
+                else {
+                    tokenItemBinding.tokenId.text = token.tokenId
+                    isShowed = true
+                }
+            }
+
             tokenItemBinding.deleteBtn.setOnClickListener { onClick.onClick(token) }
+            tokenItemBinding.copyBtn.setOnClickListener {
+                token.tokenId.copyToClipBoard(tokenItemBinding.root.context)
+                Toast.makeText(tokenItemBinding.root.context, R.string.copy, Toast.LENGTH_SHORT).show()
+            }
 
         }
     }

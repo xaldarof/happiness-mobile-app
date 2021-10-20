@@ -76,6 +76,7 @@
                         android:background="@drawable/edit_text_style_2"
                         android:elevation="4dp"
                         android:hint="@string/id_token"
+                        android:inputType="textPersonName"
                         android:padding="12dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -134,7 +135,8 @@
                     android:overScrollMode="never"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:listitem="@layout/token_item" />
 
             </RelativeLayout>
         </LinearLayout>

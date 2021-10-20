@@ -17,6 +17,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/red_end" />
 
+    <ImageView
+        android:id="@+id/copyBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:src="@drawable/ic_baseline_content_copy_24"
+        app:layout_constraintEnd_toStartOf="@+id/deleteBtn"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/green" />
+
     <RelativeLayout
         android:id="@+id/relativeLayout2"
         android:layout_width="match_parent"

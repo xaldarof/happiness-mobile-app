@@ -46,12 +46,15 @@ class StatisticFragment : Fragment(),KoinComponent {
         binding.rv.isNestedScrollingEnabled = false
         val itemAdapter = StatisticItemAdapter()
 
+        binding.backBtn.setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
+        }
+
         binding.rv.adapter = itemAdapter
         CoroutineScope(Dispatchers.Main).launch {
             setupChartView()
             itemAdapter.update(viewModel.fetchStatistic())
         }
-
     }
 
     private suspend fun setupChartView(){

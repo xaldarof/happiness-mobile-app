@@ -7,6 +7,7 @@ import pdf.reader.happiness.data.cache.dao.ToolsDao
 import pdf.reader.happiness.data.cache.models.TokenModelDb
 
 interface TokenCacheDataSource {
+
     suspend fun fetchTokenHistory(): Flow<List<TokenModel>>
     suspend fun addTokenToHistory(tokenModelDb: TokenModelDb)
     suspend fun deleteTokenHistory(tokenModelDb: TokenModelDb)

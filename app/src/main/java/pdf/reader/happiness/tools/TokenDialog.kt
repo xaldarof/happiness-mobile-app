@@ -51,6 +51,8 @@ interface TokenDialog {
         override fun showCreateTokenDialog(userBalance:Int,callback: CallBack) {
             val dialog = BottomSheetDialog(context, R.style.BottomSheetDialogTheme)
             val binding = CreateTokenBinding.inflate(dialog.layoutInflater)
+            val connectionManager = ConnectionManager(context)
+
             dialog.setContentView(binding.root)
 
             val randomId = TokenIdGenerator().getGeneratedId()
@@ -60,16 +62,22 @@ interface TokenDialog {
 
 
             binding.createBtn.setOnClickListener {
+
                 val userEnteredCount = binding.tokenValue.text.toString()
 
                 if (userEnteredCount.isNotEmpty()) {
-                    if (userBalance < userEnteredCount.toInt()) {
-                        Toast.makeText(context, R.string.not_enough_money, Toast.LENGTH_SHORT)
-                            .show()
-                    } else {
-                        callback.onClickCreate(randomId, userEnteredCount.toInt())
-                        dialog.dismiss()
-                        Toast.makeText(context,"Токен успешно создан !", Toast.LENGTH_LONG)
+                    if (connectionManager.isConnected()) {
+                        if (userBalance < userEnteredCount.toInt()) {
+                            Toast.makeText(context, R.string.not_enough_money, Toast.LENGTH_SHORT)
+                                .show()
+                        } else {
+                            callback.onClickCreate(randomId, userEnteredCount.toInt())
+                            dialog.dismiss()
+                            Toast.makeText(context, "Токен успешно создан !", Toast.LENGTH_LONG)
+                                .show()
+                        }
+                    }else {
+                        Toast.makeText(context, R.string.no_connection, Toast.LENGTH_LONG)
                             .show()
                     }
                 }
