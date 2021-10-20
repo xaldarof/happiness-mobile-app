@@ -16,9 +16,8 @@ import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import pdf.reader.happiness.R
-import pdf.reader.happiness.core.Status
+import pdf.reader.happiness.core.CloudResult
 import pdf.reader.happiness.core.TokenModel
-import pdf.reader.happiness.data.cloud.models.TokenCloudModel
 import pdf.reader.happiness.databinding.FragmentTokensBinding
 import pdf.reader.happiness.presentation.adapter.TokenHistoryItemAdapter
 import pdf.reader.happiness.tools.ConnectionManager
@@ -77,21 +76,17 @@ class TokensFragment : Fragment(), KoinComponent, TokenDialog.CallBack,
 
                     withContext(Dispatchers.Main) {
 
-                        when (result.status) {
-                            Status.SUCCESS -> {
+                        when (result) {
+                            is CloudResult.Success -> {
                                 TokenDialog.Base(requireContext())
-                                    .show(result.data!!.mapToTokenModel(), this@TokensFragment)
+                                    .show(result.data.mapToTokenModel(), this@TokensFragment)
 
                                 coinCount = result.data.tokenValue
                                 tokenIdForRemove = result.data.tokenId
                             }
 
-                            Status.ERROR -> {
-                                Toast.makeText(
-                                    requireContext(),
-                                    R.string.token_not_found,
-                                    Toast.LENGTH_SHORT
-                                )
+                            is CloudResult.Fail -> {
+                                Toast.makeText(requireContext(), R.string.token_not_found, Toast.LENGTH_SHORT)
                                     .show()
                             }
                         }

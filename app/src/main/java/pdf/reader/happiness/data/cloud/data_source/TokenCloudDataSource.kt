@@ -9,7 +9,7 @@ import pdf.reader.happiness.data.cloud.models.TokenCloudModel
 
 interface TokenCloudDataSource {
 
-    suspend fun fetchTokenById(id: String): CloudResult<TokenCloudModel>
+    suspend fun fetchTokenById(id: String): CloudResult
 
     suspend fun createToken(tokenValue: Int)
     suspend fun createTokenByUser(tokenValue: Int,tokenId:String)
@@ -20,7 +20,7 @@ interface TokenCloudDataSource {
                private val tokenIdGenerator: TokenIdGenerator,
                ) : TokenCloudDataSource {
 
-        override suspend fun fetchTokenById(id: String):  CloudResult<TokenCloudModel> {
+        override suspend fun fetchTokenById(id: String):  CloudResult {
             var token: TokenCloudModel? = null
 
             fireStore.document("tokens/$id")
@@ -33,8 +33,8 @@ interface TokenCloudDataSource {
 
             delay(700)
 
-            return if (token==null) CloudResult.error(null,Status.ERROR)
-            else CloudResult.success(token!!,Status.SUCCESS)
+            return if (token==null) CloudResult.Fail("NullPointerException")
+            else CloudResult.Success(token!!)
 
         }
 

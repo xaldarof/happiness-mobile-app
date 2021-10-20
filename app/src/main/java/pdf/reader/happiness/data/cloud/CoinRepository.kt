@@ -7,13 +7,12 @@ import pdf.reader.happiness.data.cache.data_source.TokenCacheDataSource
 import pdf.reader.happiness.data.cloud.data_source.InfoCloudDataSource
 import pdf.reader.happiness.data.cloud.data_source.TokenCloudDataSource
 import pdf.reader.happiness.data.cloud.models.InfoCloudModel
-import pdf.reader.happiness.data.cloud.models.TokenCloudModel
 
 interface CoinRepository {
 
     suspend fun fetchCloudData(): Flow<List<InfoCloudModel>>
 
-    suspend fun fetchTokenById(id: String): CloudResult<TokenCloudModel>
+    suspend fun fetchTokenById(id: String): CloudResult
     suspend fun fetchTokenHistory(): Flow<List<TokenModel>>
     suspend fun addTokenToHistory(tokenModel: TokenModel)
     suspend fun deleteTokenHistory(tokenModel: TokenModel)
@@ -33,7 +32,7 @@ interface CoinRepository {
             return cloudDataSource.fetchInfoAsFlow()
         }
 
-        override suspend fun fetchTokenById(id: String): CloudResult<TokenCloudModel> {
+        override suspend fun fetchTokenById(id: String): CloudResult {
             return tokenCloudDataSource.fetchTokenById(id)
         }
 
