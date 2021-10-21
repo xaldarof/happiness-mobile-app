@@ -69,9 +69,9 @@ class TokensFragment : Fragment(), KoinComponent, TokenDialog.CallBack,
             val tokenId = binding.idEditText.text.toString()
 
             if (connectionManager.isConnected() && tokenId.isNotEmpty()) {
+                binding.progressView.visibility = View.VISIBLE
 
                 CoroutineScope(Dispatchers.IO).launch {
-
                     val result = viewModel.fetchTokenById(tokenId)
 
                     withContext(Dispatchers.Main) {
@@ -83,11 +83,14 @@ class TokensFragment : Fragment(), KoinComponent, TokenDialog.CallBack,
 
                                 coinCount = result.data.tokenValue
                                 tokenIdForRemove = result.data.tokenId
+                                binding.progressView.visibility = View.INVISIBLE
+
                             }
 
                             is CloudResult.Fail -> {
                                 Toast.makeText(requireContext(), R.string.token_not_found, Toast.LENGTH_SHORT)
                                     .show()
+                                binding.progressView.visibility = View.INVISIBLE
                             }
                         }
                     }

@@ -11,6 +11,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.DiffUtil
 import pdf.reader.happiness.core.InfoModel
+import pdf.reader.happiness.data.cache.models.Type
 
 
 class ItemAdapter(private val onClick: OnClick) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -40,18 +41,18 @@ class ItemAdapter(private val onClick: OnClick) : RecyclerView.Adapter<RecyclerV
                 itemBinding.stateIcon.background.setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP)
             }
             else {
-                itemBinding.stateIcon.background.setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP)
+                if (infoModel.dataType == Type.CLOUD) {
+                    itemBinding.stateIcon.background.setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_ATOP)
+                } else {
+                    itemBinding.stateIcon.background.setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP)
+                }
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ItemViewHolder(
-            ItemBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
+            ItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
