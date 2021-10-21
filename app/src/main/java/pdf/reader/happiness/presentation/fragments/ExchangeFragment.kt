@@ -26,12 +26,14 @@ class ExchangeFragment : Fragment(),KoinComponent,ImportingActivityViewModel.Cal
 
     private lateinit var binding:FragmentExchangeBinding
     private val viewModel: ImportingActivityViewModel = get()
+    private var userOn = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentExchangeBinding.inflate(inflater,container,false)
+        userOn = true
         return binding.root
     }
 
@@ -107,9 +109,11 @@ class ExchangeFragment : Fragment(),KoinComponent,ImportingActivityViewModel.Cal
     override fun onSuccessCallBack(count: Int) {
         CoroutineScope(Dispatchers.Main).launch {
             onFinishExchange()
-            Toast.makeText(requireContext(), "Обмен успешно завершен. Вы получили $count новых данных",
-                Toast.LENGTH_SHORT).show()
-
+            if (userOn) {
+                Toast.makeText(
+                    requireContext(), "Обмен успешно завершен. Вы получили $count новых данных",
+                    Toast.LENGTH_SHORT).show()
+            }
             viewModel.payWithCoin(binding.priceTv.text.toString().toInt())
 
         }
@@ -117,11 +121,19 @@ class ExchangeFragment : Fragment(),KoinComponent,ImportingActivityViewModel.Cal
 
     override fun onOutOfBounds(count: Int) {
         CoroutineScope(Dispatchers.Main).launch {
-            Toast.makeText(requireContext(),
-                "Вы просите слишком большое количество данных, максимум: $count",
-                Toast.LENGTH_SHORT
-            ).show()
+            if (userOn) {
+                Toast.makeText(
+                    requireContext(),
+                    "Вы просите слишком большое количество данных, максимум: $count",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
             onFinishExchange()
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        userOn = false
     }
 }

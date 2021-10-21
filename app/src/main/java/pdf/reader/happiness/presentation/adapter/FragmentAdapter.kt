@@ -11,7 +11,7 @@ class FragmentAdapter(
     private val fragments: List<Fragment>
 ) :
     FragmentStateAdapter(fragmentManager, lifecycle) {
-
+    
     override fun getItemCount(): Int {
         return fragments.size
     }

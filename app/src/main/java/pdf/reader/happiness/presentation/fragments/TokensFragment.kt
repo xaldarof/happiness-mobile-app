@@ -34,12 +34,14 @@ class TokensFragment : Fragment(), KoinComponent, TokenDialog.CallBack,
     private val viewModel: TokenViewModel = get()
     private var coinCount = 0
     private var tokenIdForRemove = ""
+    private var userOn = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentTokensBinding.inflate(inflater, container, false)
+        userOn = true
         return binding.root
     }
 
@@ -57,7 +59,7 @@ class TokensFragment : Fragment(), KoinComponent, TokenDialog.CallBack,
             }
         }
 
-        binding.infoBtn.setOnClickListener { TokenDialog.Base(requireContext()).showInfo() }
+        binding.infoBtn.setOnClickListener { if (userOn) TokenDialog.Base(requireContext()).showInfo() }
         binding.backBtn.setOnClickListener { requireActivity().supportFragmentManager.popBackStack() }
 
         binding.createTokenBtn.setOnClickListener {
@@ -78,19 +80,23 @@ class TokensFragment : Fragment(), KoinComponent, TokenDialog.CallBack,
 
                         when (result) {
                             is CloudResult.Success -> {
-                                TokenDialog.Base(requireContext())
-                                    .show(result.data.mapToTokenModel(), this@TokensFragment)
+                                if (userOn) {
+                                    TokenDialog.Base(requireContext())
+                                        .show(result.data.mapToTokenModel(), this@TokensFragment)
 
-                                coinCount = result.data.tokenValue
-                                tokenIdForRemove = result.data.tokenId
-                                binding.progressView.visibility = View.INVISIBLE
+                                    coinCount = result.data.tokenValue
+                                    tokenIdForRemove = result.data.tokenId
+                                    binding.progressView.visibility = View.INVISIBLE
 
+                                }
                             }
 
                             is CloudResult.Fail -> {
-                                Toast.makeText(requireContext(), R.string.token_not_found, Toast.LENGTH_SHORT)
-                                    .show()
-                                binding.progressView.visibility = View.INVISIBLE
+                                if (userOn) {
+                                    Toast.makeText(requireContext(), R.string.token_not_found, Toast.LENGTH_SHORT)
+                                        .show()
+                                    binding.progressView.visibility = View.INVISIBLE
+                                }
                             }
                         }
                     }
@@ -102,6 +108,11 @@ class TokensFragment : Fragment(), KoinComponent, TokenDialog.CallBack,
                     .show()
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        userOn = false
     }
 
     override fun onClickActive() {

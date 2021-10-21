@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.DiffUtil
 import pdf.reader.happiness.core.InfoModel
 import pdf.reader.happiness.data.cache.models.Type
 
-
 class ItemAdapter(private val onClick: OnClick) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val list = ArrayList<InfoModel>()

@@ -2,6 +2,7 @@ package pdf.reader.happiness.presentation.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import androidx.appcompat.app.AppCompatDelegate
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -20,6 +21,16 @@ import pdf.reader.happiness.presentation.fragments.AchievementsFragment
 import pdf.reader.happiness.presentation.fragments.MainFragment
 import pdf.reader.happiness.presentation.fragments.SearchFragment
 import pdf.reader.happiness.vm.MainActivityViewModel
+import android.os.Looper
+
+import android.widget.Toast
+
+
+
+
+/**
+ * @author Xoldarov Temur
+ */
 
 @KoinApiExtension
 class MainActivity : AppCompatActivity(), KoinComponent {
@@ -49,6 +60,22 @@ class MainActivity : AppCompatActivity(), KoinComponent {
         CoroutineScope(Dispatchers.IO).launch {
             viewModel.updateWastedTime()
         }
+    }
+
+    var doubleBackToExitPressedOnce = false
+
+    override fun onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed()
+            return
+        }
+
+        this.doubleBackToExitPressedOnce = true
+        Toast.makeText(this, "Нажмите еще раз для выхода", Toast.LENGTH_SHORT).show()
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            doubleBackToExitPressedOnce = false
+        }, 2000)
     }
 
     override fun onResume() {
