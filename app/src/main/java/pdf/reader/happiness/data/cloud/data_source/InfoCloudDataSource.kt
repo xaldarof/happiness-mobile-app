@@ -7,6 +7,8 @@ import kotlinx.coroutines.flow.flow
 import pdf.reader.happiness.data.cloud.models.InfoCloudModel
 import java.lang.Exception
 import java.util.concurrent.CopyOnWriteArrayList
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 interface InfoCloudDataSource {
 
@@ -15,11 +17,9 @@ interface InfoCloudDataSource {
     class Base(private val databaseReference: DatabaseReference) : InfoCloudDataSource {
 
         private val cloudInfoList = CopyOnWriteArrayList<InfoCloudModel>()
-        private var tryCount = 0
 
-        override suspend fun fetchInfoAsFlow(): Flow<CopyOnWriteArrayList<InfoCloudModel>>{
+        override suspend fun fetchInfoAsFlow() = suspendCoroutine<Flow<CopyOnWriteArrayList<InfoCloudModel>>> {
             val list = CopyOnWriteArrayList<InfoCloudModel>()
-            tryCount++
 
             databaseReference.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(p0: DataSnapshot) {
@@ -36,18 +36,17 @@ interface InfoCloudDataSource {
                         }
                         cloudInfoList.clear()
                         cloudInfoList.addAll(list)
-                    }catch (e:Exception){e.printStackTrace()}
+                        it.resume(flow { emit(cloudInfoList) })
+
+                    }
+                    catch (e:Exception){
+                        e.printStackTrace()
+                    }
                 }
                 override fun onCancelled(p0: DatabaseError) {
+
                 }
             })
-            delay(3000)
-
-            return if(cloudInfoList.isEmpty()) fetchInfoAsFlow()
-
-            else flow { emit(cloudInfoList)
-                cloudInfoList.clear()
-            }
         }
     }
 }

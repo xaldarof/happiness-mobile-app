@@ -6,6 +6,8 @@ import pdf.reader.happiness.core.CloudResult
 import pdf.reader.happiness.core.Status
 import pdf.reader.happiness.data.cloud.data_insert.TokenIdGenerator
 import pdf.reader.happiness.data.cloud.models.TokenCloudModel
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 interface TokenCloudDataSource {
 
@@ -21,22 +23,18 @@ interface TokenCloudDataSource {
         private val tokenIdGenerator: TokenIdGenerator
     ) : TokenCloudDataSource {
 
-        override suspend fun fetchTokenById(id: String): CloudResult {
-            var token: TokenCloudModel? = null
+        override suspend fun fetchTokenById(id: String) = suspendCoroutine<CloudResult> { continuation ->
+                var token: TokenCloudModel? = null
 
-            fireStore.document("tokens/$id")
-                .get()
-                .addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        token = it.result.toObject(TokenCloudModel::class.java)
+                fireStore.document("tokens/$id")
+                    .get()
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            token = it.result.toObject(TokenCloudModel::class.java)
+                            continuation.resume(CloudResult.Success(token!!))
+                        }
                     }
-                }
-            delay(5000)
-
-            return if (token == null) CloudResult.Fail("NullPointerException")
-            else CloudResult.Success(token!!)
-
-        }
+            }
 
         override suspend fun createToken(tokenValue: Int) {
             val id = tokenIdGenerator.getGeneratedId()
