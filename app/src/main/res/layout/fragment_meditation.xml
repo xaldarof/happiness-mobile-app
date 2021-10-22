@@ -16,8 +16,12 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.github.ybq.android.spinkit.SpinKitView
         android:id="@+id/progressView"
@@ -34,6 +38,80 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <LinearLayout
+        android:id="@+id/errorLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.skydoves.elasticviews.ElasticImageView
+            android:id="@+id/retryBtn"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:src="@drawable/ic_baseline_rotate_left_24"
+            app:layout_constraintEnd_toEndOf="@+id/textView4"
+            app:layout_constraintStart_toStartOf="@+id/textView4"
+            app:layout_constraintTop_toBottomOf="@+id/progressView" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/retry"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="24dp"
+            android:background="@drawable/clear_item"
+            android:elevation="3dp"
+            app:layout_constraintBottom_toBottomOf="@+id/playPauseBtn"
+            app:layout_constraintStart_toEndOf="@+id/playPauseBtn"
+            app:layout_constraintTop_toTopOf="@+id/playPauseBtn" />
+
+        <ImageView
+            android:id="@+id/playPauseBtn"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_below="@+id/seekBar"
+            android:layout_alignStart="@+id/seekBar"
+            android:layout_alignEnd="@+id/seekBar"
+            android:layout_marginStart="24dp"
+            android:background="@drawable/clear_item"
+            android:elevation="3dp"
+            android:src="@drawable/ic_baseline_play_circle_outline_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!--    <com.scwang.wave.MultiWaveHeader-->
     <!--        android:layout_width="match_parent"-->

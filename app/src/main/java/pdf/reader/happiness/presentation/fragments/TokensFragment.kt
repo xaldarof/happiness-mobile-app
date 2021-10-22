@@ -1,7 +1,6 @@
 package pdf.reader.happiness.presentation.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +15,7 @@ import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import pdf.reader.happiness.R
-import pdf.reader.happiness.core.CloudResult
+import pdf.reader.happiness.core.TokenCloudResult
 import pdf.reader.happiness.core.TokenModel
 import pdf.reader.happiness.databinding.FragmentTokensBinding
 import pdf.reader.happiness.presentation.adapter.TokenHistoryItemAdapter
@@ -79,7 +78,7 @@ class TokensFragment : Fragment(), KoinComponent, TokenDialog.CallBack,
                     withContext(Dispatchers.Main) {
 
                         when (result) {
-                            is CloudResult.Success -> {
+                            is TokenCloudResult.Success -> {
                                 if (userOn) {
                                     TokenDialog.Base(requireContext())
                                         .show(result.data.mapToTokenModel(), this@TokensFragment)
@@ -91,7 +90,7 @@ class TokensFragment : Fragment(), KoinComponent, TokenDialog.CallBack,
                                 }
                             }
 
-                            is CloudResult.Fail -> {
+                            is TokenCloudResult.Fail -> {
                                 if (userOn) {
                                     Toast.makeText(requireContext(), R.string.token_not_found, Toast.LENGTH_SHORT)
                                         .show()

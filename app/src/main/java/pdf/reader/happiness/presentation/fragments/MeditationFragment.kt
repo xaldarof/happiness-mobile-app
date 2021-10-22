@@ -1,5 +1,6 @@
 package pdf.reader.happiness.presentation.fragments
 
+import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
@@ -8,8 +9,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.SeekBar
 import androidx.annotation.RequiresApi
+import androidx.core.app.NotificationCompat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -18,21 +20,21 @@ import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import pdf.reader.happiness.R
+import pdf.reader.happiness.core.MusicCloudResult
 import pdf.reader.happiness.core.MusicModel
-import pdf.reader.happiness.data.cache.data_source.MusicPathDataSource
-import pdf.reader.happiness.data.cache.models.MusicCloudModel
 import pdf.reader.happiness.databinding.FragmentMeditationBinding
 import pdf.reader.happiness.presentation.adapter.MusicItemAdapter
 import pdf.reader.happiness.vm.MeditationFragmentViewModel
 
 @KoinApiExtension
 class MeditationFragment : Fragment(), KoinComponent,
-    MusicItemAdapter.CallBack,
-    MusicPathDataSource.CallBack {
+    MusicItemAdapter.CallBack {
 
     private lateinit var binding: FragmentMeditationBinding
     private val viewModel: MeditationFragmentViewModel = get()
     private lateinit var itemAdapter: MusicItemAdapter
+    private lateinit var mediaPlayer: MediaPlayer
+    private var isPlaying = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,6 +42,7 @@ class MeditationFragment : Fragment(), KoinComponent,
     ): View {
         binding = FragmentMeditationBinding.inflate(inflater, container, false)
         itemAdapter = MusicItemAdapter(this)
+        mediaPlayer = MediaPlayer()
 
         return binding.root
     }
@@ -47,65 +50,103 @@ class MeditationFragment : Fragment(), KoinComponent,
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //Toast.makeText(requireContext(), R.string.connect_headphones, Toast.LENGTH_LONG).show()
         binding.rv.adapter = itemAdapter
 
-        CoroutineScope(Dispatchers.IO).launch {
-            viewModel.fetchMusics(this@MeditationFragment)
+        fetchMusics()
+
+        binding.retryBtn.setOnClickListener {
+            CoroutineScope(Dispatchers.IO).launch {
+                fetchMusics()
+                binding.errorLayout.visibility = View.INVISIBLE
+            }
         }
-    }
 
-    override fun onSuccess(list: List<MusicCloudModel>) {
-        itemAdapter.update(list.map { it.mapToMusic() })
-        binding.progressView.visibility = View.INVISIBLE
-    }
-
-    override fun onFail() {
-        Toast.makeText(requireContext(), R.string.no_connection, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onLoad() {
-        binding.progressView.visibility = View.VISIBLE
-    }
-
-    private val music = MediaPlayer()
-    private var started = false
-
-    override fun onClickPlay(musicModel: MusicModel) {
-        if (music.isPlaying) {
-            music.stop()
+        binding.playPauseBtn.setOnClickListener {
+            if (isPlaying) {
+                binding.playPauseBtn.setImageResource(R.drawable.ic_baseline_play_circle_outline_24)
+                mediaPlayer.pause()
+                isPlaying = false
+            } else {
+                binding.playPauseBtn.setImageResource(R.drawable.ic_baseline_pause_circle_outline_24)
+                mediaPlayer.start()
+                isPlaying = true
+            }
         }
-        else {
-            if (!started) {
-                music.setDataSource(musicModel.url)
-                music.prepare()
-                music.start()
-                started = true
-            }else {
-                music.setDataSource(musicModel.url)
-                music.prepare()
-                music.start()
+
+        binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
+
+                if (p2) {
+                    if (isPlaying) {
+                        mediaPlayer.seekTo(p1)
+                    } else {
+                        mediaPlayer.seekTo(0)
+                    }
+                }
+            }
+
+            override fun onStartTrackingTouch(p0: SeekBar?) {}
+            override fun onStopTrackingTouch(p0: SeekBar?) {}
+        })
+
+    }
+
+    private fun fetchMusics() {
+        CoroutineScope(Dispatchers.Main).launch {
+            val result = viewModel.fetchMusics()
+
+            when (result) {
+                is MusicCloudResult.Success -> {
+                    itemAdapter.update(result.data.map { it.mapToMusic() })
+                }
+                is MusicCloudResult.Fail -> {
+                    binding.errorLayout.visibility = View.VISIBLE
+                }
             }
         }
     }
-}
 
-//    private suspend fun observePosition() {
-//        while (true) {
-//            delay(1000)
-//            // musicProgressLive.postValue(musicPlayer.currentPosition)
-//
-//        }
-//    }
-//}
-//        musicPlayer.setOnBufferingUpdateListener { _, i ->
-//            val rt = i /100.0
-//            val pg = (musicPlayer.duration * rt).toInt()
-//            binding.musicProgressBar.secondaryProgress  = pg
-//            Log.d("pos","DOWNLOAD = $i")
-//        }
-//
-//        musicProgressLive.observe(this, {
-//            binding.musicProgressBar.progress = it
-//        })
-//
+
+    override fun onMusicChange(musicModel: MusicModel) {
+        if (mediaPlayer.isPlaying) {
+            mediaPlayer.pause()
+            mediaPlayer.reset()
+        } else {
+            mediaPlayer.reset()
+        }
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC)
+
+        mediaPlayer.setDataSource(musicModel.url)
+        mediaPlayer.prepare()
+
+        mediaPlayer.setOnPreparedListener {
+            val duration = mediaPlayer.duration
+            isPlaying = true
+            mediaPlayer.start()
+            binding.playPauseBtn.setImageResource(R.drawable.ic_baseline_pause_circle_outline_24)
+
+            binding.seekBar.max = duration
+
+            CoroutineScope(Dispatchers.Main).launch {
+                seekBarObserve()
+            }
+        }
+        mediaPlayer.setOnCompletionListener {
+            mediaPlayer.reset()
+            isPlaying = false
+            binding.playPauseBtn.setImageResource(R.drawable.ic_baseline_play_circle_outline_24)
+        }
+    }
+
+    private suspend fun seekBarObserve() {
+        while (true) {
+            binding.seekBar.progress = mediaPlayer.currentPosition
+            delay(1000)
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mediaPlayer.stop()
+    }
+}

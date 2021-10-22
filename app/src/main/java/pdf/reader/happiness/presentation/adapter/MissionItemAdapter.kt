@@ -17,7 +17,7 @@ class MissionItemAdapter(private val onClick: OnClick) :
         oldList.add(MissionModel("Токены",0f,FragmentName.TOKENS))
         oldList.add(MissionModel("Статистика",0f,FragmentName.STATISTIC))
         oldList.add(MissionModel("Заработать",0f,FragmentName.BONUS))
-        //oldList.add(MissionModel("Медитация",0f,FragmentName.MEDITATION))
+        oldList.add(MissionModel("Медитация",0f,FragmentName.MEDITATION))
 
     }
 

@@ -1,9 +1,7 @@
 package pdf.reader.happiness.data.cloud.data_source
 
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.delay
-import pdf.reader.happiness.core.CloudResult
-import pdf.reader.happiness.core.Status
+import pdf.reader.happiness.core.TokenCloudResult
 import pdf.reader.happiness.data.cloud.data_insert.TokenIdGenerator
 import pdf.reader.happiness.data.cloud.models.TokenCloudModel
 import kotlin.coroutines.resume
@@ -11,7 +9,7 @@ import kotlin.coroutines.suspendCoroutine
 
 interface TokenCloudDataSource {
 
-    suspend fun fetchTokenById(id: String): CloudResult
+    suspend fun fetchTokenById(id: String): TokenCloudResult
 
     suspend fun createToken(tokenValue: Int)
     suspend fun createTokenByUser(tokenValue: Int, tokenId: String)
@@ -23,7 +21,7 @@ interface TokenCloudDataSource {
         private val tokenIdGenerator: TokenIdGenerator
     ) : TokenCloudDataSource {
 
-        override suspend fun fetchTokenById(id: String) = suspendCoroutine<CloudResult> { continuation ->
+        override suspend fun fetchTokenById(id: String) = suspendCoroutine<TokenCloudResult> { continuation ->
                 var token: TokenCloudModel? = null
 
                 fireStore.document("tokens/$id")
@@ -31,7 +29,7 @@ interface TokenCloudDataSource {
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
                             token = it.result.toObject(TokenCloudModel::class.java)
-                            continuation.resume(CloudResult.Success(token!!))
+                            continuation.resume(TokenCloudResult.Success(token!!))
                         }
                     }
             }

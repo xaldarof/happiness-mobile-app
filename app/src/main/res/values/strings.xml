@@ -55,4 +55,5 @@
     <string name="create">СОЗДАТЬ</string>
     <string name="id_token">Вставьте id</string>
     <string name="copy">Идентификатор скопировано в буфер обмена</string>
+    <string name="retry">Повторить попытку</string>
 </resources>

@@ -6,7 +6,7 @@ import org.junit.Test
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import pdf.reader.happiness.core.CloudResult
+import pdf.reader.happiness.core.TokenCloudResult
 import pdf.reader.happiness.data.cloud.data_insert.TokenIdGenerator
 
 @KoinApiExtension
@@ -22,7 +22,7 @@ class TokenCloudDataSourceTest : KoinComponent {
         val res = tokenCloudDataSource.fetchTokenById(tokenId)
 
         when(res){
-            is CloudResult.Success ->{
+            is TokenCloudResult.Success ->{
                 assertTrue(res.data.tokenId == tokenId)
             }
         }
