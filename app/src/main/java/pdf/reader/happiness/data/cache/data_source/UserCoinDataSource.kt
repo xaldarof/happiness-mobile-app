@@ -12,10 +12,11 @@ interface UserCoinDataSource {
     fun updateUserCoinCount(count:Int)
     fun payWithCoin(price:Int)
 
+    fun initUserCoin()
+
     class Base(private val toolsDao: ToolsDao):UserCoinDataSource {
 
         override fun fetchUserCoinCountAsFlow(): Flow<Int> {
-            toolsDao.initUserCoin(CoinModelDb("UCC", 0))
            return toolsDao.fetchUserCoinCountAsFlow()
     }
 
@@ -31,6 +32,10 @@ interface UserCoinDataSource {
 
         override fun payWithCoin(price: Int) {
             toolsDao.payWithCoin(price)
+        }
+
+        override fun initUserCoin() {
+            toolsDao.initUserCoin(CoinModelDb("UCC", 0))
         }
     }
 }

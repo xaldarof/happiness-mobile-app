@@ -17,7 +17,7 @@ val viewModels = module {
     factory { FavoritesViewModel(get()) }
 
     factory { MainActivityViewModel(get(), get(), get()) }
-    factory { MainFragmentViewModel(get(), get()) }
+    factory { MainFragmentViewModel(get(), get(),get()) }
 
     factory { AchievementsViewModel(get()) }
 

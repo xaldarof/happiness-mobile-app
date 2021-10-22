@@ -1,60 +1,28 @@
 package pdf.reader.happiness.vm
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
+import android.util.Log
+import androidx.lifecycle.*
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
+import pdf.reader.happiness.core.MusicModel
 import pdf.reader.happiness.data.cache.data_source.MusicPathDataSource
+import pdf.reader.happiness.data.cache.models.MusicCloudModel
+import pdf.reader.happiness.tools.CallBack
 import pdf.reader.happiness.tools.MusicPlayer
 
-class MeditationFragmentViewModel(private val musicPlayer: MusicPlayer,
-                                  private val musicPathDataSource: MusicPathDataSource,
-                                  application: Application):
-    AndroidViewModel(application) {
-
-    private var isMoreZero: Boolean = true
-    private var second = 60
-    private var minute = 2
-    private val secondLiveData = MutableLiveData<String>()
-    private val minuteLiveData = MutableLiveData<String>()
+class MeditationFragmentViewModel(
+    private val musicPlayer: MusicPlayer,
+    private val musicPathDataSource: MusicPathDataSource,
+    application: Application
+) : AndroidViewModel(application) {
 
 
-    fun getSecond(): MutableLiveData<String> {
-        return secondLiveData
-    }
+    suspend fun fetchMusics(callBack: MusicPathDataSource.CallBack) = musicPathDataSource.fetMusics(callBack)
 
-    fun getMinute(): MutableLiveData<String> {
-        return minuteLiveData
-    }
+    suspend fun addMusic(musicModel: MusicModel) = musicPathDataSource.addMusic(musicModel.mapToCloud())
 
-    suspend fun startMeditation(callBack: CallBack) {
-        val context = getApplication<Application>().applicationContext
-        musicPlayer.play(context,musicPathDataSource.fetRandomPath())
 
-        while (isMoreZero) {
-            second--
-            secondLiveData.postValue(if (second<10) "0$second" else "$second")
-            minuteLiveData.postValue(if (minute<10) "0$minute" else "$minute")
-
-            if (second == 0) {
-                second = 60
-                minute--
-            }
-            if (minute < 0) {
-                isMoreZero = false
-                musicPlayer.pause()
-                callBack.onFinish()
-            }
-
-            delay(1000)
-        }
-    }
-
-    fun stopMusic(){
-        musicPlayer.pause()
-    }
-
-    interface CallBack{
-        fun onFinish()
-    }
+    //fun stopMusic() = musicPlayer.pauseMusic()
 }

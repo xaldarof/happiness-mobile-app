@@ -1,6 +1,7 @@
 package pdf.reader.happiness.di
 
 import androidx.room.RoomDatabase
+import com.google.firebase.firestore.FirebaseFirestore
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import pdf.reader.happiness.data.cache.data_source.*
@@ -29,7 +30,7 @@ val cacheDataModule = module {
     factory<AllTypesCacheDataSource> { AllTypesCacheDataSource.Base(get()) }
     factory<AchievementDataSource> { AchievementDataSource.Base(get()) }
     factory<ChapterDataSource> { ChapterDataSource.Base(get()) }
-    factory<MusicPathDataSource> { MusicPathDataSource.Base() }
+    factory <MusicPathDataSource> { MusicPathDataSource.Base(FirebaseFirestore.getInstance()) }
     factory<StatisticDataSource> { StatisticDataSource.Base(get(), get()) }
     factory<UserCoinDataSource> { UserCoinDataSource.Base(get()) }
     factory<TokenCacheDataSource> { TokenCacheDataSource.Base(get()) }

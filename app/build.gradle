@@ -13,8 +13,8 @@ android {
         applicationId "pdf.reader.happiness"
         minSdk 21
         targetSdk 31
-        versionCode 19
-        versionName "6.7"
+        versionCode 21
+        versionName "6.8"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -22,9 +22,11 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

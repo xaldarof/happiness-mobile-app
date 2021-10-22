@@ -31,7 +31,7 @@ interface TokenCloudDataSource {
                         token = it.result.toObject(TokenCloudModel::class.java)
                     }
                 }
-            delay(2000)
+            delay(5000)
 
             return if (token == null) CloudResult.Fail("NullPointerException")
             else CloudResult.Success(token!!)

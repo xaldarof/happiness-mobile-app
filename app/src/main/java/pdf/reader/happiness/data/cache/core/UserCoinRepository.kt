@@ -13,6 +13,8 @@ interface UserCoinRepository {
 
     fun payWithCoin(price:Int)
 
+    fun initUserCoin()
+
     class Base(private val userCoinDataSource: UserCoinDataSource):UserCoinRepository {
 
 
@@ -31,6 +33,10 @@ interface UserCoinRepository {
 
         override fun payWithCoin(price: Int) {
             userCoinDataSource.payWithCoin(price)
+        }
+
+        override fun initUserCoin() {
+            userCoinDataSource.initUserCoin()
         }
     }
 }

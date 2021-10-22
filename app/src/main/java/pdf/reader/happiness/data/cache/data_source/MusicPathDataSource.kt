@@ -1,18 +1,42 @@
 package pdf.reader.happiness.data.cache.data_source
 
+import android.util.Log
+import com.google.firebase.firestore.FirebaseFirestore
+import pdf.reader.happiness.data.cache.models.MusicCloudModel
+import pdf.reader.happiness.data.cloud.data_insert.TokenIdGenerator
+
 interface MusicPathDataSource {
 
-    fun fetRandomPath(): String
+    suspend fun fetMusics(callBack: CallBack)
+    suspend fun addMusic(musicCloudModel: MusicCloudModel)
 
-    class Base : MusicPathDataSource {
+    class Base(private val fireStore: FirebaseFirestore) : MusicPathDataSource {
 
-        private val startPath = "music_med/"
-
-        override fun fetRandomPath(): String {
-
-            val paths = listOf("med1.mp3", "med2.mp3", "waterfall.mp3")
-
-            return startPath.plus(paths[(paths.indices).random()])
+        override suspend fun fetMusics(callBack: CallBack) {
+            callBack.onLoad()
+            fireStore.collection("music_url")
+                .get()
+                .addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        val music = it.result.toObjects(MusicCloudModel::class.java)
+                        callBack.onSuccess(music)
+                        if (music.isEmpty()){
+                            callBack.onFail()
+                        }
+                        music.clear()
+                    }
+                }
         }
+
+        override suspend fun addMusic(musicCloudModel: MusicCloudModel) {
+            val generator = TokenIdGenerator()
+            fireStore.document("music_url/${generator.getGeneratedId()}").set(musicCloudModel)
+        }
+    }
+
+    interface CallBack {
+        fun onSuccess(list: List<MusicCloudModel>)
+        fun onFail()
+        fun onLoad()
     }
 }
