@@ -15,11 +15,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"
+        android:overScrollMode="never"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.9"
+        app:layout_constraintHeight_percent="0.87"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -76,6 +77,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@drawable/clear_item"
+        android:layout_margin="12dp"
+        android:elevation="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.1"
@@ -84,16 +88,17 @@
 
         <SeekBar
             android:id="@+id/seekBar"
-            android:layout_width="200dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerInParent="true"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="12dp"
             android:background="@drawable/clear_item"
             android:elevation="3dp"
             app:layout_constraintBottom_toBottomOf="@+id/playPauseBtn"
             app:layout_constraintStart_toEndOf="@+id/playPauseBtn"
-            app:layout_constraintTop_toTopOf="@+id/playPauseBtn" />
+            app:layout_constraintTop_toTopOf="@+id/playPauseBtn"
+            app:layout_constraintWidth_percent="0.65" />
 
         <ImageView
             android:id="@+id/playPauseBtn"
@@ -102,15 +107,30 @@
             android:layout_below="@+id/seekBar"
             android:layout_alignStart="@+id/seekBar"
             android:layout_alignEnd="@+id/seekBar"
-            android:layout_marginStart="24dp"
-            android:background="@drawable/clear_item"
+            android:layout_marginStart="12dp"
             android:elevation="3dp"
             android:src="@drawable/ic_baseline_play_circle_outline_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/to_right_color" />
 
 
+        <TextView
+            android:id="@+id/durationTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="00:00"
+            android:textStyle="bold"
+            android:padding="4dp"
+            android:backgroundTint="@color/time_color"
+            android:elevation="3dp"
+            android:background="@drawable/item_style"
+            app:layout_constraintBottom_toBottomOf="@+id/seekBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/seekBar"
+            app:layout_constraintTop_toTopOf="@+id/seekBar" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!--    <com.scwang.wave.MultiWaveHeader-->

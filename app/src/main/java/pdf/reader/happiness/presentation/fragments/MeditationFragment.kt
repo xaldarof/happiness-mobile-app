@@ -10,12 +10,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
@@ -24,7 +23,11 @@ import pdf.reader.happiness.core.MusicCloudResult
 import pdf.reader.happiness.core.MusicModel
 import pdf.reader.happiness.databinding.FragmentMeditationBinding
 import pdf.reader.happiness.presentation.adapter.MusicItemAdapter
+import pdf.reader.happiness.tools.formatToDate
+import pdf.reader.happiness.tools.toPlayerFormat
 import pdf.reader.happiness.vm.MeditationFragmentViewModel
+import java.util.*
+import java.util.concurrent.TimeUnit
 
 @KoinApiExtension
 class MeditationFragment : Fragment(), KoinComponent,
@@ -35,6 +38,7 @@ class MeditationFragment : Fragment(), KoinComponent,
     private lateinit var itemAdapter: MusicItemAdapter
     private lateinit var mediaPlayer: MediaPlayer
     private var isPlaying = false
+    private var isSelected = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,6 +55,10 @@ class MeditationFragment : Fragment(), KoinComponent,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.rv.adapter = itemAdapter
+        OverScrollDecoratorHelper.setUpOverScroll(
+            binding.rv,
+            OverScrollDecoratorHelper.ORIENTATION_VERTICAL
+        )
 
         fetchMusics()
 
@@ -62,29 +70,27 @@ class MeditationFragment : Fragment(), KoinComponent,
         }
 
         binding.playPauseBtn.setOnClickListener {
-            if (isPlaying) {
-                binding.playPauseBtn.setImageResource(R.drawable.ic_baseline_play_circle_outline_24)
-                mediaPlayer.pause()
-                isPlaying = false
+            if (isSelected) {
+                if (isPlaying) {
+                    binding.playPauseBtn.setImageResource(R.drawable.ic_baseline_play_circle_outline_24)
+                    mediaPlayer.pause()
+                    isPlaying = false
+                } else {
+                    binding.playPauseBtn.setImageResource(R.drawable.ic_baseline_pause_circle_outline_24)
+                    mediaPlayer.start()
+                    isPlaying = true
+                }
             } else {
-                binding.playPauseBtn.setImageResource(R.drawable.ic_baseline_pause_circle_outline_24)
-                mediaPlayer.start()
-                isPlaying = true
+                Toast.makeText(requireContext(), "Выберите музыку", Toast.LENGTH_SHORT).show()
             }
         }
 
         binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
-
                 if (p2) {
-                    if (isPlaying) {
-                        mediaPlayer.seekTo(p1)
-                    } else {
-                        mediaPlayer.seekTo(0)
-                    }
+                    mediaPlayer.seekTo(p1)
                 }
             }
-
             override fun onStartTrackingTouch(p0: SeekBar?) {}
             override fun onStopTrackingTouch(p0: SeekBar?) {}
         })
@@ -92,15 +98,17 @@ class MeditationFragment : Fragment(), KoinComponent,
     }
 
     private fun fetchMusics() {
+        binding.progressView.visibility = View.VISIBLE
         CoroutineScope(Dispatchers.Main).launch {
-            val result = viewModel.fetchMusics()
 
-            when (result) {
+            when (val result = viewModel.fetchMusics()) {
                 is MusicCloudResult.Success -> {
                     itemAdapter.update(result.data.map { it.mapToMusic() })
+                    binding.progressView.visibility = View.INVISIBLE
                 }
                 is MusicCloudResult.Fail -> {
                     binding.errorLayout.visibility = View.VISIBLE
+                    binding.progressView.visibility = View.INVISIBLE
                 }
             }
         }
@@ -108,6 +116,7 @@ class MeditationFragment : Fragment(), KoinComponent,
 
 
     override fun onMusicChange(musicModel: MusicModel) {
+        isSelected = true
         if (mediaPlayer.isPlaying) {
             mediaPlayer.pause()
             mediaPlayer.reset()
@@ -117,13 +126,20 @@ class MeditationFragment : Fragment(), KoinComponent,
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC)
 
         mediaPlayer.setDataSource(musicModel.url)
-        mediaPlayer.prepare()
+        mediaPlayer.prepareAsync()
+        binding.progressView.visibility = View.VISIBLE
+
 
         mediaPlayer.setOnPreparedListener {
-            val duration = mediaPlayer.duration
+            binding.progressView.visibility = View.INVISIBLE
             isPlaying = true
             mediaPlayer.start()
+            val duration = mediaPlayer.duration
+
             binding.playPauseBtn.setImageResource(R.drawable.ic_baseline_pause_circle_outline_24)
+
+
+            binding.durationTv.text = duration.toLong().toPlayerFormat()
 
             binding.seekBar.max = duration
 
@@ -135,6 +151,9 @@ class MeditationFragment : Fragment(), KoinComponent,
             mediaPlayer.reset()
             isPlaying = false
             binding.playPauseBtn.setImageResource(R.drawable.ic_baseline_play_circle_outline_24)
+            isSelected = false
+            itemAdapter.onFinish()
+
         }
     }
 
@@ -148,5 +167,8 @@ class MeditationFragment : Fragment(), KoinComponent,
     override fun onStop() {
         super.onStop()
         mediaPlayer.stop()
+        isSelected = false
+        binding.playPauseBtn.setImageResource(R.drawable.ic_baseline_play_circle_outline_24)
+        itemAdapter.onFinish()
     }
 }

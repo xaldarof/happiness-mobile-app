@@ -48,7 +48,7 @@
     <string name="coin_count">Количество монет…</string>
     <string name="id">Идентификатор</string>
     <string name="active">Активировать</string>
-    <string name="token_not_found">Данный токен не существует или ошибка подключения, повторите попытку</string>
+    <string name="token_not_found">Данный токен не существует или повторите попытку</string>
     <string name="check">ПРОВЕРИТЬ</string>
     <string name="token_info">Токен нужен для создание чека для кого-либо, чтобы например ваш друг мог получить от вас монеты(Tcoin) для обмена на новые данные в приложении. Вы можете найти токены по id и потом активировать их. Но запомните токен будет удален после активации.</string>
     <string name="token_after_activation">Токен будет удален после активации</string>

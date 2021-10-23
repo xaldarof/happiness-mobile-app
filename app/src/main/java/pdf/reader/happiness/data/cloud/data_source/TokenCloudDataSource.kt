@@ -29,7 +29,13 @@ interface TokenCloudDataSource {
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
                             token = it.result.toObject(TokenCloudModel::class.java)
+                            if (token!=null){
                             continuation.resume(TokenCloudResult.Success(token!!))
+
+                            }
+                            else {
+                                continuation.resume(TokenCloudResult.Fail("Error"))
+                            }
                         }
                     }
             }

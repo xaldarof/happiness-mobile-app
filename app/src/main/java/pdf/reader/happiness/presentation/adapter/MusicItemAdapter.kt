@@ -3,13 +3,17 @@ package pdf.reader.happiness.presentation.adapter
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.PorterDuff
-import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import pdf.reader.happiness.R
 import pdf.reader.happiness.core.MusicModel
 import pdf.reader.happiness.databinding.MusicItemBinding
+import java.util.*
+import java.util.concurrent.TimeUnit
+import kotlin.collections.ArrayList
 
 class MusicItemAdapter(private val callback: CallBack) :
     RecyclerView.Adapter<MusicItemAdapter.VH>() {
@@ -22,11 +26,18 @@ class MusicItemAdapter(private val callback: CallBack) :
         notifyDataSetChanged()
     }
 
+    fun onFinish(){
+        oldList[playingPosition].isPlaying = false
+        notifyDataSetChanged()
+    }
+
     inner class VH(private val musicItemBinding: MusicItemBinding) :
         RecyclerView.ViewHolder(musicItemBinding.root) {
 
         val textView = musicItemBinding.musicName
+        val durationTv = musicItemBinding.durationTv
         val container = musicItemBinding.musicContainer
+        val playStop = musicItemBinding.stopPlay
     }
 
 
@@ -38,19 +49,23 @@ class MusicItemAdapter(private val callback: CallBack) :
 
     override fun onBindViewHolder(holder: VH, @SuppressLint("RecyclerView") position: Int) {
         holder.textView.text = oldList[position].name
-        val list = oldList[position]
+        holder.durationTv.text = oldList[position].duration
+        val clickedItem = oldList[position]
+
 
         if (oldList[position].isPlaying) {
             playingPosition = position
-            holder.container.background.setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_ATOP)
+            holder.container.background.setColorFilter(ContextCompat.getColor(holder.container.context,R.color.time_color), PorterDuff.Mode.SRC_ATOP)
+            holder.playStop.setImageResource(R.drawable.ic_baseline_pause_circle_outline_24)
         } else {
-            holder.container.background.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP)
-
+            holder.container.background.setColorFilter(ContextCompat.getColor(holder.container.context,R.color.light_black), PorterDuff.Mode.SRC_ATOP)
+            holder.playStop.setImageResource(R.drawable.ic_baseline_play_circle_outline_24)
         }
 
         holder.container.setOnClickListener {
             oldList[playingPosition].isPlaying = false
-            list.isPlaying = true
+            clickedItem.isPlaying = true
+
             notifyDataSetChanged()
             callback.onMusicChange(oldList[position])
         }
@@ -63,10 +78,7 @@ class MusicItemAdapter(private val callback: CallBack) :
 
     interface CallBack {
 
-        fun onMusicChange(musicModel: MusicModel) {
+        fun onMusicChange(musicModel: MusicModel)
 
-        }
     }
-
-
 }

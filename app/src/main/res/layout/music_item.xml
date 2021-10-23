@@ -5,21 +5,49 @@
     android:layout_width="match_parent"
     android:layout_height="?actionBarSize"
     android:layout_margin="8dp"
-    android:background="@drawable/clear_item"
+    android:background="@drawable/item_style"
     android:clickable="true"
     android:elevation="3dp"
     android:focusable="true">
 
-
     <TextView
         android:id="@+id/musicName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
+        android:layout_marginStart="24dp"
+        android:ellipsize="end"
+        android:lines="1"
+        android:maxLines="1"
         android:text="I can get you my heart"
         android:textColor="@color/to_right_color"
+        app:layout_constraintBottom_toBottomOf="@+id/stopPlay"
+        app:layout_constraintStart_toEndOf="@+id/stopPlay"
+        app:layout_constraintTop_toTopOf="@+id/stopPlay"
+        app:layout_constraintWidth_percent="0.6" />
+
+    <ImageView
+        android:id="@+id/stopPlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:src="@drawable/ic_baseline_play_circle_outline_24"
+        app:imageView_duration="100"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/to_right_color" />
+
+    <TextView
+        android:id="@+id/durationTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/time_style"
+        android:padding="4dp"
+        android:text="03:21"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

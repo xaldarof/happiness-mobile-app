@@ -10,7 +10,7 @@
     <color name="defColor">#C1BBBB</color>
     <color name="reading_toolbar_color">#FFFFFF</color>
 
-<!--    My colors-->
+    <!--    My colors-->
     <color name="myWhite">#FFFFFFFF</color>
     <color name="light_blue">#BEC3DF</color>
     <color name="seek_color">#AA65FF</color>
@@ -31,6 +31,7 @@
 
     <color name="to_right_color">#000000</color>
     <color name="item_click">#BAB7B7</color>
+    <color name="time_color">#EEEAEA</color>
     <color name="search_color">#F3F6F3</color>
 
     <color name="empty_box_color">#000000</color>

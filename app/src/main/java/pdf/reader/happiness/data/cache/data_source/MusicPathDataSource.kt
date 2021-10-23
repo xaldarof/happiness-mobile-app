@@ -1,5 +1,6 @@
 package pdf.reader.happiness.data.cache.data_source
 
+import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import pdf.reader.happiness.core.MusicCloudResult
 import pdf.reader.happiness.core.TokenCloudResult
@@ -21,7 +22,9 @@ interface MusicPathDataSource {
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
                         val music = it.result.toObjects(MusicCloudModel::class.java)
-                            if (music.isEmpty()){
+                        Log.d("pos3","DURATION $music")
+
+                        if (music.isEmpty()){
                             continuation.resume(MusicCloudResult.Fail("Error"))
                         }else {
                             continuation.resume(MusicCloudResult.Success(music))
