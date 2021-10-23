@@ -41,6 +41,8 @@ android {
 
 dependencies {
     //view
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
     implementation 'com.github.gayanvoice:android-animations:1.0.2'
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'

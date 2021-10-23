@@ -6,23 +6,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_black"
-    android:clickable="true"
-    android:focusable="true"
     android:gravity="center"
-    android:orientation="horizontal"
     tools:context=".presentation.fragments.MeditationFragment">
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv"
-        android:overScrollMode="never"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.87"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:overScrollMode="never"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
     <com.github.ybq.android.spinkit.SpinKitView
         android:id="@+id/progressView"
@@ -39,6 +49,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <LinearLayout
         android:id="@+id/errorLayout"
         android:layout_width="wrap_content"
@@ -51,11 +62,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.skydoves.elasticviews.ElasticImageView
-            android:id="@+id/retryBtn"
+        <ImageView
             android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:src="@drawable/ic_baseline_rotate_left_24"
+            android:layout_height="47dp"
+            android:src="@drawable/ic_baseline_wifi_off_24"
             app:layout_constraintEnd_toEndOf="@+id/textView4"
             app:layout_constraintStart_toStartOf="@+id/textView4"
             app:layout_constraintTop_toBottomOf="@+id/progressView" />
@@ -64,7 +74,7 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/retry"
+            android:text="@string/no_connection"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -77,9 +87,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/clear_item"
         android:layout_margin="12dp"
-        android:elevation="2dp"
+        android:background="@drawable/clear_item"
+        android:elevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.1"
@@ -98,7 +108,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/playPauseBtn"
             app:layout_constraintStart_toEndOf="@+id/playPauseBtn"
             app:layout_constraintTop_toTopOf="@+id/playPauseBtn"
-            app:layout_constraintWidth_percent="0.65" />
+            app:layout_constraintWidth_percent="0.6" />
 
         <ImageView
             android:id="@+id/playPauseBtn"
@@ -121,16 +131,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="00:00"
-            android:textStyle="bold"
-            android:padding="4dp"
+            android:background="@drawable/item_style"
             android:backgroundTint="@color/time_color"
             android:elevation="3dp"
-            android:background="@drawable/item_style"
+            android:padding="4dp"
+            android:text="00:00"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/seekBar"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.195"
             app:layout_constraintStart_toEndOf="@+id/seekBar"
-            app:layout_constraintTop_toTopOf="@+id/seekBar" />
+            app:layout_constraintTop_toTopOf="@+id/seekBar"
+            app:layout_constraintVertical_bias="0.6" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!--    <com.scwang.wave.MultiWaveHeader-->
@@ -141,6 +153,5 @@
     <!--        app:mwhCloseColor="#3F51B5"-->
     <!--        app:mwhStartColor="#877171"-->
     <!--        app:mwhVelocity="5" />-->
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

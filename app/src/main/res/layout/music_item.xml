@@ -50,4 +50,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/playingIcon"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_margin="8dp"
+        android:src="@drawable/ic_baseline_brightness_1_24"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/green" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

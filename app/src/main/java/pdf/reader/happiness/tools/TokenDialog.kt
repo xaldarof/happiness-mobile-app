@@ -67,14 +67,20 @@ interface TokenDialog {
 
                 if (userEnteredCount.isNotEmpty()) {
                     if (connectionManager.isConnected()) {
-                        if (userBalance < userEnteredCount.toInt()) {
+                        if (userBalance < userEnteredCount.toInt() && userBalance==0) {
                             Toast.makeText(context, R.string.not_enough_money, Toast.LENGTH_SHORT)
                                 .show()
                         } else {
-                            callback.onClickCreate(randomId, userEnteredCount.toInt())
-                            dialog.dismiss()
-                            Toast.makeText(context, "Токен успешно создан !", Toast.LENGTH_LONG)
-                                .show()
+                            if (userEnteredCount.toInt() == 0) {
+                                Toast.makeText(context, "Нельзя создать токен с нулевым количеством", Toast.LENGTH_LONG)
+                                    .show()
+                            }
+                            else {
+                                callback.onClickCreate(randomId, userEnteredCount.toInt())
+                                dialog.dismiss()
+                                Toast.makeText(context, "Токен успешно создан !", Toast.LENGTH_LONG)
+                                    .show()
+                            }
                         }
                     }else {
                         Toast.makeText(context, R.string.no_connection, Toast.LENGTH_LONG)

@@ -5,7 +5,11 @@ import android.content.Intent
 import android.net.Uri
 
 
-fun Context.openPlayMarket(){
-        startActivity(Intent(Intent.ACTION_VIEW,
-            Uri.parse("https://play.google.com/store/apps/details?id=pdf.reader.happiness&hl=ru&gl=US")))
+fun Context.openPlayMarket() {
+    startActivity(
+        Intent(
+            Intent.ACTION_VIEW,
+            Uri.parse("https://play.google.com/store/apps/details?id=pdf.reader.happiness&hl=ru&gl=US")
+        )
+    )
 }

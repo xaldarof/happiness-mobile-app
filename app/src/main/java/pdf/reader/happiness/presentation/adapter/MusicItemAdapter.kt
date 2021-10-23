@@ -6,6 +6,8 @@ import android.graphics.PorterDuff
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import pdf.reader.happiness.R
@@ -27,8 +29,10 @@ class MusicItemAdapter(private val callback: CallBack) :
     }
 
     fun onFinish(){
-        oldList[playingPosition].isPlaying = false
-        notifyDataSetChanged()
+        if (oldList.isNotEmpty()) {
+            oldList[playingPosition].isPlaying = false
+            notifyDataSetChanged()
+        }
     }
 
     inner class VH(private val musicItemBinding: MusicItemBinding) :
@@ -38,6 +42,7 @@ class MusicItemAdapter(private val callback: CallBack) :
         val durationTv = musicItemBinding.durationTv
         val container = musicItemBinding.musicContainer
         val playStop = musicItemBinding.stopPlay
+        val playingIcon = musicItemBinding.playingIcon
     }
 
 
@@ -51,12 +56,14 @@ class MusicItemAdapter(private val callback: CallBack) :
         holder.textView.text = oldList[position].name
         holder.durationTv.text = oldList[position].duration
         val clickedItem = oldList[position]
+        setAnimation(holder.itemView,position)
 
 
         if (oldList[position].isPlaying) {
             playingPosition = position
             holder.container.background.setColorFilter(ContextCompat.getColor(holder.container.context,R.color.time_color), PorterDuff.Mode.SRC_ATOP)
             holder.playStop.setImageResource(R.drawable.ic_baseline_pause_circle_outline_24)
+            holder.playingIcon.visibility = View.VISIBLE
         } else {
             holder.container.background.setColorFilter(ContextCompat.getColor(holder.container.context,R.color.light_black), PorterDuff.Mode.SRC_ATOP)
             holder.playStop.setImageResource(R.drawable.ic_baseline_play_circle_outline_24)
@@ -71,6 +78,17 @@ class MusicItemAdapter(private val callback: CallBack) :
         }
     }
 
+    private var lastPosition = -1
+
+    private fun setAnimation(viewToAnimate: View, position: Int) {
+        if (position > lastPosition) {
+            val animation: Animation =
+                AnimationUtils.loadAnimation(viewToAnimate.context, android.R.anim.slide_in_left)
+            animation.duration = 800
+            viewToAnimate.startAnimation(animation)
+            lastPosition = position
+        }
+    }
 
     override fun getItemCount(): Int {
         return oldList.size
