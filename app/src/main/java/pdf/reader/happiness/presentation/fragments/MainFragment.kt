@@ -84,7 +84,6 @@ class MainFragment : Fragment(), KoinComponent, ChapterItemAdapter.OnClick,
         CoroutineScope(Dispatchers.Main).launch {
             update()
         }
-        Log.d("pos2","ON RESUME")
     }
 
     private suspend fun updateCore() {
@@ -97,7 +96,6 @@ class MainFragment : Fragment(), KoinComponent, ChapterItemAdapter.OnClick,
         while (true) {
             viewModel.fetchChapters().observeForever {
                 chapterItemAdapter.update(it)
-                Log.d("pos2", "DATA $it")
             }
             delay(4000)
         }

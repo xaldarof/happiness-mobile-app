@@ -28,6 +28,7 @@
     <string name="rate_us">Оценить приложение</string>
     <string name="dev_mode_enabled">Включен режим разработчика</string>
     <string name="no_connection">Нет подключения к интернету…</string>
+    <string name="bad_connection">Плохое подключения к интернету…</string>
     <string name="connect_headphones">Подключите наушники для максимального погружения</string>
     <string name="have_good_day">Медитация окончено, желаю вас приятного дня.</string>
     <string name="exchange_coin">Обменить монеты</string>

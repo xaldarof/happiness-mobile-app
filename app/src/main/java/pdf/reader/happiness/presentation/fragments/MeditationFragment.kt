@@ -4,7 +4,6 @@ import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,9 +11,6 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.app.NotificationCompat
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.*
 import kotlinx.coroutines.*
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import org.koin.core.component.KoinApiExtension
@@ -25,11 +21,9 @@ import pdf.reader.happiness.core.MusicCloudResult
 import pdf.reader.happiness.core.MusicModel
 import pdf.reader.happiness.databinding.FragmentMeditationBinding
 import pdf.reader.happiness.presentation.adapter.MusicItemAdapter
-import pdf.reader.happiness.tools.formatToDate
+import pdf.reader.happiness.tools.isConnected
 import pdf.reader.happiness.tools.toPlayerFormat
 import pdf.reader.happiness.vm.MeditationFragmentViewModel
-import java.util.*
-import java.util.concurrent.TimeUnit
 
 /**
  * Need global refactoring
@@ -45,7 +39,6 @@ class MeditationFragment : Fragment(), KoinComponent,
     private lateinit var mediaPlayer: MediaPlayer
     private var isPlaying = false
     private var isSelected = false
-    private var isOnline = false
     private var isUserOn = false
 
     override fun onCreateView(
@@ -71,6 +64,7 @@ class MeditationFragment : Fragment(), KoinComponent,
             CoroutineScope(Dispatchers.IO).launch {
                 fetchMusics()
                 binding.errorLayout.visibility = View.INVISIBLE
+            }
         }
 
         binding.playPauseBtn.setOnClickListener {
@@ -103,8 +97,6 @@ class MeditationFragment : Fragment(), KoinComponent,
             override fun onStartTrackingTouch(p0: SeekBar?) {}
             override fun onStopTrackingTouch(p0: SeekBar?) {}
         })
-
-    }
     }
 
     private fun fetchMusics() {
@@ -138,51 +130,55 @@ class MeditationFragment : Fragment(), KoinComponent,
 
 
     override fun onMusicChange(musicModel: MusicModel) {
-        isSelected = true
-        isOnline = false
-        if (mediaPlayer.isPlaying) {
-            mediaPlayer.pause()
-            mediaPlayer.reset()
-        } else {
-            mediaPlayer.reset()
-        }
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC)
+        if (requireContext().isConnected()) {
+            isSelected = true
 
-        mediaPlayer.setDataSource(musicModel.url)
-        mediaPlayer.prepareAsync()
-        binding.progressView.visibility = View.VISIBLE
+            if (mediaPlayer.isPlaying) {
+                mediaPlayer.pause()
+                mediaPlayer.reset()
+            } else {
+                mediaPlayer.reset()
+            }
+            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC)
 
-        CoroutineScope(Dispatchers.Main).launch {
-            checkConnection()
-        }
+            mediaPlayer.setDataSource(musicModel.url)
+            mediaPlayer.prepareAsync()
+            binding.progressView.visibility = View.VISIBLE
 
-        mediaPlayer.setOnPreparedListener {
-            binding.progressView.visibility = View.INVISIBLE
-            isOnline = true
-            isPlaying = true
-            mediaPlayer.start()
-            val duration = mediaPlayer.duration
+            mediaPlayer.setOnPreparedListener {
+                binding.progressView.visibility = View.INVISIBLE
+                isPlaying = true
+                mediaPlayer.start()
+                val duration = mediaPlayer.duration
 
-            binding.playPauseBtn.setImageResource(R.drawable.ic_baseline_pause_circle_outline_24)
-            binding.seekBar.max = duration
+                binding.playPauseBtn.setImageResource(R.drawable.ic_baseline_pause_circle_outline_24)
+                binding.seekBar.max = duration
 
-            CoroutineScope(Dispatchers.Main).launch {
-                seekBarObserve()
+                CoroutineScope(Dispatchers.Main).launch {
+                    seekBarObserve()
+                }
+            }
+            mediaPlayer.setOnCompletionListener {
+                mediaPlayer.reset()
+                isPlaying = false
+                binding.playPauseBtn.setImageResource(R.drawable.ic_baseline_play_circle_outline_24)
+                isSelected = false
+                itemAdapter.onFinish()
+
             }
         }
-        mediaPlayer.setOnCompletionListener {
-            mediaPlayer.reset()
-            isPlaying = false
-            binding.playPauseBtn.setImageResource(R.drawable.ic_baseline_play_circle_outline_24)
-            isSelected = false
-            itemAdapter.onFinish()
-
+        else {
+            Toast.makeText(requireContext(), R.string.bad_connection, Toast.LENGTH_SHORT).show()
+            onFinish()
         }
     }
-
     private suspend fun seekBarObserve() {
         while (true) {
-            binding.seekBar.progress = mediaPlayer.currentPosition
+            if (!isSelected) {
+                binding.seekBar.progress = 0
+            }else {
+                binding.seekBar.progress = mediaPlayer.currentPosition
+            }
             if (isPlaying) {
                 binding.durationTv.text = mediaPlayer.currentPosition.toLong().toPlayerFormat()
             } else {
@@ -192,21 +188,10 @@ class MeditationFragment : Fragment(), KoinComponent,
         }
     }
 
-    private suspend fun checkConnection(){
-        for (i in 0 until 5){
-            delay(1000)
-        }
-        if (!isOnline && isUserOn){
-            Toast.makeText(requireContext(), R.string.no_connection, Toast.LENGTH_SHORT).show()
-            binding.progressView.visibility = View.INVISIBLE
-            onFinish()
-            isOnline = false
-        }
-    }
-
     private fun onFinish() {
         binding.playPauseBtn.setImageResource(R.drawable.ic_baseline_play_circle_outline_24)
         isSelected = false
+        binding.seekBar.progress = 0
         itemAdapter.onFinish()
         mediaPlayer.stop()
     }

@@ -10,6 +10,9 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import pdf.reader.happiness.R
 import pdf.reader.happiness.core.MusicModel
 import pdf.reader.happiness.databinding.MusicItemBinding
@@ -30,7 +33,9 @@ class MusicItemAdapter(private val callback: CallBack) :
 
     fun onFinish(){
         if (oldList.isNotEmpty()) {
-            oldList[playingPosition].isPlaying = false
+            oldList.forEach {
+                it.isPlaying = false
+            }
             notifyDataSetChanged()
         }
     }
@@ -67,6 +72,8 @@ class MusicItemAdapter(private val callback: CallBack) :
         } else {
             holder.container.background.setColorFilter(ContextCompat.getColor(holder.container.context,R.color.light_black), PorterDuff.Mode.SRC_ATOP)
             holder.playStop.setImageResource(R.drawable.ic_baseline_play_circle_outline_24)
+            holder.playingIcon.visibility = View.INVISIBLE
+
         }
 
         holder.container.setOnClickListener {
@@ -75,6 +82,7 @@ class MusicItemAdapter(private val callback: CallBack) :
 
             notifyDataSetChanged()
             callback.onMusicChange(oldList[position])
+
         }
     }
 
