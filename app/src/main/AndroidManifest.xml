@@ -19,6 +19,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Happiness">
+
+
         <activity
             android:name=".presentation.activity.DataImportingActivity"
             android:exported="true"

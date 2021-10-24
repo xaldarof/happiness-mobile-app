@@ -56,4 +56,6 @@
     <string name="create">СОЗДАТЬ</string>
     <string name="id_token">Вставьте id</string>
     <string name="copy">Идентификатор скопировано в буфер обмена</string>
+    <string name="headphones_connected">Наушники подключены, теперь давайте начнем медитировать...</string>
+    <string name="headphones_disconnected">Наушники отключены...</string>
 </resources>

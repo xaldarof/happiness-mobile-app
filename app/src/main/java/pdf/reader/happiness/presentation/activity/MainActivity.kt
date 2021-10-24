@@ -1,5 +1,7 @@
 package pdf.reader.happiness.presentation.activity
 
+import android.content.Intent
+import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -25,6 +27,7 @@ import android.os.Looper
 import android.util.Log
 
 import android.widget.Toast
+import pdf.reader.happiness.broadcast.UserBroadcastReceiver
 
 /**
  * @author Xoldarov Temur
@@ -37,6 +40,7 @@ class MainActivity : AppCompatActivity(), KoinComponent {
     private lateinit var themeController: ThemeController
     private val badgeController: BadgeController by inject()
     private val viewModel: MainActivityViewModel = get()
+    private val userBroadcastReceiver = UserBroadcastReceiver()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +71,13 @@ class MainActivity : AppCompatActivity(), KoinComponent {
 
     override fun onResume() {
         super.onResume()
+        val intentFilter = IntentFilter(Intent.ACTION_HEADSET_PLUG)
+        registerReceiver(userBroadcastReceiver,intentFilter)
         viewModel.startWastingTime()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(userBroadcastReceiver)
     }
 }
