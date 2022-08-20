@@ -37,10 +37,6 @@ class RewardedAdManager(private val callback:CallBack,private val context: Conte
                         Log.d("pos2", "Ad was shown.")
                     }
 
-                    override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
-                        Log.d("pos2", "Ad failed to show.")
-                        callback.handledAnError()
-                    }
 
                     override fun onAdDismissedFullScreenContent() {
                         Log.d("pos2", "Ad was dismissed.")

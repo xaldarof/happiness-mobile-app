@@ -30,8 +30,7 @@ class ExchangeFragment : Fragment(),KoinComponent,ImportingActivityViewModel.Cal
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+        savedInstanceState: Bundle?): View {
         binding = FragmentExchangeBinding.inflate(inflater,container,false)
         userOn = true
         return binding.root

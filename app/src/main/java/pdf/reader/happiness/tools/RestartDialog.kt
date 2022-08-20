@@ -6,7 +6,6 @@ import pdf.reader.happiness.R
 
 interface RestartDialog {
 
-
     fun show(context: Context)
 
     class Base : RestartDialog {

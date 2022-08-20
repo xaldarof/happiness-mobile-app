@@ -8,6 +8,7 @@
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/drawable/edit_text_style.xml" value="0.2203125" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/drawable/edit_text_style_2.xml" value="0.33046875" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/drawable/ic_baseline_cake_24.xml" value="0.33046875" />
+        <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/drawable/ic_baseline_clear_24.xml" value="0.33046875" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/drawable/ic_baseline_cloud_sync_24.xml" value="0.33046875" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/drawable/ic_baseline_font_download_24.xml" value="0.33046875" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/drawable/ic_baseline_heart_broken_24.xml" value="0.2203125" />
@@ -20,6 +21,9 @@
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/drawable/life_item_style.xml" value="0.2203125" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/drawable/main_layout_style.xml" value="0.18854166666666666" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/drawable/rounded_style.xml" value="1.5107142857142857" />
+        <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/drawable/search_style.xml" value="0.33046875" />
+        <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/drawable/switch_thumb.xml" value="0.33046875" />
+        <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/drawable/tab_layout_style.xml" value="0.33046875" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/drawable/time_style.xml" value="0.2203125" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/drawable/wave_style.xml" value="0.33046875" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout-v23/create_token.xml" value="0.20416666666666666" />
@@ -36,7 +40,7 @@
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/fragment_favorites.xml" value="0.20416666666666666" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/fragment_main.xml" value="0.25" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/fragment_meditation.xml" value="0.33" />
-        <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/fragment_search.xml" value="0.20416666666666666" />
+        <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/fragment_search.xml" value="0.25" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/fragment_settings.xml" value="0.33" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/fragment_share.xml" value="0.5" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/fragment_statistic.xml" value="0.25" />

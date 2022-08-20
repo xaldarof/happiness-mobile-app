@@ -12,13 +12,13 @@ import pdf.reader.happiness.databinding.TokenInfoDialogBinding
 
 interface TokenDialog {
 
-    fun show(tokenModel: TokenModel,callback:TokenDialog.CallBack)
+    fun show(tokenModel: TokenModel, callback: TokenDialog.CallBack)
     fun showInfo()
-    fun showCreateTokenDialog(userBalance:Int,callback: CallBack)
+    fun showCreateTokenDialog(userBalance: Int, callback: CallBack)
 
-    class Base(private val context: Context): TokenDialog {
+    class Base(private val context: Context) : TokenDialog {
 
-        override fun show(tokenModel: TokenModel,callback:TokenDialog.CallBack) {
+        override fun show(tokenModel: TokenModel, callback: TokenDialog.CallBack) {
 
             val dialog = BottomSheetDialog(context, R.style.BottomSheetDialogTheme)
             val binding = TokenInfoDialogBinding.inflate(dialog.layoutInflater)
@@ -26,11 +26,15 @@ interface TokenDialog {
 
             binding.tokenDate.text = tokenModel.tokenDate.toLong().formatToDate()
             binding.tokenValue.text = tokenModel.tokenValue.toString()
-            binding.tokenId.text = "${tokenModel.tokenId.substring(0,8)}*****"
+            binding.tokenId.text = "${tokenModel.tokenId.substring(0, 8)}*****"
 
             binding.activeBtn.setOnClickListener {
                 callback.onClickActive()
-                Toast.makeText(context, "Поздравляю, вы успешно активировали токен !", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    "Поздравляю, вы успешно активировали токен !",
+                    Toast.LENGTH_SHORT
+                ).show()
                 dialog.dismiss()
             }
 
@@ -48,7 +52,7 @@ interface TokenDialog {
         }
 
 
-        override fun showCreateTokenDialog(userBalance:Int,callback: CallBack) {
+        override fun showCreateTokenDialog(userBalance: Int, callback: CallBack) {
             val dialog = BottomSheetDialog(context, R.style.BottomSheetDialogTheme)
             val binding = CreateTokenBinding.inflate(dialog.layoutInflater)
             val connectionManager = ConnectionManager(context)
@@ -56,8 +60,8 @@ interface TokenDialog {
             dialog.setContentView(binding.root)
 
             val randomId = TokenIdGenerator().getGeneratedId()
-            binding.tokenDate.text = (System.currentTimeMillis()/1000).formatToDate()
-            binding.tokenId.text = "${randomId.substring(0,8)}*****"
+            binding.tokenDate.text = (System.currentTimeMillis() / 1000).formatToDate()
+            binding.tokenId.text = "${randomId.substring(0, 8)}*****"
             binding.balance.text = userBalance.toString()
 
 
@@ -67,27 +71,31 @@ interface TokenDialog {
 
                 if (userEnteredCount.isNotEmpty()) {
                     if (connectionManager.isConnected()) {
-                        if (userBalance < userEnteredCount.toInt() && userBalance==0) {
-                            Toast.makeText(context, R.string.not_enough_money, Toast.LENGTH_SHORT)
-                                .show()
-                        } else {
-                            if (userEnteredCount.toInt() == 0) {
-                                Toast.makeText(context, "Нельзя создать токен с нулевым количеством", Toast.LENGTH_LONG)
+                        if (userEnteredCount.toInt() != 0) {
+                            if (userBalance < userEnteredCount.toInt()) {
+                                Toast.makeText(
+                                    context,
+                                    R.string.not_enough_money,
+                                    Toast.LENGTH_SHORT
+                                )
                                     .show()
-                            }
-                            else {
+                            } else {
                                 callback.onClickCreate(randomId, userEnteredCount.toInt())
                                 dialog.dismiss()
                                 Toast.makeText(context, "Токен успешно создан !", Toast.LENGTH_LONG)
                                     .show()
                             }
+                        } else {
+                            Toast.makeText(
+                                context,
+                                "Нельзя создать токен с нулевым количеством",
+                                Toast.LENGTH_LONG).show()
                         }
-                    }else {
+                    } else {
                         Toast.makeText(context, R.string.no_connection, Toast.LENGTH_LONG)
                             .show()
                     }
-                }
-                else {
+                } else {
                     binding.relativeLayout1.errorAnimation()
                 }
             }
@@ -98,8 +106,8 @@ interface TokenDialog {
     }
 
 
-    interface CallBack{
+    interface CallBack {
         fun onClickActive()
-        fun onClickCreate(id:String,userEnteredCount:Int)
+        fun onClickCreate(id: String, userEnteredCount: Int)
     }
 }

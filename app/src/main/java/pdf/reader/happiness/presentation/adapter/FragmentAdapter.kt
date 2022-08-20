@@ -16,26 +16,7 @@ class FragmentAdapter(
         return fragments.size
     }
     override fun createFragment(position: Int): Fragment {
-        if (position == 0) {
-            return fragments[0]
-        }
-        if (position == 1) {
-            return fragments[1]
-        }
-        if (position == 2) {
-            return fragments[2]
-        }
-        if (position == 3) {
-            return fragments[3]
-        }
-        if (position == 4) {
-            return fragments[4]
-        }
-        if (position == 5) {
-            return fragments[5]
-        }
-
-        return null!!
+        return fragments[position]
     }
 
 }

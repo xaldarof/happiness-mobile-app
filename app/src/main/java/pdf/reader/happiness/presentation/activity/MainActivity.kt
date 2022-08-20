@@ -1,7 +1,9 @@
 package pdf.reader.happiness.presentation.activity
 
+import android.app.PendingIntent
 import android.content.Intent
 import android.content.IntentFilter
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -71,13 +73,14 @@ class MainActivity : AppCompatActivity(), KoinComponent {
 
     override fun onResume() {
         super.onResume()
-        val intentFilter = IntentFilter(Intent.ACTION_HEADSET_PLUG)
-        registerReceiver(userBroadcastReceiver,intentFilter)
+//        val intentFilter = IntentFilter(Intent.ACTION_HEADSET_PLUG)
+//        registerReceiver(userBroadcastReceiver,intentFilter)
+
         viewModel.startWastingTime()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        unregisterReceiver(userBroadcastReceiver)
+//        unregisterReceiver(userBroadcastReceiver)
     }
 }
