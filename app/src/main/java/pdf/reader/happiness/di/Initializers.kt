@@ -11,13 +11,14 @@ val initializers = module {
     factory { AppDatabase.getInstance(androidContext()).toolsDaoProvider() }
     factory { AppDatabase.getInstance(androidContext()).chaptersDaoProvider() }
     factory { AppDatabase.getInstance(androidContext()).achievementDaoProvider() }
+    factory { AppDatabase.getInstance(androidContext()).userDaoProvider() }
 
     factory<SuccessInitializer> { SuccessInitializer.Base(get(), get()) }
     factory<LifeInitializer> { LifeInitializer.Base(get(), get()) }
     factory<LoveInitializer> { LoveInitializer.Base(get(), get()) }
     factory<HappyInitializer> { HappyInitializer.Base(get(), get()) }
 
-    factory<ChapterInitializer>{ ChapterInitializer.Base(get(),get()) }
-    factory<AllInitializer>{ AllInitializer(get(),get(),get(),get()) }
+    factory<ChapterInitializer> { ChapterInitializer.Base(get(), get()) }
+    factory<AllInitializer> { AllInitializer(get(), get(), get(), get()) }
 
 }

@@ -37,8 +37,9 @@
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/create_token.xml" value="0.5" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/fragment_achievements.xml" value="0.25" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/fragment_bonus.xml" value="0.33" />
-        <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/fragment_exchange.xml" value="0.5" />
+        <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/fragment_exchange.xml" value="0.25" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/fragment_favorites.xml" value="0.20416666666666666" />
+        <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/fragment_happiness.xml" value="0.30625" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/fragment_main.xml" value="0.25" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/fragment_meditation.xml" value="0.33" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/fragment_search.xml" value="0.25" />
@@ -48,8 +49,10 @@
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/fragment_tokens.xml" value="0.33" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/item.xml" value="0.5" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/item_achievment.xml" value="0.25" />
+        <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/login_fragment_layout.xml" value="0.25" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/mission_item.xml" value="0.33" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/music_item.xml" value="0.67" />
+        <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/register_fragment_layout.xml" value="0.30625" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/should_restart.xml" value="0.5" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/snackbar_style.xml" value="0.5" />
         <entry key="..\:/NEW PROJECTS/Happiness/app/src/main/res/layout/statistic_item.xml" value="0.5" />

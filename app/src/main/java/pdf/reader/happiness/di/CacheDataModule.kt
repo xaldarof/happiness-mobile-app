@@ -8,6 +8,7 @@ import pdf.reader.happiness.data.cache.data_source.*
 import pdf.reader.happiness.core.AppDatabase
 import pdf.reader.happiness.data.cache.core.*
 import pdf.reader.happiness.data.cache.settings_cache.AchievementUpdater
+import pdf.reader.happiness.data.cloud.user.UserRepository
 
 
 val cacheDataModule = module {
@@ -35,5 +36,6 @@ val cacheDataModule = module {
     factory<UserCoinDataSource> { UserCoinDataSource.Base(get()) }
     factory<TokenCacheDataSource> { TokenCacheDataSource.Base(get()) }
 
+    factory<UserRepository> { UserRepository.Base(get()) }
 
 }

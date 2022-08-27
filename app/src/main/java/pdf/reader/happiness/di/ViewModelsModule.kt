@@ -17,11 +17,11 @@ val viewModels = module {
     factory { FavoritesViewModel(get()) }
 
     factory { MainActivityViewModel(get(), get(), get()) }
-    factory { MainFragmentViewModel(get(), get(),get()) }
+    factory { MainFragmentViewModel(get(), get(), get()) }
 
     factory { AchievementsViewModel(get()) }
 
-    factory { ImportingActivityViewModel(get(), get(), get(), get(),get()) }
+    factory { ImportingActivityViewModel(get(), get(), get(), get(), get()) }
 
     factory { MeditationFragmentViewModel(get(), get(), androidApplication()) }
 
@@ -29,7 +29,9 @@ val viewModels = module {
 
     factory { BonusFragmentViewModel(get()) }
 
-    factory { ShareViewModel(get(),get()) }
+    factory { ShareViewModel(get(), get()) }
 
-    factory { TokenViewModel(get(),get()) }
+    factory { TokenViewModel(get(), get()) }
+
+    factory { LoginViewModel(get()) }
 }

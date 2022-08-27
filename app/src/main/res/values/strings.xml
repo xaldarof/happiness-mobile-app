@@ -59,4 +59,7 @@
     <string name="headphones_connected">Наушники подключены, теперь давайте начнем медитировать...</string>
     <string name="headphones_disconnected">Наушники отключены...</string>
     <string name="get_coin">Получайте Tcoin</string>
+    <string name="login">Логин</string>
+    <string name="password">Пароль</string>
+    <string name="register">Регистрация</string>
 </resources>

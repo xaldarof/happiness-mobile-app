@@ -6,10 +6,16 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import org.koin.android.ext.android.get
 import org.koin.core.component.KoinApiExtension
 import pdf.reader.happiness.R
+import pdf.reader.happiness.presentation.fragments.LoginActivity
+import pdf.reader.happiness.vm.LoginViewModel
 
 class PresentationActivity : AppCompatActivity() {
+
+    private val viewModel: LoginViewModel = get()
+
     @KoinApiExtension
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,8 +29,13 @@ class PresentationActivity : AppCompatActivity() {
                 or View.SYSTEM_UI_FLAG_FULLSCREEN)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
+            if(viewModel.isAuthorized) {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            } else {
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
+            }
         }, 2500)
 
     }
