@@ -1,6 +1,8 @@
 package pdf.reader.happiness.data.cache.dao
 
 import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 import pdf.reader.happiness.data.cache.models.UserModelDb
@@ -15,4 +17,7 @@ import pdf.reader.happiness.data.cache.models.UserModelDb
 interface UserDao {
     @Query("SELECT * FROM user")
     fun fetUser(): Flow<UserModelDb?>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(userModelDb: UserModelDb)
 }

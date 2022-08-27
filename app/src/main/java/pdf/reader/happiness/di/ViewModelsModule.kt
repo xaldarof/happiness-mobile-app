@@ -33,5 +33,5 @@ val viewModels = module {
 
     factory { TokenViewModel(get(), get()) }
 
-    factory { LoginViewModel(get()) }
+    factory { LoginViewModel(get(),get()) }
 }

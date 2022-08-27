@@ -15,7 +15,7 @@ interface UserRepository {
 
     class Base(private val userDao: UserDao) : UserRepository {
         override fun fetchUser(): Flow<UserModelDb?> {
-            return  userDao.fetUser()
+            return userDao.fetUser()
         }
     }
 }

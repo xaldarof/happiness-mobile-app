@@ -1,9 +1,8 @@
 package pdf.reader.happiness.data.cloud.auth
 
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
+import pdf.reader.happiness.data.cache.dao.UserDao
+import pdf.reader.happiness.data.cloud.models.UserCloudModel
 
 /**
  * @Author: Temur
@@ -18,7 +17,7 @@ interface AuthRepository {
         onNotExists: () -> Unit
     )
 
-    class Base(private val databaseReference: DatabaseReference) : AuthRepository {
+    class Base(private val userDao: UserDao) : AuthRepository {
         override suspend fun login(
             login: String,
             password: String,
@@ -26,20 +25,47 @@ interface AuthRepository {
             onFail: () -> Unit,
             onNotExists: () -> Unit
         ) {
-            databaseReference.child("users")
-                .addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        if (snapshot.hasChild(login)) {
-                            onSuccess()
-                        } else {
-                            onNotExists()
-                        }
-                    }
+            val databaseReference = FirebaseDatabase.getInstance().getReference("users")
 
-                    override fun onCancelled(error: DatabaseError) {
-                        onFail()
-                    }
-                })
+            try {
+                databaseReference
+                    .addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            if (snapshot.hasChild(login)) {
+                                databaseReference.child(login)
+                                    .addValueEventListener(object : ValueEventListener {
+                                        override fun onDataChange(snapshot: DataSnapshot) {
+                                            val model =
+                                                snapshot.getValue(UserCloudModel::class.java)
+                                            if (model?.password == password) {
+                                                model.mapToCache()
+                                                    .let {
+                                                        userDao.insert(it)
+                                                        onSuccess()
+                                                    }
+                                            } else {
+                                                onFail()
+                                            }
+                                        }
+
+                                        override fun onCancelled(error: DatabaseError) {
+                                            onFail()
+                                        }
+
+                                    })
+                            } else {
+                                onNotExists()
+                            }
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                            onFail()
+                            error.toException().printStackTrace()
+                        }
+                    })
+            } catch (e: Exception) {
+                onFail()
+            }
         }
     }
 }

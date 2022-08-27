@@ -11,6 +11,23 @@
     android:orientation="vertical"
     tools:context=".presentation.activity.MainActivity">
 
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:text="Войдите чтобы \nпродолжить"
+        android:textColor="@color/to_right_color"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/loginEdt"
         android:layout_width="0dp"
@@ -19,8 +36,7 @@
         android:background="@drawable/edit_text_style_2"
         android:elevation="4dp"
         android:hint="@string/login"
-        android:inputType="number"
-        android:maxLength="5"
+        android:inputType="textPersonName"
         android:maxLines="1"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
@@ -41,8 +57,7 @@
         android:background="@drawable/edit_text_style_2"
         android:elevation="4dp"
         android:hint="@string/password"
-        android:inputType="number"
-        android:maxLength="5"
+        android:inputType="textPersonName"
         android:maxLines="1"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
