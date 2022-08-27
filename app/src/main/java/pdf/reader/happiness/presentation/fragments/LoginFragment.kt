@@ -18,6 +18,7 @@ import org.koin.core.component.get
 import pdf.reader.happiness.core.UiState
 import pdf.reader.happiness.databinding.LoginFragmentLayoutBinding
 import pdf.reader.happiness.presentation.activity.MainActivity
+import pdf.reader.happiness.presentation.activity.RegisterActivity
 import pdf.reader.happiness.tools.disable
 import pdf.reader.happiness.tools.enable
 import pdf.reader.happiness.vm.LoginViewModel
@@ -45,26 +46,40 @@ class LoginActivity : AppCompatActivity() {
             viewModel.login(binding.loginEdt.text.toString(), binding.paswordEdt.text.toString())
         }
 
+        binding.register.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
+        }
+
 
         lifecycleScope.launch {
             viewModel.loginState.collectLatest {
                 when (it) {
                     is UiState.Success<String> -> {
                         binding.loginBtn.enable()
-                        this@LoginActivity.startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                        this@LoginActivity.startActivity(
+                            Intent(
+                                this@LoginActivity,
+                                MainActivity::class.java
+                            )
+                        )
                         finish()
                     }
                     is UiState.Fail -> {
-                        Toast.makeText(this@LoginActivity, "Something went wrong !", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@LoginActivity,
+                            "Something went wrong !",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         binding.loginBtn.enable()
 
                     }
                     is UiState.ValidationError -> {
-                        Toast.makeText(this@LoginActivity, "Fill all places !", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@LoginActivity, "Fill all places !", Toast.LENGTH_SHORT)
+                            .show()
                         binding.loginBtn.enable()
                     }
                 }
-                Log.d("res","State is :$it")
+                Log.d("res", "State is :$it")
             }
         }
     }

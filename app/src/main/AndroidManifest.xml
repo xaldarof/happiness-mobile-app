@@ -20,6 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Happiness">
         <activity
+            android:name=".presentation.activity.RegisterActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.activity.ExchangeCoinRoomActivity"
             android:exported="false" />
         <activity
@@ -46,7 +49,6 @@
             android:exported="true"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".presentation.fragments.LoginActivity"
             android:exported="true"
