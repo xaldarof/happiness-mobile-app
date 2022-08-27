@@ -17,5 +17,5 @@ data class UserCloudModel(
         return UserModelDb(login, password, balance)
     }
 
-//test
+//tes
 }
