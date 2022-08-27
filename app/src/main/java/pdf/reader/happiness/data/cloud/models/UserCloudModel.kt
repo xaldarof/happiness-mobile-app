@@ -16,4 +16,6 @@ data class UserCloudModel(
     fun mapToCache(): UserModelDb {
         return UserModelDb(login, password, balance)
     }
+
+//test
 }
