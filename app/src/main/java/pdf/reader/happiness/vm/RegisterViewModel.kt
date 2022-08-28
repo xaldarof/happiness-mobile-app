@@ -29,11 +29,7 @@ class RegisterViewModel(
                 }
             }, onFail = {
                 viewModelScope.launch {
-                    _loginState.send(UiState.Fail())
-                }
-            }, onNotExists = {
-                viewModelScope.launch {
-                    _loginState.send(UiState.Fail())
+                    _loginState.send(UiState.Fail(it))
                 }
             })
 

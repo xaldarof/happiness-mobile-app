@@ -1,6 +1,7 @@
 package pdf.reader.happiness.data.cache.settings_cache
 
 import pdf.reader.happiness.data.cache.dao.ToolsDao
+import pdf.reader.happiness.data.cache.dao.UserDao
 
 interface CacheClear {
 
@@ -8,6 +9,7 @@ interface CacheClear {
 
     class Base(
         private val toolsDao: ToolsDao,
+        private val userDao: UserDao,
         private val fontController: FontController,
         private val themeController: ThemeController,
         private val congratulationController: CongratulationController,
@@ -19,6 +21,8 @@ interface CacheClear {
             toolsDao.deleteTypes()
             toolsDao.deleteChapters()
             toolsDao.deleteAchievement()
+
+            userDao.clear()
 
             wastedTimeController.clearWastedTime()
             fontController.setBoldFont(false)

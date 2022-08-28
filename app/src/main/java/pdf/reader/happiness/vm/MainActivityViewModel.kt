@@ -3,11 +3,13 @@ package pdf.reader.happiness.vm
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.delay
+import pdf.reader.happiness.data.cache.initilizers.AllInitializer
 import pdf.reader.happiness.data.cache.settings_cache.WastedTimeController
 import pdf.reader.happiness.data.cache.settings_cache.WastedTimeAchievement
 import pdf.reader.happiness.data.cache.settings_cache.WastedTimeAchievementController
 
 class MainActivityViewModel(
+    private val allInitializer: AllInitializer,
     private val wastedTimeController: WastedTimeController,
     private val wastedTimeAchievementController: WastedTimeAchievementController,
     private val wastedTimeAchievement: WastedTimeAchievement
@@ -20,6 +22,10 @@ class MainActivityViewModel(
             Log.d("pos",wastedTimeController.getTime().toString())
             delay(3000)
         }
+    }
+
+    init {
+        allInitializer.invokeAll()
     }
 
     fun startWastingTime() {

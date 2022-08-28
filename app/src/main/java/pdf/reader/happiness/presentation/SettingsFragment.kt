@@ -12,6 +12,7 @@ import org.koin.core.component.inject
 import pdf.reader.happiness.data.cache.settings_cache.*
 import pdf.reader.happiness.databinding.FragmentSettingsBinding
 import pdf.reader.happiness.presentation.activity.DataImportingActivity
+import pdf.reader.happiness.presentation.activity.PresentationActivity
 import pdf.reader.happiness.presentation.activity.SettingFragmentPresenter
 import pdf.reader.happiness.tools.*
 
@@ -85,6 +86,7 @@ class SettingsFragment : Fragment(),KoinComponent, SettingFragmentPresenter.Sett
 
     override fun onClickYes() {
         cacheClear.clear()
-        RestartDialog.Base().show(requireContext())
+        requireContext().startActivity(Intent(requireContext(),PresentationActivity::class.java))
+        requireActivity().finish()
     }
 }

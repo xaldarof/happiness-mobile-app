@@ -43,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
 
         binding.loginBtn.setOnClickListener {
             binding.loginBtn.disable()
-            viewModel.login(binding.loginEdt.text.toString(), binding.paswordEdt.text.toString())
+            viewModel.login(binding.loginEdt.text.toString().trim(), binding.paswordEdt.text.toString().trim())
         }
 
         binding.register.setOnClickListener {
@@ -67,19 +67,13 @@ class LoginActivity : AppCompatActivity() {
                     is UiState.Fail -> {
                         Toast.makeText(
                             this@LoginActivity,
-                            "Something went wrong !",
+                            it.message,
                             Toast.LENGTH_SHORT
                         ).show()
                         binding.loginBtn.enable()
 
                     }
-                    is UiState.ValidationError -> {
-                        Toast.makeText(this@LoginActivity, "Fill all places !", Toast.LENGTH_SHORT)
-                            .show()
-                        binding.loginBtn.enable()
-                    }
                 }
-                Log.d("res", "State is :$it")
             }
         }
     }

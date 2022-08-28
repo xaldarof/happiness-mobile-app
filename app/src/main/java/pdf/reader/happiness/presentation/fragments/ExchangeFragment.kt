@@ -56,7 +56,7 @@ class ExchangeFragment : Fragment(),KoinComponent,ImportingActivityViewModel.Cal
         binding.start.setOnClickListener {
             val commonPrice = binding.priceTv.text.toString().toInt()
 
-            if (viewModel.fetchUserCoinCount()>=commonPrice && binding.editTextCount.text.toString().isNotEmpty()) {
+            if (viewModel.fetchUserCoinCount()>= commonPrice && binding.editTextCount.text.toString().isNotEmpty()) {
                 CoroutineScope(Dispatchers.Main).launch {
                     importData(binding.editTextCount.text.toString().toInt())
                 }
@@ -82,9 +82,9 @@ class ExchangeFragment : Fragment(),KoinComponent,ImportingActivityViewModel.Cal
 
     override fun onResume() {
         super.onResume()
-        viewModel.fetchUserCoinAsLiveData().observe(viewLifecycleOwner, {
+        viewModel.fetchUserCoinAsLiveData().observe(viewLifecycleOwner) {
             binding.balanceTv.text = it.toString()
-        })
+        }
     }
 
     private suspend fun importData(userEnteredInfoCount: Int) {

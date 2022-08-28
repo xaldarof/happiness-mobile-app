@@ -31,7 +31,7 @@ class RegisterActivity : AppCompatActivity() {
 
         binding.registerBtn.setOnClickListener {
             binding.registerBtn.disable()
-            viewModel.register(binding.loginEdt.text.toString(), binding.paswordEdt.text.toString())
+            viewModel.register(binding.loginEdt.text.toString().trim(), binding.paswordEdt.text.toString().trim())
         }
 
         binding.backBtn.setOnClickListener {
@@ -55,19 +55,11 @@ class RegisterActivity : AppCompatActivity() {
                     is UiState.Fail -> {
                         Toast.makeText(
                             this@RegisterActivity,
-                            "Something went wrong !",
+                            it.message,
                             Toast.LENGTH_SHORT
                         ).show()
                         binding.registerBtn.enable()
 
-                    }
-                    is UiState.ValidationError -> {
-                        Toast.makeText(
-                            this@RegisterActivity,
-                            "Fill all places !",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        binding.registerBtn.enable()
                     }
                 }
             }

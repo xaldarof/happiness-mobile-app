@@ -13,14 +13,12 @@ interface AuthRepository {
 
     suspend fun login(
         login: String, password: String, onSuccess: () -> Unit,
-        onFail: () -> Unit,
-        onNotExists: () -> Unit
+        onFail: (String) -> Unit,
     )
 
     suspend fun register(
         login: String, password: String, onSuccess: () -> Unit,
-        onFail: () -> Unit,
-        onNotExists: () -> Unit
+        onFail: (String) -> Unit,
     )
 
     class Base(private val userDao: UserDao) : AuthRepository {
@@ -28,8 +26,7 @@ interface AuthRepository {
             login: String,
             password: String,
             onSuccess: () -> Unit,
-            onFail: () -> Unit,
-            onNotExists: () -> Unit
+            onFail: (String) -> Unit,
         ) {
             val databaseReference = FirebaseDatabase.getInstance().getReference("users")
 
@@ -51,30 +48,30 @@ interface AuthRepository {
                                                             onSuccess()
                                                         }
                                                 } else {
-                                                    onFail()
+                                                    onFail("Неверный пароль !")
                                                 }
                                             }
 
                                             override fun onCancelled(error: DatabaseError) {
-                                                onFail()
+                                                onFail("Что то пошло не так...")
                                             }
 
                                         })
                                 } else {
-                                    onNotExists()
+                                    onFail("Данный пользователь не существует")
                                 }
                             }
 
                             override fun onCancelled(error: DatabaseError) {
-                                onFail()
+                                onFail("Что то пошло не так...")
                                 error.toException().printStackTrace()
                             }
                         })
                 } else {
-                    onFail()
+                    onFail("Заполните все поля !")
                 }
             } catch (e: Exception) {
-                onFail()
+                onFail("Что то пошло не так...")
             }
         }
 
@@ -82,8 +79,7 @@ interface AuthRepository {
             login: String,
             password: String,
             onSuccess: () -> Unit,
-            onFail: () -> Unit,
-            onNotExists: () -> Unit
+            onFail: (String) -> Unit,
         ) {
             val databaseReference = FirebaseDatabase.getInstance().getReference("users")
             try {
@@ -106,23 +102,23 @@ interface AuthRepository {
                                                 onSuccess()
                                             }
                                     }.addOnFailureListener {
-                                        onFail()
+                                        onFail("Что то пошло не так...")
                                     }
                                 } else {
-                                    onFail()
+                                    onFail("Пользователь уже зарегистрирован !")
                                 }
                             }
 
                             override fun onCancelled(error: DatabaseError) {
-                                onFail()
+                                onFail("Что то пошло не так...")
                                 error.toException().printStackTrace()
                             }
                         })
                 } else {
-                    onFail()
+                    onFail("Заполните все поля !")
                 }
             } catch (e: Exception) {
-                onFail()
+                onFail("Что то пошло не так...")
             }
         }
     }
