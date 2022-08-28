@@ -4,26 +4,43 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import pdf.reader.happiness.data.cache.core.UserCoinRepository
 import pdf.reader.happiness.data.cloud.data_insert.CloudDataSendService
 import pdf.reader.happiness.data.cloud.models.InfoCloudModel
+import pdf.reader.happiness.data.cloud.user.UserRepository
 
 class ShareViewModel(
     private val sendService: CloudDataSendService,
-    private val coinRepository: UserCoinRepository
+    private val coinRepository: UserRepository
 ) : ViewModel() {
 
 
-    fun sendDataToFirebase(infoCloudModel: InfoCloudModel) {
+    fun sendDataToFirebase(
+        infoCloudModel: InfoCloudModel, onSuccess: () -> Unit,
+        onFail: (String) -> Unit
+    ) {
         CoroutineScope(Dispatchers.IO).launch {
-            sendService.sendData(infoCloudModel)
-            payWithCoin()
+            sendService.sendData(infoCloudModel, onSuccess = {
+                payWithCoin(onSuccess = {
+                    onSuccess()
+                }, onFail = {
+                    onFail(it)
+                })
+            }, onFail = {
+
+            })
         }
     }
 
-    fun fetchUserCoinCount() = coinRepository.fetchUserCoinCount()
+    fun fetchUserCoinCount() = coinRepository.fetchUserBalance()
 
-    private fun payWithCoin() {
-        coinRepository.payWithCoin(1)
+    private fun payWithCoin(
+        onSuccess: () -> Unit,
+        onFail: (String) -> Unit
+    ) {
+        coinRepository.invokePayment(1, onFail = {
+            onFail(it)
+        }, onSuccess = {
+            onSuccess()
+        })
     }
 }

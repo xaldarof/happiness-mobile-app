@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.ads.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
@@ -19,7 +21,7 @@ import pdf.reader.happiness.vm.BonusFragmentViewModel
 import pdf.reader.happiness.R
 
 @KoinApiExtension
-class BonusFragment : Fragment(), RewardedAdManager.CallBack,KoinComponent {
+class EarnFragment : Fragment(), RewardedAdManager.CallBack, KoinComponent {
 
     private lateinit var binding: FragmentBonusBinding
     private val viewModel: BonusFragmentViewModel = get()
@@ -27,7 +29,8 @@ class BonusFragment : Fragment(), RewardedAdManager.CallBack,KoinComponent {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View {
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentBonusBinding.inflate(inflater, container, false)
         isUserOn = true
         return binding.root
@@ -35,13 +38,15 @@ class BonusFragment : Fragment(), RewardedAdManager.CallBack,KoinComponent {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val rewardedAdManager = RewardedAdManager(this,requireContext())
+        val rewardedAdManager = RewardedAdManager(this, requireContext())
 
         binding.progress.visibility = View.INVISIBLE
         binding.backBtn.setOnClickListener { requireActivity().supportFragmentManager.popBackStack() }
 
-        viewModel.fetchUserCoinCountAsFlow().observe(viewLifecycleOwner) {
-            binding.countTv.text = it.toString()
+        lifecycleScope.launch {
+            viewModel.fetchUserCoinCountAsFlow().collectLatest {
+                binding.countTv.text = it.toString()
+            }
         }
 
 
@@ -64,23 +69,29 @@ class BonusFragment : Fragment(), RewardedAdManager.CallBack,KoinComponent {
         isUserOn = false
     }
 
-    private fun onStartAd(){
+    private fun onStartAd() {
         binding.progress.visibility = View.VISIBLE
         binding.startBtn.isEnabled = false
         binding.shimmer.stopShimmer()
     }
 
-    private fun onAdFinish(message:Int) {
+    private fun onAdFinish(message: Int) {
         binding.startBtn.setImageResource(R.drawable.ic_baseline_play_circle_outline_24)
         binding.progress.visibility = View.INVISIBLE
         binding.startBtn.isEnabled = true
         binding.shimmer.startShimmer()
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT)
-        .show()
+            .show()
     }
 
     override fun onSuccessReward() {
-        viewModel.updateUserCoinCount()
+        viewModel.updateUserCoinCount(
+            onSuccess = {
+                binding.countTv.text = viewModel.fetchUserCoinCount().toString()
+                Toast.makeText(requireContext(), "Успешно выплачено !", Toast.LENGTH_SHORT).show()
+            }, onFail = {
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            })
     }
 
 

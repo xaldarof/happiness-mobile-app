@@ -24,16 +24,17 @@ import pdf.reader.happiness.vm.ImportingActivityViewModel
 
 
 @KoinApiExtension
-class ExchangeFragment : Fragment(),KoinComponent,ImportingActivityViewModel.CallBack {
+class ExchangeFragment : Fragment(), KoinComponent, ImportingActivityViewModel.CallBack {
 
-    private lateinit var binding:FragmentExchangeBinding
+    private lateinit var binding: FragmentExchangeBinding
     private val viewModel: ImportingActivityViewModel = get()
     private var userOn = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View {
-        binding = FragmentExchangeBinding.inflate(inflater,container,false)
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentExchangeBinding.inflate(inflater, container, false)
         userOn = true
         return binding.root
     }
@@ -50,24 +51,34 @@ class ExchangeFragment : Fragment(),KoinComponent,ImportingActivityViewModel.Cal
         }
 
         binding.exchangeRoom.setOnClickListener {
-            startActivity(Intent(requireContext(),ExchangeCoinRoomActivity::class.java))
+            startActivity(Intent(requireContext(), ExchangeCoinRoomActivity::class.java))
         }
 
         binding.start.setOnClickListener {
             val commonPrice = binding.priceTv.text.toString().toInt()
 
-            if (viewModel.fetchUserCoinCount()>= commonPrice && binding.editTextCount.text.toString().isNotEmpty()) {
+            if (viewModel.fetchUserCoinCount() >= commonPrice && binding.editTextCount.text.toString()
+                    .isNotEmpty()
+            ) {
                 CoroutineScope(Dispatchers.Main).launch {
                     importData(binding.editTextCount.text.toString().toInt())
                 }
 
-            }else {
+            } else {
                 if (binding.editTextCount.text.toString().isEmpty()) {
                     binding.editTextCount.errorAnimation()
-                    Toast.makeText(requireContext(), "Введите количетсво статьей !", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Введите количетсво статьей !",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 } else {
                     binding.balanceLayout.errorAnimation()
-                    Toast.makeText(requireContext(), "У вас не хватает количество монет", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "У вас не хватает количество монет",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
@@ -75,7 +86,7 @@ class ExchangeFragment : Fragment(),KoinComponent,ImportingActivityViewModel.Cal
         binding.editTextCount.addTextChangedListener(MyTextWatcher(object : CallBack {
             override fun onChange(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 binding.priceTv.text = if (binding.editTextCount.text.toString().isNotEmpty())
-                    (binding.editTextCount.text.toString().toLong()*3).toString() else "0"
+                    (binding.editTextCount.text.toString().toLong() * 3).toString() else "0"
             }
         }))
     }
@@ -95,32 +106,39 @@ class ExchangeFragment : Fragment(),KoinComponent,ImportingActivityViewModel.Cal
                 binding.progressView.visibility = View.VISIBLE
                 binding.start.isEnabled = false
             }
-            viewModel.startImporting(this,userEnteredInfoCount)
-        }
-        else {
+            viewModel.startImporting(this, userEnteredInfoCount)
+        } else {
             CoroutineScope(Dispatchers.Main).launch {
-                Toast.makeText(requireContext(), R.string.no_connection,
-                    Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(), R.string.no_connection,
+                    Toast.LENGTH_SHORT
+                ).show()
                 connectionManager.enableWifi()
             }
         }
     }
 
-    private fun onFinishExchange(){
+    private fun onFinishExchange() {
         binding.progressView.visibility = View.INVISIBLE
         binding.start.isEnabled = true
     }
 
     override fun onSuccessCallBack(count: Int) {
         CoroutineScope(Dispatchers.Main).launch {
-            onFinishExchange()
-            if (userOn) {
+            viewModel.payWithCoin(binding.priceTv.text.toString().toInt(), onSuccess = {
+                onFinishExchange()
+                if (userOn) {
+                    Toast.makeText(
+                        requireContext(), "Обмен успешно завершен. Вы получили $count новых данных",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }, onFail = {
                 Toast.makeText(
-                    requireContext(), "Обмен успешно завершен. Вы получили $count новых данных",
-                    Toast.LENGTH_SHORT).show()
-            }
-            viewModel.payWithCoin(binding.priceTv.text.toString().toInt())
-
+                    requireContext(), it,
+                    Toast.LENGTH_SHORT
+                ).show()
+            })
         }
     }
 

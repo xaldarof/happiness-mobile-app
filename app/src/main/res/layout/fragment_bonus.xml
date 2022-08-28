@@ -7,7 +7,7 @@
     android:background="@color/light_black"
     android:clickable="true"
     android:focusable="true"
-    tools:context=".presentation.fragments.BonusFragment">
+    tools:context=".presentation.fragments.EarnFragment">
 
     <ImageView
         android:id="@+id/backBtn"

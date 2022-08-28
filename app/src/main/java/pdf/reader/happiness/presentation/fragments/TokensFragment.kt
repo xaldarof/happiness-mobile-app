@@ -58,7 +58,9 @@ class TokensFragment : Fragment(), KoinComponent, TokenDialog.CallBack,
             }
         }
 
-        binding.infoBtn.setOnClickListener { if (userOn) TokenDialog.Base(requireContext()).showInfo() }
+        binding.infoBtn.setOnClickListener {
+            if (userOn) TokenDialog.Base(requireContext()).showInfo()
+        }
         binding.backBtn.setOnClickListener { requireActivity().supportFragmentManager.popBackStack() }
 
         binding.createTokenBtn.setOnClickListener {
@@ -92,7 +94,11 @@ class TokensFragment : Fragment(), KoinComponent, TokenDialog.CallBack,
 
                             is TokenCloudResult.Fail -> {
                                 if (userOn) {
-                                    Toast.makeText(requireContext(), R.string.token_not_found, Toast.LENGTH_SHORT)
+                                    Toast.makeText(
+                                        requireContext(),
+                                        R.string.token_not_found,
+                                        Toast.LENGTH_SHORT
+                                    )
                                         .show()
                                     binding.progressView.visibility = View.INVISIBLE
                                 }
@@ -114,18 +120,34 @@ class TokensFragment : Fragment(), KoinComponent, TokenDialog.CallBack,
         userOn = false
     }
 
-    override fun onClickActive() {
+    override fun onClickActive(
+        onSuccess: () -> Unit,
+        onFail: (String) -> Unit
+    ) {
         CoroutineScope(Dispatchers.IO).launch {
             viewModel.removeToken(tokenIdForRemove)
-            viewModel.updateUserCoinCount(coinCount)
+            viewModel.updateUserCoinCount(coinCount, onSuccess = {
+                onSuccess()
+            }, onFail = {
+                onFail(it)
+            })
         }
     }
 
-    override fun onClickCreate(id: String, userEnteredCount: Int) {
+    override fun onClickCreate(
+        id: String, userEnteredCount: Int, onSuccess: () -> Unit,
+        onFail: (String) -> Unit
+    ) {
         CoroutineScope(Dispatchers.IO).launch {
             viewModel.createTokenByUser(userEnteredCount, id)
-            viewModel.payWithCoin(userEnteredCount)
-            viewModel.addTokenHistory(TokenModel(userEnteredCount,(System.currentTimeMillis()/1000).toString(),id))
+            viewModel.payWithCoin(userEnteredCount, onSuccess = onSuccess, onFail = onFail)
+            viewModel.addTokenHistory(
+                TokenModel(
+                    userEnteredCount,
+                    (System.currentTimeMillis() / 1000).toString(),
+                    id
+                )
+            )
         }
     }
 

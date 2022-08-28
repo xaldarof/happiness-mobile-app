@@ -17,8 +17,6 @@ val cacheDataModule = module {
     factory<ToolsRepository> { ToolsRepository.Base(get()) }
     factory<AchievementRepository> { AchievementRepository.Base(get()) }
     factory<ChaptersRepository> { ChaptersRepository.Base(get()) }
-    factory<StatisticRepository> { StatisticRepository.Base(get()) }
-    factory<UserCoinRepository> { UserCoinRepository.Base(get()) }
 
 
     factory<AchievementUpdater> { AchievementUpdater.Base(get(), get()) }
@@ -33,7 +31,6 @@ val cacheDataModule = module {
     factory<ChapterDataSource> { ChapterDataSource.Base(get()) }
     factory <MusicPathDataSource> { MusicPathDataSource.Base(FirebaseFirestore.getInstance()) }
     factory<StatisticDataSource> { StatisticDataSource.Base(get(), get()) }
-    factory<UserCoinDataSource> { UserCoinDataSource.Base(get()) }
     factory<TokenCacheDataSource> { TokenCacheDataSource.Base(get()) }
 
     factory<UserRepository> { UserRepository.Base(get()) }

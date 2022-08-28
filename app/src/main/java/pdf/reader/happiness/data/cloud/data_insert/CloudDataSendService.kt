@@ -7,13 +7,23 @@ import pdf.reader.happiness.tools.formatForDatabase
 
 interface CloudDataSendService {
 
-    suspend fun sendData(cloudModel: InfoCloudModel)
+    suspend fun sendData(
+        cloudModel: InfoCloudModel, onSuccess: () -> Unit,
+        onFail: (String) -> Unit
+    )
 
-    class Base(private val databaseReference: DatabaseReference): CloudDataSendService {
-        override suspend fun sendData(cloudModel: InfoCloudModel) {
+    class Base(private val databaseReference: DatabaseReference) : CloudDataSendService {
+        override suspend fun sendData(
+            cloudModel: InfoCloudModel, onSuccess: () -> Unit,
+            onFail: (String) -> Unit
+        ) {
             val formatted = cloudModel.title.formatForDatabase()
 
-            databaseReference.child(formatted).setValue(cloudModel)
+            databaseReference.child(formatted).setValue(cloudModel).addOnSuccessListener {
+                onSuccess()
+            }.addOnFailureListener {
+                onFail("Что то пошло не так")
+            }
         }
     }
 }

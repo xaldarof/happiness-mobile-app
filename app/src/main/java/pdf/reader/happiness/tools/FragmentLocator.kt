@@ -4,9 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import org.koin.core.component.KoinApiExtension
 import pdf.reader.happiness.R
-import pdf.reader.happiness.core.ChapterModel
 import pdf.reader.happiness.core.FragmentName
-import pdf.reader.happiness.data.cache.models.ChapterModelDb
 import pdf.reader.happiness.presentation.fragments.*
 import java.io.Serializable
 
@@ -41,7 +39,7 @@ class FragmentLocator<T>(
             navigate(StatisticFragment())
         }
         if (fragmentName == FragmentName.BONUS){
-            navigate(BonusFragment())
+            navigate(EarnFragment())
         }
 
         if (fragmentName == FragmentName.TOKENS){

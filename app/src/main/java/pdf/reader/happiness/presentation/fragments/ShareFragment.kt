@@ -26,15 +26,16 @@ import pdf.reader.happiness.vm.ShareViewModel
 
 
 @KoinApiExtension
-class ShareFragment : Fragment(), KoinComponent,ImportInfoDialog.CallBack {
+class ShareFragment : Fragment(), KoinComponent, ImportInfoDialog.CallBack {
 
     private lateinit var binding: FragmentShareBinding
-    private val viewModel:ShareViewModel = get()
+    private val viewModel: ShareViewModel = get()
     private val typeLocator = TypeLocator()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View {
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentShareBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -47,16 +48,18 @@ class ShareFragment : Fragment(), KoinComponent,ImportInfoDialog.CallBack {
         binding.backBtn.setOnClickListener { viewPager2.currentItem-- }
 
         binding.clearTextBtn.setOnClickListener {
-            ImportInfoDialog.Base().showClearText(requireContext(),this)
+            ImportInfoDialog.Base().showClearText(requireContext(), this)
         }
 
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item,
-            arrayListOf(Name.HAPPY, Name.LOVE,Name.SUCCESS,Name.LIFE))
+        val adapter = ArrayAdapter(
+            requireContext(), android.R.layout.simple_spinner_dropdown_item,
+            arrayListOf(Name.HAPPY, Name.LOVE, Name.SUCCESS, Name.LIFE)
+        )
 
         var type = ""
         binding.spinner.adapter = adapter
 
-        binding.spinner.onItemSelectedListener = SpinnerClickCallBack(object :CallBackSpinner {
+        binding.spinner.onItemSelectedListener = SpinnerClickCallBack(object : CallBackSpinner {
             override fun onSelect(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 type = p0?.getItemAtPosition(p2).toString()
             }
@@ -73,25 +76,38 @@ class ShareFragment : Fragment(), KoinComponent,ImportInfoDialog.CallBack {
             if (viewModel.fetchUserCoinCount() >= 1) {
                 sendData(type, title, body)
                 ImportInfoDialog.Base().showInfoAboutPublish(requireContext(), this)
+            } else {
+                Toast.makeText(
+                    requireContext(), "У вас недостаточно монет для отправки данных",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
-            else {
-                Toast.makeText(requireContext(),"У вас недостаточно монет для отправки данных",
-                    Toast.LENGTH_SHORT).show()
-            }
-        }else {
+        } else {
             if (title.isEmpty()) binding.titleEditText.errorAnimation()
             if (body.isEmpty()) binding.bodyEditText.errorAnimation()
         }
     }
 
-    private fun sendData(type:String,title:String,body:String){
+    private fun sendData(type: String, title: String, body: String) {
         CoroutineScope(Dispatchers.Main).launch {
-            viewModel.sendDataToFirebase(InfoCloudModel(title, body, type = typeLocator.locate(type), dataType = Type.CLOUD))
+            viewModel.sendDataToFirebase(
+                InfoCloudModel(
+                    title,
+                    body,
+                    type = typeLocator.locate(type),
+                    dataType = Type.CLOUD
+                ), onFail = {
+                    Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                }, onSuccess = {
+                    Toast.makeText(requireContext(), "Успешно отправлено !", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            )
         }
     }
 
     override fun onClickClear() {
-       binding.bodyEditText.setText("")
+        binding.bodyEditText.setText("")
         binding.titleEditText.setText("")
     }
 }

@@ -16,7 +16,14 @@ import pdf.reader.happiness.data.cache.models.UserModelDb
 @Dao
 interface UserDao {
     @Query("SELECT * FROM user")
-    fun fetUser(): Flow<UserModelDb?>
+    fun fetUserAsFlow(): Flow<UserModelDb?>
+
+    @Query("SELECT balance FROM user")
+    fun fetUserBalanceAsFlow(): Flow<Int>
+
+
+    @Query("SELECT * FROM user")
+    fun fetUser(): UserModelDb?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(userModelDb: UserModelDb)

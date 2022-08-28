@@ -1,17 +1,16 @@
 package pdf.reader.happiness.vm
 
 import androidx.lifecycle.*
-import kotlinx.coroutines.flow.collect
 import pdf.reader.happiness.data.cache.core.CacheDataRepository
-import pdf.reader.happiness.data.cache.core.UserCoinRepository
 import pdf.reader.happiness.data.cache.initilizers.AllInitializer
 import pdf.reader.happiness.data.cache.initilizers.ChapterInitializer
 import pdf.reader.happiness.data.cloud.CoinRepository
 import pdf.reader.happiness.data.cloud.models.InfoCloudModel
+import pdf.reader.happiness.data.cloud.user.UserRepository
 
-interface Editable{
-    fun fetchUserCoinAsLiveData():LiveData<Int>
-    fun fetchUserCoinCount() :Int
+interface Editable {
+    fun fetchUserCoinAsLiveData(): LiveData<Int>
+    fun fetchUserCoinCount(): Int
 }
 
 
@@ -20,18 +19,17 @@ class ImportingActivityViewModel(
     private val cacheRepository: CacheDataRepository,
     private val allInitializer: AllInitializer,
     private val chapterInitializer: ChapterInitializer,
-    private val userCoin: UserCoinRepository
-) : ViewModel(),Editable{
+    private val userCoin: UserRepository
+) : ViewModel(), Editable {
 
-    suspend fun startImporting(callBack: CallBack,count: Int) {
+    suspend fun startImporting(callBack: CallBack, count: Int) {
         val limitedList = ArrayList<InfoCloudModel>()
 
         coinRepository.fetchCloudData().collect { cloudData ->
             if (cloudData.isNotEmpty()) {
                 if (count > cloudData.size) {
                     callBack.onOutOfBounds(cloudData.size)
-                }
-                else {
+                } else {
                     for (i in 0 until count) {
                         limitedList.add(cloudData[(cloudData.indices).random()])
                     }
@@ -45,12 +43,19 @@ class ImportingActivityViewModel(
         }
     }
 
-    override fun fetchUserCoinAsLiveData() = userCoin.fetchUserCoinCountAsFlow().asLiveData()
+    override fun fetchUserCoinAsLiveData() = userCoin.fetchUserBalanceAsFlow().asLiveData()
 
-    override fun fetchUserCoinCount() = userCoin.fetchUserCoinCount()
+    override fun fetchUserCoinCount() = userCoin.fetchUserBalance()
 
-    fun payWithCoin(price:Int){
-        userCoin.payWithCoin(price)
+    fun payWithCoin(
+        price: Int, onSuccess: () -> Unit,
+        onFail: (String) -> Unit
+    ) {
+        userCoin.invokePayment(price, onSuccess = {
+            onSuccess()
+        }, onFail = {
+            onFail(it)
+        })
     }
 
 

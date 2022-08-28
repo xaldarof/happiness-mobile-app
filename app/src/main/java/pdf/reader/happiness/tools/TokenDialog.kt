@@ -14,7 +14,9 @@ interface TokenDialog {
 
     fun show(tokenModel: TokenModel, callback: TokenDialog.CallBack)
     fun showInfo()
-    fun showCreateTokenDialog(userBalance: Int, callback: CallBack)
+    fun showCreateTokenDialog(
+        userBalance: Int, callback: CallBack
+    )
 
     class Base(private val context: Context) : TokenDialog {
 
@@ -29,13 +31,20 @@ interface TokenDialog {
             binding.tokenId.text = "${tokenModel.tokenId.substring(0, 8)}*****"
 
             binding.activeBtn.setOnClickListener {
-                callback.onClickActive()
-                Toast.makeText(
-                    context,
-                    "Поздравляю, вы успешно активировали токен !",
-                    Toast.LENGTH_SHORT
-                ).show()
-                dialog.dismiss()
+                callback.onClickActive(onFail = {
+                    Toast.makeText(
+                        context,
+                        it,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }, onSuccess = {
+                    Toast.makeText(
+                        context,
+                        "Поздравляю, вы успешно активировали токен !",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    dialog.dismiss()
+                })
             }
 
             dialog.show()
@@ -52,7 +61,9 @@ interface TokenDialog {
         }
 
 
-        override fun showCreateTokenDialog(userBalance: Int, callback: CallBack) {
+        override fun showCreateTokenDialog(
+            userBalance: Int, callback: CallBack
+        ) {
             val dialog = BottomSheetDialog(context, R.style.BottomSheetDialogTheme)
             val binding = CreateTokenBinding.inflate(dialog.layoutInflater)
             val connectionManager = ConnectionManager(context)
@@ -80,16 +91,26 @@ interface TokenDialog {
                                 )
                                     .show()
                             } else {
-                                callback.onClickCreate(randomId, userEnteredCount.toInt())
-                                dialog.dismiss()
-                                Toast.makeText(context, "Токен успешно создан !", Toast.LENGTH_LONG)
-                                    .show()
+                                callback.onClickCreate(
+                                    randomId,
+                                    userEnteredCount.toInt(),
+                                    onSuccess = {
+                                        dialog.dismiss()
+                                        Toast.makeText(context, "Токен успешно создан !", Toast.LENGTH_LONG)
+                                            .show()
+                                    },
+                                    onFail = {
+                                        Toast.makeText(context, "Что то пошло не так !", Toast.LENGTH_LONG)
+                                            .show()
+                                    }
+                                )
                             }
                         } else {
                             Toast.makeText(
                                 context,
                                 "Нельзя создать токен с нулевым количеством",
-                                Toast.LENGTH_LONG).show()
+                                Toast.LENGTH_LONG
+                            ).show()
                         }
                     } else {
                         Toast.makeText(context, R.string.no_connection, Toast.LENGTH_LONG)
@@ -107,7 +128,14 @@ interface TokenDialog {
 
 
     interface CallBack {
-        fun onClickActive()
-        fun onClickCreate(id: String, userEnteredCount: Int)
+        fun onClickActive(
+            onSuccess: () -> Unit,
+            onFail: (String) -> Unit
+        )
+
+        fun onClickCreate(
+            id: String, userEnteredCount: Int, onSuccess: () -> Unit,
+            onFail: (String) -> Unit
+        )
     }
 }
