@@ -36,6 +36,11 @@ interface UserRepository {
         onFail: (String) -> Unit
     )
 
+    suspend fun sendTo(
+        username: String, count: Int, onSuccess: () -> Unit,
+        onFail: (String) -> Unit
+    )
+
     class Base(private val userDao: UserDao) : UserRepository {
         override fun fetchUser(): Flow<UserModelDb?> {
             return userDao.fetUserAsFlow()
@@ -119,7 +124,7 @@ interface UserRepository {
                 databaseReference.child(userDao.fetUser()?.login ?: "")
                     .addValueEventListener(object : ValueEventListener {
                         override fun onDataChange(snapshot: DataSnapshot) {
-                            if(snapshot.getValue(UserCloudModel::class.java) != null) {
+                            if (snapshot.getValue(UserCloudModel::class.java) != null) {
                                 userDao.insert(
                                     snapshot.getValue(UserCloudModel::class.java)!!.mapToCache()
                                 )
@@ -137,5 +142,57 @@ interface UserRepository {
                 onFail("Что то пошло не так")
             }
         }
+
+        override suspend fun sendTo(
+            username: String,
+            count: Int,
+            onSuccess: () -> Unit,
+            onFail: (String) -> Unit
+        ) {
+            val databaseReference = FirebaseDatabase.getInstance().getReference("users")
+
+            try {
+                if (username == userDao.fetUser()?.login ?: "") {
+                    onFail("Xaxaxaxa ну вы юморист !")
+                } else {
+                    if (username.isNotEmpty() && count != -1) {
+                        if ((userDao.fetUser()?.balance ?: 0) >= count) {
+                            databaseReference.child(username)
+                                .addListenerForSingleValueEvent(object : ValueEventListener {
+                                    override fun onDataChange(snapshot: DataSnapshot) {
+                                        val model = snapshot.getValue(UserCloudModel::class.java)
+                                        if(model != null) {
+                                            val current = model.balance
+                                            val updated = current + count
+
+                                            databaseReference.child(username).child("balance")
+                                                .setValue(updated).addOnSuccessListener {
+                                                    invokePayment(count,onSuccess,onFail )
+                                                }.addOnFailureListener {
+                                                    onFail("Что то пошло не так")
+                                                }
+                                        } else {
+                                            onFail("Пользователь не найден !")
+                                        }
+                                    }
+
+                                    override fun onCancelled(error: DatabaseError) {
+                                        onFail("Что то пошло не так")
+                                    }
+
+                                })
+                        } else {
+                            onFail("Недостаточно монет !")
+                        }
+
+                    } else {
+                        onFail("Заполните все поля !")
+                    }
+                }
+            } catch (e: Exception) {
+                onFail("Что то пошло не так")
+            }
+        }
+
     }
 }

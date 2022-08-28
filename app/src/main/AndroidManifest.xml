@@ -21,10 +21,15 @@
         android:theme="@style/Theme.Happiness">
         <activity
             android:name=".presentation.activity.RegisterActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".presentation.activity.ExchangeCoinRoomActivity"
-            android:exported="false" />
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+           />
         <activity
             android:name=".presentation.activity.DataImportingActivity"
             android:exported="true"
@@ -33,6 +38,7 @@
         <activity
             android:name=".presentation.activity.PresentationActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

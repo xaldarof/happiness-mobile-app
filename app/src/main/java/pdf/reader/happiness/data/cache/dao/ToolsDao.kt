@@ -81,7 +81,7 @@ interface ToolsDao {
     @Delete
     fun deleteTokenHistory(tokenModelDb: TokenModelDb)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addTokenHistory(tokenModelDb: TokenModelDb)
 
 }

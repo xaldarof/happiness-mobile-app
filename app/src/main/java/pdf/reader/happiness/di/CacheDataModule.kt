@@ -17,6 +17,7 @@ val cacheDataModule = module {
     factory<ToolsRepository> { ToolsRepository.Base(get()) }
     factory<AchievementRepository> { AchievementRepository.Base(get()) }
     factory<ChaptersRepository> { ChaptersRepository.Base(get()) }
+    factory<StatisticRepository> { StatisticRepository.Base(get()) }
 
 
     factory<AchievementUpdater> { AchievementUpdater.Base(get(), get()) }

@@ -26,6 +26,7 @@ val viewModels = module {
     factory { MeditationFragmentViewModel(get(), get(), androidApplication()) }
 
     factory { StatisticViewModel(get()) }
+    factory { ExchangeCoinViewModel(get()) }
 
     factory { BonusFragmentViewModel(get()) }
 

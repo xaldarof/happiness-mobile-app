@@ -9,12 +9,13 @@
     android:orientation="vertical"
     tools:context=".presentation.activity.DataImportingActivity">
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/relativeLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/myWhite"
         android:backgroundTint="@color/myWhite"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -24,13 +25,11 @@
             android:id="@+id/tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerInParent="true"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="100dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginBottom="24dp"
-            android:text="Нажмите "
+            android:layout_marginBottom="4dp"
+            android:text="Отправить монеты ! "
             android:textColor="@color/to_right_color"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -39,62 +38,76 @@
 
         <TextView
             android:id="@+id/tv2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv"
-            android:layout_alignStart="@+id/tv"
-            android:layout_alignEnd="@+id/tv"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="-20dp"
-            android:text="Просто нажмите на кнопку и подождите."
-            android:textColor="@color/to_right_color"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:text="Обменяйтесь..."
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/tv"
             app:layout_constraintTop_toBottomOf="@+id/tv" />
 
-        <ImageView
-            android:id="@+id/info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:src="@drawable/ic_baseline_help_outline_24"
-            android:textColor="@color/to_right_color"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/usernameEdt"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="24dp"
+            android:background="@drawable/edit_text_style_2"
+            android:elevation="4dp"
+            android:hint="@string/receiver"
+            android:inputType="textPersonName"
+            android:maxLines="1"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColorHint="@color/hint_color"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.085" />
 
-        <ImageView
-            android:id="@+id/share"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/info"
-            android:layout_marginStart="8dp"
-            android:layout_alignBottom="@+id/info"
-            android:layout_marginBottom="0dp"
-            android:layout_toStartOf="@+id/info"
-            android:src="@drawable/ic_baseline_add_circle_outline_24"
-            android:textColor="@color/to_right_color"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/countEdt"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/edit_text_style_2"
+            android:elevation="4dp"
+            android:hint="@string/coin_count"
+            android:inputType="number"
+            android:maxLength="6"
+            android:maxLines="1"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColorHint="@color/hint_color"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.085" />
 
-        <ImageView
-            android:id="@+id/exchange_room"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/share"
-            android:layout_alignBottom="@+id/share"
-            android:layout_marginBottom="0dp"
-            android:layout_toStartOf="@+id/share"
-            android:src="@drawable/ic_baseline_flip_camera_android_24"
-            android:textColor="@color/to_right_color"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+    </LinearLayout>
 
-    </RelativeLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/sendBtn"
+        android:layout_width="132dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="24dp"
+        android:background="@drawable/clear_item"
+        android:text="@string/send"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
@@ -103,6 +116,18 @@
         android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout3"/>
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout3" />
+
+
+    <ImageView
+        android:id="@+id/backBtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="12dp"
+        android:src="@drawable/ic_baseline_chevron_left_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/to_right_color" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

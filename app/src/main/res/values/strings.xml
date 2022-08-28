@@ -62,4 +62,5 @@
     <string name="login">Логин</string>
     <string name="password">Пароль</string>
     <string name="register">Регистрация</string>
+    <string name="receiver">Получатель..</string>
 </resources>

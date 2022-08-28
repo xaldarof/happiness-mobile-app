@@ -132,6 +132,7 @@ class ExchangeFragment : Fragment(), KoinComponent, ImportingActivityViewModel.C
                         requireContext(), "Обмен успешно завершен. Вы получили $count новых данных",
                         Toast.LENGTH_SHORT
                     ).show()
+                    requireActivity().finish()
                 }
             }, onFail = {
                 Toast.makeText(
