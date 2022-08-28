@@ -13,8 +13,8 @@ android {
         applicationId "pdf.reader.happiness"
         minSdk 21
         targetSdk 32
-        versionCode 26
-        versionName "7.0"
+        versionCode 27
+        versionName "7.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

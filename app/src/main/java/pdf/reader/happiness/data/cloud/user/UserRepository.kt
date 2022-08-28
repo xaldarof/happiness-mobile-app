@@ -36,6 +36,10 @@ interface UserRepository {
         onFail: (String) -> Unit
     )
 
+    suspend fun checkUserState(
+        loggedOut: () -> Unit
+    )
+
     suspend fun sendTo(
         username: String, count: Int, onSuccess: () -> Unit,
         onFail: (String) -> Unit
@@ -143,6 +147,29 @@ interface UserRepository {
             }
         }
 
+        override suspend fun checkUserState(
+            loggedOut: () -> Unit
+        ) {
+            val databaseReference = FirebaseDatabase.getInstance().getReference("users")
+
+            try {
+                databaseReference.child(userDao.fetUser()?.login ?: "")
+                    .addValueEventListener(object : ValueEventListener {
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            val currentUser = snapshot.getValue(UserCloudModel::class.java)
+                            if (currentUser == null) {
+                                loggedOut()
+                            }
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                        }
+                    })
+            } catch (e: Exception) {
+
+            }
+        }
+
         override suspend fun sendTo(
             username: String,
             count: Int,
@@ -161,13 +188,13 @@ interface UserRepository {
                                 .addListenerForSingleValueEvent(object : ValueEventListener {
                                     override fun onDataChange(snapshot: DataSnapshot) {
                                         val model = snapshot.getValue(UserCloudModel::class.java)
-                                        if(model != null) {
+                                        if (model != null) {
                                             val current = model.balance
                                             val updated = current + count
 
                                             databaseReference.child(username).child("balance")
                                                 .setValue(updated).addOnSuccessListener {
-                                                    invokePayment(count,onSuccess,onFail )
+                                                    invokePayment(count, onSuccess, onFail)
                                                 }.addOnFailureListener {
                                                     onFail("Что то пошло не так")
                                                 }

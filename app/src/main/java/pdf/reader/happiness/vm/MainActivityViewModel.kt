@@ -3,8 +3,11 @@ package pdf.reader.happiness.vm
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import pdf.reader.happiness.core.UiState
 import pdf.reader.happiness.data.cache.initilizers.AllInitializer
 import pdf.reader.happiness.data.cache.settings_cache.WastedTimeController
 import pdf.reader.happiness.data.cache.settings_cache.WastedTimeAchievement
@@ -18,6 +21,9 @@ class MainActivityViewModel(
     private val wastedTimeAchievement: WastedTimeAchievement,
     private val userRepository: UserRepository
 ) : ViewModel() {
+
+    private var _loggedOutState = Channel<UiState<String>>()
+    val loggedOutState = _loggedOutState.receiveAsFlow()
 
 
     suspend fun updateWastedTime() {
@@ -34,6 +40,14 @@ class MainActivityViewModel(
                 Log.d("res", "Synced")
             }, onFail = {
 
+            })
+        }
+
+        viewModelScope.launch {
+            userRepository.checkUserState(loggedOut = {
+                viewModelScope.launch {
+                    _loggedOutState.send(UiState.Success())
+                }
             })
         }
 

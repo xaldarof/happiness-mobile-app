@@ -29,7 +29,11 @@ import android.os.Looper
 import android.util.Log
 
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.flow.collectLatest
 import pdf.reader.happiness.broadcast.UserBroadcastReceiver
+import pdf.reader.happiness.core.UiState
+import pdf.reader.happiness.data.cache.settings_cache.CacheClear
 
 /**
  * @author Xoldarov Temur
@@ -42,7 +46,7 @@ class MainActivity : AppCompatActivity(), KoinComponent {
     private lateinit var themeController: ThemeController
     private val badgeController: BadgeController by inject()
     private val viewModel: MainActivityViewModel = get()
-    private val userBroadcastReceiver = UserBroadcastReceiver()
+    private val cacheClear: CacheClear by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +71,18 @@ class MainActivity : AppCompatActivity(), KoinComponent {
 
         CoroutineScope(Dispatchers.IO).launch {
             viewModel.updateWastedTime()
+        }
+
+        lifecycleScope.launch {
+            viewModel.loggedOutState.collectLatest {
+                when(it) {
+                    is UiState.Success -> {
+                        cacheClear.clear()
+                        startActivity(Intent(this@MainActivity,PresentationActivity::class.java))
+                        finish()
+                    }
+                }
+            }
         }
 
     }
