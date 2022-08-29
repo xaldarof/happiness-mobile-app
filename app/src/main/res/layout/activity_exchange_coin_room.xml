@@ -15,7 +15,10 @@
         android:layout_height="wrap_content"
         android:background="@color/myWhite"
         android:backgroundTint="@color/myWhite"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         android:orientation="vertical"
+        android:paddingBottom="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

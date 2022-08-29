@@ -46,7 +46,7 @@ class LoginViewModel(
 
     private fun checkAppState() {
         viewModelScope.launch {
-            userRepository.fetchUser().collectLatest {
+            userRepository.fetchUserAsFlow().collectLatest {
                 isAuthorized = it != null
             }
         }

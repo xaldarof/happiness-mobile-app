@@ -1,5 +1,6 @@
 package pdf.reader.happiness.data.cloud.user
 
+import android.util.Log
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -8,6 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import pdf.reader.happiness.data.cache.dao.UserDao
 import pdf.reader.happiness.data.cache.models.UserModelDb
 import pdf.reader.happiness.data.cloud.models.UserCloudModel
+import pdf.reader.happiness.vm.CURRENT_USERNAME
 
 /**
  * @Author: Temur
@@ -16,7 +18,8 @@ import pdf.reader.happiness.data.cloud.models.UserCloudModel
 
 interface UserRepository {
 
-    fun fetchUser(): Flow<UserModelDb?>
+    fun fetchUserAsFlow(): Flow<UserModelDb?>
+    fun fetchUser(): UserModelDb?
     fun fetchUserBalance(): Int
     fun fetchUserBalanceAsFlow(): Flow<Int>
     fun invokePayment(
@@ -46,8 +49,12 @@ interface UserRepository {
     )
 
     class Base(private val userDao: UserDao) : UserRepository {
-        override fun fetchUser(): Flow<UserModelDb?> {
+        override fun fetchUserAsFlow(): Flow<UserModelDb?> {
             return userDao.fetUserAsFlow()
+        }
+
+        override fun fetchUser(): UserModelDb? {
+            return userDao.fetUser()
         }
 
         override fun fetchUserBalance(): Int {
@@ -65,14 +72,14 @@ interface UserRepository {
             val databaseReference = FirebaseDatabase.getInstance().getReference("users")
 
             try {
-                databaseReference.child(userDao.fetUser()?.login ?: "")
+                databaseReference.child(CURRENT_USERNAME)
                     .addListenerForSingleValueEvent(object : ValueEventListener {
                         override fun onDataChange(snapshot: DataSnapshot) {
                             val model = snapshot.getValue(UserCloudModel::class.java)
                             val current = model?.balance ?: 0
                             val updated = current - count
 
-                            databaseReference.child(userDao.fetUser()?.login ?: "")
+                            databaseReference.child(CURRENT_USERNAME)
                                 .child("balance").setValue(updated).addOnSuccessListener {
                                     onSuccess()
                                 }.addOnFailureListener {
@@ -95,14 +102,14 @@ interface UserRepository {
             val databaseReference = FirebaseDatabase.getInstance().getReference("users")
 
             try {
-                databaseReference.child(userDao.fetUser()?.login ?: "")
+                databaseReference.child(CURRENT_USERNAME)
                     .addListenerForSingleValueEvent(object : ValueEventListener {
                         override fun onDataChange(snapshot: DataSnapshot) {
                             val model = snapshot.getValue(UserCloudModel::class.java)
                             val current = model?.balance ?: 0
                             val updated = current + count
 
-                            databaseReference.child(userDao.fetUser()?.login ?: "")
+                            databaseReference.child(CURRENT_USERNAME)
                                 .child("balance").setValue(updated).addOnSuccessListener {
                                     onSuccess()
                                 }.addOnFailureListener {
@@ -125,7 +132,7 @@ interface UserRepository {
             val databaseReference = FirebaseDatabase.getInstance().getReference("users")
 
             try {
-                databaseReference.child(userDao.fetUser()?.login ?: "")
+                databaseReference.child(CURRENT_USERNAME)
                     .addValueEventListener(object : ValueEventListener {
                         override fun onDataChange(snapshot: DataSnapshot) {
                             if (snapshot.getValue(UserCloudModel::class.java) != null) {
@@ -153,7 +160,7 @@ interface UserRepository {
             val databaseReference = FirebaseDatabase.getInstance().getReference("users")
 
             try {
-                databaseReference.child(userDao.fetUser()?.login ?: "")
+                databaseReference.child(CURRENT_USERNAME)
                     .addValueEventListener(object : ValueEventListener {
                         override fun onDataChange(snapshot: DataSnapshot) {
                             val currentUser = snapshot.getValue(UserCloudModel::class.java)
@@ -179,7 +186,7 @@ interface UserRepository {
             val databaseReference = FirebaseDatabase.getInstance().getReference("users")
 
             try {
-                if (username == userDao.fetUser()?.login ?: "") {
+                if (username == CURRENT_USERNAME) {
                     onFail("Xaxaxaxa ну вы юморист !")
                 } else {
                     if (username.isNotEmpty() && count != -1) {

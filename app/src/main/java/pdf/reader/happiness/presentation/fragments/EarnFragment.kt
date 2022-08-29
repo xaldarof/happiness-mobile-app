@@ -49,6 +49,9 @@ class EarnFragment : Fragment(), RewardedAdManager.CallBack, KoinComponent {
             }
         }
 
+        CoroutineScope(Dispatchers.IO).launch {
+            MobileAds.initialize(requireContext())
+        }
 
         binding.startBtn.setOnClickListener {
             onStartAd()
@@ -58,9 +61,6 @@ class EarnFragment : Fragment(), RewardedAdManager.CallBack, KoinComponent {
             binding.startBtn.setImageResource(R.drawable.ic_baseline_pause_circle_outline_24)
         }
 
-        CoroutineScope(Dispatchers.IO).launch {
-            MobileAds.initialize(requireContext())
-        }
 
     }
 

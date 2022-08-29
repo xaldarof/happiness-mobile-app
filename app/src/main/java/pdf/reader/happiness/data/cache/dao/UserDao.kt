@@ -29,5 +29,5 @@ interface UserDao {
     fun insert(userModelDb: UserModelDb)
 
     @Query("DELETE FROM user")
-    fun clear()
+    fun clear(): Int
 }

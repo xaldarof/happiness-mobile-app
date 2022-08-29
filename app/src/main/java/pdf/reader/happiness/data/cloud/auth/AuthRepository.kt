@@ -44,6 +44,7 @@ interface AuthRepository {
                                                 if (model?.password == password) {
                                                     model.mapToCache()
                                                         .let {
+                                                            userDao.clear()
                                                             userDao.insert(it)
                                                             onSuccess()
                                                         }
@@ -98,6 +99,7 @@ interface AuthRepository {
                                     ).addOnSuccessListener {
                                         registerModel.mapToCache()
                                             .let {
+                                                userDao.clear()
                                                 userDao.insert(it)
                                                 onSuccess()
                                             }

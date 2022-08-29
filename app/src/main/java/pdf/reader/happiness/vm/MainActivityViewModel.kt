@@ -14,6 +14,8 @@ import pdf.reader.happiness.data.cache.settings_cache.WastedTimeAchievement
 import pdf.reader.happiness.data.cache.settings_cache.WastedTimeAchievementController
 import pdf.reader.happiness.data.cloud.user.UserRepository
 
+var CURRENT_USERNAME = ""
+
 class MainActivityViewModel(
     private val allInitializer: AllInitializer,
     private val wastedTimeController: WastedTimeController,
@@ -35,6 +37,8 @@ class MainActivityViewModel(
     }
 
     init {
+        CURRENT_USERNAME = userRepository.fetchUser()?.login ?: ""
+
         viewModelScope.launch {
             userRepository.syncUser(onSuccess = {
                 Log.d("res", "Synced")
