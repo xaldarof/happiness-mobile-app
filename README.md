@@ -4,11 +4,6 @@
 
 <table>
   <tr>
-    <td>First Screen Page</td>
-     <td>Holiday Mention</td>
-     <td>Present day in purple and selected day in pink</td>
-  </tr>
-  <tr>
     <td><img src="https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/1.jpg" width=270 height=600></td>
     <td><img src="https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/2.jpg" width=270 height=600></td>
     <td><img src="https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/3.jpg" width=270 height=600></td>
@@ -17,11 +12,7 @@
 
 
 <table>
-  <tr>
-    <td>First Screen Page</td>
-     <td>Holiday Mention</td>
-     <td>Present day in purple and selected day in pink</td>
-  </tr>
+
   <tr>
     <td><img src="https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/4.jpg" width=270 height=600></td>
     <td><img src="https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/5.jpg" width=270 height=600></td>
@@ -31,11 +22,7 @@
 
 
 <table>
-  <tr>
-    <td>First Screen Page</td>
-     <td>Holiday Mention</td>
-     <td>Present day in purple and selected day in pink</td>
-  </tr>
+
   <tr>
     <td><img src="https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/7.jpg" width=270 height=600></td>
     <td><img src="https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/8.jpg" width=270 height=600></td>
@@ -45,11 +32,6 @@
 
 
 <table>
-  <tr>
-    <td>First Screen Page</td>
-     <td>Holiday Mention</td>
-     <td>Present day in purple and selected day in pink</td>
-  </tr>
   <tr>
     <td><img src="https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/10.jpg" width=270 height=600></td>
     <td><img src="https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/11.jpg" width=270 height=600></td>
