@@ -5,6 +5,7 @@
 - Читай и не забудь поделитесь друзьями
 
 [Скачать приложение](http://play.google.com/store/apps/details?id=pdf.reader.happiness)
+[Предложить новый функционал](https://t.me/xaldarof)
 
 
 <table>
