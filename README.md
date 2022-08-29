@@ -4,10 +4,8 @@
 - Здесь ты найдешь самые интересные мысли которые точно тебе помогут в жизни и тд.
 - Читай и не забудь поделитесь друзьями
 
-[create issue](https://github.com/user/repository/issues/new)
+[Скачать](http://play.google.com/store/apps/details?id=pdf.reader.happiness)
 
-
-[<img alt="alt_text" width="100px" src="https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/play_market.jpg" />](http://play.google.com/store/apps/details?id=pdf.reader.happiness)
 
 <table>
   <tr>
