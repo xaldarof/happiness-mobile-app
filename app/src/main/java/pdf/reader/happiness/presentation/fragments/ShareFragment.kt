@@ -101,6 +101,8 @@ class ShareFragment : Fragment(), KoinComponent, ImportInfoDialog.CallBack {
                 }, onSuccess = {
                     Toast.makeText(requireContext(), "Успешно отправлено !", Toast.LENGTH_SHORT)
                         .show()
+                    binding.titleEditText.text = null
+                    binding.bodyEditText.text = null
                 }
             )
         }
