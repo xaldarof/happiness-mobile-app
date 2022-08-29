@@ -4,7 +4,7 @@
 - Здесь ты найдешь самые интересные мысли которые точно тебе помогут в жизни и тд.
 - Читай и не забудь поделитесь друзьями
 
-[Скачать](http://play.google.com/store/apps/details?id=pdf.reader.happiness)
+[Скачать приложение](http://play.google.com/store/apps/details?id=pdf.reader.happiness)
 
 
 <table>
