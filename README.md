@@ -1,11 +1,6 @@
 
 
-Solarized dark             |  Solarized Ocean
-:-------------------------:|:-------------------------:
-![](https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/1.jpg)  |  ![](https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/1.jpg)
-
-![](https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/1.jpg)
-![](https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/2.jpg)
+![alt-text-1](https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/1.jpg) ![alt-text-2](https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/2.jpg)
 ![](https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/3.jpg)
 ![](https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/4.jpg)
 ![](https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/5.jpg)
