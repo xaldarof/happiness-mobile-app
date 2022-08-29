@@ -1,6 +1,9 @@
 
 
-![alt-text-1](https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/1.jpg) ![alt-text-1](https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/2.jpg)
+<img src="https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/1.jpg" width="425"/> <img src="https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/1.jpg" width="425"/> 
+
+![](https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/1.jpg)
+![](https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/2.jpg)
 ![](https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/3.jpg)
 ![](https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/4.jpg)
 ![](https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/5.jpg)
@@ -19,3 +22,4 @@
 ![](https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/17.jpg)
 ![](https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/18.jpg)
 ![](https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/19.jpg)
+
