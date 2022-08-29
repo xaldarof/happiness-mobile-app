@@ -1,5 +1,7 @@
 
 
+[![name](https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/play_market.jpg)](http://play.google.com/store/apps/details?id=pdf.reader.happiness)
+
 
 
 <table>
@@ -19,8 +21,6 @@
     <td><img src="https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/6.jpg" width=270 height=470></td>
   </tr> 
 </table>
-
-[![name](https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/play_market.jpg)](http://play.google.com/store/apps/details?id=pdf.reader.happiness)
 
 <table>
 
