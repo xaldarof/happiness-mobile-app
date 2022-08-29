@@ -3,6 +3,7 @@
 [![name](https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/play_market.jpg)](http://play.google.com/store/apps/details?id=pdf.reader.happiness)
 
 
+[<img alt="alt_text" width="40px" src="https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/play_market.jpg" />](https://www.google.com/)
 
 <table>
   <tr>
