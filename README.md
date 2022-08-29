@@ -1,9 +1,5 @@
 <table>
   <tr>
-    <td>Login Screen Page</td>
-     <td>Register Screen Page</td>
-  </tr>
-  <tr>
     <td><img src="https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/1.jpg"></td>
     <td><img src="https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/2.jpg"></td>
     <td><img src="https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/3.jpg"></td>
