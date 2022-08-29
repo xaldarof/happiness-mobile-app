@@ -1,3 +1,6 @@
+
+![alt text](https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/1.jpg)
+
 <table>
   <tr>
     <td><img src="https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/1.jpg"></td>
