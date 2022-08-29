@@ -2,7 +2,7 @@
 
 Solarized dark             |  Solarized Ocean
 :-------------------------:|:-------------------------:
-![](https://...Dark.png)  |  ![](https://...Ocean.png)
+![](https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/1.jpg)  |  ![](https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/1.jpg)
 
 ![](https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/1.jpg)
 ![](https://github.com/xaldarof/Happiness-Mobile-App/blob/junior/screens/2.jpg)
