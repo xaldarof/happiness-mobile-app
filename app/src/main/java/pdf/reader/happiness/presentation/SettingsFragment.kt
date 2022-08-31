@@ -17,22 +17,24 @@ import pdf.reader.happiness.presentation.activity.SettingFragmentPresenter
 import pdf.reader.happiness.tools.*
 
 @KoinApiExtension
-class SettingsFragment : Fragment(),KoinComponent, SettingFragmentPresenter.SettingsView,
+class SettingsFragment : Fragment(), KoinComponent, SettingFragmentPresenter.SettingsView,
     ClearDialog.ClearDialogCallBack {
 
     private lateinit var binding: FragmentSettingsBinding
     private val themeController: ThemeController by inject()
-    private val fontController:FontController by inject()
+    private val fontController: FontController by inject()
     private lateinit var settingFragmentPresenter: SettingFragmentPresenter
     private val cacheClear: CacheClear by inject()
-    private val allChaptersFinished:AllChaptersFinished by inject()
+    private val allChaptersFinished: AllChaptersFinished by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        settingFragmentPresenter = SettingFragmentPresenter(this,themeController,
-            fontController,allChaptersFinished)
+        settingFragmentPresenter = SettingFragmentPresenter(
+            this, themeController,
+            fontController, allChaptersFinished
+        )
 
         binding = FragmentSettingsBinding.inflate(inflater, container, false)
         binding.themeSwitch.isChecked = themeController.isDarkThemeOn()
@@ -66,17 +68,21 @@ class SettingsFragment : Fragment(),KoinComponent, SettingFragmentPresenter.Sett
         binding.rateBtn.setOnClickListener {
             requireContext().openPlayMarket()
         }
-        
+
         binding.importData.setOnClickListener {
-           startActivity(Intent(requireContext(), DataImportingActivity::class.java))
+            startActivity(Intent(requireContext(), DataImportingActivity::class.java))
         }
 
         binding.shareBtn.setOnClickListener {
             requireActivity().shareApp()
         }
+
+        binding.funBtn.setOnClickListener {
+
+        }
     }
 
-    override fun updateDarkThemeSwitchState(state:Boolean) {
+    override fun updateDarkThemeSwitchState(state: Boolean) {
         binding.themeSwitch.isChecked = state
     }
 
@@ -86,7 +92,7 @@ class SettingsFragment : Fragment(),KoinComponent, SettingFragmentPresenter.Sett
 
     override fun onClickYes() {
         cacheClear.clear()
-        requireContext().startActivity(Intent(requireContext(),PresentationActivity::class.java))
+        requireContext().startActivity(Intent(requireContext(), PresentationActivity::class.java))
         requireActivity().finish()
     }
 }

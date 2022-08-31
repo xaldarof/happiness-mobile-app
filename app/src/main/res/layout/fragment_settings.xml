@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/myWhite"
-    android:padding="12dp"
     tools:context=".presentation.SettingsFragment">
 
     <androidx.constraintlayout.widget.Guideline
@@ -14,292 +13,358 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.2" />
+        app:layout_constraintGuide_percent="0" />
 
-    <TextView
-        android:id="@+id/info"
-        android:layout_width="wrap_content"
+
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/settings"
-        android:textColor="@color/to_right_color"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="12dp"
-        android:background="@drawable/item_style"
-        android:elevation="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline">
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="12dp">
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/themeSwitch"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerInParent="true"
-            android:layout_marginEnd="12dp"
-            android:thumb="@drawable/switch_thumb"
-            app:track="@drawable/thumb_track" />
-
-        <ImageView
-            android:id="@+id/img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginBottom="12dp"
-            android:src="@drawable/ic_baseline_nightlight_round_24"
-            app:tint="@color/to_right_color" />
-
-        <TextView
-            android:id="@+id/darkThemeSwitch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="0dp"
-            android:layout_toEndOf="@+id/img"
-            android:text="@string/dark_theme"
-            android:textColor="@color/to_right_color"
-            android:textSize="20sp" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="12dp"
-        android:background="@drawable/item_style"
-        android:elevation="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/fontSwitch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerInParent="true"
-            android:layout_marginEnd="12dp"
-            android:thumb="@drawable/switch_thumb"
-            app:track="@drawable/thumb_track" />
-
-        <ImageView
-            android:id="@+id/img2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginBottom="12dp"
-            android:src="@drawable/ic_baseline_font_download_24"
-            app:tint="@color/to_right_color" />
-
-        <TextView
-            android:id="@+id/fontThemeSwitch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="0dp"
-            android:layout_toEndOf="@+id/img2"
-            android:text="@string/bold_font"
-            android:textColor="@color/to_right_color"
-            android:textSize="20sp" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/importData"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="12dp"
-        android:background="@drawable/clear_item"
-        android:elevation="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2">
-
-        <ImageView
-            android:id="@+id/implementBtn"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerInParent="true"
-            android:layout_marginEnd="12dp"
-            android:src="@drawable/ic_baseline_chevron_right_24"
-            android:thumb="@drawable/switch_thumb"
-            app:tint="@color/to_right_color"
-            app:track="@drawable/thumb_track" />
-
-        <ImageView
-            android:id="@+id/img3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginBottom="12dp"
-            android:src="@drawable/ic_baseline_cloud_sync_24"
-            app:tint="@color/to_right_color" />
-
-        <TextView
-            android:id="@+id/implement_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="0dp"
-            android:layout_toEndOf="@+id/img3"
-            android:text="@string/exchange_coin"
-            android:textColor="@color/to_right_color"
-            android:textSize="20sp" />
-    </RelativeLayout>
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:padding="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="12dp">
 
 
-    <RelativeLayout
-        android:id="@+id/clearBtn"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="12dp"
-        android:background="@drawable/clear_item"
-        android:clickable="true"
-        android:elevation="2dp"
-        android:focusable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shareBtn">
+            <TextView
+                android:id="@+id/info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/settings"
+                android:textColor="@color/to_right_color"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/img5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginBottom="12dp"
-            android:src="@drawable/ic_baseline_heart_broken_24"
-            app:tint="@color/to_right_color" />
+            <RelativeLayout
+                android:id="@+id/relativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="?android:actionBarSize"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="62dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/item_style"
+                android:elevation="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guideline">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="0dp"
-            android:layout_toEndOf="@+id/img5"
-            android:text="@string/clear_all"
-            android:textColor="@color/to_right_color"
-            android:textSize="20sp" />
-    </RelativeLayout>
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/themeSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginEnd="12dp"
+                    android:thumb="@drawable/switch_thumb"
+                    app:track="@drawable/thumb_track" />
 
-    <RelativeLayout
-        android:id="@+id/rateBtn"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="12dp"
-        android:background="@drawable/clear_item"
-        android:clickable="true"
-        android:elevation="2dp"
-        android:focusable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/importData">
+                <ImageView
+                    android:id="@+id/img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:src="@drawable/ic_baseline_nightlight_round_24"
+                    app:tint="@color/to_right_color" />
+
+                <TextView
+                    android:id="@+id/darkThemeSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_toEndOf="@+id/img"
+                    android:text="@string/dark_theme"
+                    android:textColor="@color/to_right_color"
+                    android:textSize="20sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="?android:actionBarSize"
+                android:layout_margin="12dp"
+                android:background="@drawable/item_style"
+                android:elevation="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/fontSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginEnd="12dp"
+                    android:thumb="@drawable/switch_thumb"
+                    app:track="@drawable/thumb_track" />
+
+                <ImageView
+                    android:id="@+id/img2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:src="@drawable/ic_baseline_font_download_24"
+                    app:tint="@color/to_right_color" />
+
+                <TextView
+                    android:id="@+id/fontThemeSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_toEndOf="@+id/img2"
+                    android:text="@string/bold_font"
+                    android:textColor="@color/to_right_color"
+                    android:textSize="20sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/importData"
+                android:layout_width="match_parent"
+                android:layout_height="?android:actionBarSize"
+                android:layout_margin="12dp"
+                android:background="@drawable/clear_item"
+                android:elevation="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/relativeLayout2">
+
+                <ImageView
+                    android:id="@+id/implementBtn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginEnd="12dp"
+                    android:src="@drawable/ic_baseline_chevron_right_24"
+                    android:thumb="@drawable/switch_thumb"
+                    app:tint="@color/to_right_color"
+                    app:track="@drawable/thumb_track" />
+
+                <ImageView
+                    android:id="@+id/img3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:src="@drawable/ic_baseline_cloud_sync_24"
+                    app:tint="@color/to_right_color" />
+
+                <TextView
+                    android:id="@+id/implement_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_toEndOf="@+id/img3"
+                    android:text="@string/exchange_coin"
+                    android:textColor="@color/to_right_color"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/fundBtn"
+                android:layout_width="match_parent"
+                android:layout_height="?android:actionBarSize"
+                android:layout_margin="12dp"
+                android:background="@drawable/clear_item"
+                android:elevation="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/relativeLayout2">
+
+                <ImageView
+                    android:id="@+id/funBtn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginEnd="12dp"
+                    android:src="@drawable/ic_baseline_chevron_right_24"
+                    android:thumb="@drawable/switch_thumb"
+                    app:tint="@color/to_right_color"
+                    app:track="@drawable/thumb_track" />
+
+                <ImageView
+                    android:id="@+id/im11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:src="@drawable/ic_baseline_supervisor_account_24"
+                    app:tint="@color/to_right_color" />
+
+                <TextView
+                    android:id="@+id/fundTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_toEndOf="@+id/im11"
+                    android:text="@string/fund"
+                    android:textColor="@color/to_right_color"
+                    android:textSize="20sp" />
+            </RelativeLayout>
 
 
-        <ImageView
-            android:id="@+id/img6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginBottom="12dp"
-            android:src="@drawable/ic_baseline_star_rate_24"
-            app:tint="@color/to_right_color" />
+            <RelativeLayout
+                android:id="@+id/clearBtn"
+                android:layout_width="match_parent"
+                android:layout_height="?android:actionBarSize"
+                android:layout_margin="12dp"
+                android:background="@drawable/clear_item"
+                android:clickable="true"
+                android:elevation="2dp"
+                android:focusable="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shareBtn">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="0dp"
-            android:layout_toEndOf="@+id/img6"
-            android:text="@string/rate_us"
-            android:textColor="@color/to_right_color"
-            android:textSize="20sp" />
-    </RelativeLayout>
+                <ImageView
+                    android:id="@+id/img5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:src="@drawable/ic_baseline_heart_broken_24"
+                    app:tint="@color/to_right_color" />
 
-    <RelativeLayout
-        android:id="@+id/shareBtn"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="12dp"
-        android:background="@drawable/clear_item"
-        android:clickable="true"
-        android:elevation="2dp"
-        android:focusable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rateBtn">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_toEndOf="@+id/img5"
+                    android:text="@string/clear_all"
+                    android:textColor="@color/to_right_color"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rateBtn"
+                android:layout_width="match_parent"
+                android:layout_height="?android:actionBarSize"
+                android:layout_margin="12dp"
+                android:background="@drawable/clear_item"
+                android:clickable="true"
+                android:elevation="2dp"
+                android:focusable="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/importData">
 
 
-        <ImageView
-            android:id="@+id/shareImg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginBottom="12dp"
-            android:src="@drawable/ic_baseline_share_24"
-            app:tint="@color/to_right_color" />
+                <ImageView
+                    android:id="@+id/img6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:src="@drawable/ic_baseline_star_rate_24"
+                    app:tint="@color/to_right_color" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="0dp"
-            android:layout_toEndOf="@+id/shareImg"
-            android:text="@string/share"
-            android:textColor="@color/to_right_color"
-            android:textSize="20sp" />
-    </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_toEndOf="@+id/img6"
+                    android:text="@string/rate_us"
+                    android:textColor="@color/to_right_color"
+                    android:textSize="20sp" />
+            </RelativeLayout>
 
-    <TextView
-        android:id="@+id/restart_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:textColor="@color/red_end"
-        app:layout_constraintEnd_toEndOf="@+id/clearBtn"
-        app:layout_constraintStart_toStartOf="@+id/clearBtn"
-        app:layout_constraintTop_toBottomOf="@+id/clearBtn" />
+            <RelativeLayout
+                android:id="@+id/shareBtn"
+                android:layout_width="match_parent"
+                android:layout_height="?android:actionBarSize"
+                android:layout_margin="12dp"
+                android:background="@drawable/clear_item"
+                android:clickable="true"
+                android:elevation="2dp"
+                android:focusable="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rateBtn">
+
+
+                <ImageView
+                    android:id="@+id/shareImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:src="@drawable/ic_baseline_share_24"
+                    app:tint="@color/to_right_color" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_toEndOf="@+id/shareImg"
+                    android:text="@string/share"
+                    android:textColor="@color/to_right_color"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

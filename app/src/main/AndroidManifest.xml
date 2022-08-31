@@ -20,16 +20,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Happiness">
         <activity
-            android:name=".presentation.activity.RegisterActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
+            android:name=".presentation.activity.FundActivity"
             android:exported="false" />
+        <activity
+            android:name=".presentation.activity.RegisterActivity"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.activity.ExchangeCoinRoomActivity"
             android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-           />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.activity.DataImportingActivity"
             android:exported="true"
@@ -38,8 +40,8 @@
         <activity
             android:name=".presentation.activity.PresentationActivity"
             android:exported="true"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
